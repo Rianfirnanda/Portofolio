@@ -14,7 +14,7 @@ import Reveal from '@/components/Reveal';
  */
 export default function Hero() {
   const { lang, t } = useLanguage();
-  const { profile, social, ui, contact, stats } = portfolio;
+  const { profile, social, ui, contact } = portfolio;
 
   const featuredSocial = social.filter((item) => item.featured !== false);
   const isExternalResume = profile.resumeUrl.startsWith('http');
@@ -146,16 +146,6 @@ export default function Hero() {
                 <p className="truncate text-xs text-subtle">{contact.email}</p>
               </div>
             </div>
-
-            {/* Sorotan angka kecil, menempel di sudut kanan atas foto.
-                Latarnya dibuat pekat supaya angkanya tetap terbaca walau
-                bagian foto di belakangnya terang. */}
-            {stats.length > 0 ? (
-              <div className="absolute -right-3 -top-3 hidden rounded-2xl border border-line bg-surface-solid/95 px-3.5 py-2.5 text-center shadow-lg backdrop-blur-xl sm:block">
-                <p className="text-lg font-bold text-fg">{stats[0].value}</p>
-                <p className="text-[0.65rem] leading-tight text-subtle">{t(stats[0].label)}</p>
-              </div>
-            ) : null}
           </div>
         </Reveal>
       </div>
