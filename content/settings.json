@@ -1,6 +1,6 @@
 {
   "meta": {
-    "siteTitle": "Rian Firnanda Irsyadani | Teknologi Informasi & Tata Kelola Sektor Publik",
+    "siteTitle": "Rian Firnanda Irsyadani | Portofolio",
     "description": {
       "id": "Portofolio Rian Firnanda Irsyadani. Menggabungkan teknologi informasi dan administrasi publik untuk membenahi layanan pemerintahan.",
       "en": "Portfolio of Rian Firnanda Irsyadani. Bringing information technology and public administration together to improve government services."
@@ -21,7 +21,7 @@
     "ogImage": "/images/og-image.png",
     "baseUrl": "https://rianfirnanda.vercel.app",
     "locale": "id",
-    "defaultTheme": "system",
+    "defaultTheme": "dark",
     "themeColorLight": "#f5f7fc",
     "themeColorDark": "#05070f"
   },
