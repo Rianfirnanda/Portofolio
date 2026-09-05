@@ -20,7 +20,13 @@ export default function Hero() {
   const isExternalResume = profile.resumeUrl.startsWith('http');
 
   return (
-    <section id="top" className="relative flex min-h-svh items-center px-4 pt-28 pb-20 print:pt-4 sm:px-6">
+    // flex-col + justify-center: isinya tetap di tengah layar saat jendelanya
+    // tinggi, tetapi saat jendelanya pendek bagian ini tumbuh ke bawah dan
+    // halaman jadi bisa digulir. Tidak ada yang saling menimpa.
+    <section
+      id="top"
+      className="relative flex min-h-svh flex-col justify-center px-4 pt-28 pb-28 print:pt-4 sm:px-6"
+    >
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
         {/* ---------------- Kolom teks ---------------- */}
         <div className="flex flex-col items-start gap-5">
@@ -150,11 +156,13 @@ export default function Hero() {
         </Reveal>
       </div>
 
-      {/* Strip keahlian berjalan, mengisi ruang di bawah Hero. */}
-      <div className="absolute inset-x-0 bottom-20 hidden px-4 sm:px-6 lg:block">
-        <div className="mx-auto max-w-6xl">
-          <SkillMarquee />
-        </div>
+      {/*
+        Strip keahlian berjalan. Ikut aliran halaman, jadi posisinya selalu di
+        bawah isi Hero berapa pun tinggi jendelanya. Sebelumnya dibuat melayang
+        dan sempat menimpa deretan ikon sosial di layar yang pendek.
+      */}
+      <div className="mx-auto mt-14 hidden w-full max-w-6xl lg:block">
+        <SkillMarquee />
       </div>
 
       {/* Petunjuk gulir */}

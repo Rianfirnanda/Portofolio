@@ -145,6 +145,8 @@ export default function Navbar() {
           'glass glass-nav relative z-50 mt-4 w-full max-w-5xl px-3 transition-all duration-300',
           open ? 'rounded-3xl' : 'rounded-full',
           scrolled ? 'py-1.5' : 'py-2.5',
+          // Dipekatkan saat halaman digulir, dan saat menu ponsel terbuka.
+          scrolled || open ? 'glass-nav-solid' : '',
         ].join(' ')}
       >
         <div className="flex items-center justify-between gap-3">
