@@ -90,7 +90,7 @@ export const portfolio = {
      * sehingga tampilan tidak pernah rusak.
      * -------------------------------------------------------------------- */
     avatar: '/images/profile.jpg',
-    avatarFallback: '/images/avatar.svg',
+    avatarFallback: '/images/profile.jpg',
     avatarAlt: {
       id: 'Foto profil Rian Firnanda Irsyadani',
       en: 'Profile photo of Rian Firnanda Irsyadani',
