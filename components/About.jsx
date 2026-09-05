@@ -1,0 +1,85 @@
+'use client';
+
+import { portfolio } from '@/data/portfolio';
+import { useLanguage } from '@/components/LanguageProvider';
+import GlassCard from '@/components/GlassCard';
+import SectionHeading from '@/components/SectionHeading';
+import Reveal from '@/components/Reveal';
+import Icon from '@/components/Icon';
+
+/**
+ * About — ringkasan tiga paragraf + strip statistik + daftar bahasa.
+ * Paragraf diambil dari profile.summaryId / profile.summaryEn sesuai bahasa aktif.
+ */
+export default function About() {
+  const { lang, t } = useLanguage();
+  const { profile, stats, languages, sections, ui } = portfolio;
+
+  const paragraphs = lang === 'id' ? profile.summaryId : profile.summaryEn;
+  if (!paragraphs || paragraphs.length === 0) return null;
+
+  return (
+    <section id="about" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading
+          eyebrow={t(sections.about.eyebrow)}
+          title={t(sections.about.title)}
+          subtitle={t(sections.about.subtitle)}
+        />
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+          {/* Ringkasan naratif */}
+          <Reveal>
+            <GlassCard className="h-full p-6 sm:p-8">
+              <Icon name="quote" className="mb-4 h-7 w-7 text-accent-2/70" />
+              <div className="space-y-4">
+                {paragraphs.map((paragraph, index) => (
+                  <p key={index} className="text-[0.95rem] leading-7 text-slate-300">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </GlassCard>
+          </Reveal>
+
+          {/* Statistik + bahasa */}
+          <div className="flex flex-col gap-6">
+            {stats.length > 0 ? (
+              <Reveal delay={80}>
+                <div className="grid grid-cols-2 gap-3">
+                  {stats.map((stat) => (
+                    <GlassCard key={t(stat.label)} className="p-4 text-center sm:p-5">
+                      <p className="bg-linear-to-br from-white to-accent-3 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
+                        {stat.value}
+                      </p>
+                      <p className="mt-1 text-xs leading-snug text-slate-400">{t(stat.label)}</p>
+                    </GlassCard>
+                  ))}
+                </div>
+              </Reveal>
+            ) : null}
+
+            {languages.length > 0 ? (
+              <Reveal delay={140} className="grow">
+                <GlassCard className="h-full p-6">
+                  <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-white">
+                    <Icon name="languages" className="h-4 w-4 text-accent-3" />
+                    {t(ui.languagesTitle)}
+                  </h3>
+                  <ul className="space-y-3">
+                    {languages.map((language) => (
+                      <li key={t(language.name)} className="flex items-center justify-between gap-3">
+                        <span className="text-sm text-slate-200">{t(language.name)}</span>
+                        <span className="chip shrink-0">{t(language.level)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </GlassCard>
+              </Reveal>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Placeholder foto profil (640x640).
+  GANTI: taruh foto asli di public/images/ (mis. avatar.jpg) lalu ubah
+  `profile.avatar` di data/portfolio.js menjadi '/images/avatar.jpg'.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640" role="img" aria-label="Placeholder foto profil">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1024"/>
+      <stop offset="100%" stop-color="#05070f"/>
+    </linearGradient>
+    <radialGradient id="b1" cx="25%" cy="20%" r="65%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="b2" cx="85%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="b3" cx="45%" cy="105%" r="65%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c7d2fe"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="640" fill="url(#base)"/>
+  <rect width="640" height="640" fill="url(#b1)"/>
+  <rect width="640" height="640" fill="url(#b2)"/>
+  <rect width="640" height="640" fill="url(#b3)"/>
+
+  <!-- Bingkai kaca -->
+  <rect x="40" y="40" width="560" height="560" rx="72" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5"/>
+
+  <!-- Monogram -->
+  <text x="320" y="352" text-anchor="middle" font-family="'Plus Jakarta Sans','Segoe UI',system-ui,-apple-system,sans-serif" font-size="188" font-weight="800" letter-spacing="-6" fill="url(#ink)">RF</text>
+  <rect x="255" y="398" width="130" height="5" rx="2.5" fill="#22d3ee"/>
+  <text x="320" y="452" text-anchor="middle" font-family="'Plus Jakarta Sans','Segoe UI',system-ui,-apple-system,sans-serif" font-size="21" font-weight="600" letter-spacing="5" fill="#94a3b8">RIAN FIRNANDA</text>
+</svg>

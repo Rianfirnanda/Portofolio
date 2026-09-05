@@ -1,0 +1,104 @@
+# =============================================================================
+#  Deploy portofolio (Next.js static export) ke GitHub Pages
+# -----------------------------------------------------------------------------
+#  Alur: push ke main  ->  build  ->  folder out/  ->  artifact  ->  Pages
+#
+#  Aktifkan sekali di repo: Settings -> Pages -> Build and deployment ->
+#  Source: "GitHub Actions".
+# =============================================================================
+name: Deploy to GitHub Pages
+
+on:
+  # Setiap push ke branch utama memicu deploy otomatis.
+  push:
+    branches: [main]
+  # Tombol "Run workflow" manual di tab Actions.
+  workflow_dispatch:
+
+# Izin minimum yang dibutuhkan actions/deploy-pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Hanya satu deploy berjalan pada satu waktu; antrean tidak dibatalkan
+# supaya deploy yang sedang berlangsung tetap selesai.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # 1. BUILD — menghasilkan folder out/
+  # ---------------------------------------------------------------------------
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      # Menentukan basePath secara otomatis:
+      #  - repo biasa            -> "/<nama-repo>"  (project page)
+      #  - repo <user>.github.io -> ""              (user page)
+      #  - ada file CNAME        -> ""              (custom domain)
+      - name: Resolve NEXT_PUBLIC_BASE_PATH
+        id: basepath
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          OWNER_NAME="${GITHUB_REPOSITORY%%/*}"
+          REPO_LOWER="$(echo "$REPO_NAME" | tr '[:upper:]' '[:lower:]')"
+          OWNER_LOWER="$(echo "$OWNER_NAME" | tr '[:upper:]' '[:lower:]')"
+
+          if [ -f "public/CNAME" ] || [ -f "CNAME" ]; then
+            BASE_PATH=""
+            echo "Custom domain terdeteksi (CNAME) -> basePath kosong."
+          elif [ "$REPO_LOWER" = "${OWNER_LOWER}.github.io" ]; then
+            BASE_PATH=""
+            echo "User/organization page terdeteksi -> basePath kosong."
+          else
+            BASE_PATH="/$REPO_NAME"
+            echo "Project page terdeteksi -> basePath $BASE_PATH"
+          fi
+
+          echo "base_path=$BASE_PATH" >> "$GITHUB_OUTPUT"
+
+      - name: Build static site
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.basepath.outputs.base_path }}
+        run: npm run build
+
+      # Mencegah GitHub Pages memproses folder _next/ dengan Jekyll.
+      - name: Ensure .nojekyll
+        run: touch out/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  # ---------------------------------------------------------------------------
+  # 2. DEPLOY — mempublikasikan artifact ke GitHub Pages
+  # ---------------------------------------------------------------------------
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

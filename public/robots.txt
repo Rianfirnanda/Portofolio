@@ -1,0 +1,5 @@
+# robots.txt — portofolio Rian Firnanda Irsyadani
+User-agent: *
+Allow: /
+
+Sitemap: https://rianfirnanda.github.io/Portofolio/sitemap.xml

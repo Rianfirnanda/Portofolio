@@ -1,0 +1,96 @@
+'use client';
+
+import { useState } from 'react';
+import { portfolio } from '@/data/portfolio';
+import { useLanguage } from '@/components/LanguageProvider';
+import SectionHeading from '@/components/SectionHeading';
+import GlassCard from '@/components/GlassCard';
+import Reveal from '@/components/Reveal';
+import Icon from '@/components/Icon';
+
+/** Satu kartu publikasi dengan abstrak yang bisa dibuka-tutup. */
+function PublicationCard({ item }) {
+  const { t } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const abstract = t(item.abstract);
+
+  return (
+    <GlassCard as="article" featured className="p-6 sm:p-8">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-accent-1/25 to-accent-2/25 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/15">
+          <Icon name="book" className="h-3.5 w-3.5" />
+          {t(item.role)}
+        </span>
+        <span className="chip">{t(item.date)}</span>
+      </div>
+
+      <h3 className="mt-4 text-lg font-semibold leading-snug text-white sm:text-xl">{item.title}</h3>
+      <p className="mt-2 text-sm text-accent-3">{t(item.venue)}</p>
+
+      {abstract ? (
+        <>
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            className="mt-4 inline-flex items-center gap-1.5 rounded-md text-sm font-semibold text-slate-200 transition-colors hover:text-white"
+          >
+            {open ? t(portfolio.ui.hideAbstract) : t(portfolio.ui.readAbstract)}
+            <Icon
+              name="chevron-down"
+              className={`h-4 w-4 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+            />
+          </button>
+
+          {open ? (
+            <p className="mt-3 border-l-2 border-accent-2/50 pl-4 text-sm leading-7 text-slate-300">
+              {abstract}
+            </p>
+          ) : null}
+        </>
+      ) : null}
+
+      {item.url ? (
+        <div className="mt-5 border-t border-white/10 pt-4">
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-white/10"
+          >
+            <Icon name="external-link" className="h-3.5 w-3.5" />
+            {t(portfolio.ui.viewPublication)}
+          </a>
+        </div>
+      ) : null}
+    </GlassCard>
+  );
+}
+
+/** Publications — daftar karya ilmiah; hilang otomatis jika array kosong. */
+export default function Publications() {
+  const { t } = useLanguage();
+  const { publications, sections } = portfolio;
+
+  if (publications.length === 0) return null;
+
+  return (
+    <section id="publications" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
+      <div className="mx-auto max-w-4xl">
+        <SectionHeading
+          eyebrow={t(sections.publications.eyebrow)}
+          title={t(sections.publications.title)}
+          subtitle={t(sections.publications.subtitle)}
+        />
+
+        <div className="mt-10 space-y-6">
+          {publications.map((item, index) => (
+            <Reveal key={item.title} delay={Math.min(index * 80, 240)}>
+              <PublicationCard item={item} />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
