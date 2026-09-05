@@ -2,14 +2,15 @@
   "name": "portofolio-rian-firnanda",
   "version": "1.0.0",
   "private": true,
-  "description": "Portofolio pribadi Rian Firnanda Irsyadani - Next.js static export untuk GitHub Pages",
+  "description": "Portofolio pribadi Rian Firnanda Irsyadani, Next.js static export",
   "engines": {
     "node": ">=20.9.0"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx --yes serve out"
+    "start": "npx --yes serve out",
+    "assets": "node --no-warnings scripts/generate-assets.mjs"
   },
   "dependencies": {
     "next": "16.3.4",
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.3",
+    "sharp": "0.35.4",
     "tailwindcss": "4.3.3"
   }
 }

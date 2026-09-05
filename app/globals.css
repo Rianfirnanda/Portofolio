@@ -182,6 +182,32 @@ body {
       0 0 40px -24px color-mix(in oklab, var(--accent-2) 80%, transparent);
   }
 
+  /* Sorotan lembut yang mengikuti kursor di dalam kartu.
+   * Posisinya dikirim komponen GlassCard lewat variabel --spot-x dan --spot-y.
+   * Matikan lewat appearance.spotlight di data/portfolio.js. */
+  .glass-spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .glass-spotlight::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    background: radial-gradient(
+      340px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      color-mix(in oklab, var(--accent-2) 22%, transparent),
+      transparent 70%
+    );
+  }
+  .glass-spotlight:hover::after {
+    opacity: 1;
+  }
+
   /* Navbar memakai dasar lebih pekat agar teks tetap terbaca di atas apa pun. */
   .glass-nav {
     background-color: color-mix(in oklab, var(--bg) 82%, transparent);
@@ -370,10 +396,136 @@ body {
     color: var(--fg);
     font-weight: 650;
   }
+
+  /* Garis progres gulir di tepi paling atas halaman. */
+  .scroll-progress {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 60;
+    height: 2.5px;
+    transform-origin: 0 50%;
+    background-image: linear-gradient(
+      90deg,
+      var(--accent-1),
+      var(--accent-2),
+      var(--accent-3)
+    );
+    pointer-events: none;
+  }
+
+  /* Garis bawah yang tumbuh saat kursor lewat, dipakai menu navigasi. */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0.25rem;
+    height: 1.5px;
+    width: 0;
+    border-radius: 2px;
+    background-image: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  .link-underline:hover::after {
+    left: 20%;
+    width: 60%;
+  }
 }
 
 /* ==========================================================================
- * 4. KEYFRAMES
+ * 4. MODE CETAK
+ * Menyiapkan halaman agar rapi ketika pengunjung menekan Ctrl+P atau menyimpan
+ * portofolio ini sebagai PDF. Elemen dekoratif dan navigasi dilepas, warna
+ * dipaksa terang, dan kartu berubah jadi kotak bergaris tipis.
+ * ========================================================================== */
+@media print {
+  :root,
+  [data-theme='dark'] {
+    --bg: #ffffff;
+    --bg-deep: #ffffff;
+    --fg: #000000;
+    --fg-muted: #1f2937;
+    --fg-subtle: #374151;
+    --accent-fg: #4338ca;
+    --glass: transparent;
+    --glass-hover: transparent;
+    --glass-solid: #ffffff;
+    --line: #d1d5db;
+    --line-strong: #9ca3af;
+    --inner-glow: transparent;
+    --chip-bg: transparent;
+    --chip-fg: #1f2937;
+  }
+
+  body {
+    background: #ffffff !important;
+  }
+
+  /* Lepas semua elemen yang tidak berguna di atas kertas. */
+  header,
+  footer,
+  .scroll-progress,
+  [data-print='hide'] {
+    display: none !important;
+  }
+
+  .glass,
+  .glass-featured::before,
+  .glass-spotlight::after {
+    background: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+
+  .glass {
+    border: 1px solid #d1d5db !important;
+  }
+
+  .chip {
+    border: 1px solid #d1d5db !important;
+  }
+
+  /* Rapatkan jarak antar bagian dan jaga satu kartu tidak terbelah dua halaman. */
+  section {
+    min-height: 0 !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  article,
+  li,
+  figure {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Tulis alamat lengkap hanya untuk tautan di dalam artikel blog. Tautan
+   * berbentuk ikon di bagian lain sengaja dilewati supaya tata letaknya
+   * tidak berantakan oleh deretan URL panjang. */
+  .prose-post a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.75rem;
+    color: #4b5563;
+    word-break: break-all;
+  }
+}
+
+/* ==========================================================================
+ * 5. KEYFRAMES
  * ========================================================================== */
 @keyframes blob-drift-a {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
@@ -427,8 +579,15 @@ body {
   to   { opacity: 1; transform: none; }
 }
 
+/* Strip keahlian berjalan di bagian bawah Hero. Isinya digandakan dua kali,
+ * jadi bergeser sejauh separuh lebar sudah cukup untuk perulangan yang mulus. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* ==========================================================================
- * 5. PREFERS-REDUCED-MOTION
+ * 6. PREFERS-REDUCED-MOTION
  * Semua animasi dekoratif dimatikan, konten tetap tampil penuh.
  * ========================================================================== */
 @media (prefers-reduced-motion: reduce) {

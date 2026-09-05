@@ -52,9 +52,15 @@ export default function PostCard({ post, compact = false }) {
           </div>
 
           <h3 className="mt-2.5 text-lg font-semibold leading-snug text-fg">{title}</h3>
-          <p className={`mt-2 grow text-sm leading-6 text-muted ${compact ? 'line-clamp-3' : ''}`}>
-            {t(post.excerpt)}
-          </p>
+
+          {/* Pemotongan teks dibungkus elemen terpisah. Menaruh line-clamp
+              langsung pada elemen yang juga memakai grow membuat baris di luar
+              batas tetap terlihat, karena tingginya dipaksa memanjang. */}
+          <div className="mt-2 grow">
+            <p className={`text-sm leading-6 text-muted ${compact ? 'line-clamp-3' : ''}`}>
+              {t(post.excerpt)}
+            </p>
+          </div>
 
           {post.tags?.length > 0 ? (
             <ul className="mt-4 flex flex-wrap gap-2">

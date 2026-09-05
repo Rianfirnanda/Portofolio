@@ -16,26 +16,34 @@ isinya diatur dari satu berkas data.
   browser, dan tanpa kedipan warna saat halaman dimuat.
 - Toggle bahasa **ID dan EN** memakai satu state React, tanpa library i18n.
 - **Blog** lengkap dengan halaman daftar, filter topik, halaman detail per
-  tulisan, dan data terstruktur untuk mesin pencari.
+  tulisan, tombol berbagi, dan data terstruktur untuk mesin pencari.
 - Konten sepenuhnya *data-driven*. Menambah item cukup dengan menambah objek ke
   array, tidak ada komponen yang perlu disentuh.
 - Setiap pengalaman, proyek, kegiatan sukarela, dan tulisan blog bisa diberi
   **foto sendiri**, dan situs tetap rapi kalau fotonya belum ada.
+- **Satu foto profil untuk lima tempat.** Perintah `npm run assets` membuat
+  favicon, ikon iOS, dan kartu preview tautan langsung dari foto itu.
+- Sentuhan interaktif yang bisa dimatikan satu per satu: sorotan mengikuti
+  kursor di kartu, garis progres gulir, angka statistik yang menghitung naik,
+  tombol melayang kembali ke atas, dan strip keahlian berjalan.
 - Latar berlapis: blob gradien beranimasi, garis grid, titik tekstur, dan
   butiran halus. Kepekatannya bisa disetel, animasinya berhenti otomatis untuk
   pengunjung yang mengaktifkan "kurangi gerakan".
+- **Siap dicetak.** Tautan "Simpan sebagai PDF" di footer menghasilkan tata
+  letak bersih berlatar putih tanpa navigasi dan elemen dekoratif.
 - Font variabel Plus Jakarta Sans di-host sendiri, tidak memanggil server luar.
 - SEO lengkap: OpenGraph, Twitter card, canonical, JSON-LD `Person` dan
   `BlogPosting`, plus `robots.txt` dan `sitemap.xml` yang dibuat otomatis.
 - Lolos audit aksesibilitas axe-core WCAG 2.1 AA tanpa pelanggaran, di kedua
   mode warna dan di lebar 360 sampai 1440 piksel.
-- Tanpa dependency tambahan. Ikon, animasi, dan sistem dua bahasa ditulis sendiri.
+- Tanpa dependency runtime tambahan. Ikon, animasi, dan sistem dua bahasa
+  ditulis sendiri di dalam proyek ini.
 
 **Struktur folder**
 
 | Berkas atau folder | Fungsi |
 | --- | --- |
-| `data/portfolio.js` | **Sumber utama konten.** Profil, pengalaman, proyek, sertifikasi, keahlian, kontak, menu, judul section. |
+| `data/portfolio.js` | **Sumber utama konten.** Profil, pengalaman, proyek, sertifikasi, keahlian, kontak, menu, judul section, dan sakelar `appearance`. |
 | `data/posts.js` | Semua tulisan blog beserta isinya. |
 | `data/README.md` | Panduan operasional dengan cuplikan siap tempel. |
 | `app/layout.js` | Kerangka HTML, metadata SEO, JSON-LD, font, skrip anti kedip tema, provider tema dan bahasa. |
@@ -68,6 +76,12 @@ isinya diatur dari satu berkas data.
 | `components/LanguageProvider.jsx` | State bahasa ID dan EN. |
 | `components/Icon.jsx` | Peta ikon SVG inline, tanpa library ikon. |
 | `components/Reveal.jsx` dan `hooks/useReveal.js` | Animasi muncul saat digulir. |
+| `components/ScrollProgress.jsx` | Garis progres gulir di tepi atas layar. |
+| `components/BackToTop.jsx` | Tombol melayang kembali ke atas. |
+| `components/CountUp.jsx` | Angka statistik yang menghitung naik saat masuk layar. |
+| `components/SkillMarquee.jsx` | Strip keahlian berjalan di bawah Hero. |
+| `components/ShareButtons.jsx` | Tombol berbagi di bawah tulisan blog. |
+| `scripts/generate-assets.mjs` | Membuat favicon, ikon iOS, dan kartu preview dari foto profil. |
 | `lib/i18n.js` | Helper `t()` pemilih teks ID atau EN. |
 | `lib/asset.js` | Helper `withBasePath()` untuk path gambar dan berkas. |
 | `lib/format.js` | Format tanggal dan perkiraan lama baca. |
@@ -95,6 +109,10 @@ npm run build
 
 # 4. Uji hasil build secara lokal
 npm start
+
+# 5. Buat ulang favicon, ikon iOS, dan kartu preview dari foto profil.
+#    Jalankan setiap kali foto di public/images/profile.jpg diganti.
+npm run assets
 ```
 
 ---
@@ -146,7 +164,7 @@ dengan contoh yang tinggal disalin. Isinya mencakup:
 
 | Yang ingin diubah | Bagian di panduan |
 | --- | --- |
-| Memasang foto profil | Bagian 1 |
+| Mengganti foto profil | Bagian 1 |
 | Menambah pengalaman kerja | Bagian 3 |
 | Menambahkan foto ke pengalaman dan proyek | Bagian 4 |
 | Menambah proyek | Bagian 5 |
@@ -156,13 +174,14 @@ dengan contoh yang tinggal disalin. Isinya mencakup:
 | Mengatur mode awal terang atau gelap | Bagian 10 |
 | Menyetel kepekatan latar belakang | Bagian 11 |
 | Menyembunyikan satu section | Bagian 14 |
+| Mematikan animasi dan sentuhan interaktif | Bagian 16 |
 
 ### Yang paling sering ditanyakan
 
-**Memasang foto profil.** Simpan fotomu sebagai `public/images/profile.jpg`
-dengan bentuk persegi minimal 640 x 640 piksel. Path-nya sudah tertulis di data,
-jadi tidak ada yang perlu diubah. Selama foto itu belum ada, situs memakai kartu
-monogram sebagai cadangan dan tetap tampil rapi.
+**Mengganti foto profil.** Timpa `public/images/profile.jpg` dengan foto baru
+berbentuk persegi minimal 640 x 640 piksel, lalu jalankan `npm run assets`.
+Perintah itu membuat ulang favicon, ikon iOS, dan kartu preview tautan supaya
+semuanya ikut memakai foto yang sama.
 
 **Mengganti warna aksen.** Ubah tiga baris di `app/globals.css`:
 
@@ -273,5 +292,6 @@ Aturan main di proyek ini:
 | `react` dan `react-dom` | 19.2.8 | Pustaka antarmuka |
 | `tailwindcss` | 4.3.3 | Styling utility-first |
 | `@tailwindcss/postcss` | 4.3.3 | Integrasi Tailwind ke PostCSS |
+| `sharp` | 0.35.4 | Hanya dipakai `npm run assets` untuk membuat favicon dan kartu preview. Tidak ikut ke dalam situs. |
 
-Tidak ada dependency lain.
+Tidak ada dependency lain. Ikon, animasi, dan sistem dua bahasa ditulis sendiri.

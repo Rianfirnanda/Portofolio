@@ -63,6 +63,35 @@ export const portfolio = {
   },
 
   /* ==========================================================================
+   * 1b. APPEARANCE  |  sakelar hidup dan mati untuk sentuhan interaktif
+   *
+   *  Semua bernilai true secara bawaan. Ubah jadi false kalau ada yang terasa
+   *  terlalu ramai. Tidak ada yang rusak kalau dimatikan, halamannya hanya
+   *  menjadi lebih tenang.
+   * ========================================================================== */
+  appearance: {
+    // Sorotan lembut yang mengikuti kursor di dalam setiap kartu kaca.
+    spotlight: true,
+    // Garis tipis bergradien di tepi atas layar, menunjukkan posisi gulir.
+    scrollProgress: true,
+    // Angka statistik menghitung naik dari nol saat masuk layar.
+    countUpStats: true,
+    // Tombol bundar kembali ke atas di sudut kanan bawah.
+    backToTop: true,
+    // Foto profil dipakai sebagai logo di navbar. Isi false untuk memakai
+    // inisial dari profile.name sebagai gantinya.
+    photoAsLogo: true,
+    // Tombol berbagi di bagian bawah setiap tulisan blog.
+    shareButtons: true,
+    // Strip keahlian yang bergeser pelan di bagian bawah Hero.
+    // Isinya diambil otomatis dari skills.groups.
+    heroMarquee: true,
+    // Tautan simpan sebagai PDF di footer. Membuka dialog cetak browser
+    // dengan tata letak khusus yang sudah dirapikan.
+    printLink: true,
+  },
+
+  /* ==========================================================================
    * 2. PROFILE  |  identitas utama, tampil di Hero, About, dan JSON-LD
    * ========================================================================== */
   profile: {
@@ -715,6 +744,7 @@ export const portfolio = {
     servicesTitle: { id: 'Layanan yang Ditawarkan', en: 'Services Offered' },
     languagesTitle: { id: 'Bahasa', en: 'Languages' },
     backToTop: { id: 'Kembali ke atas', en: 'Back to top' },
+    printPage: { id: 'Simpan sebagai PDF', en: 'Save as PDF' },
     // Label khusus blog
     blogAll: { id: 'Lihat semua tulisan', en: 'View all writing' },
     blogBack: { id: 'Kembali ke blog', en: 'Back to blog' },
@@ -728,6 +758,8 @@ export const portfolio = {
     blogPublished: { id: 'Terbit', en: 'Published' },
     blogRelated: { id: 'Tulisan lainnya', en: 'More writing' },
     blogShare: { id: 'Bagikan tulisan ini', en: 'Share this post' },
+    shareNative: { id: 'Bagikan lewat perangkat', en: 'Share with your device' },
+    shareCopyLink: { id: 'Salin tautan tulisan', en: 'Copy post link' },
     blogFilterLabel: { id: 'Saring tulisan berdasarkan topik', en: 'Filter posts by topic' },
     builtWith: {
       id: '',

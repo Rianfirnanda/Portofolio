@@ -5,6 +5,7 @@ import { useLanguage } from '@/components/LanguageProvider';
 import GlassCard from '@/components/GlassCard';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
+import CountUp from '@/components/CountUp';
 import Icon from '@/components/Icon';
 
 /**
@@ -50,8 +51,8 @@ export default function About() {
                       {stat.icon ? (
                         <Icon name={stat.icon} className="mx-auto mb-2 h-4 w-4 text-accent" />
                       ) : null}
-                      <p className="bg-linear-to-br from-accent-1 to-accent-2 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
-                        {stat.value}
+                      <p className="bg-linear-to-br from-accent-1 to-accent-2 bg-clip-text text-2xl font-bold text-transparent tabular-nums sm:text-3xl">
+                        <CountUp value={stat.value} />
                       </p>
                       <p className="mt-1 text-xs leading-snug text-subtle">{t(stat.label)}</p>
                     </GlassCard>

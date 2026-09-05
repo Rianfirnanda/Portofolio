@@ -22,7 +22,7 @@ Vercel akan membangun ulang situsnya sendiri dalam satu sampai dua menit.
 
 ## Daftar isi
 
-1. [Memasang foto profil](#1-memasang-foto-profil)
+1. [Mengganti foto profil](#1-mengganti-foto-profil)
 2. [Menulis teks dua bahasa](#2-menulis-teks-dua-bahasa)
 3. [Menambah pengalaman kerja](#3-menambah-pengalaman-kerja)
 4. [Menambahkan foto ke pengalaman dan proyek](#4-menambahkan-foto-ke-pengalaman-dan-proyek)
@@ -37,35 +37,59 @@ Vercel akan membangun ulang situsnya sendiri dalam satu sampai dua menit.
 13. [Memasang tombol Unduh CV](#13-memasang-tombol-unduh-cv)
 14. [Menyembunyikan satu section](#14-menyembunyikan-satu-section)
 15. [Daftar nama ikon yang tersedia](#15-daftar-nama-ikon-yang-tersedia)
+16. [Menyalakan dan mematikan sentuhan interaktif](#16-menyalakan-dan-mematikan-sentuhan-interaktif)
 
 ---
 
-## 1. Memasang foto profil
+## 1. Mengganti foto profil
 
-Ini yang pertama sebaiknya kamu lakukan.
+Foto kamu dipakai di **lima tempat sekaligus**: kartu besar di Hero, logo
+bundar di navbar, favicon di tab browser, ikon layar utama iOS, dan kartu
+preview saat tautan situs dibagikan.
 
-1. Siapkan fotomu dalam bentuk **persegi**, minimal 640 x 640 piksel.
-   Foto formal berlatar polos memberi hasil paling rapi.
-2. Beri nama `profile.jpg`, lalu simpan ke folder `public/images/`.
-   Jadi alamat lengkapnya `public/images/profile.jpg`.
-3. Selesai. Path-nya sudah tertulis di `data/portfolio.js`:
+**Kalau kamu mengganti fotonya, ikuti dua langkah ini.**
+
+**Langkah 1. Ganti berkasnya.**
+Siapkan foto **persegi**, minimal 640 x 640 piksel. Timpa berkas
+`public/images/profile.jpg` dengan foto baru itu.
+
+Cara lewat browser tanpa perlu Git: buka repo di GitHub, masuk ke folder
+`public/images`, klik **Add file**, pilih **Upload files**, seret fotomu ke
+sana, lalu **Commit changes**.
+
+**Langkah 2. Buat ulang aset turunannya.**
+
+```bash
+npm run assets
+```
+
+Perintah itu membaca `profile.avatar` di `data/portfolio.js`, lalu menulis
+ulang tiga berkas sekaligus:
+
+| Berkas | Isi |
+| --- | --- |
+| `app/icon.png` | Favicon bundar berbingkai gradien, 512 x 512 |
+| `app/apple-icon.png` | Ikon layar utama iOS, 180 x 180 |
+| `public/images/og-image.png` | Kartu preview 1200 x 630 berisi foto, nama, dan status |
+
+Setelah itu `git commit` dan `git push`. Vercel akan membangun ulang sendiri.
+
+> Kalau kamu melewatkan langkah 2, foto di Hero dan navbar tetap berganti,
+> hanya favicon dan kartu preview yang masih memakai foto lama.
+
+**Kalau foto barumu berformat PNG atau WebP**, ubah dua baris di
+`data/portfolio.js` supaya cocok:
 
 ```js
 profile: {
-  avatar: '/images/profile.jpg',        // foto utama kamu
-  avatarFallback: '/images/avatar.svg', // dipakai kalau foto di atas belum ada
+  avatar: '/images/profile.png',         // foto utama
+  avatarFallback: '/images/profile.png', // cadangan kalau yang utama gagal dimuat
 }
 ```
 
-Kalau fotomu berformat PNG atau WebP, ganti saja baris `avatar` menjadi
-`'/images/profile.png'` atau `'/images/profile.webp'`.
-
-**Cara mengunggah lewat browser tanpa perlu Git:** buka repo di GitHub, masuk
-ke folder `public/images`, klik **Add file**, pilih **Upload files**, seret
-fotomu ke sana, lalu **Commit changes**. Vercel langsung membangun ulang.
-
-> Situs tidak akan rusak walau fotonya belum ada. Selama `profile.jpg` belum
-> diunggah, yang tampil adalah kartu monogram `avatar.svg`.
+`avatarFallback` adalah gambar pengganti kalau berkas utamanya tidak ditemukan.
+Arahkan ke berkas lain kalau kamu ingin ada cadangan yang berbeda, misalnya
+`'/images/avatar.svg'` yang berisi kartu monogram.
 
 ---
 
@@ -555,3 +579,55 @@ const strokeIcons = {
 ```
 
 Setelah itu langsung bisa dipakai dengan menulis `{ icon: 'dribbble' }`.
+
+---
+
+## 16. Menyalakan dan mematikan sentuhan interaktif
+
+Semua gerakan halus di situs ini punya sakelar sendiri di blok `appearance`
+pada `data/portfolio.js`. Ubah jadi `false` kalau ada yang terasa terlalu ramai.
+Tidak ada yang rusak kalau dimatikan, halamannya hanya jadi lebih tenang.
+
+```js
+appearance: {
+  spotlight: true,       // sorotan lembut mengikuti kursor di dalam kartu
+  scrollProgress: true,  // garis bergradien di tepi atas layar
+  countUpStats: true,    // angka statistik menghitung naik dari nol
+  backToTop: true,       // tombol bundar di sudut kanan bawah
+  photoAsLogo: true,     // foto profil sebagai logo navbar
+  shareButtons: true,    // tombol berbagi di bawah tulisan blog
+  heroMarquee: true,     // strip keahlian berjalan di bawah Hero
+  printLink: true,       // tautan simpan sebagai PDF di footer
+}
+```
+
+| Sakelar | Kalau diisi `false` |
+| --- | --- |
+| `spotlight` | Kartu tetap punya efek angkat saat disentuh kursor, hanya sorotan cahayanya yang hilang |
+| `scrollProgress` | Garis tipis di tepi atas layar tidak dirender sama sekali |
+| `countUpStats` | Angka statistik langsung tampil utuh tanpa animasi |
+| `backToTop` | Tombol melayang hilang. Pengunjung tetap bisa menggulir sendiri |
+| `photoAsLogo` | Logo navbar kembali memakai inisial dari `profile.name` |
+| `shareButtons` | Baris tombol berbagi di bawah artikel tidak muncul |
+| `heroMarquee` | Strip keahlian berjalan di bawah Hero dilepas |
+| `printLink` | Tautan "Simpan sebagai PDF" di footer disembunyikan |
+
+### Mode cetak dan simpan PDF
+
+Tautan **Simpan sebagai PDF** di footer membuka dialog cetak browser. Tata
+letak khususnya sudah disiapkan di blok `@media print` pada `app/globals.css`:
+latar bergradien dilepas, warna dipaksa terang supaya hemat tinta, navigasi dan
+tombol melayang disembunyikan, dan kartu tidak terbelah dua halaman.
+
+Ingin menyembunyikan elemen tertentu saat dicetak? Tambahkan atribut
+`data-print="hide"` pada elemen itu.
+
+```jsx
+<div data-print="hide">Ini tidak ikut tercetak</div>
+```
+
+### Menghormati pengaturan perangkat
+
+Semua animasi di situs ini otomatis berhenti untuk pengunjung yang menyalakan
+"kurangi gerakan" di perangkat mereka. Tidak ada pengaturan tambahan yang perlu
+kamu urus, dan tidak ada konten yang hilang, hanya geraknya yang tidak dijalankan.

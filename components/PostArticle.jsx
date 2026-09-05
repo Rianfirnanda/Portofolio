@@ -8,6 +8,7 @@ import { formatDate, estimateReadingTime } from '@/lib/format';
 import SmartImage from '@/components/SmartImage';
 import PostBody from '@/components/PostBody';
 import PostCard from '@/components/PostCard';
+import ShareButtons from '@/components/ShareButtons';
 import Reveal from '@/components/Reveal';
 import Icon from '@/components/Icon';
 
@@ -93,6 +94,7 @@ export default function PostArticle({ slug }) {
         <Reveal delay={120} className="mt-10">
           <div className="glass rounded-3xl p-6 sm:p-9">
             <PostBody content={post.content} />
+            <ShareButtons title={t(post.title)} path={`/blog/${post.slug}/`} />
           </div>
         </Reveal>
 

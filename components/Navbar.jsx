@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
 import ThemeToggle from '@/components/ThemeToggle';
+import SmartImage from '@/components/SmartImage';
 import Icon from '@/components/Icon';
 
 /**
@@ -27,7 +28,17 @@ export default function Navbar() {
   const [active, setActive] = useState('');
 
   const items = portfolio.nav ?? [];
+  const profile = portfolio.profile;
   const isHome = pathname === '/' || pathname === '';
+  const usePhotoLogo = portfolio.appearance?.photoAsLogo !== false && Boolean(profile.avatar);
+
+  // Inisial dari nama, dipakai kalau logo foto dimatikan lewat data.
+  const initials = profile.name
+    .split(' ')
+    .map((word) => word[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 
   // Perkecil tinggi navbar setelah halaman digulir sedikit.
   useEffect(() => {
@@ -136,15 +147,32 @@ export default function Navbar() {
         ].join(' ')}
       >
         <div className="flex items-center justify-between gap-3">
-          {/* Logo berupa inisial, mengarah kembali ke beranda. */}
+          {/* Logo, mengarah kembali ke beranda. Memakai foto profil dengan
+              bingkai gradien. Isi appearance.photoAsLogo dengan false untuk
+              kembali memakai inisial nama. */}
           <Link
             href="/"
-            className="ml-1 flex shrink-0 items-center gap-2 rounded-full px-2 py-1 text-sm font-bold text-fg"
+            aria-label={`${portfolio.profile.name}, ${lang === 'id' ? 'kembali ke beranda' : 'back to home'}`}
+            className="group ml-1 flex shrink-0 items-center gap-2.5 rounded-full py-1 pl-1 pr-2 text-sm font-bold text-fg"
           >
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-linear-to-br from-accent-1 to-accent-2 text-xs text-white">
-              RF
-            </span>
-            <span className="hidden whitespace-nowrap sm:inline">{portfolio.profile.shortName}</span>
+            {usePhotoLogo ? (
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-linear-to-br from-accent-1 via-accent-2 to-accent-3 p-[1.5px] transition-transform duration-300 group-hover:scale-105">
+                <SmartImage
+                  src={profile.avatar}
+                  fallbackSrc={profile.avatarFallback}
+                  alt=""
+                  width={64}
+                  height={64}
+                  loading="eager"
+                  className="h-full w-full rounded-full object-cover"
+                />
+              </span>
+            ) : (
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-linear-to-br from-accent-1 to-accent-2 text-xs text-white transition-transform duration-300 group-hover:scale-105">
+                {initials}
+              </span>
+            )}
+            <span className="hidden whitespace-nowrap sm:inline">{profile.shortName}</span>
           </Link>
 
           {/* Menu layar besar */}
@@ -153,7 +181,7 @@ export default function Navbar() {
               <li key={item.id}>
                 <NavLink
                   item={item}
-                  className={`relative rounded-full px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                  className={`link-underline relative rounded-full px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                     active === item.id ? 'text-fg' : 'text-subtle hover:text-fg'
                   }`}
                 >

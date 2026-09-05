@@ -4,6 +4,7 @@ import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
 import { withBasePath } from '@/lib/asset';
 import SmartImage from '@/components/SmartImage';
+import SkillMarquee from '@/components/SkillMarquee';
 import Icon from '@/components/Icon';
 import Reveal from '@/components/Reveal';
 
@@ -19,7 +20,7 @@ export default function Hero() {
   const isExternalResume = profile.resumeUrl.startsWith('http');
 
   return (
-    <section id="top" className="relative flex min-h-svh items-center px-4 pt-28 pb-20 sm:px-6">
+    <section id="top" className="relative flex min-h-svh items-center px-4 pt-28 pb-20 print:pt-4 sm:px-6">
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
         {/* ---------------- Kolom teks ---------------- */}
         <div className="flex flex-col items-start gap-5">
@@ -146,9 +147,11 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Sorotan angka kecil, menempel di sudut kanan atas foto. */}
+            {/* Sorotan angka kecil, menempel di sudut kanan atas foto.
+                Latarnya dibuat pekat supaya angkanya tetap terbaca walau
+                bagian foto di belakangnya terang. */}
             {stats.length > 0 ? (
-              <div className="glass absolute -right-3 -top-3 hidden rounded-2xl px-3.5 py-2.5 text-center sm:block">
+              <div className="absolute -right-3 -top-3 hidden rounded-2xl border border-line bg-surface-solid/95 px-3.5 py-2.5 text-center shadow-lg backdrop-blur-xl sm:block">
                 <p className="text-lg font-bold text-fg">{stats[0].value}</p>
                 <p className="text-[0.65rem] leading-tight text-subtle">{t(stats[0].label)}</p>
               </div>
@@ -157,9 +160,17 @@ export default function Hero() {
         </Reveal>
       </div>
 
+      {/* Strip keahlian berjalan, mengisi ruang di bawah Hero. */}
+      <div className="absolute inset-x-0 bottom-20 hidden px-4 sm:px-6 lg:block">
+        <div className="mx-auto max-w-6xl">
+          <SkillMarquee />
+        </div>
+      </div>
+
       {/* Petunjuk gulir */}
       <a
         href="#about"
+        data-print="hide"
         aria-label={t(ui.scrollCue)}
         className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-subtle transition-colors hover:text-fg sm:flex"
       >

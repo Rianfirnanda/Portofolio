@@ -21,7 +21,11 @@
  */
 export default function MeshBackground() {
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div
+      aria-hidden="true"
+      data-print="hide"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+    >
       {/* 1. Gradien dasar */}
       <div
         className="absolute inset-0"

@@ -6,8 +6,10 @@ import ThemeProvider from '@/components/ThemeProvider';
 import { THEME_STORAGE_KEY } from '@/lib/theme';
 import MeshBackground from '@/components/MeshBackground';
 import SkipLink from '@/components/SkipLink';
+import ScrollProgress from '@/components/ScrollProgress';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import BackToTop from '@/components/BackToTop';
 import './globals.css';
 
 /**
@@ -139,9 +141,11 @@ export default function RootLayout({ children }) {
         <ThemeProvider>
           <LanguageProvider>
             <SkipLink />
+            <ScrollProgress />
             <Navbar />
             <main id="main">{children}</main>
             <Footer />
+            <BackToTop />
           </LanguageProvider>
         </ThemeProvider>
       </body>

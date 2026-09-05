@@ -10,6 +10,7 @@ export default function Footer() {
   const { t } = useLanguage();
   const { profile, social, ui, nav } = portfolio;
   const year = new Date().getFullYear();
+  const showPrintLink = portfolio.appearance?.printLink !== false;
 
   return (
     <footer className="border-t border-line px-4 py-10 sm:px-6">
@@ -55,19 +56,28 @@ export default function Footer() {
           </ul>
         ) : null}
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-line pt-6 text-center sm:flex-row sm:text-left">
+        {/* Tombol kembali ke atas sengaja tidak diulang di sini karena sudah
+            ada tombol melayang di sudut kanan bawah, lihat BackToTop.jsx. */}
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-line pt-6 text-center sm:flex-row sm:text-left">
           <p className="text-xs text-subtle">
             &copy; {year} {profile.name}. {t(ui.rights)}
           </p>
-          <p className="text-xs text-subtle">{t(ui.builtWith)}</p>
-          <a
-            href="#top"
-            aria-label={t(ui.backToTop)}
-            title={t(ui.backToTop)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-subtle transition-all duration-300 hover:-translate-y-0.5 hover:text-fg"
-          >
-            <Icon name="arrow-up" className="h-4 w-4" />
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2" data-print="hide">
+            {t(ui.builtWith) ? <p className="text-xs text-subtle">{t(ui.builtWith)}</p> : null}
+
+            {/* Membuka dialog cetak browser. Gaya khusus @media print di
+                app/globals.css membuat hasilnya rapi sebagai PDF. */}
+            {showPrintLink ? (
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-subtle transition-colors hover:text-fg"
+              >
+                <Icon name="download" className="h-3.5 w-3.5" />
+                {t(ui.printPage)}
+              </button>
+            ) : null}
+          </div>
         </div>
       </div>
     </footer>
