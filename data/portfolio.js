@@ -134,8 +134,8 @@ export const portfolio = {
     {
       // GANTI dengan username Instagram kamu.
       label: 'Instagram',
-      handle: '@rianfirnanda',
-      href: 'https://www.instagram.com/rianfirnanda/',
+      handle: '@rianfirnanda_id',
+      href: 'https://www.instagram.com/rianfirnanda_id/',
       icon: 'instagram',
       featured: true,
     },
@@ -163,6 +163,7 @@ export const portfolio = {
       icon: 'mail',
       featured: true,
     },
+    { label: 'Google Scholar', handle: 'Profil peneliti', href: 'https://scholar.google.com/citations?user=PW0IcAsAAAAJ&hl=en', icon: 'scholar', featured: false },
 
     /* Contoh tambahan, hapus tanda komentar kalau mau dipakai:
     { label: 'X', handle: '@rianfirnanda', href: 'https://x.com/rianfirnanda', icon: 'x', featured: false },
