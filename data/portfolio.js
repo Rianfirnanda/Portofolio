@@ -479,8 +479,9 @@ export const portfolio = {
     { name: { id: 'Pengembangan Perangkat Lunak', en: 'Software Development' }, issuer: 'BNSP', year: '2022', group: 'Perangkat Lunak', credentialUrl: '' },
     { name: 'Game Development', issuer: 'Direktorat SMK', year: '2021', group: 'Perangkat Lunak', credentialUrl: '' },
     { name: { id: 'Desainer Grafis Muda', en: 'Junior Graphic Designer' }, issuer: 'BNSP & Digitalent Kominfo', year: '2022', group: 'Desain', credentialUrl: '' },
-    { name: 'Operator Komputer Madya', issuer: 'Kominfo', year: '2022', group: 'Desain', credentialUrl: '' },
+    { name: 'Operator Komputer Madya', issuer: 'Kominfo', year: '2024', group: 'Desain', credentialUrl: '' },
     { name: { id: 'UKBI, Uji Kemahiran Berbahasa Indonesia', en: 'UKBI, Indonesian Language Proficiency Test' }, issuer: 'Badan Bahasa', year: '2022', group: 'Bahasa', credentialUrl: '' },
+    { name: { id: 'TOEFL', en: 'UKBI, TOEFL' }, issuer: 'UPA Bahasa Universitas Bengkulu', year: '2026', group: 'Bahasa', credentialUrl: '' },
   ],
 
   /* ==========================================================================
