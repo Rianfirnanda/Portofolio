@@ -24,9 +24,19 @@
     "en": "Profile photo of Rian Firnanda Irsyadani"
   },
   "resumeUrl": "https://www.linkedin.com/in/rian-firnanda/",
+  "summaryId": [
+    "Saya lulus Administrasi Publik di Universitas Bengkulu dengan predikat Cum Laude dan IPK 3,84. Sebelum itu saya sekolah di SMKN 1 Kota Bengkulu jurusan Rekayasa Perangkat Lunak, jadi saya terbiasa membaca kebutuhan birokrasi sekaligus menerjemahkannya jadi solusi teknis yang benar-benar bisa dipakai sehari-hari.",
+    "Di sisi teknis, saya tersertifikasi BNSP untuk Pengembangan Perangkat Lunak dan membangun aplikasi web dengan Laravel serta CodeIgniter. Untuk keamanan, saya memegang Certified Cyber Security Analyst dari CyberWarFare Labs dan Foundations of Cybersecurity dari Google. Saya juga punya sertifikasi Junior Graphic Designer dari BNSP bersama Digitalent Kominfo dan Operator Komputer Madya.",
+    "Belakangan saya banyak belajar AI dan cloud lewat Google Cloud Generative AI Leader, Anthropic AI Fluency, program produktivitas AI dari Google, serta AWS Educate Machine Learning Foundations. Tujuannya satu, memakai teknologi untuk membuat pelayanan publik lebih cepat dan alur kerja administrasi lebih masuk akal."
+  ],
+  "summaryEn": [
+    "I graduated in Public Administration from Universitas Bengkulu with Cum Laude honours and a 3.84 GPA. Before that I studied Software Engineering at SMKN 1 Kota Bengkulu, so I am used to reading what a bureaucracy actually needs and turning it into something technical that people can use day to day.",
+    "On the technical side I am BNSP-certified in Software Development and build web applications with Laravel and CodeIgniter. For security I hold the Certified Cyber Security Analyst credential from CyberWarFare Labs and Foundations of Cybersecurity from Google. I am also a BNSP and Digitalent Kominfo certified Junior Graphic Designer and an Intermediate Computer Operator.",
+    "More recently I have been learning AI and cloud through Google Cloud Generative AI Leader, Anthropic AI Fluency, Google AI productivity programs, and AWS Educate Machine Learning Foundations. The goal stays the same, using technology to make public services faster and administrative workflows make more sense."
+  ],
   "gallery": [
     {
-      "src": "/images/about/riset.svg",
+      "src": "/images/uploads/123701.jpg",
       "alt": {
         "id": "Kegiatan riset lapangan dan pengolahan data",
         "en": "Field research and data work"
@@ -37,7 +47,7 @@
       }
     },
     {
-      "src": "/images/about/kolaborasi.svg",
+      "src": "/images/uploads/117893.jpg",
       "alt": {
         "id": "Kerja sama tim dan kegiatan komunitas",
         "en": "Team collaboration and community activities"
@@ -48,7 +58,7 @@
       }
     },
     {
-      "src": "/images/about/sistem.svg",
+      "src": "/images/uploads/IMG-20260831-WA0158.jpg",
       "alt": {
         "id": "Pengelolaan sistem dan infrastruktur web",
         "en": "Web systems and infrastructure work"
@@ -58,15 +68,5 @@
         "en": "Web systems and infrastructure"
       }
     }
-  ],
-  "summaryId": [
-    "Saya lulus Administrasi Publik di Universitas Bengkulu dengan predikat Cum Laude dan IPK 3,84. Sebelum itu saya sekolah di SMKN 1 Kota Bengkulu jurusan Rekayasa Perangkat Lunak, jadi saya terbiasa membaca kebutuhan birokrasi sekaligus menerjemahkannya jadi solusi teknis yang benar-benar bisa dipakai sehari-hari.",
-    "Di sisi teknis, saya tersertifikasi BNSP untuk Pengembangan Perangkat Lunak dan membangun aplikasi web dengan Laravel serta CodeIgniter. Untuk keamanan, saya memegang Certified Cyber Security Analyst dari CyberWarFare Labs dan Foundations of Cybersecurity dari Google. Saya juga punya sertifikasi Junior Graphic Designer dari BNSP bersama Digitalent Kominfo dan Operator Komputer Madya.",
-    "Belakangan saya banyak belajar AI dan cloud lewat Google Cloud Generative AI Leader, Anthropic AI Fluency, program produktivitas AI dari Google, serta AWS Educate Machine Learning Foundations. Tujuannya satu, memakai teknologi untuk membuat pelayanan publik lebih cepat dan alur kerja administrasi lebih masuk akal."
-  ],
-  "summaryEn": [
-    "I graduated in Public Administration from Universitas Bengkulu with Cum Laude honours and a 3.84 GPA. Before that I studied Software Engineering at SMKN 1 Kota Bengkulu, so I am used to reading what a bureaucracy actually needs and turning it into something technical that people can use day to day.",
-    "On the technical side I am BNSP-certified in Software Development and build web applications with Laravel and CodeIgniter. For security I hold the Certified Cyber Security Analyst credential from CyberWarFare Labs and Foundations of Cybersecurity from Google. I am also a BNSP and Digitalent Kominfo certified Junior Graphic Designer and an Intermediate Computer Operator.",
-    "More recently I have been learning AI and cloud through Google Cloud Generative AI Leader, Anthropic AI Fluency, Google AI productivity programs, and AWS Educate Machine Learning Foundations. The goal stays the same, using technology to make public services faster and administrative workflows make more sense."
   ]
 }
