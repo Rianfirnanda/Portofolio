@@ -113,19 +113,17 @@ flowchart LR
 
 ## 4. Mengaktifkan GitHub Pages (sekali saja)
 
-Workflow sudah memakai `actions/configure-pages` dengan opsi `enablement: true`,
-sehingga **Pages diaktifkan otomatis** pada run pertama. Biasanya kamu tidak
-perlu melakukan apa pun.
-
-Kalau run pertama gagal di step *Configure GitHub Pages* (misalnya karena
-pengaturan organisasi), aktifkan manual:
+Langkah ini **wajib dilakukan sekali** sebelum deploy pertama berhasil.
+Token bawaan GitHub Actions (`GITHUB_TOKEN`) tidak berwenang membuat situs
+Pages sendiri, jadi harus dinyalakan lewat antarmuka repo:
 
 1. Buka repository di GitHub.
 2. Masuk ke tab **Settings**.
 3. Pilih menu **Pages** di sidebar kiri.
 4. Pada bagian **Build and deployment → Source**, pilih **GitHub Actions**.
    *(Bukan "Deploy from a branch".)*
-5. Kembali ke tab **Actions**, buka run yang gagal, lalu klik **Re-run all jobs**.
+5. Buka tab **Actions** → workflow **Deploy to GitHub Pages** → klik
+   **Run workflow** (atau buka run yang gagal lalu **Re-run all jobs**).
 
 Setelah aktif, setiap push ke branch `main` otomatis mem-build dan menerbitkan
 situs. Progresnya bisa dipantau di tab **Actions**.
@@ -267,6 +265,8 @@ Aturan main di proyek ini:
 | `Image Optimization using the default loader is not compatible with export` | Memakai `next/image` tanpa `unoptimized` | Sudah diatasi lewat `images: { unoptimized: true }`; untuk gambar baru pakai `<img>` + `withBasePath()` |
 | `npm ci` gagal di Actions | `package-lock.json` tidak ikut ter-commit | Jalankan `npm install` lalu commit `package-lock.json` |
 | `Error: Missing environment` di step deploy | Sumber Pages masih "Deploy from a branch" | Ubah ke **GitHub Actions** (lihat bagian 4) |
+| `Create Pages site failed. Error: Resource not accessible by integration` | GitHub Pages belum pernah diaktifkan dan token workflow tidak boleh mengaktifkannya | Aktifkan manual di **Settings → Pages → Source: GitHub Actions**, lalu jalankan ulang workflow (lihat bagian 4) |
+| `Node.js 20 is deprecated ... forced to run on Node.js 24` | Peringatan runner untuk *action* pihak ketiga, bukan build kita | Aman diabaikan — `npm ci` dan `npm run build` tetap berjalan di Node 20 lewat `actions/setup-node` |
 
 ---
 
