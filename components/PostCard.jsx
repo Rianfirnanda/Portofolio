@@ -40,7 +40,7 @@ export default function PostCard({ post, compact = false }) {
         </div>
 
         <div className="flex grow flex-col p-5">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-subtle">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-meta text-subtle">
             <span className="inline-flex items-center gap-1.5">
               <Icon name="calendar" className="h-3.5 w-3.5" />
               {formatDate(post.date, lang)}
@@ -57,7 +57,7 @@ export default function PostCard({ post, compact = false }) {
               langsung pada elemen yang juga memakai grow membuat baris di luar
               batas tetap terlihat, karena tingginya dipaksa memanjang. */}
           <div className="mt-2 grow">
-            <p className={`text-sm leading-6 text-muted ${compact ? 'line-clamp-3' : ''}`}>
+            <p className={`text-body-sm text-muted ${compact ? 'line-clamp-3' : ''}`}>
               {t(post.excerpt)}
             </p>
           </div>

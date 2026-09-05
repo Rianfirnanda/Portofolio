@@ -42,7 +42,7 @@ export default function Hero() {
           ) : null}
 
           <Reveal delay={80}>
-            <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="text-[2.6rem] font-extrabold leading-[1.06] tracking-[-0.03em] sm:text-[3.4rem] lg:text-[4rem]">
               <span className="block text-base font-medium tracking-normal text-subtle sm:text-lg">
                 {lang === 'id' ? 'Halo, saya' : "Hi, I'm"}
               </span>
@@ -51,14 +51,14 @@ export default function Hero() {
           </Reveal>
 
           <Reveal delay={130}>
-            <p className="max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+            <p className="max-w-xl text-[1.0625rem] leading-relaxed text-muted sm:text-lg">
               {t(profile.headline)}
             </p>
           </Reveal>
 
           {profile.tagline ? (
             <Reveal delay={170}>
-              <p className="max-w-xl border-l-2 border-accent/50 pl-4 text-sm italic leading-relaxed text-muted">
+              <p className="max-w-xl border-l-2 border-accent/50 pl-4 text-[0.9375rem] italic leading-relaxed text-muted">
                 {t(profile.tagline)}
               </p>
             </Reveal>

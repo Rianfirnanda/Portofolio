@@ -49,10 +49,10 @@ export default function ProjectCard({ project }) {
 
       {/* Isi kartu */}
       <div className="flex grow flex-col p-5">
-        <h3 className="text-lg font-semibold text-fg">{project.name}</h3>
-        {project.org ? <p className="mt-0.5 text-xs text-accent">{t(project.org)}</p> : null}
+        <h3 className="text-lg font-semibold leading-snug text-fg">{project.name}</h3>
+        {project.org ? <p className="mt-1 text-meta text-accent">{t(project.org)}</p> : null}
 
-        <p className="mt-3 grow text-sm leading-6 text-muted">{t(project.description)}</p>
+        <p className="mt-3 grow text-body-sm text-muted">{t(project.description)}</p>
 
         {project.tags?.length > 0 ? (
           <ul className="mt-4 flex flex-wrap gap-2">

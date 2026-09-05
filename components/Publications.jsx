@@ -43,7 +43,7 @@ function PublicationCard({ item }) {
           </button>
 
           {open ? (
-            <p className="mt-3 border-l-2 border-accent/60 pl-4 text-sm leading-7 text-muted">{abstract}</p>
+            <p className="mt-3 border-l-2 border-accent/60 pl-4 text-body-sm text-muted">{abstract}</p>
           ) : null}
         </>
       ) : null}

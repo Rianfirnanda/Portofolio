@@ -89,6 +89,10 @@ export const portfolio = {
     // Tautan simpan sebagai PDF di footer. Membuka dialog cetak browser
     // dengan tata letak khusus yang sudah dirapikan.
     printLink: true,
+    // Gambar bisa diklik untuk dibuka besar di tengah layar.
+    lightbox: true,
+    // Pencarian cepat yang dibuka dengan Ctrl+K atau Cmd+K.
+    commandPalette: true,
   },
 
   /* ==========================================================================
@@ -128,6 +132,32 @@ export const portfolio = {
     // Tautan tombol Unduh CV. Isi '' untuk menyembunyikan tombolnya.
     // Kalau CV berupa PDF, taruh di public/ lalu tulis '/cv-rian-firnanda.pdf'.
     resumeUrl: 'https://www.linkedin.com/in/rian-firnanda/',
+
+    /* ---- GALERI DI SECTION TENTANG SAYA ---------------------------------
+     * Strip gambar di bawah ringkasan. Diklik akan terbuka besar.
+     * Kosongkan array ([]) untuk menyembunyikan seluruh strip-nya.
+     *
+     * Gambar di bawah masih placeholder buatan npm run placeholders.
+     * Ganti dengan foto asli kapan saja: simpan foto ke public/images/about/
+     * lalu ubah field src di sini. Rasio persegi paling rapi.
+     * -------------------------------------------------------------------- */
+    gallery: [
+      {
+        src: '/images/about/riset.svg',
+        alt: { id: 'Kegiatan riset lapangan dan pengolahan data', en: 'Field research and data work' },
+        caption: { id: 'Riset lapangan dan data', en: 'Field research and data' },
+      },
+      {
+        src: '/images/about/kolaborasi.svg',
+        alt: { id: 'Kerja sama tim dan kegiatan komunitas', en: 'Team collaboration and community activities' },
+        caption: { id: 'Kolaborasi tim dan komunitas', en: 'Team and community collaboration' },
+      },
+      {
+        src: '/images/about/sistem.svg',
+        alt: { id: 'Pengelolaan sistem dan infrastruktur web', en: 'Web systems and infrastructure work' },
+        caption: { id: 'Sistem dan infrastruktur web', en: 'Web systems and infrastructure' },
+      },
+    ],
 
     // Ringkasan tiga paragraf. Satu elemen array sama dengan satu paragraf.
     summaryId: [
@@ -240,8 +270,11 @@ export const portfolio = {
         en: 'I was appointed student representative through Rector Decree No. 1664/UN30.9/HK/2026 to help prepare the 2026 departmental accreditation. My job is drafting the Internal Quality Audit documents with faculty members, from gathering supporting evidence to shaping the narrative so it fits the quality assurance instrument.',
       },
       skills: ['Quality Assurance', 'Tata Kelola Pendidikan Tinggi', 'Dokumentasi Teknis'],
-      image: null,
-      imageAlt: '',
+      image: '/images/experience/audit-mutu-internal.svg',
+      imageAlt: {
+        id: 'Dokumentasi penyusunan berkas Audit Mutu Internal bersama tim dosen',
+        en: 'Documentation of Internal Quality Audit drafting with the faculty team',
+      },
       logo: null,
       highlight: true,
     },
@@ -278,8 +311,11 @@ export const portfolio = {
         en: 'Appointed through Rector Decree No. 019/UN30.9/HK/2026 to manage the department official website. I handle system maintenance, shape the content strategy, and keep public digital communication running so academic information stays accurate and easy to find.',
       },
       skills: ['Pengelolaan Website', 'Strategi Konten', 'Komunikasi Digital', 'CMS'],
-      image: null,
-      imageAlt: '',
+      image: '/images/experience/website-jurusan.svg',
+      imageAlt: {
+        id: 'Tampilan pengelolaan website resmi jurusan',
+        en: 'The department official website being managed',
+      },
       logo: null,
       highlight: true,
     },
@@ -297,8 +333,11 @@ export const portfolio = {
         en: 'Appointed through Rector Decree No. 068/UN30.9/HK/2026. I track alumni data, run the research and data collection, then analyse the results as supporting evidence for the departmental accreditation.',
       },
       skills: ['Riset', 'Analisis Data', 'Desain Survei', 'Pelacakan Alumni'],
-      image: null,
-      imageAlt: '',
+      image: '/images/experience/tracer-study.svg',
+      imageAlt: {
+        id: 'Rekap dan analisis data alumni untuk tracer study',
+        en: 'Alumni data recap and analysis for the tracer study',
+      },
       logo: null,
       highlight: false,
     },
@@ -316,8 +355,11 @@ export const portfolio = {
         en: 'Presented a paper titled "Bridging Design-Reality Gaps in a National Family Information System" at an international forum. It looks at the distance between an information system designed at the national level and the reality of using it in the regions.',
       },
       skills: ['Public Speaking', 'Penulisan Akademik', 'SDGs', 'Presentasi Riset'],
-      image: null,
-      imageAlt: '',
+      image: '/images/experience/konferensi-sdgs.svg',
+      imageAlt: {
+        id: 'Sesi presentasi makalah di konferensi internasional SDGs 2030',
+        en: 'Paper presentation session at the SDGs 2030 international conference',
+      },
       logo: null,
       highlight: true,
     },
@@ -332,8 +374,11 @@ export const portfolio = {
         en: 'Worked directly on regional governance and village empowerment programs. I helped with administrative processes, document handling, and support for agency activities, which let me see first hand how policy plays out on the ground.',
       },
       skills: ['Tata Kelola Daerah', 'Pemberdayaan Desa', 'Administrasi Pemerintahan'],
-      image: null,
-      imageAlt: '',
+      image: '/images/experience/magang-dpmd.svg',
+      imageAlt: {
+        id: 'Kegiatan pendampingan program pemberdayaan desa bersama DPMD',
+        en: 'Village empowerment program mentoring with DPMD',
+      },
       logo: null,
       highlight: false,
     },
@@ -348,8 +393,11 @@ export const portfolio = {
         en: 'Supporting academic, research, training, and community service activities in the lab. I prepare practicum materials, assist participants during sessions, and keep the documentation tidy.',
       },
       skills: ['Pendampingan Akademik', 'Fasilitasi Pelatihan', 'Asistensi Riset'],
-      image: null,
-      imageAlt: '',
+      image: '/images/experience/laboratorium.svg',
+      imageAlt: {
+        id: 'Persiapan materi praktikum di Laboratorium Administrasi Publik',
+        en: 'Preparing practicum materials at the Public Administration Laboratory',
+      },
       logo: null,
       highlight: false,
     },
@@ -745,6 +793,27 @@ export const portfolio = {
     languagesTitle: { id: 'Bahasa', en: 'Languages' },
     backToTop: { id: 'Kembali ke atas', en: 'Back to top' },
     printPage: { id: 'Simpan sebagai PDF', en: 'Save as PDF' },
+    // Galeri dan lightbox
+    galleryTitle: { id: 'Sekilas Kegiatan', en: 'A Look at the Work' },
+    galleryHint: { id: 'Klik gambar untuk melihat lebih besar', en: 'Click an image to view it larger' },
+    lightboxClose: { id: 'Tutup gambar', en: 'Close image' },
+    imageZoom: { id: 'Perbesar gambar', en: 'Enlarge image' },
+    // Pencarian cepat
+    searchOpen: { id: 'Buka pencarian cepat', en: 'Open quick search' },
+    searchPlaceholder: { id: 'Cari bagian, proyek, atau tulisan...', en: 'Search sections, projects, or posts...' },
+    searchEmpty: { id: 'Tidak ada hasil yang cocok.', en: 'Nothing matched your search.' },
+    searchHintNavigate: { id: 'pilih', en: 'navigate' },
+    searchHintOpen: { id: 'buka', en: 'open' },
+    searchHintClose: { id: 'tutup', en: 'close' },
+    searchGroupSections: { id: 'Bagian halaman', en: 'Page sections' },
+    searchGroupProjects: { id: 'Proyek', en: 'Projects' },
+    searchGroupPosts: { id: 'Tulisan', en: 'Writing' },
+    searchGroupSocial: { id: 'Tautan', en: 'Links' },
+    searchGroupActions: { id: 'Tindakan', en: 'Actions' },
+    searchActionTheme: { id: 'Ganti mode terang atau gelap', en: 'Toggle light or dark mode' },
+    searchActionLanguage: { id: 'Ganti bahasa ID atau EN', en: 'Switch language ID or EN' },
+    searchActionPrint: { id: 'Simpan halaman sebagai PDF', en: 'Save the page as PDF' },
+    searchActionResume: { id: 'Buka CV', en: 'Open CV' },
     // Label khusus blog
     blogAll: { id: 'Lihat semua tulisan', en: 'View all writing' },
     blogBack: { id: 'Kembali ke blog', en: 'Back to blog' },

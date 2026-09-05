@@ -53,7 +53,7 @@ export default function Contact() {
 
         <Reveal delay={80} className="mt-10">
           <GlassCard featured hover={false} className="p-6 text-center sm:p-10">
-            <p className="mx-auto max-w-xl text-sm leading-7 text-muted">{t(contact.note)}</p>
+            <p className="mx-auto max-w-xl text-body-sm text-muted">{t(contact.note)}</p>
 
             {/* Baris email dan tombol salin */}
             <div className="mx-auto mt-7 flex max-w-md flex-col items-stretch gap-2 sm:flex-row">

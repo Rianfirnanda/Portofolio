@@ -18,9 +18,9 @@ export default function SectionHeading({ eyebrow, title, subtitle, align = 'left
         </span>
       ) : null}
 
-      <h2 className="text-3xl font-bold leading-tight text-fg sm:text-4xl">{title}</h2>
+      <h2 className="text-[2.1rem] font-bold leading-[1.12] text-fg sm:text-[2.6rem]">{title}</h2>
 
-      {subtitle ? <p className="text-base leading-relaxed text-subtle">{subtitle}</p> : null}
+      {subtitle ? <p className="max-w-xl text-[1.0625rem] leading-relaxed text-subtle">{subtitle}</p> : null}
     </Reveal>
   );
 }

@@ -45,10 +45,10 @@ export default function BlogIndex() {
             <span aria-hidden="true" className="h-px w-6 bg-accent/60" />
             {t(sections.blog.eyebrow)}
           </span>
-          <h1 className="mt-3 text-4xl font-bold leading-tight text-fg sm:text-5xl">
+          <h1 className="mt-3 text-[2.6rem] font-bold leading-[1.08] tracking-[-0.03em] text-fg sm:text-[3.2rem]">
             {t(sections.blog.title)}
           </h1>
-          <p className="mt-3 text-base leading-relaxed text-subtle">{t(sections.blog.subtitle)}</p>
+          <p className="mt-4 max-w-xl text-[1.0625rem] leading-relaxed text-subtle">{t(sections.blog.subtitle)}</p>
         </Reveal>
 
         {publishedPosts.length === 0 ? (

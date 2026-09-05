@@ -7,6 +7,7 @@ import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
 import ThemeToggle from '@/components/ThemeToggle';
 import SmartImage from '@/components/SmartImage';
+import { CommandPaletteTrigger } from '@/components/CommandPalette';
 import Icon from '@/components/Icon';
 
 /**
@@ -198,6 +199,9 @@ export default function Navbar() {
           </ul>
 
           <div className="flex shrink-0 items-center gap-2">
+            {/* Pencarian cepat, juga bisa dibuka dengan Ctrl+K atau Cmd+K */}
+            <CommandPaletteTrigger />
+
             {/* Ganti bahasa */}
             <button
               type="button"

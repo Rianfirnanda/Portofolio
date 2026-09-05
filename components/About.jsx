@@ -6,6 +6,7 @@ import GlassCard from '@/components/GlassCard';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
 import CountUp from '@/components/CountUp';
+import AboutGallery from '@/components/AboutGallery';
 import Icon from '@/components/Icon';
 
 /**
@@ -34,7 +35,7 @@ export default function About() {
               <Icon name="quote" className="mb-4 h-7 w-7 text-accent opacity-70" />
               <div className="space-y-4">
                 {paragraphs.map((paragraph, index) => (
-                  <p key={index} className="text-[0.95rem] leading-7 text-muted">
+                  <p key={index} className="text-body text-muted">
                     {paragraph}
                   </p>
                 ))}
@@ -61,9 +62,12 @@ export default function About() {
               </Reveal>
             ) : null}
 
+            {/* Kartu bahasa sengaja tidak dipaksa setinggi kolom kiri. Kartu
+                yang menyesuaikan isinya terlihat lebih rapi daripada kartu
+                tinggi dengan ruang kosong di bawah. */}
             {languages.length > 0 ? (
-              <Reveal delay={140} className="grow">
-                <GlassCard className="h-full p-6">
+              <Reveal delay={140}>
+                <GlassCard className="p-6">
                   <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-fg">
                     <Icon name="languages" className="h-4 w-4 text-accent" />
                     {t(ui.languagesTitle)}
@@ -81,6 +85,9 @@ export default function About() {
             ) : null}
           </div>
         </div>
+
+        {/* Strip gambar kegiatan, isinya dari profile.gallery. */}
+        <AboutGallery />
       </div>
     </section>
   );

@@ -202,6 +202,49 @@ gradien dengan inisial nama proyek, dan tetap terlihat rapi.
 > atau salah nama, komponen itu berpindah ke gambar cadangan atau menyembunyikan
 > dirinya. Situs tidak pernah menampilkan ikon gambar rusak.
 
+### Galeri di section Tentang Saya
+
+Strip tiga gambar di bawah ringkasan diatur lewat `profile.gallery`:
+
+```js
+profile: {
+  gallery: [
+    {
+      src: '/images/about/riset.jpg',
+      alt: { id: 'Kegiatan riset lapangan', en: 'Field research activity' },
+      caption: { id: 'Riset lapangan dan data', en: 'Field research and data' },
+    },
+    // tambah objek lain di sini, gridnya menyesuaikan sendiri
+  ],
+}
+```
+
+Kosongkan `gallery: []` untuk menyembunyikan seluruh strip-nya. Gambar bisa
+diklik untuk dibuka besar, dan `caption` tampil di atas gambarnya.
+
+### Gambar placeholder bawaan
+
+Gambar yang sekarang terpasang di bagian Pengalaman dan galeri Tentang Saya
+masih **placeholder**, bukan foto asli. Bentuknya SVG abstrak bergradien dengan
+motif geometris, dibuat oleh:
+
+```bash
+npm run placeholders
+```
+
+Placeholder ini sengaja **tidak memuat teks apa pun** supaya tetap utuh saat
+dipotong ke rasio mana pun oleh kartu yang menampilkannya.
+
+Ganti dengan foto asli kapan saja: simpan foto ke folder yang sama, lalu ubah
+field `image` atau `src` di `data/portfolio.js`. Ingin menambah placeholder baru
+dengan gaya yang sama? Tambahkan satu baris ke array `ITEMS` di
+`scripts/generate-placeholders.mjs`, pilih palet warna dan motifnya, lalu
+jalankan perintah di atas.
+
+| Palet tersedia | Motif tersedia |
+| --- | --- |
+| `indigo`, `violet`, `cyan`, `teal`, `slate`, `rose` | `documents`, `network`, `broadcast`, `territory`, `lab`, `community`, `growth` |
+
 ---
 
 ## 5. Menambah proyek
@@ -598,6 +641,8 @@ appearance: {
   shareButtons: true,    // tombol berbagi di bawah tulisan blog
   heroMarquee: true,     // strip keahlian berjalan di bawah Hero
   printLink: true,       // tautan simpan sebagai PDF di footer
+  lightbox: true,        // gambar bisa diklik untuk dibuka besar
+  commandPalette: true,  // pencarian cepat Ctrl+K atau Cmd+K
 }
 ```
 
@@ -611,6 +656,26 @@ appearance: {
 | `shareButtons` | Baris tombol berbagi di bawah artikel tidak muncul |
 | `heroMarquee` | Strip keahlian berjalan di bawah Hero dilepas |
 | `printLink` | Tautan "Simpan sebagai PDF" di footer disembunyikan |
+| `lightbox` | Gambar tetap tampil, hanya tidak bisa diklik untuk diperbesar |
+| `commandPalette` | Tombol Ctrl+K di navbar dan pintasan keyboardnya dimatikan |
+
+### Pencarian cepat Ctrl+K
+
+Pengunjung bisa menekan **Ctrl+K** (atau **Cmd+K** di Mac) untuk membuka
+pencarian yang melompat ke bagian mana pun. Isinya dirakit otomatis dari data
+yang sudah ada, jadi menambah proyek, tulisan blog, atau tautan sosial langsung
+menambahnya ke pencarian tanpa pekerjaan tambahan.
+
+| Tombol | Fungsi |
+| --- | --- |
+| `Ctrl+K` atau `Cmd+K` | Buka dan tutup |
+| Panah atas dan bawah | Pindah pilihan |
+| `Enter` | Buka pilihan yang sedang disorot |
+| `Esc` | Tutup |
+
+Selain bagian halaman, proyek, tulisan, dan tautan sosial, pencarian ini juga
+memuat tindakan cepat: ganti tema, ganti bahasa, kirim email, buka CV, dan
+simpan halaman sebagai PDF.
 
 ### Mode cetak dan simpan PDF
 

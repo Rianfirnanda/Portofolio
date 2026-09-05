@@ -53,13 +53,13 @@ export default function PostArticle({ slug }) {
               </ul>
             ) : null}
 
-            <h1 className="mt-4 text-3xl font-bold leading-tight text-fg sm:text-4xl">
+            <h1 className="mt-4 text-[2.1rem] font-bold leading-[1.14] text-fg sm:text-[2.6rem]">
               {t(post.title)}
             </h1>
 
-            <p className="mt-4 text-base leading-relaxed text-muted">{t(post.excerpt)}</p>
+            <p className="mt-5 text-[1.0625rem] leading-relaxed text-muted">{t(post.excerpt)}</p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-5 text-xs text-subtle">
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-5 text-meta text-subtle">
               <span className="inline-flex items-center gap-1.5 font-semibold text-fg">
                 <Icon name="users" className="h-3.5 w-3.5" />
                 {profile.name}

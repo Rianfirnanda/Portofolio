@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Gambar placeholder, dibuat oleh scripts/generate-placeholders.mjs
+  GANTI DENGAN FOTO ASLI: simpan foto ke folder ini, lalu ubah field "image"
+  pada item terkait di data/portfolio.js
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640" role="img" aria-label="Riset, LAPANGAN &amp; DATA">
+  <defs>
+    <linearGradient id="riset-base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#080b16"/>
+    </linearGradient>
+    <radialGradient id="riset-glow1" cx="20%" cy="14%" r="76%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#4f46e5" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="riset-glow2" cx="88%" cy="82%" r="66%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="riset-veil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="45%" stop-color="#05070f" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#05070f" stop-opacity="0.78"/>
+    </linearGradient>
+    <linearGradient id="riset-rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="riset-grid" width="57.599999999999994" height="57.599999999999994" patternUnits="userSpaceOnUse">
+      <path d="M57.599999999999994 0H0V57.599999999999994" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="640" height="640" fill="url(#riset-base)"/>
+  <rect width="640" height="640" fill="url(#riset-glow1)"/>
+  <rect width="640" height="640" fill="url(#riset-glow2)"/>
+  <rect width="640" height="640" fill="url(#riset-grid)"/>
+
+  <!-- Lingkaran samar sebagai kedalaman tambahan -->
+  <circle cx="524.8" cy="128" r="211.2" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1.5"/>
+  <circle cx="76.8" cy="550.4" r="153.6" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1.5"/>
+
+  
+    <g transform="translate(320 320)" fill="none" stroke="#ffffff" stroke-width="10.24" stroke-linejoin="round">
+      <path d="M-57.599999999999994 -192v128L-166.4 166.4a32 32 0 0 0 28.799999999999997 48h275.2a32 32 0 0 0 28.799999999999997 -48L57.599999999999994 -64v-128Z" opacity="0.45" fill="#ffffff" fill-opacity="0.06"/>
+      <path d="M-89.60000000000001 -192h179.20000000000002" opacity="0.55"/>
+      <circle cx="-32" cy="102.4" r="19.2" fill="#ffffff" fill-opacity="0.5" stroke="none"/>
+      <circle cx="38.4" cy="153.6" r="14.079999999999998" fill="#ffffff" fill-opacity="0.4" stroke="none"/>
+    </g>
+
+  <!-- Peredup lembut di bagian bawah, memberi kedalaman -->
+  <rect width="640" height="640" fill="url(#riset-veil)"/>
+
+  <!-- Garis aksen kecil di sudut sebagai penanda.
+       Gambar ini sengaja tidak memuat teks apa pun supaya tetap utuh ketika
+       dipotong ke rasio mana pun oleh kartu yang menampilkannya. Judul dan
+       keterangannya sudah ditulis oleh komponen di sebelah gambar. -->
+  <rect x="40" y="600" width="96" height="3" rx="1.5" fill="url(#riset-rule)"/>
+</svg>

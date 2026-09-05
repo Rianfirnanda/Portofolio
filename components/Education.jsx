@@ -42,7 +42,7 @@ export default function Education() {
                   </span>
                 )}
 
-                <h3 className="mt-4 text-base font-semibold leading-snug text-fg">{t(item.degree)}</h3>
+                <h3 className="mt-4 text-[1.0625rem] font-semibold leading-snug text-fg">{t(item.degree)}</h3>
                 <p className="mt-1 text-sm text-accent">{item.school}</p>
 
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -51,7 +51,7 @@ export default function Education() {
                 </div>
 
                 {t(item.notes) ? (
-                  <p className="mt-4 text-sm leading-6 text-muted">{t(item.notes)}</p>
+                  <p className="mt-4 text-body-sm text-muted">{t(item.notes)}</p>
                 ) : null}
               </GlassCard>
             </Reveal>

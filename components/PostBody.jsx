@@ -71,7 +71,7 @@ export default function PostBody({ content = [] }) {
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-linear-to-br from-accent-1 to-accent-2 text-white">
                   <Icon name={block.icon || 'sparkles'} className="h-4 w-4" />
                 </span>
-                <p className="!mb-0 text-sm leading-7 text-muted">{t(block.text)}</p>
+                <p className="!mb-0 text-body-sm text-muted">{t(block.text)}</p>
               </aside>
             );
 

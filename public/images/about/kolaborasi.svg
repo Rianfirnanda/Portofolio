@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Gambar placeholder, dibuat oleh scripts/generate-placeholders.mjs
+  GANTI DENGAN FOTO ASLI: simpan foto ke folder ini, lalu ubah field "image"
+  pada item terkait di data/portfolio.js
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640" role="img" aria-label="Kolaborasi, TIM &amp; KOMUNITAS">
+  <defs>
+    <linearGradient id="kolaborasi-base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4c1d95"/>
+      <stop offset="100%" stop-color="#080b16"/>
+    </linearGradient>
+    <radialGradient id="kolaborasi-glow1" cx="20%" cy="14%" r="76%">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#7c3aed" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="kolaborasi-glow2" cx="88%" cy="82%" r="66%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="kolaborasi-veil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="45%" stop-color="#05070f" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#05070f" stop-opacity="0.78"/>
+    </linearGradient>
+    <linearGradient id="kolaborasi-rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="kolaborasi-grid" width="57.599999999999994" height="57.599999999999994" patternUnits="userSpaceOnUse">
+      <path d="M57.599999999999994 0H0V57.599999999999994" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="640" height="640" fill="url(#kolaborasi-base)"/>
+  <rect width="640" height="640" fill="url(#kolaborasi-glow1)"/>
+  <rect width="640" height="640" fill="url(#kolaborasi-glow2)"/>
+  <rect width="640" height="640" fill="url(#kolaborasi-grid)"/>
+
+  <!-- Lingkaran samar sebagai kedalaman tambahan -->
+  <circle cx="524.8" cy="128" r="249.60000000000002" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1.5"/>
+  <circle cx="76.8" cy="550.4" r="153.6" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1.5"/>
+
+  
+    <g transform="translate(320 320)" fill="none" stroke="#ffffff" stroke-width="10.24">
+      <circle cx="-83.2" cy="-38.4" r="128" opacity="0.45"/>
+      <circle cx="83.2" cy="-38.4" r="128" opacity="0.45"/>
+      <circle cx="0" cy="102.4" r="128" opacity="0.45"/>
+      <circle cx="0" cy="9.6" r="35.2" fill="#ffffff" fill-opacity="0.55" stroke="none"/>
+    </g>
+
+  <!-- Peredup lembut di bagian bawah, memberi kedalaman -->
+  <rect width="640" height="640" fill="url(#kolaborasi-veil)"/>
+
+  <!-- Garis aksen kecil di sudut sebagai penanda.
+       Gambar ini sengaja tidak memuat teks apa pun supaya tetap utuh ketika
+       dipotong ke rasio mana pun oleh kartu yang menampilkannya. Judul dan
+       keterangannya sudah ditulis oleh komponen di sebelah gambar. -->
+  <rect x="40" y="600" width="96" height="3" rx="1.5" fill="url(#kolaborasi-rule)"/>
+</svg>

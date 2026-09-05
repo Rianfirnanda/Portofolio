@@ -32,8 +32,8 @@ export default function Certifications() {
                 </span>
 
                 <div className="min-w-0">
-                  <h3 className="text-sm font-semibold leading-snug text-fg">{t(item.name)}</h3>
-                  <p className="mt-1 text-xs text-subtle">
+                  <h3 className="text-[0.9375rem] font-semibold leading-snug text-fg">{t(item.name)}</h3>
+                  <p className="mt-1.5 text-meta text-subtle">
                     {item.issuer}
                     {item.year ? <span> &bull; {item.year}</span> : null}
                   </p>

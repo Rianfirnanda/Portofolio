@@ -34,14 +34,14 @@ export default function Volunteering() {
                       <Icon name="heart" className="h-4 w-4" />
                     </span>
                     <div className="min-w-0">
-                      <h3 className="text-base font-semibold leading-snug text-fg">{t(item.role)}</h3>
+                      <h3 className="text-[1.0625rem] font-semibold leading-snug text-fg">{t(item.role)}</h3>
                       <p className="mt-1 text-sm text-accent">{t(item.org)}</p>
                       <span className="chip mt-3">{item.period}</span>
                     </div>
                   </div>
 
                   {t(item.description) ? (
-                    <p className="mt-4 text-sm leading-6 text-muted">{t(item.description)}</p>
+                    <p className="mt-4 text-body-sm text-muted">{t(item.description)}</p>
                   ) : null}
                 </div>
 

@@ -23,6 +23,10 @@ isinya diatur dari satu berkas data.
   **foto sendiri**, dan situs tetap rapi kalau fotonya belum ada.
 - **Satu foto profil untuk lima tempat.** Perintah `npm run assets` membuat
   favicon, ikon iOS, dan kartu preview tautan langsung dari foto itu.
+- **Pencarian cepat Ctrl+K** yang melompat ke bagian mana pun, lengkap dengan
+  tindakan cepat seperti ganti tema, ganti bahasa, dan simpan PDF. Isinya
+  dirakit otomatis dari data, jadi tidak ada daftar terpisah yang perlu diurus.
+- **Lightbox** untuk semua gambar dokumentasi dan galeri.
 - Sentuhan interaktif yang bisa dimatikan satu per satu: sorotan mengikuti
   kursor di kartu, garis progres gulir, angka statistik yang menghitung naik,
   tombol melayang kembali ke atas, dan strip keahlian berjalan.
@@ -53,7 +57,8 @@ isinya diatur dari satu berkas data.
 | `app/globals.css` | Token warna mode terang dan gelap, kelas `.glass`, keyframes, pengaturan kepekatan latar. |
 | `app/sitemap.js` dan `app/robots.js` | Membuat `sitemap.xml` dan `robots.txt` saat build. |
 | `app/not-found.js` | Halaman 404. |
-| `app/icon.svg` dan `app/fonts/` | Favicon dan berkas font. |
+| `app/icon.png` dan `app/apple-icon.png` | Favicon dan ikon iOS, dibuat dari foto profil oleh `npm run assets`. |
+| `app/fonts/` | Berkas font variabel yang di-host sendiri. |
 | `components/Navbar.jsx` | Pill kaca melayang, sorot section aktif, drawer mobile, toggle bahasa dan tema. |
 | `components/Hero.jsx` | Layar pembuka: foto, nama bergradien, kalimat pembuka, dua tombol, ikon sosial. |
 | `components/About.jsx` | Ringkasan, strip statistik, daftar bahasa. |
@@ -81,7 +86,11 @@ isinya diatur dari satu berkas data.
 | `components/CountUp.jsx` | Angka statistik yang menghitung naik saat masuk layar. |
 | `components/SkillMarquee.jsx` | Strip keahlian berjalan di bawah Hero. |
 | `components/ShareButtons.jsx` | Tombol berbagi di bawah tulisan blog. |
+| `components/CommandPalette.jsx` | Pencarian cepat Ctrl+K beserta tombol pemicunya di navbar. |
+| `components/LightboxProvider.jsx` | Lapisan tampilan gambar besar untuk seluruh situs. |
+| `components/AboutGallery.jsx` | Strip gambar kegiatan di section Tentang Saya. |
 | `scripts/generate-assets.mjs` | Membuat favicon, ikon iOS, dan kartu preview dari foto profil. |
+| `scripts/generate-placeholders.mjs` | Membuat gambar placeholder bergaya seragam untuk Pengalaman dan galeri. |
 | `lib/i18n.js` | Helper `t()` pemilih teks ID atau EN. |
 | `lib/asset.js` | Helper `withBasePath()` untuk path gambar dan berkas. |
 | `lib/format.js` | Format tanggal dan perkiraan lama baca. |
@@ -113,6 +122,10 @@ npm start
 # 5. Buat ulang favicon, ikon iOS, dan kartu preview dari foto profil.
 #    Jalankan setiap kali foto di public/images/profile.jpg diganti.
 npm run assets
+
+# 6. Buat ulang gambar placeholder untuk Pengalaman dan galeri Tentang Saya.
+#    Hanya perlu dijalankan kalau kamu menambah placeholder baru.
+npm run placeholders
 ```
 
 ---
@@ -175,6 +188,8 @@ dengan contoh yang tinggal disalin. Isinya mencakup:
 | Menyetel kepekatan latar belakang | Bagian 11 |
 | Menyembunyikan satu section | Bagian 14 |
 | Mematikan animasi dan sentuhan interaktif | Bagian 16 |
+| Mengatur galeri di Tentang Saya | Bagian 4 |
+| Mengganti gambar placeholder dengan foto asli | Bagian 4 |
 
 ### Yang paling sering ditanyakan
 
@@ -293,5 +308,8 @@ Aturan main di proyek ini:
 | `tailwindcss` | 4.3.3 | Styling utility-first |
 | `@tailwindcss/postcss` | 4.3.3 | Integrasi Tailwind ke PostCSS |
 | `sharp` | 0.35.4 | Hanya dipakai `npm run assets` untuk membuat favicon dan kartu preview. Tidak ikut ke dalam situs. |
+
+Perintah `npm run placeholders` tidak memakai dependency apa pun, hanya modul
+bawaan Node.
 
 Tidak ada dependency lain. Ikon, animasi, dan sistem dua bahasa ditulis sendiri.

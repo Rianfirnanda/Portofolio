@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
+import { useLightbox } from '@/components/LightboxProvider';
 import GlassCard from '@/components/GlassCard';
 import SmartImage from '@/components/SmartImage';
 import Icon from '@/components/Icon';
@@ -19,6 +20,7 @@ const CLAMP_LENGTH = 190;
  */
 export default function ExperienceCard({ item }) {
   const { t } = useLanguage();
+  const { openLightbox, enabled: lightboxEnabled } = useLightbox();
   const [expanded, setExpanded] = useState(false);
 
   const description = t(item.description);
@@ -27,7 +29,14 @@ export default function ExperienceCard({ item }) {
 
   return (
     <GlassCard as="article" featured={item.highlight} className="overflow-hidden">
-      <div className="p-5 sm:p-6">
+      {/* Kartu dengan gambar dibagi dua kolom di layar lebar: gambar di kiri
+          sebagai pendamping, isi tulisan di kanan. Di layar kecil gambarnya
+          turun ke atas sebagai pita pendek. Kartu tanpa gambar tetap satu
+          kolom penuh. */}
+      <div className={item.image ? 'sm:grid sm:grid-cols-[minmax(0,13.5rem)_1fr] lg:grid-cols-[minmax(0,17rem)_1fr]' : ''}>
+        {item.image ? <ExperienceMedia item={item} /> : null}
+
+        <div className="p-5 sm:p-6">
         <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
           <div className="flex min-w-0 gap-3">
             {item.logo ? (
@@ -41,7 +50,7 @@ export default function ExperienceCard({ item }) {
             ) : null}
 
             <div className="min-w-0">
-              <h3 className="text-base font-semibold leading-snug text-fg sm:text-lg">{t(item.role)}</h3>
+              <h3 className="text-[1.0625rem] font-semibold leading-snug text-fg sm:text-lg">{t(item.role)}</h3>
               <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-accent">
                 <Icon name="building" className="h-3.5 w-3.5 shrink-0" />
                 <span>{t(item.org)}</span>
@@ -64,14 +73,14 @@ export default function ExperienceCard({ item }) {
         </div>
 
         {item.location ? (
-          <p className="mt-2 flex items-center gap-1.5 text-xs text-subtle">
+          <p className="mt-2 flex items-center gap-1.5 text-meta text-subtle">
             <Icon name="map-pin" className="h-3.5 w-3.5" />
             {t(item.location)}
           </p>
         ) : null}
 
         {description ? (
-          <p className="mt-3 text-sm leading-6 text-muted">
+          <p className="mt-3 text-body-sm text-muted">
             {visibleText}{' '}
             {isLong ? (
               <button
@@ -99,23 +108,56 @@ export default function ExperienceCard({ item }) {
             ))}
           </ul>
         ) : null}
+        </div>
       </div>
-
-      {/* Dokumentasi kegiatan, muncul hanya kalau field image diisi. */}
-      {item.image ? (
-        <figure className="border-t border-line">
-          <SmartImage
-            src={item.image}
-            alt={t(item.imageAlt) || t(item.role)}
-            width={900}
-            height={520}
-            className="aspect-16/9 w-full object-cover"
-          />
-          {t(item.imageAlt) ? (
-            <figcaption className="px-5 py-2.5 text-xs text-subtle">{t(item.imageAlt)}</figcaption>
-          ) : null}
-        </figure>
-      ) : null}
     </GlassCard>
   );
+
+  /**
+   * Kolom gambar pendamping. Dibuat sebagai fungsi bersarang supaya tetap bisa
+   * memakai t(), openLightbox, dan lightboxEnabled dari komponen induknya.
+   */
+  function ExperienceMedia({ item: media }) {
+    const alt = t(media.imageAlt) || t(media.role);
+
+    const picture = (
+      <SmartImage
+        src={media.image}
+        alt={alt}
+        width={960}
+        height={540}
+        className="aspect-16/10 w-full object-cover transition-transform duration-700 group-hover:scale-[1.05] sm:aspect-auto sm:h-full"
+      />
+    );
+
+    return (
+      <figure className="relative border-b border-line sm:border-b-0 sm:border-r">
+        {lightboxEnabled ? (
+          <button
+            type="button"
+            onClick={() =>
+              openLightbox({ src: media.image, alt: media.imageAlt, caption: media.imageAlt || media.role })
+            }
+            aria-label={`${t(portfolio.ui.imageZoom)}: ${t(media.role)}`}
+            className="group relative block h-full w-full cursor-zoom-in overflow-hidden"
+          >
+            {picture}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/45 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            />
+            <span className="pointer-events-none absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full border border-white/25 bg-black/45 text-white opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
+              <Icon name="image" className="h-4 w-4" />
+            </span>
+          </button>
+        ) : (
+          <div className="h-full overflow-hidden">{picture}</div>
+        )}
+
+        {/* Keterangan gambar hanya dibaca pembaca layar. Teks lengkapnya sudah
+            ada di atribut alt, jadi tidak perlu diulang di layar. */}
+        <figcaption className="sr-only">{alt}</figcaption>
+      </figure>
+    );
+  }
 }
