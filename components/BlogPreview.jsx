@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { portfolio } from '@/data/portfolio';
-import { publishedPosts } from '@/data/posts';
 import { useLanguage } from '@/components/LanguageProvider';
 import SectionHeading from '@/components/SectionHeading';
 import PostCard from '@/components/PostCard';
@@ -11,12 +10,17 @@ import Icon from '@/components/Icon';
 
 /**
  * BlogPreview: tiga tulisan terbaru di halaman utama.
+ *
+ * Daftar tulisannya dikirim app/page.js sebagai props, karena tulisan dibaca
+ * dari folder content/posts/ saat build dan pembacaan folder hanya bisa
+ * dilakukan di sisi server.
+ *
  * Section ini hilang sendiri kalau belum ada tulisan yang terbit.
  */
-export default function BlogPreview({ limit = 3 }) {
+export default function BlogPreview({ posts = [], limit = 3 }) {
   const { t } = useLanguage();
   const { sections, ui } = portfolio;
-  const latest = publishedPosts.slice(0, limit);
+  const latest = posts.slice(0, limit);
 
   if (latest.length === 0) return null;
 

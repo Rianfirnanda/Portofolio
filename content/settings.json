@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "siteTitle": "Rian Firnanda Irsyadani | Teknologi Informasi & Tata Kelola Sektor Publik",
+    "description": {
+      "id": "Portofolio Rian Firnanda Irsyadani. Menggabungkan teknologi informasi dan administrasi publik untuk membenahi layanan pemerintahan.",
+      "en": "Portfolio of Rian Firnanda Irsyadani. Bringing information technology and public administration together to improve government services."
+    },
+    "keywords": [
+      "Rian Firnanda Irsyadani",
+      "Portofolio",
+      "Information Technology",
+      "Administrasi Publik",
+      "Universitas Bengkulu",
+      "Web Developer",
+      "Laravel",
+      "CodeIgniter",
+      "Cyber Security Analyst",
+      "Generative AI Leader",
+      "Tata Kelola Sektor Publik"
+    ],
+    "ogImage": "/images/og-image.png",
+    "baseUrl": "https://rianfirnanda.vercel.app",
+    "locale": "id",
+    "defaultTheme": "system",
+    "themeColorLight": "#f5f7fc",
+    "themeColorDark": "#05070f"
+  },
+  "appearance": {
+    "spotlight": true,
+    "scrollProgress": true,
+    "countUpStats": true,
+    "backToTop": true,
+    "photoAsLogo": true,
+    "shareButtons": true,
+    "heroMarquee": true,
+    "printLink": true,
+    "lightbox": true,
+    "commandPalette": true
+  }
+}

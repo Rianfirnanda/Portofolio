@@ -1,22 +1,61 @@
 # Panduan Mengubah Isi Portofolio
 
-Hampir semua yang tampil di situs diatur dari dua berkas saja:
+## Ada dua cara, pilih yang paling nyaman
+
+### Cara 1: lewat panel konten, tanpa membuka GitHub
+
+Buka **https://rianfirnanda.vercel.app/admin** lalu login dengan GitHub. Semua
+isi situs bisa diubah dari form biasa di sana, termasuk menambah tulisan blog
+dan mengunggah foto langsung dari ponsel.
+
+Kalau panelnya belum bisa login, berarti pemasangan awalnya belum selesai.
+Langkahnya ada di [bagian 17](#17-panel-konten-di-admin), cukup sekali saja.
+
+### Cara 2: lewat berkas di folder `content/`
+
+Semua isi situs tersimpan sebagai berkas JSON biasa. Bisa diedit di komputer,
+atau langsung lewat tampilan web GitHub.
 
 | Berkas | Isinya |
 | --- | --- |
-| `data/portfolio.js` | Profil, pengalaman, proyek, sertifikasi, keahlian, kontak, menu, judul section |
-| `data/posts.js` | Semua tulisan blog |
+| `content/profile.json` | Nama, headline, ringkasan, foto, galeri |
+| `content/settings.json` | Judul situs, SEO, bahasa awal, tema awal, sakelar tampilan |
+| `content/contact.json` | Email, telepon, catatan kontak |
+| `content/social.json` | Tautan media sosial |
+| `content/experience.json` | Daftar pengalaman |
+| `content/projects.json` | Daftar proyek |
+| `content/certifications.json` | Daftar sertifikasi |
+| `content/education.json` | Riwayat pendidikan |
+| `content/publications.json` | Karya ilmiah |
+| `content/skills.json` | Kelompok keahlian |
+| `content/volunteering.json` | Kegiatan sukarela |
+| `content/languages.json` | Bahasa yang dikuasai |
+| `content/services.json` | Layanan yang ditawarkan |
+| `content/stats.json` | Angka sorotan di section Tentang |
+| `content/navigation.json` | Isi menu navigasi |
+| `content/sections.json` | Judul dan subjudul tiap bagian |
+| `content/labels.json` | Label tombol dan teks antarmuka |
+| `content/posts/*.json` | Satu berkas per tulisan blog |
 
-Kamu tidak perlu menyentuh folder `components/` sama sekali.
+Berkas `data/portfolio.js` dan `data/posts.js` sekarang hanya bertugas
+menyatukan berkas-berkas di atas. Isinya tidak perlu disentuh.
+
+Kamu juga tidak perlu menyentuh folder `components/` sama sekali.
 
 > **Tiga aturan yang berlaku di mana-mana**
-> 1. Menambah item cukup dengan menambah satu objek ke array. Tampilan menyesuaikan sendiri.
-> 2. Array kosong (`[]`) membuat section-nya hilang otomatis dari halaman.
-> 3. Urutan array sama dengan urutan tampil di layar, paling atas paling baru.
+> 1. Menambah item cukup dengan menambah satu objek ke daftar. Tampilan menyesuaikan sendiri.
+> 2. Daftar kosong (`[]`) membuat section-nya hilang otomatis dari halaman.
+> 3. Urutan daftar sama dengan urutan tampil di layar, paling atas paling baru.
 
-Setelah mengubah berkas, simpan lalu jalankan `npm run dev` dan buka
-`http://localhost:3000`. Kalau sudah cocok, `git commit` dan `git push`.
-Vercel akan membangun ulang situsnya sendiri dalam satu sampai dua menit.
+Kalau mengedit lewat berkas, jalankan `npm run dev` dan buka
+`http://localhost:3000` untuk melihat hasilnya. Setelah cocok, `git commit` dan
+`git push`. Vercel akan membangun ulang situsnya sendiri dalam satu sampai dua
+menit. Kalau mengedit lewat panel, semua itu terjadi otomatis begitu kamu
+menekan Publish.
+
+Cuplikan kode di panduan ini ditulis dalam gaya JavaScript agar mudah dibaca.
+Isi berkas JSON yang sebenarnya sama persis strukturnya, hanya perlu tanda kutip
+ganda pada setiap nama field.
 
 ---
 
@@ -38,6 +77,7 @@ Vercel akan membangun ulang situsnya sendiri dalam satu sampai dua menit.
 14. [Menyembunyikan satu section](#14-menyembunyikan-satu-section)
 15. [Daftar nama ikon yang tersedia](#15-daftar-nama-ikon-yang-tersedia)
 16. [Menyalakan dan mematikan sentuhan interaktif](#16-menyalakan-dan-mematikan-sentuhan-interaktif)
+17. [Panel konten di /admin](#17-panel-konten-di-admin)
 
 ---
 
@@ -63,7 +103,7 @@ sana, lalu **Commit changes**.
 npm run assets
 ```
 
-Perintah itu membaca `profile.avatar` di `data/portfolio.js`, lalu menulis
+Perintah itu membaca `profile.avatar` di `content/profile.json`, lalu menulis
 ulang tiga berkas sekaligus:
 
 | Berkas | Isi |
@@ -78,7 +118,7 @@ Setelah itu `git commit` dan `git push`. Vercel akan membangun ulang sendiri.
 > hanya favicon dan kartu preview yang masih memakai foto lama.
 
 **Kalau foto barumu berformat PNG atau WebP**, ubah dua baris di
-`data/portfolio.js` supaya cocok:
+`content/profile.json` supaya cocok, atau ganti lewat panel di menu Profil Diri:
 
 ```js
 profile: {
@@ -112,8 +152,10 @@ dipakai untuk ID maupun EN, dan tidak akan menimbulkan error.
 
 ## 3. Menambah pengalaman kerja
 
-Buka bagian `experience: [ ... ]` di `data/portfolio.js`, lalu sisipkan objek
-baru di posisi paling atas karena urutannya dari yang terbaru.
+Lewat panel: menu **Isi Halaman**, lalu **Pengalaman**, lalu tombol tambah.
+
+Lewat berkas: buka `content/experience.json`, lalu sisipkan objek baru di
+posisi paling atas array `items` karena urutannya dari yang terbaru.
 
 ```js
 experience: [
@@ -163,7 +205,8 @@ Semua kartu bisa menampilkan gambar, dan semuanya opsional.
 
 1. Simpan gambar ke `public/images/`. Buat sub folder kalau perlu, misalnya
    `public/images/pengalaman/` atau `public/images/projects/`.
-2. Tulis path-nya di data, selalu diawali `/` dan dihitung dari folder `public`.
+2. Tulis path-nya di berkas terkait, selalu diawali `/` dan dihitung dari
+   folder `public`. Kalau mengunggah lewat panel, path-nya diisi otomatis.
 
 **Pengalaman**
 
@@ -204,7 +247,8 @@ gradien dengan inisial nama proyek, dan tetap terlihat rapi.
 
 ### Galeri di section Tentang Saya
 
-Strip tiga gambar di bawah ringkasan diatur lewat `profile.gallery`:
+Strip tiga gambar di bawah ringkasan diatur lewat field `gallery` di
+`content/profile.json`, atau lewat panel di menu Profil Diri:
 
 ```js
 profile: {
@@ -235,8 +279,8 @@ npm run placeholders
 Placeholder ini sengaja **tidak memuat teks apa pun** supaya tetap utuh saat
 dipotong ke rasio mana pun oleh kartu yang menampilkannya.
 
-Ganti dengan foto asli kapan saja: simpan foto ke folder yang sama, lalu ubah
-field `image` atau `src` di `data/portfolio.js`. Ingin menambah placeholder baru
+Ganti dengan foto asli kapan saja: unggah lewat panel, atau simpan foto ke
+folder yang sama lalu ubah field `image` atau `src` di berkas terkait. Ingin menambah placeholder baru
 dengan gaya yang sama? Tambahkan satu baris ke array `ITEMS` di
 `scripts/generate-placeholders.mjs`, pilih palet warna dan motifnya, lalu
 jalankan perintah di atas.
@@ -249,7 +293,8 @@ jalankan perintah di atas.
 
 ## 5. Menambah proyek
 
-Tambahkan objek ke array `projects`. **Tag baru otomatis menjadi tombol filter**
+Tambahkan objek ke `items` di `content/projects.json`, atau lewat panel di menu
+**Isi Halaman**, lalu **Proyek**. **Tag baru otomatis menjadi tombol filter**
 di atas grid, tidak perlu didaftarkan di mana pun.
 
 ```js
@@ -278,8 +323,11 @@ projects: [
 
 ## 6. Menulis tulisan blog baru
 
-Buka `data/posts.js`, salin satu objek yang sudah ada, tempel di posisi paling
-atas array `posts`, lalu ganti isinya.
+Lewat panel: menu **Tulisan Blog**, lalu tombol tambah. Bloknya tinggal dipilih
+dari daftar, jadi tidak perlu menghafal strukturnya.
+
+Lewat berkas: salin salah satu berkas di `content/posts/`, beri nama baru sesuai
+slug-nya, lalu ganti isinya.
 
 ```js
 {
@@ -459,7 +507,7 @@ Pengunjung bisa berpindah mode lewat tombol bulan dan matahari di navbar, dan
 pilihannya diingat browser mereka.
 
 Mode yang dipakai saat pengunjung baru pertama kali datang diatur di
-`data/portfolio.js`:
+`content/settings.json`:
 
 ```js
 meta: {
@@ -515,7 +563,7 @@ mengaktifkan pengaturan "kurangi gerakan" di perangkatnya.
 
 ## 12. Menambah atau menghapus item menu
 
-Menu navigasi dibangun dari array `nav`.
+Menu navigasi dibangun dari `content/navigation.json`.
 
 ```js
 nav: [
@@ -628,7 +676,7 @@ Setelah itu langsung bisa dipakai dengan menulis `{ icon: 'dribbble' }`.
 ## 16. Menyalakan dan mematikan sentuhan interaktif
 
 Semua gerakan halus di situs ini punya sakelar sendiri di blok `appearance`
-pada `data/portfolio.js`. Ubah jadi `false` kalau ada yang terasa terlalu ramai.
+pada `content/settings.json`, atau lewat panel di menu **Pengaturan Situs**. Ubah jadi `false` kalau ada yang terasa terlalu ramai.
 Tidak ada yang rusak kalau dimatikan, halamannya hanya jadi lebih tenang.
 
 ```js
@@ -696,3 +744,119 @@ Ingin menyembunyikan elemen tertentu saat dicetak? Tambahkan atribut
 Semua animasi di situs ini otomatis berhenti untuk pengunjung yang menyalakan
 "kurangi gerakan" di perangkat mereka. Tidak ada pengaturan tambahan yang perlu
 kamu urus, dan tidak ada konten yang hilang, hanya geraknya yang tidak dijalankan.
+
+---
+
+## 17. Panel konten di /admin
+
+Panel ini memungkinkan kamu mengubah seluruh isi situs lewat form biasa, tanpa
+membuka GitHub sama sekali. Bisa dipakai dari laptop maupun ponsel.
+
+### Cara kerjanya
+
+```
+Kamu tekan Publish  ->  panel menulis commit ke repo  ->  Vercel membangun ulang  ->  situs terbarui
+```
+
+Jedanya sekitar satu sampai dua menit. Kamu tidak perlu melakukan apa pun
+selama proses itu berjalan.
+
+Perubahan tersimpan sebagai commit biasa di repositori, atas nama akun GitHub
+kamu. Artinya seluruh riwayat perubahan tercatat, dan apa pun bisa dikembalikan
+kalau ada yang salah.
+
+### Pemasangan awal, cukup sekali seumur hidup
+
+Panelnya sudah terpasang di kode. Yang belum ada hanya izin login, karena itu
+menyangkut akun GitHub kamu sendiri. Dua langkah, sekitar lima menit.
+
+#### Langkah 1. Daftarkan aplikasi OAuth di GitHub
+
+1. Buka **https://github.com/settings/developers**
+2. Pilih tab **OAuth Apps**, lalu klik **New OAuth App**
+3. Isi seperti ini:
+
+   | Kolom | Isi |
+   | --- | --- |
+   | Application name | `Panel Konten Portofolio` (bebas) |
+   | Homepage URL | `https://rianfirnanda.vercel.app` |
+   | Authorization callback URL | `https://rianfirnanda.vercel.app/api/callback/` |
+
+   > **Perhatikan garis miring di akhir callback URL.** Alamat itu harus sama
+   > persis, termasuk garis miringnya. Kalau berbeda, GitHub akan menolak login
+   > dengan pesan `redirect_uri_mismatch`.
+
+4. Klik **Register application**
+5. Salin **Client ID** yang muncul
+6. Klik **Generate a new client secret**, lalu salin nilainya.
+   Rahasia ini hanya ditampilkan sekali, jadi simpan dulu di tempat aman.
+
+#### Langkah 2. Masukkan kredensialnya ke Vercel
+
+1. Buka dashboard Vercel, pilih proyek portofolio ini
+2. Masuk ke **Settings**, lalu **Environment Variables**
+3. Tambahkan dua variabel:
+
+   | Name | Value |
+   | --- | --- |
+   | `GITHUB_CLIENT_ID` | Client ID dari langkah 1 |
+   | `GITHUB_CLIENT_SECRET` | Client secret dari langkah 1 |
+
+4. Pastikan keduanya berlaku untuk environment **Production**
+5. Masuk ke tab **Deployments**, buka deployment terakhir, klik menu tiga titik,
+   lalu **Redeploy**. Variabel baru hanya terbaca oleh deployment baru.
+
+Selesai. Buka `https://rianfirnanda.vercel.app/admin`, klik **Sign In with
+GitHub**, beri izin sekali, dan panelnya siap dipakai.
+
+### Isi panelnya
+
+| Menu | Untuk mengubah |
+| --- | --- |
+| **Tulisan Blog** | Menambah, mengedit, dan menghapus tulisan |
+| **Isi Halaman** | Pengalaman, proyek, sertifikasi, pendidikan, publikasi, keahlian, kesukarelawanan, angka sorotan, bahasa, layanan |
+| **Pengaturan** | Profil diri, kontak, media sosial, pengaturan situs, menu navigasi, judul tiap bagian |
+
+Gambar yang kamu unggah lewat panel otomatis tersimpan di
+`public/images/uploads/` dan ikut masuk ke repositori.
+
+### Menulis tulisan blog di panel
+
+Isi tulisan disusun dari blok. Klik tombol tambah di bagian **Isi tulisan**,
+lalu pilih jenis bloknya: Paragraf, Subjudul besar, Subjudul kecil, Daftar
+bertitik, Daftar bernomor, Kutipan, Kotak sorotan, atau Gambar.
+
+Setiap blok teks punya dua kolom, Bahasa Indonesia dan English. Kolom English
+boleh dikosongkan, nanti teks Indonesia yang dipakai untuk keduanya.
+
+Isi **Simpan sebagai draf** dengan aktif kalau tulisannya belum siap terbit.
+Draf tersimpan di repositori tapi tidak muncul di situs dan tidak masuk sitemap.
+
+### Siapa saja yang bisa masuk
+
+Hanya akun GitHub yang punya akses tulis ke repositori `Rianfirnanda/Portofolio`.
+Orang lain bisa membuka halaman `/admin`, tapi tidak akan bisa menyimpan apa pun.
+Halaman panel juga ditandai `noindex` sehingga tidak muncul di hasil pencarian.
+
+Client secret hanya dipakai di sisi server, di berkas `app/api/callback/route.js`,
+dan tidak pernah ikut terkirim ke browser.
+
+### Yang belum ada di panel
+
+Dua hal sengaja tidak dimasukkan karena hampir tidak pernah diubah:
+
+| Yang ingin diubah | Tempatnya |
+| --- | --- |
+| Label tombol dan teks antarmuka | `content/labels.json` |
+| Warna aksen dan kepekatan latar | `app/globals.css`, lihat bagian 9 dan 11 |
+
+### Kalau ada yang tidak beres
+
+| Gejala | Penyebab dan perbaikannya |
+| --- | --- |
+| Halaman `/admin` kosong terus | Berkas panelnya gagal disalin saat build. Jalankan `npm install` lalu `npm run build` lagi. |
+| Tombol Sign In tidak melakukan apa-apa | Popup diblokir browser. Izinkan popup untuk domain ini. |
+| `redirect_uri_mismatch` | Authorization callback URL di GitHub tidak sama persis. Periksa garis miring di akhirnya. |
+| `Konfigurasi OAuth belum lengkap` | `GITHUB_CLIENT_ID` atau `GITHUB_CLIENT_SECRET` belum terisi di Vercel, atau belum di-redeploy setelah diisi. |
+| `Kode keamanan tidak cocok` | Proses login memakan waktu lebih dari sepuluh menit, atau cookie diblokir. Tutup jendela login lalu ulangi. |
+| Sudah Publish tapi situs belum berubah | Vercel masih membangun. Tunggu satu sampai dua menit, lalu muat ulang halaman. |

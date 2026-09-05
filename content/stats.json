@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "value": "3.84",
+      "label": {
+        "id": "IPK Cum Laude",
+        "en": "GPA Cum Laude"
+      },
+      "icon": "graduation-cap"
+    },
+    {
+      "value": "16+",
+      "label": {
+        "id": "Sertifikasi Profesional",
+        "en": "Professional Certifications"
+      },
+      "icon": "award"
+    },
+    {
+      "value": "9",
+      "label": {
+        "id": "Peran & Pengalaman",
+        "en": "Roles & Experiences"
+      },
+      "icon": "briefcase"
+    },
+    {
+      "value": "1",
+      "label": {
+        "id": "Publikasi Terakreditasi",
+        "en": "Accredited Publication"
+      },
+      "icon": "book"
+    }
+  ]
+}

@@ -1,0 +1,286 @@
+{
+  "items": [
+    {
+      "role": {
+        "id": "Tim Penyusun Dokumen Audit Mutu Internal (AMI)",
+        "en": "Internal Quality Audit (AMI) Document Team"
+      },
+      "org": "Jurusan Administrasi Publik, Universitas Bengkulu",
+      "type": {
+        "id": "Paruh Waktu",
+        "en": "Part-time"
+      },
+      "period": {
+        "id": "Mar 2026 - sekarang",
+        "en": "Mar 2026 - present"
+      },
+      "location": "Bengkulu, Indonesia",
+      "description": {
+        "id": "Saya ditunjuk sebagai perwakilan mahasiswa lewat SK Rektor No. 1664/UN30.9/HK/2026 untuk membantu persiapan akreditasi jurusan 2026. Tugas saya menyusun dokumen Audit Mutu Internal bersama dosen, mulai dari mengumpulkan bukti dukung sampai merapikan narasinya agar sesuai instrumen penjaminan mutu.",
+        "en": "I was appointed student representative through Rector Decree No. 1664/UN30.9/HK/2026 to help prepare the 2026 departmental accreditation. My job is drafting the Internal Quality Audit documents with faculty members, from gathering supporting evidence to shaping the narrative so it fits the quality assurance instrument."
+      },
+      "skills": [
+        "Quality Assurance",
+        "Tata Kelola Pendidikan Tinggi",
+        "Dokumentasi Teknis"
+      ],
+      "image": "/images/experience/audit-mutu-internal.svg",
+      "imageAlt": {
+        "id": "Dokumentasi penyusunan berkas Audit Mutu Internal bersama tim dosen",
+        "en": "Documentation of Internal Quality Audit drafting with the faculty team"
+      },
+      "logo": null,
+      "highlight": true
+    },
+    {
+      "role": {
+        "id": "Tim Penyusun Dokumen Akreditasi Jurusan 2026",
+        "en": "2026 Departmental Accreditation Document Team"
+      },
+      "org": "Jurusan Administrasi Publik, Universitas Bengkulu",
+      "type": {
+        "id": "Paruh Waktu",
+        "en": "Part-time"
+      },
+      "period": {
+        "id": "Jan 2026 - sekarang",
+        "en": "Jan 2026 - present"
+      },
+      "location": "Bengkulu, Indonesia",
+      "description": {
+        "id": "Menyiapkan berkas akreditasi jurusan dari nol, mulai dari mengumpulkan data internal, menyelaraskannya dengan instrumen akreditasi, sampai menulis narasi dokumennya supaya enak dibaca asesor.",
+        "en": "Preparing the departmental accreditation files from scratch, from collecting internal data and aligning it with the accreditation instrument to writing the document narrative so assessors can follow it easily."
+      },
+      "skills": [
+        "Akreditasi",
+        "Pengumpulan Data",
+        "Dokumentasi"
+      ],
+      "image": null,
+      "imageAlt": "",
+      "logo": null,
+      "highlight": false
+    },
+    {
+      "role": {
+        "id": "Pengelola Website Jurusan Administrasi Publik FISIP",
+        "en": "Website Manager, Public Administration Department FISIP"
+      },
+      "org": "Universitas Bengkulu",
+      "type": {
+        "id": "Paruh Waktu",
+        "en": "Part-time"
+      },
+      "period": {
+        "id": "Jan 2026 - sekarang",
+        "en": "Jan 2026 - present"
+      },
+      "location": "Bengkulu, Indonesia",
+      "description": {
+        "id": "Ditunjuk lewat SK Rektor No. 019/UN30.9/HK/2026 untuk mengelola website resmi jurusan. Saya menangani pemeliharaan sistem, menyusun strategi kontennya, dan menjaga komunikasi digital ke publik supaya informasi akademik selalu akurat dan gampang dicari.",
+        "en": "Appointed through Rector Decree No. 019/UN30.9/HK/2026 to manage the department official website. I handle system maintenance, shape the content strategy, and keep public digital communication running so academic information stays accurate and easy to find."
+      },
+      "skills": [
+        "Pengelolaan Website",
+        "Strategi Konten",
+        "Komunikasi Digital",
+        "CMS"
+      ],
+      "image": "/images/experience/website-jurusan.svg",
+      "imageAlt": {
+        "id": "Tampilan pengelolaan website resmi jurusan",
+        "en": "The department official website being managed"
+      },
+      "logo": null,
+      "highlight": true
+    },
+    {
+      "role": {
+        "id": "Tim Tracer Study Jurusan Administrasi Publik",
+        "en": "Tracer Study Team, Public Administration Department"
+      },
+      "org": "Universitas Bengkulu",
+      "type": {
+        "id": "Paruh Waktu",
+        "en": "Part-time"
+      },
+      "period": {
+        "id": "Jan 2026 - sekarang",
+        "en": "Jan 2026 - present"
+      },
+      "location": "Bengkulu, Indonesia",
+      "description": {
+        "id": "Ditunjuk lewat SK Rektor No. 068/UN30.9/HK/2026. Saya melacak data alumni, menjalankan riset dan pengumpulan datanya, lalu menganalisis hasilnya sebagai bahan pendukung akreditasi jurusan.",
+        "en": "Appointed through Rector Decree No. 068/UN30.9/HK/2026. I track alumni data, run the research and data collection, then analyse the results as supporting evidence for the departmental accreditation."
+      },
+      "skills": [
+        "Riset",
+        "Analisis Data",
+        "Desain Survei",
+        "Pelacakan Alumni"
+      ],
+      "image": "/images/experience/tracer-study.svg",
+      "imageAlt": {
+        "id": "Rekap dan analisis data alumni untuk tracer study",
+        "en": "Alumni data recap and analysis for the tracer study"
+      },
+      "logo": null,
+      "highlight": false
+    },
+    {
+      "role": {
+        "id": "Presenter, 2nd International Conference on SDGs 2030",
+        "en": "Presenter, 2nd International Conference on SDGs 2030"
+      },
+      "org": "Yayasan Bali Sruti, Denpasar",
+      "type": {
+        "id": "Konferensi",
+        "en": "Conference"
+      },
+      "period": {
+        "id": "Agu - Sep 2026",
+        "en": "Aug - Sep 2026"
+      },
+      "location": "Denpasar, Bali, Indonesia",
+      "description": {
+        "id": "Mempresentasikan makalah berjudul \"Bridging Design-Reality Gaps in a National Family Information System\" di forum internasional. Isinya soal jarak antara desain sistem informasi yang dibuat di pusat dengan kenyataan di lapangan saat dipakai daerah.",
+        "en": "Presented a paper titled \"Bridging Design-Reality Gaps in a National Family Information System\" at an international forum. It looks at the distance between an information system designed at the national level and the reality of using it in the regions."
+      },
+      "skills": [
+        "Public Speaking",
+        "Penulisan Akademik",
+        "SDGs",
+        "Presentasi Riset"
+      ],
+      "image": "/images/experience/konferensi-sdgs.svg",
+      "imageAlt": {
+        "id": "Sesi presentasi makalah di konferensi internasional SDGs 2030",
+        "en": "Paper presentation session at the SDGs 2030 international conference"
+      },
+      "logo": null,
+      "highlight": true
+    },
+    {
+      "role": {
+        "id": "Magang",
+        "en": "Intern"
+      },
+      "org": "Dinas Pemberdayaan Masyarakat dan Desa (DPMD) Provinsi Bengkulu",
+      "type": {
+        "id": "Magang",
+        "en": "Internship"
+      },
+      "period": {
+        "id": "Sep - Okt 2025",
+        "en": "Sep - Oct 2025"
+      },
+      "location": "Bengkulu, Indonesia",
+      "description": {
+        "id": "Terlibat langsung di tata kelola pemerintahan daerah dan program pemberdayaan desa. Saya ikut menangani proses administrasi, pengelolaan berkas, dan pendampingan kegiatan dinas, jadi bisa melihat sendiri bagaimana kebijakan bekerja di lapangan.",
+        "en": "Worked directly on regional governance and village empowerment programs. I helped with administrative processes, document handling, and support for agency activities, which let me see first hand how policy plays out on the ground."
+      },
+      "skills": [
+        "Tata Kelola Daerah",
+        "Pemberdayaan Desa",
+        "Administrasi Pemerintahan"
+      ],
+      "image": "/images/experience/magang-dpmd.svg",
+      "imageAlt": {
+        "id": "Kegiatan pendampingan program pemberdayaan desa bersama DPMD",
+        "en": "Village empowerment program mentoring with DPMD"
+      },
+      "logo": null,
+      "highlight": false
+    },
+    {
+      "role": {
+        "id": "Asisten Laboratorium",
+        "en": "Laboratory Assistant"
+      },
+      "org": "Laboratorium Administrasi Publik, Universitas Bengkulu",
+      "type": {
+        "id": "Paruh Waktu",
+        "en": "Part-time"
+      },
+      "period": {
+        "id": "Nov 2024 - sekarang",
+        "en": "Nov 2024 - present"
+      },
+      "location": "Bengkulu, Indonesia",
+      "description": {
+        "id": "Mendukung kegiatan akademik, penelitian, pelatihan, dan pengabdian masyarakat di laboratorium. Saya menyiapkan materi praktikum, mendampingi peserta selama kegiatan, dan merapikan dokumentasinya.",
+        "en": "Supporting academic, research, training, and community service activities in the lab. I prepare practicum materials, assist participants during sessions, and keep the documentation tidy."
+      },
+      "skills": [
+        "Pendampingan Akademik",
+        "Fasilitasi Pelatihan",
+        "Asistensi Riset"
+      ],
+      "image": "/images/experience/laboratorium.svg",
+      "imageAlt": {
+        "id": "Persiapan materi praktikum di Laboratorium Administrasi Publik",
+        "en": "Preparing practicum materials at the Public Administration Laboratory"
+      },
+      "logo": null,
+      "highlight": false
+    },
+    {
+      "role": {
+        "id": "Volunteer Kesmawa",
+        "en": "Kesmawa Volunteer"
+      },
+      "org": "Rektorat Universitas Bengkulu",
+      "type": {
+        "id": "Sukarelawan",
+        "en": "Volunteer"
+      },
+      "period": {
+        "id": "Apr 2024 - sekarang",
+        "en": "Apr 2024 - present"
+      },
+      "location": "Bengkulu, Indonesia",
+      "description": {
+        "id": "Memverifikasi berkas mahasiswa baru, mewawancarai pendaftar beasiswa, dan mengelola data pendaftar supaya proses seleksinya tertib dan bisa dipertanggungjawabkan.",
+        "en": "Verifying new student files, interviewing scholarship applicants, and managing applicant data so the selection process stays orderly and accountable."
+      },
+      "skills": [
+        "Verifikasi Data",
+        "Wawancara",
+        "Pengelolaan Data Pendaftar"
+      ],
+      "image": null,
+      "imageAlt": "",
+      "logo": null,
+      "highlight": false
+    },
+    {
+      "role": {
+        "id": "Volunteer",
+        "en": "Volunteer"
+      },
+      "org": "SDGs Center Universitas Bengkulu",
+      "type": {
+        "id": "Sukarelawan",
+        "en": "Volunteer"
+      },
+      "period": {
+        "id": "Okt 2023 - Jan 2025",
+        "en": "Oct 2023 - Jan 2025"
+      },
+      "location": "Bengkulu, Indonesia",
+      "description": {
+        "id": "Ikut menjalankan program keberlanjutan kampus, mulai dari kegiatan lingkungan, edukasi publik, sampai kolaborasi lintas organisasi untuk isu Sustainable Development Goals.",
+        "en": "Helped run campus sustainability programs, from environmental activities and public education to cross organisation collaboration around the Sustainable Development Goals."
+      },
+      "skills": [
+        "Keberlanjutan",
+        "Pelibatan Masyarakat",
+        "Dukungan Acara"
+      ],
+      "image": null,
+      "imageAlt": "",
+      "logo": null,
+      "highlight": false
+    }
+  ]
+}

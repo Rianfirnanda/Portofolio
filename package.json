@@ -8,8 +8,10 @@
   },
   "scripts": {
     "dev": "next dev",
+    "predev": "node scripts/copy-cms.mjs",
     "build": "next build",
-    "start": "npx --yes serve out",
+    "prebuild": "node scripts/copy-cms.mjs",
+    "start": "next start",
     "assets": "node --no-warnings scripts/generate-assets.mjs",
     "placeholders": "node --no-warnings scripts/generate-placeholders.mjs"
   },
@@ -19,6 +21,7 @@
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@sveltia/cms": "0.205.4",
     "@tailwindcss/postcss": "4.3.3",
     "sharp": "0.35.4",
     "tailwindcss": "4.3.3"

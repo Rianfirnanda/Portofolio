@@ -1,9 +1,12 @@
 # Portofolio Rian Firnanda Irsyadani
 
-Website portofolio pribadi berbasis **Next.js App Router + Tailwind CSS**, yang
-diekspor sepenuhnya menjadi HTML, CSS, dan JavaScript statis lalu dijalankan di
-**Vercel**. Punya mode terang dan gelap, dua bahasa, halaman blog, dan seluruh
-isinya diatur dari satu berkas data.
+Website portofolio pribadi berbasis **Next.js App Router + Tailwind CSS** yang
+dijalankan di **Vercel**. Punya mode terang dan gelap, dua bahasa, halaman blog,
+dan **panel konten di `/admin`** sehingga seluruh isinya bisa diubah lewat form
+biasa tanpa membuka GitHub.
+
+Seluruh halaman tetap dibuat sekali saat build, jadi kecepatannya sama dengan
+situs statis murni.
 
 ---
 
@@ -11,7 +14,11 @@ isinya diatur dari satu berkas data.
 
 **Yang ada di dalamnya**
 
-- Static export penuh (`output: 'export'`). Tidak ada server, tidak ada API route.
+- **Panel konten di `/admin`** memakai Sveltia CMS. Login dengan GitHub, lalu
+  tambah tulisan blog, ubah pengalaman, atau unggah foto langsung dari ponsel.
+  Setiap simpan menjadi commit biasa, dan Vercel membangun ulang sendiri.
+- Seluruh halaman **pre-render saat build**. Hanya dua endpoint login CMS yang
+  berjalan di server.
 - Mode **terang dan gelap** dengan tombol di navbar. Pilihan pengunjung diingat
   browser, dan tanpa kedipan warna saat halaman dimuat.
 - Toggle bahasa **ID dan EN** memakai satu state React, tanpa library i18n.
@@ -47,13 +54,18 @@ isinya diatur dari satu berkas data.
 
 | Berkas atau folder | Fungsi |
 | --- | --- |
-| `data/portfolio.js` | **Sumber utama konten.** Profil, pengalaman, proyek, sertifikasi, keahlian, kontak, menu, judul section, dan sakelar `appearance`. |
-| `data/posts.js` | Semua tulisan blog beserta isinya. |
-| `data/README.md` | Panduan operasional dengan cuplikan siap tempel. |
+| `content/` | **Sumber utama konten.** Seluruh isi situs sebagai berkas JSON, satu berkas per bagian, plus satu berkas per tulisan blog di `content/posts/`. |
+| `data/portfolio.js` | Perakit tipis yang menyatukan berkas di `content/` menjadi satu objek. |
+| `data/posts.js` | Membaca folder `content/posts/` saat build. |
+| `data/README.md` | Panduan operasional dengan cuplikan siap tempel, termasuk cara memasang panel konten. |
+| `public/admin/index.html` dan `config.yml` | Halaman panel konten dan definisi form-nya. |
+| `app/api/auth/` dan `app/api/callback/` | Dua endpoint login GitHub untuk panel konten. |
+| `lib/oauth.js` | Bagian bersama kedua endpoint di atas. |
+| `scripts/copy-cms.mjs` | Menyalin berkas panel dari node_modules saat build. |
 | `app/layout.js` | Kerangka HTML, metadata SEO, JSON-LD, font, skrip anti kedip tema, provider tema dan bahasa. |
 | `app/page.js` | Server component yang menyusun urutan section halaman utama. |
 | `app/blog/page.js` | Halaman daftar tulisan. |
-| `app/blog/[slug]/page.js` | Halaman detail satu tulisan, dibuat otomatis dari `data/posts.js`. |
+| `app/blog/[slug]/page.js` | Halaman detail satu tulisan, dibuat otomatis dari isi `content/posts/`. |
 | `app/globals.css` | Token warna mode terang dan gelap, kelas `.glass`, keyframes, pengaturan kepekatan latar. |
 | `app/sitemap.js` dan `app/robots.js` | Membuat `sitemap.xml` dan `robots.txt` saat build. |
 | `app/not-found.js` | Halaman 404. |
@@ -96,8 +108,7 @@ isinya diatur dari satu berkas data.
 | `lib/format.js` | Format tanggal dan perkiraan lama baca. |
 | `lib/theme.js` | Kunci penyimpanan pilihan tema. |
 | `public/images/` | Foto profil, sampul proyek, sampul tulisan, gambar preview. |
-| `next.config.mjs` | `output: 'export'`, `images.unoptimized`, `trailingSlash`, dukungan `basePath`. |
-| `.github/workflows/deploy.yml` | Cadangan untuk deploy ke GitHub Pages. Tidak berjalan otomatis. |
+| `next.config.mjs` | `trailingSlash`, pengalihan `/admin`, dan dukungan `basePath`. |
 
 ---
 
@@ -128,18 +139,22 @@ npm run assets
 npm run placeholders
 ```
 
+Panel konten di `/admin` juga jalan saat `npm run dev`. Pilih **Work with Local
+Repository** di layar login untuk mengedit berkas di komputer tanpa perlu
+menyentuh repositori online.
+
 ---
 
 ## 3. Alur deploy di Vercel
 
 ```mermaid
 flowchart LR
-    A["git push ke branch main"] --> B["Vercel mendeteksi commit baru"]
-    B --> C["npm install"]
-    C --> D["npm run build<br/>(next build, output: export)"]
-    D --> E["Folder out/<br/>HTML, CSS, JS statis"]
+    A["Publish di panel /admin<br/>atau git push ke main"] --> B["Commit masuk ke repositori"]
+    B --> C["Vercel mendeteksi commit baru"]
+    C --> D["npm install"]
+    D --> E["npm run build<br/>halaman di-render sekali"]
     E --> F["Vercel CDN global"]
-    F --> G["Situs live di domain Vercel"]
+    F --> G["Situs terbarui"]
 ```
 
 Vercel mengenali proyek Next.js secara otomatis, jadi tidak ada pengaturan yang
@@ -163,14 +178,80 @@ hanya metadata SEO-nya yang menunjuk alamat keliru.
 **Settings** lalu **Domains**, tambahkan domainmu, dan ikuti petunjuk DNS yang
 Vercel tampilkan. Setelah aktif, perbarui `meta.baseUrl` seperti di atas.
 
-**Pindah ke GitHub Pages.** Berkas `.github/workflows/deploy.yml` masih
-tersimpan sebagai cadangan dan sengaja dibuat tidak berjalan otomatis. Untuk
-memakainya: aktifkan Pages lewat **Settings, Pages, Source: GitHub Actions**,
-lalu jalankan workflow itu manual dari tab **Actions**.
+**Catatan soal hosting lain.** Panel konten membutuhkan dua endpoint kecil di
+`app/api/`, jadi situs ini tidak lagi bisa disajikan sebagai folder statis murni
+seperti di GitHub Pages. Kalau suatu saat kamu memang ingin pindah ke sana,
+hapus folder `app/api/` beserta panel di `public/admin/`, lalu kembalikan
+`output: 'export'` di `next.config.mjs`. Isi situsnya tetap bisa diubah lewat
+berkas di folder `content/`.
 
 ---
 
-## 4. Mengganti isi situs
+## 4. Panel konten di /admin
+
+Seluruh isi situs bisa diubah lewat form biasa di
+**https://rianfirnanda.vercel.app/admin**, tanpa membuka GitHub. Setiap kali
+kamu menekan Publish, panel menulis commit ke repositori dan Vercel membangun
+ulang situsnya sendiri dalam satu sampai dua menit.
+
+### Pemasangan awal, cukup sekali
+
+Panelnya sudah terpasang di kode. Yang tersisa hanya izin login, karena itu
+menyangkut akun GitHub kamu sendiri.
+
+**Langkah 1.** Buka https://github.com/settings/developers, tab **OAuth Apps**,
+klik **New OAuth App**, lalu isi:
+
+| Kolom | Isi |
+| --- | --- |
+| Application name | `Panel Konten Portofolio` |
+| Homepage URL | `https://rianfirnanda.vercel.app` |
+| Authorization callback URL | `https://rianfirnanda.vercel.app/api/callback/` |
+
+Perhatikan garis miring di akhir callback URL. Harus sama persis, kalau tidak
+GitHub akan menolak dengan pesan `redirect_uri_mismatch`.
+
+Setelah **Register application**, salin **Client ID**, lalu klik **Generate a
+new client secret** dan salin nilainya. Rahasia itu hanya ditampilkan sekali.
+
+**Langkah 2.** Di dashboard Vercel, buka proyek ini, masuk ke **Settings**, lalu
+**Environment Variables**, dan tambahkan dua variabel untuk environment
+**Production**:
+
+| Name | Value |
+| --- | --- |
+| `GITHUB_CLIENT_ID` | Client ID dari langkah 1 |
+| `GITHUB_CLIENT_SECRET` | Client secret dari langkah 1 |
+
+Terakhir, buka tab **Deployments** dan **Redeploy** deployment terakhir.
+Variabel baru hanya terbaca oleh deployment yang dibuat setelahnya.
+
+Selesai. Buka `/admin`, klik **Sign In with GitHub**, beri izin sekali.
+
+### Cara kerja dan keamanannya
+
+Panelnya adalah Sveltia CMS, disajikan dari domain sendiri (berkasnya disalin
+dari `node_modules` setiap build oleh `scripts/copy-cms.mjs`), jadi tidak ada
+ketergantungan CDN pihak ketiga.
+
+Login memakai dua endpoint di proyek yang sama:
+
+| Endpoint | Tugasnya |
+| --- | --- |
+| `app/api/auth/route.js` | Mengantar ke halaman izin GitHub, menitipkan kode acak anti pemalsuan permintaan di cookie |
+| `app/api/callback/route.js` | Menukar kode dari GitHub menjadi token akses |
+
+Client secret hanya dipakai di sisi server dan tidak pernah ikut terkirim ke
+browser. Yang bisa menyimpan perubahan hanya akun GitHub dengan akses tulis ke
+repositori. Halaman panel juga ditandai `noindex`.
+
+Panduan lengkap isi panel, cara menulis blog di sana, dan daftar masalah yang
+mungkin muncul ada di
+[`data/README.md` bagian 17](data/README.md#17-panel-konten-di-admin).
+
+---
+
+## 5. Mengganti isi situs
 
 Semua ada di **[`data/README.md`](data/README.md)**, ditulis langkah demi langkah
 dengan contoh yang tinggal disalin. Isinya mencakup:
@@ -214,7 +295,7 @@ sendiri.
 
 ---
 
-## 5. Troubleshooting
+## 6. Troubleshooting
 
 ### Foto tidak muncul, yang tampil kartu monogram RF
 
@@ -236,12 +317,11 @@ Seharusnya tidak terjadi. Ada skrip kecil di `app/layout.js` yang memasang tema
 sebelum halaman digambar. Kalau kedipan tetap muncul, biasanya penyebabnya
 skrip itu terhapus atau ada extension browser yang memblokir skrip inline.
 
-### Gambar dan CSS hilang setelah deploy ke GitHub Pages
+### Gambar dan CSS hilang setelah dipindah ke hosting lain
 
-Project page GitHub Pages disajikan dari sub folder, jadi aset perlu diberi
-awalan nama repo. Isi `NEXT_PUBLIC_BASE_PATH` dengan `/nama-repo` saat build.
-Workflow di `.github/workflows/deploy.yml` sudah mengurus ini otomatis. Di
-Vercel variabel itu harus dibiarkan kosong.
+Kalau situs disajikan dari sub folder, aset perlu diberi awalan. Isi
+`NEXT_PUBLIC_BASE_PATH` dengan `/nama-folder` saat build. Di Vercel variabel itu
+harus dibiarkan kosong.
 
 Kalau kamu menambahkan gambar lewat tag `<img>` sendiri, pakai komponen
 `SmartImage` atau bungkus path-nya dengan `withBasePath()`:
@@ -299,7 +379,7 @@ Aturan main di proyek ini:
 
 ---
 
-## 6. Teknologi
+## 7. Teknologi
 
 | Paket | Versi | Kegunaan |
 | --- | --- | --- |
@@ -308,6 +388,7 @@ Aturan main di proyek ini:
 | `tailwindcss` | 4.3.3 | Styling utility-first |
 | `@tailwindcss/postcss` | 4.3.3 | Integrasi Tailwind ke PostCSS |
 | `sharp` | 0.35.4 | Hanya dipakai `npm run assets` untuk membuat favicon dan kartu preview. Tidak ikut ke dalam situs. |
+| `@sveltia/cms` | 0.205.4 | Panel konten di `/admin`. Berkasnya disalin ke `public/admin/` saat build, tidak ikut ke dalam bundel situs. |
 
 Perintah `npm run placeholders` tidak memakai dependency apa pun, hanya modul
 bawaan Node.

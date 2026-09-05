@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "name": "SobatKoding",
+      "period": "2021 - 2022",
+      "org": "SMKN 1 Kota Bengkulu",
+      "description": {
+        "id": "Usaha layanan digital yang saya bangun bareng teman-teman sekolah. Kami mengerjakan aplikasi dan website untuk klien kecil, sekaligus membuka jasa pengerjaan dokumen perkantoran seperti Word, Excel, dan PowerPoint untuk mahasiswa dan UMKM sekitar.",
+        "en": "A digital service venture I built with school friends. We took on apps and websites for small clients, and also offered office document work in Word, Excel, and PowerPoint for students and nearby small businesses."
+      },
+      "tags": [
+        "Web Development",
+        "Wirausaha",
+        "Produktivitas Kantor"
+      ],
+      "image": "/images/projects/sobatkoding.svg",
+      "imageAlt": "Sampul proyek SobatKoding",
+      "links": [],
+      "featured": true
+    },
+    {
+      "name": "Health Hero",
+      "period": "2021",
+      "org": "Direktorat SMK",
+      "description": {
+        "id": "Proyek kolaboratif tingkat nasional bersama Direktorat SMK yang mengangkat tema kesehatan. Saya masuk di sisi pengembangan sekaligus penyusunan aset digital produknya.",
+        "en": "A national level collaborative project with Direktorat SMK on a health theme. I worked on the development side and on preparing the product digital assets."
+      },
+      "tags": [
+        "Kolaborasi",
+        "Game Development",
+        "Kesehatan"
+      ],
+      "image": "/images/projects/health-hero.svg",
+      "imageAlt": "Sampul proyek Health Hero",
+      "links": [],
+      "featured": false
+    },
+    {
+      "name": "Fly Over Space",
+      "period": "2020 - 2022",
+      "org": {
+        "id": "Organisasi riset roket dan perangkat lunak",
+        "en": "Rocket research and software organisation"
+      },
+      "description": {
+        "id": "Organisasi yang menggabungkan riset roket dengan pengembangan perangkat lunak. Saya menangani sisi perangkat lunak pendukung riset dan merapikan dokumentasi teknis tim.",
+        "en": "An organisation that mixes rocket research with software development. I handled the software side supporting the research and kept the team technical documentation in order."
+      },
+      "tags": [
+        "Riset",
+        "Software Development",
+        "Kerja Tim"
+      ],
+      "image": "/images/projects/fly-over-space.svg",
+      "imageAlt": "Sampul proyek Fly Over Space",
+      "links": [],
+      "featured": false
+    }
+  ]
+}

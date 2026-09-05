@@ -1,0 +1,142 @@
+{
+  "about": {
+    "eyebrow": {
+      "id": "01 / Profil",
+      "en": "01 / Profile"
+    },
+    "title": {
+      "id": "Tentang Saya",
+      "en": "About Me"
+    },
+    "subtitle": {
+      "id": "Latar administrasi publik yang bertemu dengan kebiasaan ngoprek teknologi.",
+      "en": "A public administration background that meets a habit of tinkering with technology."
+    }
+  },
+  "experience": {
+    "eyebrow": {
+      "id": "02 / Perjalanan",
+      "en": "02 / Journey"
+    },
+    "title": {
+      "id": "Pengalaman",
+      "en": "Experience"
+    },
+    "subtitle": {
+      "id": "Peran akademik, pemerintahan, dan kesukarelawanan yang membentuk cara saya bekerja.",
+      "en": "Academic, government, and volunteer roles that shaped the way I work."
+    }
+  },
+  "projects": {
+    "eyebrow": {
+      "id": "03 / Karya",
+      "en": "03 / Work"
+    },
+    "title": {
+      "id": "Proyek",
+      "en": "Projects"
+    },
+    "subtitle": {
+      "id": "Hal-hal yang saya bangun bareng tim, dari usaha kecil sampai proyek nasional.",
+      "en": "Things I built together with a team, from a small venture to a national project."
+    }
+  },
+  "publications": {
+    "eyebrow": {
+      "id": "04 / Riset",
+      "en": "04 / Research"
+    },
+    "title": {
+      "id": "Publikasi",
+      "en": "Publications"
+    },
+    "subtitle": {
+      "id": "Karya ilmiah yang terbit di jurnal terakreditasi.",
+      "en": "Scholarly work published in an accredited journal."
+    }
+  },
+  "skills": {
+    "eyebrow": {
+      "id": "05 / Kompetensi",
+      "en": "05 / Competencies"
+    },
+    "title": {
+      "id": "Keahlian",
+      "en": "Skills"
+    },
+    "subtitle": {
+      "id": "Perkakas yang saya pakai sehari-hari, dari baris kode sampai dokumen kebijakan.",
+      "en": "The tools I use day to day, from lines of code to policy documents."
+    }
+  },
+  "certifications": {
+    "eyebrow": {
+      "id": "06 / Kredensial",
+      "en": "06 / Credentials"
+    },
+    "title": {
+      "id": "Sertifikasi",
+      "en": "Certifications"
+    },
+    "subtitle": {
+      "id": "Sertifikasi profesional dari BNSP, Google, Anthropic, AWS, dan lembaga lain.",
+      "en": "Professional certifications from BNSP, Google, Anthropic, AWS, and other institutions."
+    }
+  },
+  "education": {
+    "eyebrow": {
+      "id": "07 / Pendidikan",
+      "en": "07 / Education"
+    },
+    "title": {
+      "id": "Pendidikan",
+      "en": "Education"
+    },
+    "subtitle": {
+      "id": "Jenjang formal yang jadi fondasi semuanya.",
+      "en": "The formal education that everything else stands on."
+    }
+  },
+  "volunteering": {
+    "eyebrow": {
+      "id": "08 / Kontribusi",
+      "en": "08 / Contribution"
+    },
+    "title": {
+      "id": "Kesukarelawanan",
+      "en": "Volunteering"
+    },
+    "subtitle": {
+      "id": "Kegiatan sosial dan lingkungan di luar ruang kelas.",
+      "en": "Social and environmental activities outside the classroom."
+    }
+  },
+  "blog": {
+    "eyebrow": {
+      "id": "09 / Tulisan",
+      "en": "09 / Writing"
+    },
+    "title": {
+      "id": "Blog",
+      "en": "Blog"
+    },
+    "subtitle": {
+      "id": "Catatan singkat soal teknologi, kebijakan, dan hal-hal yang saya pelajari sepanjang jalan.",
+      "en": "Short notes on technology, policy, and things I pick up along the way."
+    }
+  },
+  "contact": {
+    "eyebrow": {
+      "id": "10 / Kontak",
+      "en": "10 / Contact"
+    },
+    "title": {
+      "id": "Mari Terhubung",
+      "en": "Let's Connect"
+    },
+    "subtitle": {
+      "id": "Punya proyek, tawaran kerja, atau ide yang ingin didiskusikan? Sapa saya.",
+      "en": "Have a project, an offer, or an idea worth discussing? Say hello."
+    }
+  }
+}

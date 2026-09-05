@@ -1,0 +1,107 @@
+{
+  "items": [
+    {
+      "name": "Generative AI Leader",
+      "issuer": "Google Cloud",
+      "year": "2026",
+      "group": "AI & Cloud",
+      "credentialUrl": ""
+    },
+    {
+      "name": "AI Fluency",
+      "issuer": "Anthropic",
+      "year": "2026",
+      "group": "AI & Cloud",
+      "credentialUrl": ""
+    },
+    {
+      "name": "AI Fundamentals",
+      "issuer": "Google",
+      "year": "2026",
+      "group": "AI & Cloud",
+      "credentialUrl": ""
+    },
+    {
+      "name": "Start Writing Prompts like a Pro",
+      "issuer": "Google",
+      "year": "2026",
+      "group": "AI & Cloud",
+      "credentialUrl": ""
+    },
+    {
+      "name": "AWS Educate Machine Learning Foundations",
+      "issuer": "Amazon Web Services",
+      "year": "2026",
+      "group": "AI & Cloud",
+      "credentialUrl": ""
+    },
+    {
+      "name": "Foundations of Cybersecurity",
+      "issuer": "Google",
+      "year": "2025",
+      "group": "Keamanan",
+      "credentialUrl": ""
+    },
+    {
+      "name": "Certified Cyber Security Analyst (C3SA)",
+      "issuer": "CyberWarFare Labs",
+      "year": "2025",
+      "group": "Keamanan",
+      "credentialUrl": ""
+    },
+    {
+      "name": {
+        "id": "Pengembangan Perangkat Lunak",
+        "en": "Software Development"
+      },
+      "issuer": "BNSP",
+      "year": "2022",
+      "group": "Perangkat Lunak",
+      "credentialUrl": ""
+    },
+    {
+      "name": "Game Development",
+      "issuer": "Direktorat SMK",
+      "year": "2021",
+      "group": "Perangkat Lunak",
+      "credentialUrl": ""
+    },
+    {
+      "name": {
+        "id": "Desainer Grafis Muda",
+        "en": "Junior Graphic Designer"
+      },
+      "issuer": "BNSP & Digitalent Kominfo",
+      "year": "2022",
+      "group": "Desain",
+      "credentialUrl": ""
+    },
+    {
+      "name": "Operator Komputer Madya",
+      "issuer": "Kominfo",
+      "year": "2024",
+      "group": "Desain",
+      "credentialUrl": ""
+    },
+    {
+      "name": {
+        "id": "UKBI, Uji Kemahiran Berbahasa Indonesia",
+        "en": "UKBI, Indonesian Language Proficiency Test"
+      },
+      "issuer": "Badan Bahasa",
+      "year": "2022",
+      "group": "Bahasa",
+      "credentialUrl": ""
+    },
+    {
+      "name": {
+        "id": "TOEFL",
+        "en": "UKBI, TOEFL"
+      },
+      "issuer": "UPA Bahasa Universitas Bengkulu",
+      "year": "2026",
+      "group": "Bahasa",
+      "credentialUrl": ""
+    }
+  ]
+}

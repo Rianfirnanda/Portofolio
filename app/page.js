@@ -9,6 +9,7 @@ import Education from '@/components/Education';
 import Volunteering from '@/components/Volunteering';
 import BlogPreview from '@/components/BlogPreview';
 import Contact from '@/components/Contact';
+import { getPublishedPosts } from '@/data/posts';
 
 /**
  * Halaman utama. Server component yang tugasnya hanya menyusun urutan section.
@@ -19,6 +20,9 @@ import Contact from '@/components/Contact';
  * sesuaikan urutan menu di portfolio.nav.
  */
 export default function HomePage() {
+  // Tulisan dibaca di sini, di sisi server, lalu diserahkan ke BlogPreview.
+  const latestPosts = getPublishedPosts().slice(0, 3);
+
   return (
     <>
       <Hero />
@@ -30,7 +34,7 @@ export default function HomePage() {
       <Certifications />
       <Education />
       <Volunteering />
-      <BlogPreview />
+      <BlogPreview posts={latestPosts} />
       <Contact />
     </>
   );

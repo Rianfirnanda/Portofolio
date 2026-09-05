@@ -1,0 +1,35 @@
+{
+  "items": [
+    {
+      "degree": {
+        "id": "S1 Ilmu Administrasi Publik",
+        "en": "Bachelor's Degree in Public Administration"
+      },
+      "school": "Universitas Bengkulu",
+      "period": "2022 - 2026",
+      "gpa": {
+        "id": "IPK 3,84 Cum Laude",
+        "en": "GPA 3.84 Cum Laude"
+      },
+      "notes": {
+        "id": "Fokus saya di formulasi kebijakan publik, tata kelola pemerintahan, manajemen sistem informasi, dan administrasi perkantoran.",
+        "en": "I focused on public policy formulation, governance, information systems management, and office administration."
+      },
+      "logo": null
+    },
+    {
+      "degree": {
+        "id": "Teknik Komputer & Informatika, Rekayasa Perangkat Lunak",
+        "en": "Computer & Informatics Engineering, Software Engineering"
+      },
+      "school": "SMKN 1 Kota Bengkulu",
+      "period": "2019 - 2022",
+      "gpa": "",
+      "notes": {
+        "id": "Tempat saya membangun dasar pemrograman, basis data, jaringan komputer, dan pengembangan aplikasi web.",
+        "en": "Where I built my foundation in programming, databases, computer networking, and web application development."
+      },
+      "logo": null
+    }
+  ]
+}

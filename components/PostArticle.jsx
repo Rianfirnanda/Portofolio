@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { portfolio } from '@/data/portfolio';
-import { publishedPosts, getPostBySlug } from '@/data/posts';
 import { useLanguage } from '@/components/LanguageProvider';
 import { formatDate, estimateReadingTime } from '@/lib/format';
 import SmartImage from '@/components/SmartImage';
@@ -13,19 +12,18 @@ import Reveal from '@/components/Reveal';
 import Icon from '@/components/Icon';
 
 /**
- * PostArticle: isi halaman /blog/[slug]. Menerima slug dari halaman server,
- * lalu mengambil datanya sendiri dari data/posts.js.
+ * PostArticle: isi halaman /blog/[slug].
+ *
+ * Tulisannya beserta dua bacaan lanjutan dikirim app/blog/[slug]/page.js
+ * sebagai props, karena keduanya dibaca dari folder content/posts/ saat build.
  */
-export default function PostArticle({ slug }) {
+export default function PostArticle({ post, others = [] }) {
   const { lang, t } = useLanguage();
   const { ui, profile } = portfolio;
-  const post = getPostBySlug(slug);
 
   if (!post) return null;
 
   const minutes = post.readingTime ?? estimateReadingTime(post.content, lang);
-  // Dua tulisan lain sebagai bacaan lanjutan.
-  const others = publishedPosts.filter((item) => item.slug !== post.slug).slice(0, 2);
 
   return (
     <article className="px-4 pt-32 pb-20 sm:px-6 sm:pb-24">

@@ -1,0 +1,69 @@
+{
+  "items": [
+    {
+      "id": "about",
+      "type": "section",
+      "label": {
+        "id": "Tentang",
+        "en": "About"
+      }
+    },
+    {
+      "id": "experience",
+      "type": "section",
+      "label": {
+        "id": "Pengalaman",
+        "en": "Experience"
+      }
+    },
+    {
+      "id": "projects",
+      "type": "section",
+      "label": {
+        "id": "Proyek",
+        "en": "Projects"
+      }
+    },
+    {
+      "id": "publications",
+      "type": "section",
+      "label": {
+        "id": "Publikasi",
+        "en": "Publications"
+      }
+    },
+    {
+      "id": "skills",
+      "type": "section",
+      "label": {
+        "id": "Keahlian",
+        "en": "Skills"
+      }
+    },
+    {
+      "id": "certifications",
+      "type": "section",
+      "label": {
+        "id": "Sertifikasi",
+        "en": "Certifications"
+      }
+    },
+    {
+      "id": "blog",
+      "type": "page",
+      "href": "/blog/",
+      "label": {
+        "id": "Blog",
+        "en": "Blog"
+      }
+    },
+    {
+      "id": "contact",
+      "type": "section",
+      "label": {
+        "id": "Kontak",
+        "en": "Contact"
+      }
+    }
+  ]
+}

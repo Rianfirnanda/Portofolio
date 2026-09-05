@@ -1,5 +1,5 @@
 import { portfolio } from '@/data/portfolio';
-import { publishedPosts } from '@/data/posts';
+import { getPublishedPosts } from '@/data/posts';
 
 // Wajib ada saat memakai output: 'export' supaya berkas sitemap.xml
 // dibuat sekali waktu build, bukan dihitung ulang tiap permintaan.
@@ -16,7 +16,7 @@ export default function sitemap() {
   return [
     { url: `${base}/`, lastModified: today, changeFrequency: 'monthly', priority: 1 },
     { url: `${base}/blog/`, lastModified: today, changeFrequency: 'weekly', priority: 0.8 },
-    ...publishedPosts.map((post) => ({
+    ...getPublishedPosts().map((post) => ({
       url: `${base}/blog/${post.slug}/`,
       lastModified: post.date,
       changeFrequency: 'yearly',

@@ -1,5 +1,6 @@
 import localFont from 'next/font/local';
 import { portfolio } from '@/data/portfolio';
+import { getPublishedPosts } from '@/data/posts';
 import { t } from '@/lib/i18n';
 import LanguageProvider from '@/components/LanguageProvider';
 import ThemeProvider from '@/components/ThemeProvider';
@@ -127,6 +128,14 @@ const personJsonLd = {
 };
 
 export default function RootLayout({ children }) {
+  // Hanya field yang dibutuhkan pencarian cepat yang diteruskan ke browser,
+  // supaya isi lengkap setiap artikel tidak ikut terkirim di semua halaman.
+  const searchablePosts = getPublishedPosts().map((post) => ({
+    slug: post.slug,
+    title: post.title,
+    tags: post.tags ?? [],
+  }));
+
   return (
     <html lang={locale} className={plusJakarta.variable} suppressHydrationWarning>
       <head>
@@ -149,7 +158,7 @@ export default function RootLayout({ children }) {
               <main id="main">{children}</main>
               <Footer />
               <BackToTop />
-              <CommandPalette />
+              <CommandPalette posts={searchablePosts} />
             </LightboxProvider>
           </LanguageProvider>
         </ThemeProvider>

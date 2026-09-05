@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "label": "LinkedIn",
+      "handle": "rian-firnanda",
+      "href": "https://www.linkedin.com/in/rian-firnanda/",
+      "icon": "linkedin",
+      "featured": true
+    },
+    {
+      "label": "Instagram",
+      "handle": "@rianfirnanda_id",
+      "href": "https://www.instagram.com/rianfirnanda_id/",
+      "icon": "instagram",
+      "featured": true
+    },
+    {
+      "label": "GitHub",
+      "handle": "Rianfirnanda",
+      "href": "https://github.com/Rianfirnanda",
+      "icon": "github",
+      "featured": true
+    },
+    {
+      "label": "WhatsApp",
+      "handle": "Chat langsung",
+      "href": "https://wa.me/6289606032177",
+      "icon": "whatsapp",
+      "featured": true
+    },
+    {
+      "label": "Email",
+      "handle": "rianfirnanda1@gmail.com",
+      "href": "mailto:rianfirnanda1@gmail.com",
+      "icon": "mail",
+      "featured": true
+    },
+    {
+      "label": "Google Scholar",
+      "handle": "Profil peneliti",
+      "href": "https://scholar.google.com/citations?user=PW0IcAsAAAAJ&hl=en",
+      "icon": "scholar",
+      "featured": false
+    }
+  ]
+}

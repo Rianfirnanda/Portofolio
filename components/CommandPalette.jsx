@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { portfolio } from '@/data/portfolio';
-import { publishedPosts } from '@/data/posts';
 import { useLanguage } from '@/components/LanguageProvider';
 import { useTheme } from '@/components/ThemeProvider';
 import { withBasePath } from '@/lib/asset';
@@ -24,9 +23,13 @@ const OPEN_EVENT = 'portfolio:open-command-palette';
  *   Enter               buka pilihan
  *   Escape              tutup
  *
+ * Daftar tulisan dikirim app/layout.js sebagai props dalam bentuk ringkas
+ * (hanya slug, judul, dan topik), supaya isi lengkap artikel tidak ikut
+ * dikirim ke browser di setiap halaman.
+ *
  * Matikan lewat appearance.commandPalette di data/portfolio.js.
  */
-export default function CommandPalette() {
+export default function CommandPalette({ posts = [] }) {
   const { lang, toggleLang, t } = useLanguage();
   const { toggleTheme, isDark } = useTheme();
   const router = useRouter();
@@ -81,7 +84,7 @@ export default function CommandPalette() {
       });
     });
 
-    publishedPosts.forEach((post) => {
+    posts.forEach((post) => {
       list.push({
         id: `post-${post.slug}`,
         group: t(ui.searchGroupPosts),
@@ -160,7 +163,7 @@ export default function CommandPalette() {
     }
 
     return list;
-  }, [lang, isDark, nav, projects, social, profile, contact, ui, t, router, toggleTheme, toggleLang]);
+  }, [lang, isDark, nav, projects, social, profile, contact, posts, ui, t, router, toggleTheme, toggleLang]);
 
   // Pencocokan sederhana: semua kata yang diketik harus muncul di label atau petunjuk.
   const results = useMemo(() => {

@@ -3,7 +3,6 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { portfolio } from '@/data/portfolio';
-import { publishedPosts, getAllTags } from '@/data/posts';
 import { useLanguage } from '@/components/LanguageProvider';
 import GlassCard from '@/components/GlassCard';
 import PostCard from '@/components/PostCard';
@@ -13,19 +12,21 @@ import Icon from '@/components/Icon';
 /**
  * BlogIndex: isi halaman /blog. Menampilkan seluruh tulisan lengkap dengan
  * filter topik yang dibangun otomatis dari field `tags` tiap tulisan.
+ *
+ * Daftar tulisan dan daftar topiknya dikirim app/blog/page.js sebagai props,
+ * karena keduanya dibaca dari folder content/posts/ saat build.
  */
-export default function BlogIndex() {
+export default function BlogIndex({ posts = [], tags = [] }) {
   const { t } = useLanguage();
   const { sections, ui } = portfolio;
   const [activeTag, setActiveTag] = useState('__all__');
 
-  const tags = useMemo(() => getAllTags(), []);
   const visiblePosts = useMemo(
     () =>
       activeTag === '__all__'
-        ? publishedPosts
-        : publishedPosts.filter((post) => (post.tags ?? []).includes(activeTag)),
-    [activeTag]
+        ? posts
+        : posts.filter((post) => (post.tags ?? []).includes(activeTag)),
+    [posts, activeTag]
   );
 
   const filterButtonClass = (value) =>
@@ -51,7 +52,7 @@ export default function BlogIndex() {
           <p className="mt-4 max-w-xl text-[1.0625rem] leading-relaxed text-subtle">{t(sections.blog.subtitle)}</p>
         </Reveal>
 
-        {publishedPosts.length === 0 ? (
+        {posts.length === 0 ? (
           <Reveal delay={80} className="mt-10">
             <GlassCard hover={false} className="p-10 text-center">
               <Icon name="pen-line" className="mx-auto h-8 w-8 text-accent opacity-60" />

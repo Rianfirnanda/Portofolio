@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Panel Konten</title>
+    <link rel="icon" href="/icon.png" />
+    <style>
+      /* Tampilan sementara sebelum panelnya selesai dimuat. */
+      body {
+        margin: 0;
+        min-height: 100svh;
+        background: #05070f;
+        color: #cbd5e1;
+        font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      }
+      #memuat {
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 1.5rem;
+      }
+      #memuat p {
+        max-width: 30rem;
+        line-height: 1.75;
+      }
+      #memuat strong {
+        color: #ffffff;
+      }
+      #memuat a {
+        color: #22d3ee;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Diganti oleh panel begitu berkasnya selesai dimuat. -->
+    <div id="memuat">
+      <p>
+        <strong>Menyiapkan panel konten...</strong><br />
+        Kalau pesan ini tidak hilang setelah beberapa detik, buka kembali halaman ini.
+        Bila tetap tidak muncul, kontennya masih bisa diubah langsung lewat berkas di
+        folder <code>content/</code> pada repositori.
+      </p>
+    </div>
+
+    <!--
+      Berkas panel disalin dari node_modules ke folder ini setiap kali situs
+      dibangun, lihat scripts/copy-cms.mjs. Disajikan dari domain sendiri supaya
+      panel tetap bisa dibuka walau layanan CDN mana pun sedang bermasalah.
+    -->
+    <script src="/admin/sveltia-cms.js"></script>
+
+    <script>
+      // Panel menambahkan elemennya sendiri ke halaman. Begitu itu terjadi,
+      // pesan tunggu di atas dilepas supaya tidak menutupi tampilan panel.
+      (function () {
+        var placeholder = document.getElementById('memuat');
+        if (!placeholder) return;
+
+        function isPanelReady() {
+          return Array.prototype.some.call(document.body.children, function (el) {
+            return el !== placeholder && el.tagName !== 'SCRIPT';
+          });
+        }
+
+        function removePlaceholder() {
+          if (placeholder && placeholder.parentNode) placeholder.remove();
+          observer.disconnect();
+        }
+
+        var observer = new MutationObserver(function () {
+          if (isPanelReady()) removePlaceholder();
+        });
+
+        observer.observe(document.body, { childList: true });
+
+        // Kalau panel sudah sempat mount sebelum skrip ini jalan.
+        if (isPanelReady()) removePlaceholder();
+
+        // Pengaman terakhir: kalau setelah 20 detik panel tetap tidak muncul,
+        // pesan tunggu dibiarkan supaya pengunjung tahu ada yang tidak beres.
+        setTimeout(function () {
+          observer.disconnect();
+        }, 20000);
+      })();
+    </script>
+  </body>
+</html>

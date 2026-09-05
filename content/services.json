@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "Desain Web",
+      "en": "Web Design"
+    },
+    {
+      "id": "Konsultasi TI",
+      "en": "IT Consulting"
+    },
+    {
+      "id": "Bantuan Administrasi",
+      "en": "Administrative Assistance"
+    },
+    {
+      "id": "Manajemen Informasi",
+      "en": "Information Management"
+    },
+    {
+      "id": "Dukungan Teknis",
+      "en": "Technical Support"
+    },
+    {
+      "id": "Jaringan Komputer",
+      "en": "Computer Networking"
+    }
+  ]
+}

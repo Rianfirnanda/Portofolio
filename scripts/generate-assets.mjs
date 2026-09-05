@@ -13,8 +13,8 @@
  *
  *    npm run assets
  *
- *  Sumbernya diambil dari profile.avatar di data/portfolio.js, jadi kalau kamu
- *  mengganti nama berkas foto di sana, skrip ini ikut menyesuaikan sendiri.
+ *  Sumbernya diambil dari profile.avatar di content/profile.json, jadi kalau
+ *  kamu mengganti fotonya lewat panel /admin, skrip ini ikut menyesuaikan.
  *
  *  Teks pada kartu preview juga dibaca dari data yang sama. Fontnya memakai
  *  huruf bawaan sistem karena skrip ini berjalan di luar browser.
@@ -22,17 +22,25 @@
  */
 
 import sharp from 'sharp';
-import { existsSync } from 'node:fs';
-import { portfolio } from '../data/portfolio.js';
+import { existsSync, readFileSync } from 'node:fs';
 
-const { profile, meta, contact } = portfolio;
+/**
+ * Konten dibaca langsung dari berkas JSON di folder content/, bukan lewat
+ * data/portfolio.js. Berkas itu memakai alias @/ yang hanya dikenali Next.js,
+ * sedangkan skrip ini berjalan di Node biasa.
+ */
+const readJson = (file) => JSON.parse(readFileSync(new URL(`../content/${file}`, import.meta.url), 'utf8'));
+
+const profile = readJson('profile.json');
+const contact = readJson('contact.json');
+const { meta } = readJson('settings.json');
 
 // Path foto dari data, dihitung ulang menjadi lokasi berkas sungguhan.
 const PHOTO = `public${profile.avatar}`;
 
 if (!existsSync(PHOTO)) {
   console.error(`Foto tidak ditemukan di ${PHOTO}`);
-  console.error('Periksa profile.avatar di data/portfolio.js, lalu pastikan berkasnya ada di folder public/.');
+  console.error('Periksa profile.avatar di content/profile.json, lalu pastikan berkasnya ada di folder public/.');
   process.exit(1);
 }
 

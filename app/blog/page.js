@@ -1,4 +1,5 @@
 import { portfolio } from '@/data/portfolio';
+import { getAllTags, getPublishedPosts } from '@/data/posts';
 import { t } from '@/lib/i18n';
 import BlogIndex from '@/components/BlogIndex';
 
@@ -19,5 +20,6 @@ export const metadata = {
 
 /** Halaman daftar tulisan. Isinya dirender komponen client BlogIndex. */
 export default function BlogPage() {
-  return <BlogIndex />;
+  const posts = getPublishedPosts();
+  return <BlogIndex posts={posts} tags={getAllTags(posts)} />;
 }

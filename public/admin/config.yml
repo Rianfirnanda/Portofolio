@@ -1,0 +1,1054 @@
+# =============================================================================
+#  KONFIGURASI PANEL KONTEN
+# =============================================================================
+#
+#  Berkas ini menentukan form apa saja yang muncul di halaman /admin.
+#  Boleh diedit tangan. Setiap "collection" menjadi satu menu di sisi kiri
+#  panel, dan setiap "field" menjadi satu isian di dalam form.
+#
+#  Alur kerjanya: kamu menyimpan perubahan di panel, panel menulis commit ke
+#  repositori GitHub, lalu Vercel membangun ulang situsnya sendiri.
+#
+#  Petunjuk lengkap ada di data/README.md bagian 17.
+# =============================================================================
+
+backend:
+  name: github
+  repo: Rianfirnanda/Portofolio
+  branch: main
+  # Endpoint login ada di proyek Vercel yang sama, lihat app/api/auth/route.js
+  base_url: https://rianfirnanda.vercel.app
+  auth_endpoint: api/auth/
+  commit_messages:
+    create: "konten: tambah {{collection}} lewat panel"
+    update: "konten: perbarui {{collection}} lewat panel"
+    delete: "konten: hapus {{collection}} lewat panel"
+    uploadMedia: "konten: unggah {{path}} lewat panel"
+    deleteMedia: "konten: hapus {{path}} lewat panel"
+
+# Bekerja langsung di branch main, jadi setiap simpan langsung tayang.
+publish_mode: simple
+
+# Tempat gambar yang diunggah lewat panel disimpan.
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  # ------------------------------------------------------------------------
+  # TULISAN BLOG
+  # Satu berkas per tulisan di content/posts/. Tambah dan hapus sesuka hati.
+  # ------------------------------------------------------------------------
+  - name: "posts"
+    label: "Tulisan Blog"
+    label_singular: "Tulisan"
+    folder: "content/posts"
+    create: true
+    format: "json"
+    extension: "json"
+    identifier_field: "slug"
+    slug: "{{slug}}"
+    summary: "{{title.id}}"
+    sortable_fields: ["date", "slug"]
+    fields:
+      - { label: "Alamat tulisan", name: "slug", widget: "string", required: true, hint: "Huruf kecil dan tanda hubung saja. Contoh: catatan-akreditasi-2027 akan menghasilkan alamat /blog/catatan-akreditasi-2027/" }
+      - label: "Judul"
+        name: "title"
+        widget: object
+        collapsed: false
+        required: true
+        fields:
+          - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+          - { label: "English", name: "en", widget: "string", required: false }
+      - label: "Ringkasan"
+        name: "excerpt"
+        widget: object
+        collapsed: false
+        required: true
+        hint: "Satu sampai dua kalimat. Tampil di kartu daftar dan di hasil pencarian Google."
+        fields:
+          - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+          - { label: "English", name: "en", widget: "text", required: false }
+      - { label: "Tanggal terbit", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true }
+      - { label: "Perkiraan menit baca", name: "readingTime", widget: "number", required: false, value_type: "int", min: 1, hint: "Kosongkan saja, nanti dihitung otomatis dari jumlah kata." }
+      - { label: "Topik", name: "tags", widget: "list", required: false, label_singular: "Topik", hint: "Otomatis menjadi tombol penyaring di halaman blog." }
+      - { label: "Gambar sampul", name: "cover", widget: "image", required: false, hint: "Rasio 16:9 paling pas. Kosongkan untuk memakai latar gradien otomatis." }
+      - { label: "Keterangan gambar sampul", name: "coverAlt", widget: "string", required: false }
+      - { label: "Jadikan sorotan", name: "featured", widget: "boolean", default: false, required: false, hint: "Memberi kartu tulisan ini border gradien beranimasi." }
+      - { label: "Simpan sebagai draf", name: "draft", widget: "boolean", default: false, required: false, hint: "Draf tidak muncul di situs dan tidak masuk sitemap, tapi tetap tersimpan." }
+      - label: "Isi tulisan"
+        name: "content"
+        widget: list
+        label_singular: "Blok"
+        hint: "Susun tulisan dari blok. Klik tambah lalu pilih jenis bloknya."
+        types:
+          - name: "p"
+            label: "Paragraf"
+            widget: object
+            fields:
+              - label: "Isi paragraf"
+                name: "text"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - name: "h2"
+            label: "Subjudul besar"
+            widget: object
+            fields:
+              - label: "Teks subjudul"
+                name: "text"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+          - name: "h3"
+            label: "Subjudul kecil"
+            widget: object
+            fields:
+              - label: "Teks subjudul"
+                name: "text"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+          - name: "ul"
+            label: "Daftar bertitik"
+            widget: object
+            fields:
+              - label: "Butir"
+                name: "items"
+                widget: list
+                label_singular: "Butir"
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text" }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - name: "ol"
+            label: "Daftar bernomor"
+            widget: object
+            fields:
+              - label: "Butir"
+                name: "items"
+                widget: list
+                label_singular: "Butir"
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text" }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - name: "quote"
+            label: "Kutipan"
+            widget: object
+            fields:
+              - label: "Isi kutipan"
+                name: "text"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+              - label: "Sumber kutipan"
+                name: "cite"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+          - name: "callout"
+            label: "Kotak sorotan"
+            widget: object
+            fields:
+              - label: "Ikon kotak"
+                name: "icon"
+                widget: select
+                required: false
+                hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
+                options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
+              - label: "Isi sorotan"
+                name: "text"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - name: "image"
+            label: "Gambar"
+            widget: object
+            fields:
+              - { label: "Berkas gambar", name: "src", widget: "image" }
+              - { label: "Keterangan untuk pembaca layar", name: "alt", widget: "string" }
+              - label: "Keterangan di bawah gambar"
+                name: "caption"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+
+  # ------------------------------------------------------------------------
+  # ISI HALAMAN UTAMA
+  # Setiap berkas di sini berisi satu daftar yang bisa ditambah dan diurutkan.
+  # ------------------------------------------------------------------------
+  - name: "isi"
+    label: "Isi Halaman"
+    files:
+      - name: "experience"
+        label: "Pengalaman"
+        file: "content/experience.json"
+        fields:
+          - label: "Daftar pengalaman"
+            name: "items"
+            widget: list
+            label_singular: "Pengalaman"
+            summary: "{{fields.role.id}}"
+            hint: "Urutan di sini sama dengan urutan tampil. Taruh yang terbaru di atas."
+            fields:
+              - label: "Nama posisi"
+                name: "role"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Nama instansi"
+                name: "org"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Jenis"
+                name: "type"
+                widget: object
+                collapsed: false
+                required: false
+                hint: "Paruh Waktu, Magang, Sukarelawan, dan sejenisnya."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Rentang waktu"
+                name: "period"
+                widget: object
+                collapsed: false
+                required: true
+                hint: "Contoh: Jan 2026 - sekarang"
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Lokasi"
+                name: "location"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Uraian"
+                name: "description"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+              - { label: "Keahlian terkait", name: "skills", widget: "list", required: false, label_singular: "Keahlian" }
+              - { label: "Foto dokumentasi", name: "image", widget: "image", required: false, hint: "Rasio 16:9 atau 4:3. Kosongkan kalau belum ada." }
+              - label: "Keterangan foto"
+                name: "imageAlt"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - { label: "Logo instansi", name: "logo", widget: "image", required: false, hint: "Bentuk persegi, tampil kecil di samping judul." }
+              - { label: "Jadikan sorotan", name: "highlight", widget: "boolean", default: false, required: false, hint: "Memberi kartu border gradien beranimasi." }
+      - name: "projects"
+        label: "Proyek"
+        file: "content/projects.json"
+        fields:
+          - label: "Daftar proyek"
+            name: "items"
+            widget: list
+            label_singular: "Proyek"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Nama proyek", name: "name", widget: "string" }
+              - { label: "Rentang waktu", name: "period", widget: "string" }
+              - label: "Organisasi atau klien"
+                name: "org"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Uraian"
+                name: "description"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+              - { label: "Tag", name: "tags", widget: "list", required: false, label_singular: "Tag", hint: "Otomatis menjadi tombol penyaring di atas grid proyek." }
+              - { label: "Gambar sampul", name: "image", widget: "image", required: false, hint: "Rasio 16:10. Kosongkan untuk memakai latar gradien dengan inisial nama proyek." }
+              - label: "Keterangan gambar"
+                name: "imageAlt"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Tombol tautan"
+                name: "links"
+                widget: list
+                required: false
+                label_singular: "Tautan"
+                fields:
+                  - label: "Teks tombol"
+                    name: "label"
+                    widget: object
+                    collapsed: false
+                    required: true
+                    fields:
+                      - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                      - { label: "English", name: "en", widget: "string", required: false }
+                  - { label: "Alamat", name: "href", widget: "string" }
+                  - label: "Ikon tombol"
+                    name: "icon"
+                    widget: select
+                    required: false
+                    hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
+                    options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
+              - { label: "Jadikan sorotan", name: "featured", widget: "boolean", default: false, required: false }
+      - name: "certifications"
+        label: "Sertifikasi"
+        file: "content/certifications.json"
+        fields:
+          - label: "Daftar sertifikasi"
+            name: "items"
+            widget: list
+            label_singular: "Sertifikasi"
+            summary: "{{fields.issuer}}"
+            fields:
+              - label: "Nama sertifikasi"
+                name: "name"
+                widget: object
+                collapsed: false
+                required: true
+                hint: "Kalau namanya sama di kedua bahasa, cukup isi kolom Indonesia saja."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - { label: "Penerbit", name: "issuer", widget: "string" }
+              - { label: "Tahun", name: "year", widget: "string", required: false }
+              - { label: "Kelompok", name: "group", widget: "string", required: false, hint: "Pengelompokan bebas, misalnya AI & Cloud atau Keamanan." }
+              - { label: "Tautan kredensial", name: "credentialUrl", widget: "string", required: false, hint: "Kosongkan untuk menyembunyikan tombol Lihat kredensial." }
+      - name: "education"
+        label: "Pendidikan"
+        file: "content/education.json"
+        fields:
+          - label: "Riwayat pendidikan"
+            name: "items"
+            widget: list
+            label_singular: "Jenjang"
+            summary: "{{fields.school}}"
+            fields:
+              - label: "Jenjang dan jurusan"
+                name: "degree"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - { label: "Nama sekolah atau kampus", name: "school", widget: "string" }
+              - { label: "Rentang waktu", name: "period", widget: "string" }
+              - label: "Nilai akhir"
+                name: "gpa"
+                widget: object
+                collapsed: false
+                required: false
+                hint: "Kosongkan kalau tidak ingin ditampilkan."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Catatan"
+                name: "notes"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
+                  - { label: "English", name: "en", widget: "text", required: false }
+              - { label: "Logo", name: "logo", widget: "image", required: false }
+      - name: "publications"
+        label: "Publikasi"
+        file: "content/publications.json"
+        fields:
+          - label: "Daftar publikasi"
+            name: "items"
+            widget: list
+            label_singular: "Publikasi"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Judul", name: "title", widget: "text" }
+              - label: "Nama jurnal atau forum"
+                name: "venue"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Tanggal terbit"
+                name: "date"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Peran"
+                name: "role"
+                widget: object
+                collapsed: false
+                required: true
+                hint: "Misalnya Penulis Utama."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - { label: "Tautan publikasi", name: "url", widget: "string", required: false }
+              - label: "Abstrak"
+                name: "abstract"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+      - name: "skills"
+        label: "Keahlian"
+        file: "content/skills.json"
+        fields:
+          - label: "Kelompok keahlian"
+            name: "groups"
+            widget: list
+            label_singular: "Kelompok"
+            summary: "{{fields.title.id}}"
+            fields:
+              - label: "Nama kelompok"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Ikon kelompok"
+                name: "icon"
+                widget: select
+                required: true
+                hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
+                options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
+              - { label: "Isi keahlian", name: "items", widget: "list", label_singular: "Keahlian" }
+      - name: "volunteering"
+        label: "Kesukarelawanan"
+        file: "content/volunteering.json"
+        fields:
+          - label: "Daftar kegiatan"
+            name: "items"
+            widget: list
+            label_singular: "Kegiatan"
+            summary: "{{fields.role}}"
+            fields:
+              - label: "Nama kegiatan"
+                name: "role"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Penyelenggara"
+                name: "org"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - { label: "Rentang waktu", name: "period", widget: "string" }
+              - label: "Uraian"
+                name: "description"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
+                  - { label: "English", name: "en", widget: "text", required: false }
+              - { label: "Foto dokumentasi", name: "image", widget: "image", required: false }
+              - label: "Keterangan foto"
+                name: "imageAlt"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+      - name: "stats"
+        label: "Angka Sorotan"
+        file: "content/stats.json"
+        fields:
+          - label: "Daftar angka"
+            name: "items"
+            widget: list
+            label_singular: "Angka"
+            summary: "{{fields.value}} {{fields.label.id}}"
+            hint: "Tampil sebagai kartu kecil di section Tentang Saya."
+            fields:
+              - { label: "Angka", name: "value", widget: "string", hint: "Boleh dengan imbuhan, misalnya 16+ atau 3.84" }
+              - label: "Keterangan"
+                name: "label"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Ikon"
+                name: "icon"
+                widget: select
+                required: false
+                hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
+                options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
+      - name: "languages"
+        label: "Bahasa"
+        file: "content/languages.json"
+        fields:
+          - label: "Daftar bahasa"
+            name: "items"
+            widget: list
+            label_singular: "Bahasa"
+            summary: "{{fields.name.id}}"
+            fields:
+              - label: "Nama bahasa"
+                name: "name"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Tingkat kemampuan"
+                name: "level"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+      - name: "services"
+        label: "Layanan"
+        file: "content/services.json"
+        fields:
+          - label: "Daftar layanan"
+            name: "items"
+            widget: list
+            label_singular: "Layanan"
+            summary: "{{fields.id}}"
+            hint: "Tampil sebagai chip di bagian bawah kartu Kontak."
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string" }
+              - { label: "English", name: "en", widget: "string", required: false }
+
+  # ------------------------------------------------------------------------
+  # PENGATURAN
+  # Bagian yang jarang disentuh setelah situs berjalan.
+  # ------------------------------------------------------------------------
+  - name: "pengaturan"
+    label: "Pengaturan"
+    files:
+      - name: "profile"
+        label: "Profil Diri"
+        file: "content/profile.json"
+        fields:
+          - { label: "Nama lengkap", name: "name", widget: "string", required: true }
+          - { label: "Nama panggilan", name: "shortName", widget: "string", required: true, hint: "Tampil di navbar sebelah foto." }
+          - label: "Headline"
+            name: "headline"
+            widget: object
+            collapsed: false
+            required: true
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+              - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Kalimat pembuka"
+            name: "tagline"
+            widget: object
+            collapsed: false
+            required: false
+            hint: "Kalimat personal singkat di bawah headline."
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
+              - { label: "English", name: "en", widget: "text", required: false }
+          - { label: "Lokasi", name: "location", widget: "string", required: true }
+          - label: "Status Ketersediaan"
+            name: "availability"
+            widget: object
+            fields:
+              - { label: "Sedang terbuka untuk peluang", name: "available", widget: "boolean", default: true }
+              - label: "Teks status"
+                name: "label"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+          - { label: "Foto profil", name: "avatar", widget: "image", hint: "Bentuk persegi, minimal 640x640. Setelah diganti, jalankan npm run assets agar favicon dan gambar preview ikut diperbarui." }
+          - { label: "Foto cadangan", name: "avatarFallback", widget: "image", required: false, hint: "Dipakai kalau foto utama gagal dimuat." }
+          - label: "Keterangan foto untuk pembaca layar"
+            name: "avatarAlt"
+            widget: object
+            collapsed: false
+            required: true
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+              - { label: "English", name: "en", widget: "string", required: false }
+          - { label: "Tautan tombol Unduh CV", name: "resumeUrl", widget: "string", required: false, hint: "Boleh alamat web, atau berkas PDF yang diunggah. Kosongkan untuk menyembunyikan tombolnya." }
+          - { label: "Ringkasan, Bahasa Indonesia", name: "summaryId", widget: "list", label_singular: "Paragraf", field: { label: "Paragraf", name: "text", widget: "text" }, hint: "Satu baris sama dengan satu paragraf." }
+          - { label: "Ringkasan, English", name: "summaryEn", widget: "list", required: false, label_singular: "Paragraph", field: { label: "Paragraph", name: "text", widget: "text" } }
+          - label: "Galeri Kegiatan"
+            name: "gallery"
+            widget: list
+            required: false
+            label_singular: "Gambar"
+            hint: "Strip gambar di bawah ringkasan. Kosongkan untuk menyembunyikannya."
+            fields:
+              - { label: "Berkas gambar", name: "src", widget: "image" }
+              - label: "Keterangan untuk pembaca layar"
+                name: "alt"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Keterangan di atas gambar"
+                name: "caption"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+      - name: "contact"
+        label: "Kontak"
+        file: "content/contact.json"
+        fields:
+          - { label: "Alamat email", name: "email", widget: "string", hint: "Dipakai untuk tombol kirim email dan tombol salin." }
+          - { label: "Nomor telepon", name: "phone", widget: "string", required: false, hint: "Kosongkan kalau tidak ingin ditampilkan." }
+          - label: "Teks tombol utama"
+            name: "ctaText"
+            widget: object
+            collapsed: false
+            required: true
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+              - { label: "English", name: "en", widget: "string", required: false }
+          - label: "Catatan di kartu kontak"
+            name: "note"
+            widget: object
+            collapsed: false
+            required: true
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+              - { label: "English", name: "en", widget: "text", required: false }
+      - name: "social"
+        label: "Media Sosial"
+        file: "content/social.json"
+        fields:
+          - label: "Tautan"
+            name: "items"
+            widget: list
+            label_singular: "Tautan"
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "Nama platform", name: "label", widget: "string" }
+              - { label: "Nama akun", name: "handle", widget: "string", required: false, hint: "Tampil kecil di bawah nama platform pada bagian Kontak." }
+              - { label: "Alamat lengkap", name: "href", widget: "string", hint: "WhatsApp memakai format https://wa.me/62..., email memakai mailto:..." }
+              - label: "Ikon"
+                name: "icon"
+                widget: select
+                required: true
+                hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
+                options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
+              - { label: "Tampilkan juga di Hero", name: "featured", widget: "boolean", default: false, required: false, hint: "Sebaiknya empat sampai lima akun saja agar Hero tidak penuh." }
+      - name: "settings"
+        label: "Pengaturan Situs"
+        file: "content/settings.json"
+        fields:
+          - label: "Identitas Situs"
+            name: "meta"
+            widget: object
+            fields:
+              - { label: "Judul situs", name: "siteTitle", widget: "string", required: true, hint: "Tampil di tab browser dan hasil pencarian Google." }
+              - label: "Deskripsi singkat"
+                name: "description"
+                widget: object
+                collapsed: false
+                required: true
+                hint: "Maksimal sekitar 160 karakter."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+              - { label: "Kata kunci", name: "keywords", widget: "list", required: false, label_singular: "Kata kunci" }
+              - { label: "Gambar preview tautan", name: "ogImage", widget: "image", hint: "Ukuran 1200x630. Dibuat ulang otomatis oleh perintah npm run assets." }
+              - { label: "Alamat situs", name: "baseUrl", widget: "string", hint: "Tanpa garis miring di akhir. Contoh: https://rianfirnanda.vercel.app" }
+              - { label: "Bahasa awal", name: "locale", widget: "select", options: ["id", "en"], hint: "Bahasa yang aktif saat halaman pertama dibuka." }
+              - { label: "Tema awal", name: "defaultTheme", widget: "select", options: ["system", "light", "dark"], hint: "system berarti mengikuti pengaturan perangkat pengunjung." }
+              - { label: "Warna bilah alamat, mode terang", name: "themeColorLight", widget: "color", required: false }
+              - { label: "Warna bilah alamat, mode gelap", name: "themeColorDark", widget: "color", required: false }
+          - label: "Sentuhan Interaktif"
+            name: "appearance"
+            widget: object
+            collapsed: true
+            hint: "Semua boleh dimatikan. Tidak ada yang rusak, halamannya hanya jadi lebih tenang."
+            fields:
+              - { label: "Sorotan mengikuti kursor di kartu", name: "spotlight", widget: "boolean", default: true, required: false }
+              - { label: "Garis progres gulir di tepi atas", name: "scrollProgress", widget: "boolean", default: true, required: false }
+              - { label: "Angka statistik menghitung naik", name: "countUpStats", widget: "boolean", default: true, required: false }
+              - { label: "Tombol kembali ke atas", name: "backToTop", widget: "boolean", default: true, required: false }
+              - { label: "Foto profil sebagai logo navbar", name: "photoAsLogo", widget: "boolean", default: true, required: false }
+              - { label: "Tombol berbagi di tulisan blog", name: "shareButtons", widget: "boolean", default: true, required: false }
+              - { label: "Strip keahlian berjalan di Hero", name: "heroMarquee", widget: "boolean", default: true, required: false }
+              - { label: "Tautan simpan sebagai PDF", name: "printLink", widget: "boolean", default: true, required: false }
+              - { label: "Gambar bisa diperbesar", name: "lightbox", widget: "boolean", default: true, required: false }
+              - { label: "Pencarian cepat Ctrl+K", name: "commandPalette", widget: "boolean", default: true, required: false }
+      - name: "navigation"
+        label: "Menu Navigasi"
+        file: "content/navigation.json"
+        fields:
+          - label: "Item menu"
+            name: "items"
+            widget: list
+            label_singular: "Item"
+            summary: "{{fields.label.id}}"
+            fields:
+              - { label: "Penanda bagian", name: "id", widget: "string", hint: "Untuk tipe bagian, isi sama dengan id section: about, experience, projects, publications, skills, certifications, education, volunteering, blog, contact." }
+              - { label: "Tipe", name: "type", widget: "select", options: ["section", "page"], hint: "section melompat ke bagian di halaman utama, page pindah ke halaman lain." }
+              - { label: "Alamat halaman", name: "href", widget: "string", required: false, hint: "Diisi hanya kalau tipenya page. Contoh: /blog/" }
+              - label: "Teks menu"
+                name: "label"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+      - name: "sections"
+        label: "Judul Tiap Bagian"
+        file: "content/sections.json"
+        fields:
+          - label: "Tentang Saya"
+            name: "about"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Pengalaman"
+            name: "experience"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Proyek"
+            name: "projects"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Publikasi"
+            name: "publications"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Keahlian"
+            name: "skills"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Sertifikasi"
+            name: "certifications"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Pendidikan"
+            name: "education"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Kesukarelawanan"
+            name: "volunteering"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Blog"
+            name: "blog"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }
+          - label: "Kontak"
+            name: "contact"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English", name: "en", widget: "text", required: false }

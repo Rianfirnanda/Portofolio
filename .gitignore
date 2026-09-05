@@ -28,3 +28,10 @@ Thumbs.db
 # Misc
 *.pem
 .turbo
+
+# Panel konten disalin dari node_modules setiap build, lihat scripts/copy-cms.mjs
+/public/admin/sveltia-cms.js
+
+# Gambar yang diunggah lewat panel konten TIDAK diabaikan.
+# Berkas di public/images/uploads/ sengaja ikut masuk ke Git supaya jadi
+# bagian dari repositori, sama seperti gambar lainnya.

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { portfolio } from '@/data/portfolio';
-import { publishedPosts, getPostBySlug } from '@/data/posts';
+import { getPublishedPosts, getPostBySlug } from '@/data/posts';
 import { t } from '@/lib/i18n';
 import PostArticle from '@/components/PostArticle';
 
@@ -11,7 +11,7 @@ const { meta, profile } = portfolio;
  * Menambah tulisan di data/posts.js otomatis menambah halamannya di sini.
  */
 export function generateStaticParams() {
-  return publishedPosts.map((post) => ({ slug: post.slug }));
+  return getPublishedPosts().map((post) => ({ slug: post.slug }));
 }
 
 /** Metadata SEO per tulisan, termasuk kartu OpenGraph bertipe article. */
@@ -45,8 +45,12 @@ export async function generateMetadata({ params }) {
 /** Halaman detail satu tulisan. */
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const all = getPublishedPosts();
+  const post = all.find((item) => item.slug === slug);
   if (!post) notFound();
+
+  // Dua tulisan lain sebagai bacaan lanjutan di bawah artikel.
+  const others = all.filter((item) => item.slug !== slug).slice(0, 2);
 
   // Data terstruktur agar tulisan bisa muncul sebagai artikel di mesin pencari.
   const articleJsonLd = {
@@ -67,7 +71,7 @@ export default async function BlogPostPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <PostArticle slug={slug} />
+      <PostArticle post={post} others={others} />
     </>
   );
 }
