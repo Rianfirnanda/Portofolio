@@ -573,7 +573,7 @@ export const portfolio = {
    * ========================================================================== */
   contact: {
     // GANTI dengan email aktif. Dipakai untuk tombol mailto dan salin cepat.
-    email: 'rianfirnanda@example.com',
+    email: 'rianfirnanda1@gmail.com',
     // Kosongkan ('') kalau nomor telepon tidak ingin ditampilkan.
     phone: '',
     ctaText: { id: 'Kirim Email', en: 'Send an Email' },
