@@ -52,7 +52,7 @@ export const portfolio = {
     ogImage: '/images/og-image.png',
     // GANTI dengan domain Vercel milikmu, tanpa garis miring di akhir.
     // Nilai ini dipakai untuk canonical URL, sitemap, dan robots.txt.
-    baseUrl: 'https://portofolio-rian-firnanda.vercel.app',
+    baseUrl: 'https://rianfirnanda.vercel.app',
     // Bahasa yang aktif saat halaman pertama dibuka: 'id' atau 'en'.
     locale: 'id',
     // Tema saat pengunjung baru pertama kali datang: 'dark', 'light',
