@@ -553,7 +553,7 @@ export const portfolio = {
    * ========================================================================== */
   languages: [
     { name: { id: 'Bahasa Indonesia', en: 'Indonesian' }, level: { id: 'Penutur asli', en: 'Native speaker' } },
-    { name: { id: 'Bahasa Inggris', en: 'English' }, level: { id: 'Kemampuan kerja terbatas', en: 'Limited working proficiency' } },
+    { name: { id: 'Bahasa Inggris', en: 'English' }, level: { id: 'Terbatas namun Fungsional', en: 'Limited working proficiency' } },
   ],
 
   /* ==========================================================================
