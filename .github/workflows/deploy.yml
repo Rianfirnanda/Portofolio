@@ -46,9 +46,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # enablement: true membuat GitHub Pages diaktifkan otomatis dengan
+      # sumber "GitHub Actions" pada run pertama, tanpa perlu buka Settings.
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       # Menentukan basePath secara otomatis:
       #  - repo biasa            -> "/<nama-repo>"  (project page)

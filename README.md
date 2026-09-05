@@ -113,13 +113,22 @@ flowchart LR
 
 ## 4. Mengaktifkan GitHub Pages (sekali saja)
 
+Workflow sudah memakai `actions/configure-pages` dengan opsi `enablement: true`,
+sehingga **Pages diaktifkan otomatis** pada run pertama. Biasanya kamu tidak
+perlu melakukan apa pun.
+
+Kalau run pertama gagal di step *Configure GitHub Pages* (misalnya karena
+pengaturan organisasi), aktifkan manual:
+
 1. Buka repository di GitHub.
 2. Masuk ke tab **Settings**.
 3. Pilih menu **Pages** di sidebar kiri.
 4. Pada bagian **Build and deployment → Source**, pilih **GitHub Actions**.
    *(Bukan "Deploy from a branch".)*
-5. Selesai. Push berikutnya ke branch `main` akan otomatis mem-build dan
-   menerbitkan situs. Progresnya bisa dipantau di tab **Actions**.
+5. Kembali ke tab **Actions**, buka run yang gagal, lalu klik **Re-run all jobs**.
+
+Setelah aktif, setiap push ke branch `main` otomatis mem-build dan menerbitkan
+situs. Progresnya bisa dipantau di tab **Actions**.
 
 Ingin men-deploy tanpa menunggu push? Buka tab **Actions** →
 **Deploy to GitHub Pages** → tombol **Run workflow**.
