@@ -151,15 +151,15 @@ export const portfolio = {
       // GANTI dengan nomor WhatsApp kamu, format 62 tanpa tanda plus dan spasi.
       label: 'WhatsApp',
       handle: 'Chat langsung',
-      href: 'https://wa.me/6281234567890',
+      href: 'https://wa.me/6289606032177',
       icon: 'whatsapp',
       featured: true,
     },
     {
       // GANTI dengan email aktif, harus sama dengan contact.email.
       label: 'Email',
-      handle: 'rianfirnanda@example.com',
-      href: 'mailto:rianfirnanda@example.com',
+      handle: 'rianfirnanda1@gmail.com',
+      href: 'mailto:rianfirnanda1@gmail.com',
       icon: 'mail',
       featured: true,
     },
