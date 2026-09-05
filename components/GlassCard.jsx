@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * GlassCard — satu-satunya primitif permukaan kaca yang dipakai semua kartu.
+ * GlassCard: satu-satunya primitif permukaan kaca yang dipakai semua kartu.
  *
  * Props:
  *  - as         : elemen HTML pembungkus (default 'div'), mis. 'article' / 'li'

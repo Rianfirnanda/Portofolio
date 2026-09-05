@@ -8,7 +8,7 @@ import GlassCard from '@/components/GlassCard';
 import Reveal from '@/components/Reveal';
 import Icon from '@/components/Icon';
 
-/** Satu kartu publikasi dengan abstrak yang bisa dibuka-tutup. */
+/** Satu kartu publikasi dengan abstrak yang bisa dibuka dan ditutup. */
 function PublicationCard({ item }) {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);
@@ -17,15 +17,15 @@ function PublicationCard({ item }) {
   return (
     <GlassCard as="article" featured className="p-6 sm:p-8">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-accent-1/25 to-accent-2/25 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/15">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-accent-1 to-accent-2 px-3 py-1 text-xs font-semibold text-white">
           <Icon name="book" className="h-3.5 w-3.5" />
           {t(item.role)}
         </span>
         <span className="chip">{t(item.date)}</span>
       </div>
 
-      <h3 className="mt-4 text-lg font-semibold leading-snug text-white sm:text-xl">{item.title}</h3>
-      <p className="mt-2 text-sm text-accent-3">{t(item.venue)}</p>
+      <h3 className="mt-4 text-lg font-semibold leading-snug text-fg sm:text-xl">{item.title}</h3>
+      <p className="mt-2 text-sm text-accent">{t(item.venue)}</p>
 
       {abstract ? (
         <>
@@ -33,7 +33,7 @@ function PublicationCard({ item }) {
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
-            className="mt-4 inline-flex items-center gap-1.5 rounded-md text-sm font-semibold text-slate-200 transition-colors hover:text-white"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-md text-sm font-semibold text-muted transition-colors hover:text-fg"
           >
             {open ? t(portfolio.ui.hideAbstract) : t(portfolio.ui.readAbstract)}
             <Icon
@@ -43,20 +43,18 @@ function PublicationCard({ item }) {
           </button>
 
           {open ? (
-            <p className="mt-3 border-l-2 border-accent-2/50 pl-4 text-sm leading-7 text-slate-300">
-              {abstract}
-            </p>
+            <p className="mt-3 border-l-2 border-accent/60 pl-4 text-sm leading-7 text-muted">{abstract}</p>
           ) : null}
         </>
       ) : null}
 
       {item.url ? (
-        <div className="mt-5 border-t border-white/10 pt-4">
+        <div className="mt-5 border-t border-line pt-4">
           <a
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-white/10"
+            className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-4 py-2 text-xs font-semibold text-fg transition-colors hover:border-line-strong"
           >
             <Icon name="external-link" className="h-3.5 w-3.5" />
             {t(portfolio.ui.viewPublication)}
@@ -67,7 +65,7 @@ function PublicationCard({ item }) {
   );
 }
 
-/** Publications — daftar karya ilmiah; hilang otomatis jika array kosong. */
+/** Publications: daftar karya ilmiah, hilang otomatis kalau array kosong. */
 export default function Publications() {
   const { t } = useLanguage();
   const { publications, sections } = portfolio;

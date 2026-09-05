@@ -8,16 +8,15 @@ import ProjectCard from '@/components/ProjectCard';
 import Reveal from '@/components/Reveal';
 
 /**
- * Projects — grid responsif dengan filter tag.
- * Daftar tag dibangun otomatis dari field `tags` setiap proyek, jadi menambah
- * proyek baru dengan tag baru langsung menambah tombol filternya.
+ * Projects: grid responsif dengan filter tag.
+ * Daftar tombol filter dibangun otomatis dari field `tags` setiap proyek,
+ * jadi menambah proyek dengan tag baru langsung menambah tombolnya.
  */
 export default function Projects() {
   const { t } = useLanguage();
   const { projects, sections, ui } = portfolio;
   const [activeTag, setActiveTag] = useState('__all__');
 
-  // Kumpulkan seluruh tag unik dari data (urutan mengikuti kemunculan pertama).
   const tags = useMemo(() => {
     const unique = [];
     projects.forEach((project) => {
@@ -43,7 +42,7 @@ export default function Projects() {
       'rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all duration-200',
       activeTag === value
         ? 'border-transparent bg-linear-to-r from-accent-1 to-accent-2 text-white'
-        : 'border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white',
+        : 'border-line bg-surface text-muted hover:border-line-strong hover:text-fg',
     ].join(' ');
 
   return (
@@ -57,16 +56,23 @@ export default function Projects() {
 
         {tags.length > 1 ? (
           <Reveal delay={60}>
-            <div
-              role="group"
-              aria-label={t(ui.filterLabel)}
-              className="mt-8 flex flex-wrap gap-2"
-            >
-              <button type="button" onClick={() => setActiveTag('__all__')} className={filterButtonClass('__all__')} aria-pressed={activeTag === '__all__'}>
+            <div role="group" aria-label={t(ui.filterLabel)} className="mt-8 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setActiveTag('__all__')}
+                className={filterButtonClass('__all__')}
+                aria-pressed={activeTag === '__all__'}
+              >
                 {t(ui.allTag)}
               </button>
               {tags.map((tag) => (
-                <button key={tag} type="button" onClick={() => setActiveTag(tag)} className={filterButtonClass(tag)} aria-pressed={activeTag === tag}>
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => setActiveTag(tag)}
+                  className={filterButtonClass(tag)}
+                  aria-pressed={activeTag === tag}
+                >
                   {tag}
                 </button>
               ))}

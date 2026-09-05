@@ -5,7 +5,7 @@ import { portfolio } from '@/data/portfolio';
 import { t as translate } from '@/lib/i18n';
 
 /**
- * Satu state bahasa untuk seluruh situs (ID/EN) — tanpa library i18n.
+ * Satu state bahasa untuk seluruh situs (ID dan EN), tanpa library i18n.
  * Nilai awal diambil dari portfolio.meta.locale di data/portfolio.js.
  */
 const LanguageContext = createContext(null);

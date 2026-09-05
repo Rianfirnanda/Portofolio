@@ -8,8 +8,8 @@ import Reveal from '@/components/Reveal';
 import Icon from '@/components/Icon';
 
 /**
- * About — ringkasan tiga paragraf + strip statistik + daftar bahasa.
- * Paragraf diambil dari profile.summaryId / profile.summaryEn sesuai bahasa aktif.
+ * About: ringkasan naratif, strip statistik, dan daftar bahasa.
+ * Paragrafnya diambil dari profile.summaryId atau summaryEn sesuai bahasa aktif.
  */
 export default function About() {
   const { lang, t } = useLanguage();
@@ -28,13 +28,12 @@ export default function About() {
         />
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-          {/* Ringkasan naratif */}
           <Reveal>
             <GlassCard className="h-full p-6 sm:p-8">
-              <Icon name="quote" className="mb-4 h-7 w-7 text-accent-2/70" />
+              <Icon name="quote" className="mb-4 h-7 w-7 text-accent opacity-70" />
               <div className="space-y-4">
                 {paragraphs.map((paragraph, index) => (
-                  <p key={index} className="text-[0.95rem] leading-7 text-slate-300">
+                  <p key={index} className="text-[0.95rem] leading-7 text-muted">
                     {paragraph}
                   </p>
                 ))}
@@ -42,17 +41,19 @@ export default function About() {
             </GlassCard>
           </Reveal>
 
-          {/* Statistik + bahasa */}
           <div className="flex flex-col gap-6">
             {stats.length > 0 ? (
               <Reveal delay={80}>
                 <div className="grid grid-cols-2 gap-3">
                   {stats.map((stat) => (
                     <GlassCard key={t(stat.label)} className="p-4 text-center sm:p-5">
-                      <p className="bg-linear-to-br from-white to-accent-3 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
+                      {stat.icon ? (
+                        <Icon name={stat.icon} className="mx-auto mb-2 h-4 w-4 text-accent" />
+                      ) : null}
+                      <p className="bg-linear-to-br from-accent-1 to-accent-2 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
                         {stat.value}
                       </p>
-                      <p className="mt-1 text-xs leading-snug text-slate-400">{t(stat.label)}</p>
+                      <p className="mt-1 text-xs leading-snug text-subtle">{t(stat.label)}</p>
                     </GlassCard>
                   ))}
                 </div>
@@ -62,14 +63,14 @@ export default function About() {
             {languages.length > 0 ? (
               <Reveal delay={140} className="grow">
                 <GlassCard className="h-full p-6">
-                  <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-white">
-                    <Icon name="languages" className="h-4 w-4 text-accent-3" />
+                  <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-fg">
+                    <Icon name="languages" className="h-4 w-4 text-accent" />
                     {t(ui.languagesTitle)}
                   </h3>
                   <ul className="space-y-3">
                     {languages.map((language) => (
                       <li key={t(language.name)} className="flex items-center justify-between gap-3">
-                        <span className="text-sm text-slate-200">{t(language.name)}</span>
+                        <span className="text-sm text-muted">{t(language.name)}</span>
                         <span className="chip shrink-0">{t(language.level)}</span>
                       </li>
                     ))}

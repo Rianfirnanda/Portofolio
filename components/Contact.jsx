@@ -9,8 +9,8 @@ import Reveal from '@/components/Reveal';
 import Icon from '@/components/Icon';
 
 /**
- * Contact — kartu kaca berisi tombol mailto, salin email ke clipboard
- * (dengan toast "Tersalin!"), daftar layanan, dan ikon sosial.
+ * Contact: kartu kaca berisi tombol email, salin alamat email dengan
+ * konfirmasi kecil, daftar layanan, dan seluruh tautan sosial.
  */
 export default function Contact() {
   const { t } = useLanguage();
@@ -18,14 +18,13 @@ export default function Contact() {
   const [copied, setCopied] = useState(false);
   const timerRef = useRef(null);
 
-  // Bersihkan timer toast kalau komponen di-unmount lebih dulu.
   useEffect(() => () => clearTimeout(timerRef.current), []);
 
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(contact.email);
     } catch {
-      // Fallback untuk browser/konteks tanpa Clipboard API.
+      // Cadangan untuk browser atau konteks tanpa Clipboard API.
       const field = document.createElement('textarea');
       field.value = contact.email;
       field.setAttribute('readonly', '');
@@ -54,12 +53,12 @@ export default function Contact() {
 
         <Reveal delay={80} className="mt-10">
           <GlassCard featured hover={false} className="p-6 text-center sm:p-10">
-            <p className="mx-auto max-w-xl text-sm leading-7 text-slate-300">{t(contact.note)}</p>
+            <p className="mx-auto max-w-xl text-sm leading-7 text-muted">{t(contact.note)}</p>
 
-            {/* Baris email + tombol salin */}
+            {/* Baris email dan tombol salin */}
             <div className="mx-auto mt-7 flex max-w-md flex-col items-stretch gap-2 sm:flex-row">
-              <span className="flex min-w-0 grow items-center gap-2 truncate rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
-                <Icon name="mail" className="h-4 w-4 shrink-0 text-accent-3" />
+              <span className="flex min-w-0 grow items-center gap-2 truncate rounded-full border border-line bg-surface px-4 py-3 text-sm text-muted">
+                <Icon name="mail" className="h-4 w-4 shrink-0 text-accent" />
                 <span className="truncate">{contact.email}</span>
               </span>
 
@@ -67,59 +66,59 @@ export default function Contact() {
                 type="button"
                 onClick={copyEmail}
                 aria-label={t(ui.copyEmail)}
-                className="relative inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full border border-line bg-surface px-4 py-3 text-sm font-semibold text-fg transition-colors hover:border-line-strong"
               >
                 <Icon name={copied ? 'check' : 'copy'} className="h-4 w-4" />
                 <span className="sm:hidden">{copied ? t(ui.copied) : t(ui.copyEmail)}</span>
               </button>
             </div>
 
-            {/* Toast konfirmasi (dibaca screen reader lewat role="status") */}
+            {/* Konfirmasi salin, juga dibacakan pembaca layar */}
             <p
               role="status"
               aria-live="polite"
-              className={`mt-3 text-xs font-semibold text-emerald-400 transition-opacity duration-300 ${
+              className={`mt-3 text-xs font-semibold text-emerald-600 transition-opacity duration-300 dark:text-emerald-400 ${
                 copied ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              {copied ? t(ui.copied) : ' '}
+              {copied ? t(ui.copied) : ' '}
             </p>
 
-            {/* Tombol aksi utama */}
             <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href={`mailto:${contact.email}`}
-                className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-accent-1 to-accent-2 px-6 py-3 text-sm font-semibold text-white shadow-[0_16px_40px_-16px_var(--color-accent-1)] transition-transform duration-300 hover:-translate-y-0.5"
-              >
+              <a href={`mailto:${contact.email}`} className="btn-primary">
                 <Icon name="send" className="h-4 w-4" />
                 {t(contact.ctaText)}
               </a>
 
               {contact.phone ? (
-                <a
-                  href={`tel:${contact.phone.replace(/\s+/g, '')}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-                >
+                <a href={`tel:${contact.phone.replace(/\s+/g, '')}`} className="btn-ghost">
                   <Icon name="phone" className="h-4 w-4" />
                   {contact.phone}
                 </a>
               ) : null}
             </div>
 
-            {/* Ikon sosial */}
+            {/* Semua tautan sosial, lengkap dengan nama akunnya */}
             {social.length > 0 ? (
-              <ul className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
+              <ul className="mx-auto mt-8 grid max-w-lg gap-2 sm:grid-cols-2">
                 {social.map((item) => (
                   <li key={item.label}>
                     <a
                       href={item.href}
                       target={item.href.startsWith('http') ? '_blank' : undefined}
                       rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      aria-label={item.label}
-                      title={item.label}
-                      className="grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:text-white"
+                      className="flex items-center gap-3 rounded-2xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-line-strong"
                     >
-                      <Icon name={item.icon} className="h-[18px] w-[18px]" />
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-linear-to-br from-accent-1 to-accent-2 text-white">
+                        <Icon name={item.icon} className="h-4 w-4" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block truncate text-sm font-semibold text-fg">{item.label}</span>
+                        {item.handle ? (
+                          <span className="block truncate text-xs text-subtle">{item.handle}</span>
+                        ) : null}
+                      </span>
+                      <Icon name="arrow-up-right" className="ml-auto h-4 w-4 shrink-0 text-subtle" />
                     </a>
                   </li>
                 ))}
@@ -128,8 +127,8 @@ export default function Contact() {
 
             {/* Layanan yang ditawarkan */}
             {services.length > 0 ? (
-              <div className="mt-8 border-t border-white/10 pt-6">
-                <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+              <div className="mt-8 border-t border-line pt-6">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-subtle">
                   {t(ui.servicesTitle)}
                 </h3>
                 <ul className="mt-3 flex flex-wrap justify-center gap-2">

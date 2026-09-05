@@ -1,12 +1,15 @@
 /**
- * Konfigurasi Next.js untuk static export ke GitHub Pages.
+ * Konfigurasi Next.js. Situs dibangun sebagai berkas statis murni.
  *
- * NEXT_PUBLIC_BASE_PATH:
- *  - Kosong ("") saat `npm run dev` di lokal  -> situs jalan di http://localhost:3000/
- *  - Diisi "/<nama-repo>" saat deploy Pages    -> situs jalan di https://<user>.github.io/<nama-repo>/
+ * DEPLOY DI VERCEL (cara yang sedang dipakai)
+ * Tidak perlu mengatur apa pun. Vercel menjalankan `npm run build`, membaca
+ * folder out/, dan menyajikan situs dari root domain. Biarkan
+ * NEXT_PUBLIC_BASE_PATH kosong.
  *
- * Nilai ini di-set otomatis oleh GitHub Actions (.github/workflows/deploy.yml).
- * Untuk custom domain / user-page (<user>.github.io), biarkan kosong.
+ * DEPLOY DI GITHUB PAGES (opsional, kalau suatu saat dibutuhkan)
+ * Project page disajikan dari sub-folder, jadi aset perlu diberi awalan nama
+ * repo. Isi NEXT_PUBLIC_BASE_PATH dengan "/nama-repo" saat build.
+ * Workflow di .github/workflows/deploy.yml sudah mengurus ini otomatis.
  */
 
 // Normalisasi: buang trailing slash, pastikan diawali "/" bila tidak kosong.

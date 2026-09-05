@@ -6,10 +6,7 @@ import SectionHeading from '@/components/SectionHeading';
 import ExperienceCard from '@/components/ExperienceCard';
 import Reveal from '@/components/Reveal';
 
-/**
- * Experience — timeline vertikal berbahan kartu kaca.
- * Section otomatis hilang kalau portfolio.experience kosong.
- */
+/** Experience: timeline vertikal. Hilang otomatis kalau array-nya kosong. */
 export default function Experience() {
   const { t } = useLanguage();
   const { experience, sections } = portfolio;
@@ -26,21 +23,20 @@ export default function Experience() {
         />
 
         <ol className="relative mt-10 space-y-5 sm:space-y-6 sm:pl-10">
-          {/* Garis vertikal timeline (disembunyikan di layar kecil). */}
+          {/* Garis vertikal timeline, disembunyikan di layar kecil. */}
           <span
             aria-hidden="true"
-            className="absolute left-[13px] top-2 hidden h-[calc(100%-1rem)] w-px bg-linear-to-b from-accent-2/60 via-white/10 to-transparent sm:block"
+            className="absolute left-[13px] top-2 hidden h-[calc(100%-1rem)] w-px bg-linear-to-b from-accent-2 via-line-strong to-transparent sm:block"
           />
 
           {experience.map((item, index) => (
             <li key={`${t(item.role)}-${t(item.period)}`} className="relative">
-              {/* Titik penanda pada garis timeline. */}
               <span
                 aria-hidden="true"
                 className={`absolute -left-10 top-6 hidden h-3 w-3 rounded-full border-2 sm:block ${
                   item.highlight
-                    ? 'border-accent-2 bg-accent-2 shadow-[0_0_16px_2px_var(--color-accent-2)]'
-                    : 'border-white/30 bg-slate-900'
+                    ? 'border-accent-2 bg-accent-2 shadow-[0_0_16px_2px_var(--accent-2)]'
+                    : 'border-line-strong bg-bg'
                 }`}
                 style={{ marginLeft: '7px' }}
               />

@@ -7,10 +7,7 @@ import GlassCard from '@/components/GlassCard';
 import Reveal from '@/components/Reveal';
 import Icon from '@/components/Icon';
 
-/**
- * Skills — kelompok keahlian dalam kartu kaca, tiap item jadi chip dengan glow.
- * Menambah grup = tambah objek baru di portfolio.skills.groups.
- */
+/** Skills: kelompok keahlian dalam kartu kaca, tiap item jadi chip. */
 export default function Skills() {
   const { t } = useLanguage();
   const { skills, sections } = portfolio;
@@ -31,8 +28,8 @@ export default function Skills() {
           {groups.map((group, index) => (
             <Reveal key={t(group.title)} delay={Math.min(index * 70, 280)} className="h-full">
               <GlassCard className="h-full p-6">
-                <h3 className="flex items-center gap-2.5 text-sm font-semibold text-white">
-                  <span className="grid h-8 w-8 place-items-center rounded-xl border border-white/10 bg-linear-to-br from-accent-1/30 to-accent-2/20 text-accent-3">
+                <h3 className="flex items-center gap-2.5 text-sm font-semibold text-fg">
+                  <span className="grid h-8 w-8 place-items-center rounded-xl bg-linear-to-br from-accent-1 to-accent-2 text-white">
                     <Icon name={group.icon} className="h-4 w-4" />
                   </span>
                   {t(group.title)}

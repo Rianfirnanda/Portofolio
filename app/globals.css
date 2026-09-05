@@ -1,120 +1,196 @@
 @import 'tailwindcss';
 
 /* ==========================================================================
- * DESIGN TOKENS
+ * 1. PALET WARNA
  * --------------------------------------------------------------------------
- * GANTI WARNA AKSEN DI SINI. Tiga variabel --color-accent-* dipakai oleh
- * gradient teks, blob latar, border kartu unggulan, dan efek glow.
- * Contoh tema alternatif (emerald/teal/lime):
- *   --color-accent-1: #10b981;
- *   --color-accent-2: #14b8a6;
- *   --color-accent-3: #a3e635;
+ * GANTI WARNA AKSEN DI SINI. Tiga variabel --accent-* dipakai oleh gradien
+ * teks, blob latar, border kartu unggulan, dan seluruh efek glow.
+ *
+ * Contoh tema alternatif:
+ *   Emerald : #10b981 / #14b8a6 / #a3e635
+ *   Rose    : #f43f5e / #d946ef / #fb923c
+ *   Ocean   : #3b82f6 / #0ea5e9 / #2dd4bf
  * ========================================================================== */
-@theme {
-  /* Font variabel yang di-load offline oleh next/font (lihat app/layout.js). */
+:root {
+  /* Warna merek, sama di mode terang maupun gelap. */
+  --accent-1: #6366f1; /* indigo */
+  --accent-2: #a855f7; /* violet */
+  --accent-3: #06b6d4; /* cyan   */
+
+  /* Kecepatan animasi blob latar. Perbesar agar geraknya lebih tenang. */
+  --blob-speed: 30s;
+
+  /* ---- MODE TERANG (default) ---- */
+  --bg: #f5f7fc;
+  --bg-deep: #eaeefb;
+  --fg: #0b1220;
+  --fg-muted: #45526b;
+  --fg-subtle: #5d6b83;
+  --accent-fg: #6d28d9;
+
+  --glass: rgb(255 255 255 / 0.72);
+  --glass-hover: rgb(255 255 255 / 0.92);
+  --glass-solid: #ffffff;
+  --line: rgb(15 23 42 / 0.1);
+  --line-strong: rgb(15 23 42 / 0.16);
+  --inner-glow: rgb(255 255 255 / 0.9);
+  --shadow-soft: rgb(15 23 42 / 0.08);
+  --shadow-lift: rgb(15 23 42 / 0.14);
+
+  --chip-bg: rgb(15 23 42 / 0.04);
+  --chip-fg: #45526b;
+
+  /* Intensitas lapisan dekoratif latar.
+   * Naikkan angkanya kalau ingin latar lebih berwarna, turunkan kalau ingin
+   * lebih tenang. Nilai 0 mematikan lapisan itu sepenuhnya. */
+  --blob-opacity: 0.17;
+  --grid-opacity: 0.045;
+  --dot-opacity: 0.05;
+  --noise-opacity: 0.03;
+
+  color-scheme: light;
+}
+
+/* ---- MODE GELAP ---- */
+[data-theme='dark'] {
+  --bg: #05070f;
+  --bg-deep: #0a0f22;
+  --fg: #ffffff;
+  --fg-muted: #cbd5e1;
+  --fg-subtle: #94a3b8;
+  --accent-fg: #22d3ee;
+
+  --glass: rgb(255 255 255 / 0.05);
+  --glass-hover: rgb(255 255 255 / 0.09);
+  --glass-solid: #0e1424;
+  --line: rgb(255 255 255 / 0.1);
+  --line-strong: rgb(255 255 255 / 0.2);
+  --inner-glow: rgb(255 255 255 / 0.08);
+  --shadow-soft: rgb(0 0 0 / 0.5);
+  --shadow-lift: rgb(0 0 0 / 0.7);
+
+  --chip-bg: rgb(255 255 255 / 0.05);
+  --chip-fg: #cbd5e1;
+
+  --blob-opacity: 0.22;
+  --grid-opacity: 0.05;
+  --dot-opacity: 0.06;
+  --noise-opacity: 0.05;
+
+  color-scheme: dark;
+}
+
+/* Utility Tailwind (bg-surface, text-fg, border-line, dst) memakai variabel di
+ * atas lewat @theme inline, sehingga ikut berubah saat tema diganti. */
+@theme inline {
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  /* Palet dasar gelap. */
-  --color-bg: #05070f;
-  --color-bg-soft: #080b16;
-
-  /* Warna aksen (indigo → violet → cyan). */
-  --color-accent-1: #6366f1;
-  --color-accent-2: #a855f7;
-  --color-accent-3: #22d3ee;
-
-  /* Durasi animasi blob latar. Perbesar untuk gerakan lebih tenang. */
-  --duration-blob: 26s;
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-subtle: var(--fg-subtle);
+  --color-accent: var(--accent-fg);
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-surface: var(--glass);
+  --color-surface-solid: var(--glass-solid);
 }
 
 /* ==========================================================================
- * BASE
+ * 2. DASAR
  * ========================================================================== */
 html {
   scroll-behavior: smooth;
-  /* Offset agar judul section tidak tertutup navbar melayang saat anchor scroll. */
+  /* Supaya judul section tidak tertutup navbar melayang saat lompat anchor. */
   scroll-padding-top: 7rem;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: var(--color-bg);
-  color: #ffffff;
+  background-color: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Fokus keyboard yang selalu terlihat (WCAG 2.4.7). */
 :focus-visible {
-  outline: 2px solid var(--color-accent-3);
+  outline: 2px solid var(--accent-fg);
   outline-offset: 3px;
   border-radius: 0.5rem;
 }
 
-/* Warna blok seleksi teks. */
 ::selection {
-  background-color: color-mix(in oklab, var(--color-accent-2) 45%, transparent);
-  color: #ffffff;
+  background-color: color-mix(in oklab, var(--accent-2) 35%, transparent);
+  color: var(--fg);
 }
 
-/* Scrollbar kustom (WebKit + Firefox). */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-accent-1), var(--color-accent-2));
-  border: 2px solid var(--color-bg);
+  background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+  border: 2px solid var(--bg);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--color-accent-2), var(--color-accent-3));
+  background: linear-gradient(180deg, var(--accent-2), var(--accent-3));
 }
 * {
-  scrollbar-color: var(--color-accent-1) var(--color-bg);
+  scrollbar-color: var(--accent-1) var(--bg);
   scrollbar-width: thin;
 }
 
 /* ==========================================================================
- * KOMPONEN (di dalam @layer agar utility Tailwind tetap bisa menimpanya)
+ * 3. KOMPONEN
+ * Ditulis di dalam @layer supaya utility Tailwind tetap bisa menimpanya.
  * ========================================================================== */
 @layer components {
-  /* Primitif kaca — dipakai ulang oleh GlassCard.jsx. */
+  /* Primitif permukaan kaca, dipakai ulang oleh GlassCard.jsx. */
   .glass {
-    background-color: rgb(255 255 255 / 0.05);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgb(255 255 255 / 0.1);
+    background-color: var(--glass);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid var(--line);
     border-radius: 1rem;
-    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.08);
-    transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease,
+    box-shadow:
+      inset 0 1px 0 0 var(--inner-glow),
+      0 4px 20px -12px var(--shadow-soft);
+    transition:
+      background-color 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease,
       transform 0.35s ease;
   }
 
-  /* Varian khusus navbar: dasarnya gelap, bukan putih transparan, supaya teks
-     menu tetap terbaca saat melayang di atas foto atau kartu yang terang. */
-  .glass-nav {
-    background-color: color-mix(in oklab, var(--color-bg) 78%, transparent);
-    box-shadow:
-      inset 0 1px 0 0 rgb(255 255 255 / 0.08),
-      0 12px 40px -20px rgb(0 0 0 / 0.9);
-  }
-
   .glass-hover:hover {
-    background-color: rgb(255 255 255 / 0.07);
-    border-color: rgb(255 255 255 / 0.18);
+    background-color: var(--glass-hover);
+    border-color: var(--line-strong);
     transform: translateY(-4px);
     box-shadow:
-      inset 0 1px 0 0 rgb(255 255 255 / 0.12),
-      0 18px 50px -20px color-mix(in oklab, var(--color-accent-1) 55%, transparent);
+      inset 0 1px 0 0 var(--inner-glow),
+      0 20px 45px -22px var(--shadow-lift),
+      0 0 40px -24px color-mix(in oklab, var(--accent-2) 80%, transparent);
   }
 
-  /* Border gradien beranimasi untuk kartu unggulan (highlight: true). */
+  /* Navbar memakai dasar lebih pekat agar teks tetap terbaca di atas apa pun. */
+  .glass-nav {
+    background-color: color-mix(in oklab, var(--bg) 82%, transparent);
+    box-shadow:
+      inset 0 1px 0 0 var(--inner-glow),
+      0 12px 40px -22px var(--shadow-lift);
+  }
+
+  /* Border gradien beranimasi untuk kartu unggulan. */
   .glass-featured {
     position: relative;
   }
@@ -126,13 +202,13 @@ body {
     padding: 1px;
     background: linear-gradient(
       120deg,
-      var(--color-accent-1),
-      var(--color-accent-2),
-      var(--color-accent-3),
-      var(--color-accent-1)
+      var(--accent-1),
+      var(--accent-2),
+      var(--accent-3),
+      var(--accent-1)
     );
     background-size: 300% 300%;
-    animation: border-flow 8s linear infinite;
+    animation: border-flow 9s linear infinite;
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
@@ -142,27 +218,27 @@ body {
       linear-gradient(#fff 0 0);
     mask-composite: exclude;
     pointer-events: none;
-    opacity: 0.75;
+    opacity: 0.8;
   }
 
-  /* Teks dengan gradien beranimasi (nama di Hero). */
+  /* Teks bergradien. Warna awal mengikuti tema agar tetap terbaca. */
   .gradient-text {
     background-image: linear-gradient(
       100deg,
-      #ffffff 0%,
-      var(--color-accent-3) 25%,
-      var(--color-accent-2) 50%,
-      var(--color-accent-1) 70%,
-      #ffffff 100%
+      var(--fg) 0%,
+      var(--accent-1) 30%,
+      var(--accent-2) 52%,
+      var(--accent-3) 72%,
+      var(--fg) 100%
     );
     background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradient-pan 9s ease-in-out infinite;
+    animation: gradient-pan 10s ease-in-out infinite;
   }
 
-  /* Chip kaca kecil (skill, tag, bahasa). */
+  /* Chip kecil untuk skill, tag, dan label. */
   .chip {
     display: inline-flex;
     align-items: center;
@@ -171,24 +247,67 @@ body {
     font-size: 0.75rem;
     line-height: 1.1rem;
     border-radius: 999px;
-    background-color: rgb(255 255 255 / 0.05);
-    border: 1px solid rgb(255 255 255 / 0.1);
-    color: #cbd5e1;
-    transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease,
+    background-color: var(--chip-bg);
+    border: 1px solid var(--line);
+    color: var(--chip-fg);
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      background-color 0.25s ease,
       box-shadow 0.25s ease;
   }
   .chip:hover {
-    color: #ffffff;
-    border-color: color-mix(in oklab, var(--color-accent-3) 55%, transparent);
-    background-color: rgb(255 255 255 / 0.09);
-    box-shadow: 0 0 18px -4px color-mix(in oklab, var(--color-accent-3) 70%, transparent);
+    color: var(--fg);
+    border-color: color-mix(in oklab, var(--accent-2) 45%, transparent);
+    box-shadow: 0 0 18px -6px color-mix(in oklab, var(--accent-2) 80%, transparent);
   }
 
-  /* Status awal & akhir animasi scroll-reveal. */
+  /* Tombol utama bergradien. */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-image: linear-gradient(100deg, var(--accent-1), var(--accent-2));
+    box-shadow: 0 16px 36px -18px var(--accent-1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 44px -18px var(--accent-2);
+  }
+
+  /* Tombol sekunder berbahan kaca. */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--fg);
+    background-color: var(--glass);
+    border: 1px solid var(--line-strong);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .btn-ghost:hover {
+    background-color: var(--glass-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Status awal dan akhir animasi scroll-reveal. */
   .reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform: translateY(26px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
       transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
   }
@@ -197,109 +316,120 @@ body {
     transform: none;
   }
 
-  /* Lapisan grain/noise halus di atas mesh gradient. */
-  .noise-overlay {
+  /* Lapisan grain halus di atas gradien. */
+  .layer-noise {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
     background-repeat: repeat;
   }
+
+  /* Garis grid tipis, memberi kesan "kertas teknik" pada latar. */
+  .layer-grid {
+    background-image:
+      linear-gradient(to right, currentColor 1px, transparent 1px),
+      linear-gradient(to bottom, currentColor 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Titik-titik halus sebagai lapisan kedua latar. */
+  .layer-dots {
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* Isi artikel blog. Ditulis sekali, dipakai semua postingan. */
+  .prose-post p {
+    margin-bottom: 1.15rem;
+    line-height: 1.85;
+    color: var(--fg-muted);
+  }
+  .prose-post h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 0.9rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--fg);
+  }
+  .prose-post h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.7rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--fg);
+  }
+  .prose-post li {
+    margin-bottom: 0.55rem;
+    line-height: 1.75;
+    color: var(--fg-muted);
+  }
+  .prose-post a {
+    color: var(--accent-fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-post strong {
+    color: var(--fg);
+    font-weight: 650;
+  }
 }
 
 /* ==========================================================================
- * KEYFRAMES
+ * 4. KEYFRAMES
  * ========================================================================== */
 @keyframes blob-drift-a {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  33% {
-    transform: translate3d(6%, 8%, 0) scale(1.12);
-  }
-  66% {
-    transform: translate3d(-5%, 4%, 0) scale(0.95);
-  }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33%      { transform: translate3d(6%, 8%, 0) scale(1.12); }
+  66%      { transform: translate3d(-5%, 4%, 0) scale(0.95); }
 }
 
 @keyframes blob-drift-b {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1.05);
-  }
-  40% {
-    transform: translate3d(-8%, -6%, 0) scale(0.92);
-  }
-  75% {
-    transform: translate3d(5%, -9%, 0) scale(1.15);
-  }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+  40%      { transform: translate3d(-8%, -6%, 0) scale(0.92); }
+  75%      { transform: translate3d(5%, -9%, 0) scale(1.15); }
 }
 
 @keyframes blob-drift-c {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(0.98);
-  }
-  50% {
-    transform: translate3d(7%, -7%, 0) scale(1.18);
-  }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(0.98); }
+  50%      { transform: translate3d(7%, -7%, 0) scale(1.18); }
+}
+
+@keyframes blob-drift-d {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.02); }
+  45%      { transform: translate3d(-6%, 7%, 0) scale(1.16); }
+}
+
+@keyframes aurora-sweep {
+  0%, 100% { transform: translateX(-8%) skewX(-8deg); opacity: 0.55; }
+  50%      { transform: translateX(8%) skewX(-8deg); opacity: 0.85; }
 }
 
 @keyframes border-flow {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 300% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
 }
 
 @keyframes gradient-pan {
-  0%,
-  100% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
+  0%, 100% { background-position: 0% center; }
+  50%      { background-position: 100% center; }
 }
 
 @keyframes pulse-dot {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.45;
-    transform: scale(0.8);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.45; transform: scale(0.8); }
 }
 
 @keyframes scroll-cue {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.55;
-  }
-  50% {
-    transform: translateY(6px);
-    opacity: 1;
-  }
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(6px); opacity: 1; }
 }
 
 @keyframes drawer-in {
-  from {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: none; }
 }
 
 /* ==========================================================================
- * PREFERS-REDUCED-MOTION
- * Semua animasi dekoratif dimatikan total, konten tetap terlihat penuh.
+ * 5. PREFERS-REDUCED-MOTION
+ * Semua animasi dekoratif dimatikan, konten tetap tampil penuh.
  * ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {

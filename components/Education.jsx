@@ -4,10 +4,11 @@ import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
 import SectionHeading from '@/components/SectionHeading';
 import GlassCard from '@/components/GlassCard';
+import SmartImage from '@/components/SmartImage';
 import Reveal from '@/components/Reveal';
 import Icon from '@/components/Icon';
 
-/** Education — riwayat pendidikan formal. */
+/** Education: riwayat pendidikan formal. Field `logo` opsional. */
 export default function Education() {
   const { t } = useLanguage();
   const { education, sections } = portfolio;
@@ -27,12 +28,22 @@ export default function Education() {
           {education.map((item, index) => (
             <Reveal key={`${item.school}-${item.period}`} delay={Math.min(index * 80, 240)} className="h-full">
               <GlassCard className="h-full p-6">
-                <span className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-linear-to-br from-accent-1/30 to-accent-3/20 text-accent-3">
-                  <Icon name="graduation-cap" className="h-5 w-5" />
-                </span>
+                {item.logo ? (
+                  <SmartImage
+                    src={item.logo}
+                    alt={`Logo ${item.school}`}
+                    width={44}
+                    height={44}
+                    className="h-11 w-11 rounded-xl border border-line object-cover"
+                  />
+                ) : (
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-linear-to-br from-accent-1 to-accent-3 text-white">
+                    <Icon name="graduation-cap" className="h-5 w-5" />
+                  </span>
+                )}
 
-                <h3 className="mt-4 text-base font-semibold leading-snug text-white">{t(item.degree)}</h3>
-                <p className="mt-1 text-sm text-accent-3">{item.school}</p>
+                <h3 className="mt-4 text-base font-semibold leading-snug text-fg">{t(item.degree)}</h3>
+                <p className="mt-1 text-sm text-accent">{item.school}</p>
 
                 <div className="mt-3 flex flex-wrap gap-2">
                   <span className="chip">{item.period}</span>
@@ -40,7 +51,7 @@ export default function Education() {
                 </div>
 
                 {t(item.notes) ? (
-                  <p className="mt-4 text-sm leading-6 text-slate-400">{t(item.notes)}</p>
+                  <p className="mt-4 text-sm leading-6 text-muted">{t(item.notes)}</p>
                 ) : null}
               </GlassCard>
             </Reveal>

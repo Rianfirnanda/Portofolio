@@ -3,16 +3,19 @@
 # -----------------------------------------------------------------------------
 #  Alur: push ke main  ->  build  ->  folder out/  ->  artifact  ->  Pages
 #
-#  Aktifkan sekali di repo: Settings -> Pages -> Build and deployment ->
-#  Source: "GitHub Actions".
+#  Dipakai hanya kalau situs dipindahkan dari Vercel ke GitHub Pages.
+#  Sebelum menjalankannya: Settings -> Pages -> Source: "GitHub Actions".
 # =============================================================================
 name: Deploy to GitHub Pages
 
+# Situs ini sekarang di-deploy lewat Vercel, jadi workflow ini TIDAK berjalan
+# otomatis. Ia disimpan sebagai cadangan kalau suatu saat ingin dipindahkan
+# ke GitHub Pages. Jalankan manual lewat tab Actions, tombol "Run workflow".
+#
+# Ingin mengaktifkan lagi deploy otomatis? Tambahkan kembali blok berikut:
+#   push:
+#     branches: [main]
 on:
-  # Setiap push ke branch utama memicu deploy otomatis.
-  push:
-    branches: [main]
-  # Tombol "Run workflow" manual di tab Actions.
   workflow_dispatch:
 
 # Izin minimum yang dibutuhkan actions/deploy-pages.
