@@ -2,7 +2,7 @@
   "items": [
     {
       "label": "LinkedIn",
-      "handle": "rian-firnanda",
+      "handle": "Rian Firnanda Irsyadani",
       "href": "https://www.linkedin.com/in/rian-firnanda/",
       "icon": "linkedin",
       "featured": true
@@ -12,13 +12,6 @@
       "handle": "@rianfirnanda_id",
       "href": "https://www.instagram.com/rianfirnanda_id/",
       "icon": "instagram",
-      "featured": true
-    },
-    {
-      "label": "GitHub",
-      "handle": "Rianfirnanda",
-      "href": "https://github.com/Rianfirnanda",
-      "icon": "github",
       "featured": true
     },
     {
@@ -37,9 +30,16 @@
     },
     {
       "label": "Google Scholar",
-      "handle": "Profil peneliti",
+      "handle": "Rian Firnanda Irsyadani",
       "href": "https://scholar.google.com/citations?user=PW0IcAsAAAAJ&hl=en",
       "icon": "scholar",
+      "featured": true
+    },
+    {
+      "label": "GitHub",
+      "handle": "Rianfirnanda",
+      "href": "https://github.com/Rianfirnanda",
+      "icon": "github",
       "featured": false
     }
   ]
