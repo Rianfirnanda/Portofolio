@@ -728,10 +728,10 @@ export const portfolio = {
     blogShare: { id: 'Bagikan tulisan ini', en: 'Share this post' },
     blogFilterLabel: { id: 'Saring tulisan berdasarkan topik', en: 'Filter posts by topic' },
     builtWith: {
-      id: 'Dibangun dengan Next.js dan Tailwind CSS',
-      en: 'Built with Next.js and Tailwind CSS',
+      id: '',
+      en: '',
     },
-    rights: { id: 'Seluruh hak cipta dilindungi.', en: 'All rights reserved.' },
+    rights: { id: '', en: 'All rights reserved.' },
   },
 };
 
