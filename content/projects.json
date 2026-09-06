@@ -13,7 +13,7 @@
         "Wirausaha",
         "Produktivitas Kantor"
       ],
-      "image": "",
+      "image": "/media/128300.jpg",
       "imageAlt": null,
       "links": [],
       "featured": true
@@ -31,7 +31,7 @@
         "Game Development",
         "Kesehatan"
       ],
-      "image": "/images/projects/health-hero.svg",
+      "image": "/media/128301.jpg",
       "imageAlt": null,
       "links": [],
       "featured": false
