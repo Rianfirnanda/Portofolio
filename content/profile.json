@@ -43,7 +43,7 @@
   ],
   "gallery": [
     {
-      "src": "/media/123701.jpg",
+      "src": "/media/IMG-20260127-WA0206.jpg",
       "alt": {
         "id": "Kegiatan riset lapangan dan pengolahan data",
         "en": "Field research and data work"
@@ -67,12 +67,12 @@
     {
       "src": "/media/IMG-20260831-WA0158.jpg",
       "alt": {
-        "id": "Pengelolaan sistem dan infrastruktur web",
-        "en": "Web systems and infrastructure work"
+        "id": "Kegiatan Laboratorium Administrasi Publik",
+        "en": ""
       },
       "caption": {
-        "id": "Sistem dan infrastruktur web",
-        "en": "Web systems and infrastructure"
+        "id": "Kegiatan Laboratorium Administrasi Publik",
+        "en": ""
       }
     }
   ]
