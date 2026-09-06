@@ -1,76 +1,12 @@
 {
   "items": [
     {
-      "name": "Generative AI Leader",
-      "issuer": "Google Cloud",
-      "year": "2026",
-      "score": "",
-      "group": "AI & Cloud",
-      "credentialUrl": ""
-    },
-    {
-      "name": "AI Fluency",
-      "issuer": "Anthropic",
-      "year": "2026",
-      "score": "",
-      "group": "AI & Cloud",
-      "credentialUrl": ""
-    },
-    {
-      "name": "AI Fundamentals",
-      "issuer": "Google",
-      "year": "2026",
-      "score": "",
-      "group": "AI & Cloud",
-      "credentialUrl": ""
-    },
-    {
-      "name": "Start Writing Prompts like a Pro",
-      "issuer": "Google",
-      "year": "2026",
-      "score": "",
-      "group": "AI & Cloud",
-      "credentialUrl": ""
-    },
-    {
-      "name": "AWS Educate Machine Learning Foundations",
-      "issuer": "Amazon Web Services",
-      "year": "2026",
-      "score": "",
-      "group": "AI & Cloud",
-      "credentialUrl": ""
-    },
-    {
-      "name": "Foundations of Cybersecurity",
-      "issuer": "Google",
-      "year": "2025",
-      "score": "",
-      "group": "Keamanan",
-      "credentialUrl": ""
-    },
-    {
-      "name": "Certified Cyber Security Analyst (C3SA)",
-      "issuer": "CyberWarFare Labs",
-      "year": "2025",
-      "score": "",
-      "group": "Keamanan",
-      "credentialUrl": ""
-    },
-    {
       "name": {
         "id": "Pengembangan Perangkat Lunak",
         "en": "Software Development"
       },
-      "issuer": "BNSP",
+      "issuer": "Badan Nasional Sertifikasi Profesi (BNSP)",
       "year": "2022",
-      "score": "",
-      "group": "Perangkat Lunak",
-      "credentialUrl": ""
-    },
-    {
-      "name": "Game Development",
-      "issuer": "Direktorat SMK",
-      "year": "2021",
       "score": "",
       "group": "Perangkat Lunak",
       "credentialUrl": ""
@@ -80,19 +16,66 @@
         "id": "Desainer Grafis Muda",
         "en": "Junior Graphic Designer"
       },
-      "issuer": "BNSP & Digitalent Kominfo",
-      "year": "2022",
+      "issuer": "Badan Nasional Sertifikasi Profesi (BNSP)",
+      "year": "2024",
       "score": "",
       "group": "Desain",
       "credentialUrl": ""
     },
     {
-      "name": "Operator Komputer Madya",
-      "issuer": "Kominfo",
-      "year": "2024",
+      "name": {
+        "id": "Generative AI Leader",
+        "en": ""
+      },
+      "issuer": "Google Cloud",
+      "year": "2026",
       "score": "",
-      "group": "Desain",
-      "credentialUrl": ""
+      "group": "AI & Cloud",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/professional-cert/FQ7Y9J473BAT?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=prof"
+    },
+    {
+      "name": {
+        "id": "AI Fluency: AI Capabilities & Limitations",
+        "en": ""
+      },
+      "issuer": "Anthropic",
+      "year": "2026",
+      "score": "",
+      "group": "AI & Cloud",
+      "credentialUrl": "https://verify.skilljar.com/c/2ezoyenn7p5f"
+    },
+    {
+      "name": {
+        "id": "AI Fundamentals",
+        "en": ""
+      },
+      "issuer": "Google",
+      "year": "2026",
+      "score": "",
+      "group": "AI & Cloud",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/LQ5K5H9SLS0Q?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
+    },
+    {
+      "name": {
+        "id": "Start Writing Prompts like a Pro",
+        "en": ""
+      },
+      "issuer": "Google",
+      "year": "2026",
+      "score": "",
+      "group": "AI & Cloud",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/M4UQ0QYUXQIZ?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
+    },
+    {
+      "name": {
+        "id": "AWS Educate Machine Learning Foundations",
+        "en": ""
+      },
+      "issuer": "Amazon Web Services",
+      "year": "2023",
+      "score": "",
+      "group": "AI & Cloud",
+      "credentialUrl": "https://www.credly.com/badges/cc9cc752-e18e-465f-9203-b0e8cd802c3c/linked_in_profile"
     },
     {
       "name": {
@@ -101,20 +84,64 @@
       },
       "issuer": "Badan Bahasa",
       "year": "2022",
-      "score": "",
+      "score": "601",
       "group": "Bahasa",
       "credentialUrl": ""
     },
     {
       "name": {
         "id": "TOEFL",
-        "en": "UKBI, TOEFL"
+        "en": "TOEFL"
       },
       "issuer": "UPA Bahasa Universitas Bengkulu",
       "year": "2026",
-      "score": "",
+      "score": "483",
       "group": "Bahasa",
       "credentialUrl": ""
+    },
+    {
+      "name": {
+        "id": "Design Prompts for Everyday Work Tasks",
+        "en": ""
+      },
+      "issuer": "Google",
+      "year": "2026",
+      "score": "",
+      "group": "Ai",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/LP9VPPRCPYU9?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
+    },
+    {
+      "name": {
+        "id": "Speed Up Data Analysis and Presentation Building",
+        "en": ""
+      },
+      "issuer": "Google",
+      "year": "2026",
+      "score": "",
+      "group": "Ai",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/ACL7IJDJ234J?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
+    },
+    {
+      "name": {
+        "id": "Certified Cyber Security Analyst [C3SA]",
+        "en": ""
+      },
+      "issuer": "CyberWarFare Labs",
+      "year": "2023",
+      "score": "",
+      "group": "Cyber Security",
+      "credentialUrl": "https://www.credential.net/2792781d-aa04-4f71-9f0c-4513d8ea6499#gs.2rzg1n"
+    },
+    {
+      "name": {
+        "id": "Foundations of Cybersecurity",
+        "en": ""
+      },
+      "issuer": "Google",
+      "year": "2023",
+      "score": "",
+      "group": "Cyber Security",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/XB25SLSSL6PW?utm_source%3Dandroid%26utm_medium%3Dcertificate%26utm_content%3Dcert_image%26utm_campaign%3Dsharing_cta%26utm_product%3Dcourse"
     }
   ]
 }
