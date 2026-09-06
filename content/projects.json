@@ -81,6 +81,48 @@
         }
       ],
       "featured": false
+    },
+    {
+      "name": "Desain Logo Administrasi Publik",
+      "period": "2026",
+      "org": null,
+      "description": {
+        "id": "-",
+        "en": ""
+      },
+      "tags": [],
+      "image": "/media/WhatsApp Image 2026-01-10 at 19.35.22.jpeg",
+      "imageAlt": null,
+      "links": [],
+      "featured": false
+    },
+    {
+      "name": "Desain Logo Lab",
+      "period": "2026",
+      "org": null,
+      "description": {
+        "id": "-",
+        "en": ""
+      },
+      "tags": [],
+      "image": "/media/WhatsApp Image 2026-01-10 at 19.35.21.jpeg",
+      "imageAlt": null,
+      "links": [],
+      "featured": false
+    },
+    {
+      "name": "Company Profile Laboratorium Administrasi Publik",
+      "period": "2026",
+      "org": null,
+      "description": {
+        "id": "-",
+        "en": ""
+      },
+      "tags": [],
+      "image": "/media/pasted-image-1788707860014.png",
+      "imageAlt": null,
+      "links": [],
+      "featured": false
     }
   ]
 }
