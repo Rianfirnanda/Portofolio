@@ -309,7 +309,7 @@
       ],
       "image": "/media/1730043733964.jpg",
       "imageAlt": null,
-      "logo": "",
+      "logo": "/media/128288.jpg",
       "highlight": false
     },
     {
@@ -365,6 +365,33 @@
         "Game Development"
       ],
       "image": "/media/128286.jpg",
+      "imageAlt": null,
+      "logo": "",
+      "highlight": false
+    },
+    {
+      "role": {
+        "id": "Web Developer Intern",
+        "en": ""
+      },
+      "org": {
+        "id": "Rafflesia Cerdas Teknologi (RCT)",
+        "en": ""
+      },
+      "type": null,
+      "period": {
+        "id": "Februari 2021 - April 2021",
+        "en": ""
+      },
+      "location": null,
+      "description": {
+        "id": "Membuat proyek Website Digital Agency, Mengelola Hosting dan domain, Fullstack Developer.",
+        "en": ""
+      },
+      "skills": [
+        "Web Developer"
+      ],
+      "image": "/media/128290.jpg",
       "imageAlt": null,
       "logo": "",
       "highlight": false
