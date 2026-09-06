@@ -44,17 +44,6 @@
   ],
   "gallery": [
     {
-      "src": "/media/IMG-20260127-WA0206.jpg",
-      "alt": {
-        "id": "Kegiatan riset lapangan dan pengolahan data",
-        "en": "Field research and data work"
-      },
-      "caption": {
-        "id": "Riset lapangan dan data",
-        "en": "Field research and data"
-      }
-    },
-    {
       "src": "/media/117893.jpg",
       "alt": {
         "id": "Kerja sama tim dan kegiatan komunitas",
@@ -68,11 +57,33 @@
     {
       "src": "/media/IMG-20260831-WA0158.jpg",
       "alt": {
-        "id": "Kegiatan Laboratorium Administrasi Publik",
+        "id": "Pelatihan Penggunaan Aplikasi Smart-Mura DPRD Musi Rawas | Laboratorium AP",
         "en": ""
       },
       "caption": {
-        "id": "Kegiatan Laboratorium Administrasi Publik",
+        "id": "Pelatihan Penggunaan Aplikasi Smart-Mura DPRD Musi Rawas | Laboratorium AP",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/123701.jpg",
+      "alt": {
+        "id": "Pemaparan NA Ranperda Di DPRD Lubuk Linggau",
+        "en": ""
+      },
+      "caption": {
+        "id": "Pemaparan NA Ranperda Di DPRD Lubuk Linggau  | Laboratorium AP",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/IMG-20260127-WA0206.jpg",
+      "alt": {
+        "id": "Pemaparan NA Ranperda DPRD Musi Rawas",
+        "en": ""
+      },
+      "caption": {
+        "id": "Pemaparan NA Ranperda DPRD Musi Rawas | Laboratorium AP",
         "en": ""
       }
     }
