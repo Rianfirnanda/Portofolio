@@ -59,6 +59,7 @@ situs statis murni.
 | `data/posts.js` | Membaca folder `content/posts/` saat build. |
 | `data/README.md` | Panduan operasional dengan cuplikan siap tempel, termasuk cara memasang panel konten. |
 | `public/media/` | Semua berkas yang diunggah lewat panel: gambar, video, musik, PDF. |
+| `public/google*.html` | Berkas verifikasi Google Search Console. **Jangan dihapus**, Google memeriksanya ulang secara berkala. |
 | `content/feedback/` | Masukan dari tamu, satu berkas per kiriman, dibuat otomatis oleh situs. |
 | `public/admin/index.html` dan `config.yml` | Halaman panel konten dan definisi form-nya. |
 | `app/api/auth/` dan `app/api/callback/` | Dua endpoint login GitHub untuk panel konten. |
