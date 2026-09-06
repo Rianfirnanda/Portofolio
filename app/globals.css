@@ -547,6 +547,70 @@ time,
     border-radius: 1rem;
     background-color: var(--surface);
   }
+  /*
+    Garis waktu pemutar audio pendamping tulisan. Bagian yang sudah lewat
+    diwarnai aksen, sisanya abu abu. Persentasenya dikirim komponen lewat
+    variabel --lewat.
+  */
+  .pemutar-garis {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    border-radius: 999px;
+    background: linear-gradient(
+      to right,
+      var(--accent-1) 0%,
+      var(--accent-2) var(--lewat, 0%),
+      var(--line-strong) var(--lewat, 0%),
+      var(--line-strong) 100%
+    );
+    cursor: pointer;
+  }
+  .pemutar-garis::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--bg);
+    border-radius: 50%;
+    background: var(--accent-1);
+  }
+  .pemutar-garis::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--bg);
+    border-radius: 50%;
+    background: var(--accent-1);
+  }
+  .pemutar-garis:focus-visible {
+    outline: 2px solid var(--accent-1);
+    outline-offset: 3px;
+  }
+
+  /* Pemutar musik sisipan di tengah tulisan diberi bingkai supaya terlihat
+     sebagai satu blok utuh, bukan kendali telanjang yang melayang. */
+  .media-musik {
+    padding: 0.9rem 1rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background-color: var(--surface);
+  }
+  .media-musik-kepala {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--fg);
+  }
+  .media-musik-kepala svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    color: var(--accent-fg);
+  }
+
   .media-unduh {
     display: inline-flex;
     align-items: center;

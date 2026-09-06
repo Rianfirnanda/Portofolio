@@ -89,6 +89,7 @@ situs statis murni.
 | `components/BlogIndex.jsx` | Isi halaman `/blog` beserta filter topik. |
 | `components/PostArticle.jsx` dan `PostBody.jsx` | Halaman artikel dan perender blok tulisan. |
 | `components/PostCard.jsx` | Kartu tulisan di daftar blog. |
+| `components/PostAudio.jsx` | Pemutar audio pendamping di bawah judul artikel, lengkap dengan kecepatan putar. |
 | `components/Feedback.jsx` | Formulir masukan untuk tamu, boleh anonim, lengkap dengan penyaring robot. |
 | `components/MusicPlayer.jsx` | Pemutar musik kecil di pojok kiri bawah, daftar lagunya dari panel. |
 | `components/Contact.jsx` | Kartu kontak, tombol email, salin alamat, daftar sosial, layanan. |
@@ -419,7 +420,8 @@ Tidak ada dependency lain. Ikon, animasi, dan sistem dua bahasa ditulis sendiri.
 | Fitur | Di mana diatur | Catatan |
 | --- | --- | --- |
 | Menulis blog tanpa blok | Panel, Tulisan Blog | Satu editor teks biasa. Alamat, waktu baca, dan ringkasan dihitung otomatis. |
-| Unggah video, musik, PDF | Panel, tombol gambar di editor | Tampilannya dipilih otomatis sesuai jenis berkas. Batas 40 MB per berkas. |
+| Unggah video, musik, PDF | Panel, tombol Audio, Video, dan Dokumen di editor | Tampilannya dipilih otomatis sesuai jenis berkas. Batas 40 MB per berkas. |
+| Audio pendamping tulisan | Panel, Tulisan Blog, Audio pendamping | Pemutar di bawah judul artikel, seperti tombol dengarkan di Substack. Ada mundur 15 detik dan kecepatan putar. |
 | Kartu nama dan motto di foto | Panel, Profil Diri, Kartu pada foto | Dua baris di bawah foto profil. Kosongkan mottonya kalau ingin nama saja. |
 | Pemutar musik | Panel, Pengaturan, Musik | Tidak pernah berbunyi sendiri. Lihat `data/README.md` bagian 18. |
 | Masukan dari tamu | Panel, Masukan Masuk | Butuh `GITHUB_CONTENT_TOKEN` dan repositori privat. Lihat bagian 19. |

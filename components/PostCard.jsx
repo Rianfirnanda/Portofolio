@@ -49,6 +49,16 @@ export default function PostCard({ post, compact = false }) {
               <Icon name="clock" className="h-3.5 w-3.5" />
               {minutes} {t(portfolio.ui.blogMinutes)}
             </span>
+
+            {/* Penanda kecil kalau tulisan ini punya audio pendamping, supaya
+                pembaca yang lebih suka mendengarkan bisa langsung mengenalinya
+                dari daftar. */}
+            {post.audio?.file ? (
+              <span className="inline-flex items-center gap-1.5 text-accent">
+                <Icon name="headphones" className="h-3.5 w-3.5" />
+                Audio
+              </span>
+            ) : null}
           </div>
 
           <h3 className="mt-2.5 text-lg font-semibold leading-snug text-fg">{title}</h3>

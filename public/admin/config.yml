@@ -93,15 +93,43 @@ collections:
             required: true
             modes: ["rich_text", "raw"]
             buttons: ["bold", "italic", "code", "quote", "bulleted-list", "numbered-list", "link"]
-            editor_components: ["image"]
+            editor_components: ["sisip-audio", "sisip-video", "sisip-dokumen", "image"]
           - label: "English (opsional)"
             name: "en"
             widget: "markdown"
             required: false
             modes: ["rich_text", "raw"]
             buttons: ["bold", "italic", "code", "quote", "bulleted-list", "numbered-list", "link"]
-            editor_components: ["image"]
+            editor_components: ["sisip-audio", "sisip-video", "sisip-dokumen", "image"]
             hint: "Kosongkan saja kalau tidak perlu versi Inggris."
+
+      - label: "Audio pendamping"
+        name: "audio"
+        widget: object
+        collapsed: true
+        required: false
+        hint: "Pemutar yang menempel di bawah judul artikel, seperti tombol dengarkan di Substack. Kosongkan kalau tulisan ini tidak punya audio."
+        fields:
+          - { label: "Berkas audio", name: "file", widget: "file", required: false, accept: ".mp3,.m4a,.ogg,.wav", hint: "Format mp3 paling aman. Kosongkan untuk menyembunyikan pemutarnya." }
+          - label: "Jenis audio"
+            name: "kind"
+            widget: "select"
+            required: false
+            default: "narasi"
+            hint: "Menentukan ikon dan tulisan bawaan pada pemutarnya."
+            options:
+              - { label: "Narasi, rekaman kamu membacakan tulisan ini", value: "narasi" }
+              - { label: "Podcast, obrolan yang jadi dasar tulisan", value: "podcast" }
+              - { label: "Lagu, musik penemani membaca", value: "lagu" }
+          - label: "Judul pemutar"
+            name: "title"
+            widget: object
+            collapsed: false
+            required: false
+            hint: "Kosongkan untuk memakai tulisan bawaan sesuai jenis di atas."
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
 
       - { label: "Gambar sampul", name: "cover", widget: "image", required: false, hint: "Bentuk mendatar paling pas. Kosongkan untuk memakai latar gradien otomatis." }
 

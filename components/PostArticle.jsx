@@ -6,6 +6,7 @@ import { useLanguage } from '@/components/LanguageProvider';
 import { formatDate } from '@/lib/format';
 import SmartImage from '@/components/SmartImage';
 import PostBody from '@/components/PostBody';
+import PostAudio from '@/components/PostAudio';
 import PostCard from '@/components/PostCard';
 import ShareButtons from '@/components/ShareButtons';
 import Reveal from '@/components/Reveal';
@@ -72,6 +73,11 @@ export default function PostArticle({ post, others = [], bodyHtml }) {
                 {minutes} {t(ui.blogMinutes)}
               </span>
             </div>
+
+            {/* Audio pendamping, kalau tulisan ini punya. Ditaruh tepat di
+                bawah judul supaya pembaca yang lebih suka mendengarkan tidak
+                perlu mencarinya dulu. */}
+            <PostAudio audio={post.audio} />
           </header>
         </Reveal>
 

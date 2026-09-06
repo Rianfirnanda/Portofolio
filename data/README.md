@@ -346,10 +346,42 @@ Sisanya boleh dilewati. Tiga hal ini dihitung sendiri oleh situs:
 Kolom **English** di setiap bagian boleh dibiarkan kosong. Kalau kosong, versi
 Inggris situs akan memakai teks Indonesianya.
 
-### Menyisipkan foto, video, musik, atau PDF ke dalam tulisan
+### Audio pendamping, seperti tombol dengarkan di Substack
 
-Klik tombol gambar di bilah alat editor, pilih atau unggah berkasnya, selesai.
-Situs otomatis memilihkan tampilan yang pas berdasarkan jenis berkasnya:
+Setiap tulisan boleh punya satu pemutar audio yang menempel tepat di bawah
+judulnya. Pembaca yang lebih suka mendengarkan tinggal menekan tombol putar,
+tanpa harus mencari cari.
+
+Panel, buka tulisannya, lalu bagian **Audio pendamping**. Isinya tiga:
+
+| Kolom | Keterangan |
+|---|---|
+| Berkas audio | Unggah `mp3` atau `wav`. Kosongkan untuk menyembunyikan pemutarnya. |
+| Jenis audio | Menentukan ikon dan tulisan bawaannya |
+| Judul pemutar | Kosongkan untuk memakai tulisan bawaan sesuai jenis |
+
+Tiga pilihan jenis, masing masing punya tulisan bawaan sendiri:
+
+| Jenis | Tulisan bawaannya | Dipakai untuk |
+|---|---|---|
+| Narasi | "Dengarkan tulisan ini" | Rekaman kamu membacakan tulisannya |
+| Podcast | "Dengarkan podcastnya" | Obrolan atau wawancara yang jadi dasar tulisan |
+| Lagu | "Musik penemani" | Musik yang cocok menemani membaca |
+
+Pemutarnya punya tombol mundur 15 detik dan pengatur kecepatan 1x sampai 2x,
+seperti aplikasi podcast pada umumnya. Tulisan yang punya audio juga diberi
+penanda kecil di kartu daftar blog, jadi pembaca tahu sebelum membukanya.
+
+Audio ini tidak pernah berbunyi sendiri. Pembaca yang menekan tombol putar.
+
+### Menyisipkan foto, video, musik, atau PDF ke tengah tulisan
+
+Di bilah alat editor ada empat tombol sisip: **gambar**, **Audio**, **Video**,
+dan **Dokumen**. Klik salah satunya, pilih atau unggah berkasnya, selesai.
+
+Kalau tombolnya tidak kamu temukan, ada cara cadangan yang hasilnya sama persis:
+tempel saja tautan berkasnya di baris sendiri. Situs otomatis memilihkan tampilan
+yang pas berdasarkan jenis berkasnya:
 
 | Jenis berkas | Tampil sebagai |
 |---|---|
