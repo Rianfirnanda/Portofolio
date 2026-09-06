@@ -1,0 +1,412 @@
+/* ==========================================================================
+ *  GAYA DOKUMEN CETAK
+ * --------------------------------------------------------------------------
+ *  Dipakai oleh dua halaman:
+ *
+ *    /cetak/portofolio/   dokumen portofolio lengkap, rapi dan berwarna
+ *    /cetak/cv/           CV satu kolom yang terbaca mesin pelacak lamaran
+ *
+ *  Keduanya sengaja tidak memakai token warna situs. Dokumen ini hitam di atas
+ *  putih, apa pun tema yang sedang dipakai pengunjung, karena hasil akhirnya
+ *  adalah kertas atau berkas PDF.
+ *
+ *  UKURAN KERTAS
+ *  A4 dipilih karena itu ukuran standar di Indonesia dan hampir seluruh dunia
+ *  kecuali Amerika Utara. Margin diatur di sini, bukan di dialog cetak, supaya
+ *  hasilnya sama siapa pun yang mencetak.
+ * ========================================================================== */
+
+@page {
+  size: A4;
+  margin: 16mm 15mm;
+}
+
+/* Halaman CV dibuat sedikit lebih lapang di sisi kiri kanan, mengikuti
+   kebiasaan dokumen lamaran kerja. */
+@page cv {
+  size: A4;
+  margin: 15mm 16mm;
+}
+
+/* --------------------------------------------------------------------------
+ *  KERANGKA BERSAMA
+ * -------------------------------------------------------------------------- */
+
+.dok {
+  /* Lebar kertas A4 dikurangi margin, jadi tampilan di layar sama persis
+     dengan hasil cetaknya. Tidak ada kejutan saat menekan tombol simpan. */
+  max-width: 180mm;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+  color: #111827;
+  background: #ffffff;
+  font-size: 10.5pt;
+  line-height: 1.55;
+}
+
+/* Di layar, dokumen diberi bingkai lembut supaya terbaca sebagai lembar
+   kertas. Bingkai ini hilang saat dicetak. */
+.dok-lembar {
+  min-height: 100svh;
+  background: #f1f5f9;
+}
+
+.dok-kertas {
+  background: #ffffff;
+  box-shadow: 0 10px 40px -20px rgba(15, 23, 42, 0.35);
+}
+
+/* Bilah tombol di atas dokumen. Tidak pernah ikut tercetak. */
+.dok-bilah {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 0.8125rem;
+}
+
+.dok-bilah a,
+.dok-bilah button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(226, 232, 240, 0.28);
+  border-radius: 999px;
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.dok-bilah button {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.dok-bilah .dok-bilah-kiri,
+.dok-bilah .dok-bilah-kanan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+ *  DOKUMEN PORTOFOLIO
+ * -------------------------------------------------------------------------- */
+
+.dok-kepala {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #4f46e5;
+}
+
+.dok-foto {
+  width: 26mm;
+  height: 26mm;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 3mm;
+  border: 1px solid #d1d5db;
+}
+
+.dok-nama {
+  margin: 0;
+  font-size: 20pt;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: #0f172a;
+}
+
+.dok-headline {
+  margin: 0.35rem 0 0;
+  font-size: 10.5pt;
+  color: #374151;
+}
+
+.dok-kontak {
+  margin: 0.55rem 0 0;
+  font-size: 9pt;
+  color: #4b5563;
+  word-break: break-word;
+}
+
+.dok-kontak span + span::before {
+  content: '  ·  ';
+  color: #9ca3af;
+}
+
+.dok-bagian {
+  margin-top: 1.35rem;
+  /* Judul bagian tidak boleh sendirian di dasar halaman. */
+  break-inside: auto;
+}
+
+.dok-judul {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.7rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 10pt;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4f46e5;
+  break-after: avoid;
+}
+
+.dok-judul::before {
+  content: '';
+  width: 3px;
+  height: 0.95em;
+  background: #4f46e5;
+  border-radius: 2px;
+}
+
+/* Satu entri: pengalaman, pendidikan, proyek, dan sejenisnya. */
+.dok-entri {
+  margin-bottom: 0.95rem;
+  /* Satu entri utuh tidak boleh terbelah dua halaman. Ini yang membuat
+     dokumennya terbaca rapi, bukan terpotong di tengah kalimat. */
+  break-inside: avoid;
+}
+
+.dok-entri:last-child {
+  margin-bottom: 0;
+}
+
+.dok-baris {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.dok-peran {
+  margin: 0;
+  font-size: 11pt;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.dok-waktu {
+  flex-shrink: 0;
+  font-size: 8.5pt;
+  font-weight: 600;
+  color: #4b5563;
+  white-space: nowrap;
+}
+
+.dok-org {
+  margin: 0.1rem 0 0;
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: #4f46e5;
+}
+
+.dok-teks {
+  margin: 0.35rem 0 0;
+  color: #374151;
+  /* Sengaja rata kiri, bukan rata kanan kiri. Teks rata kanan kiri pada kolom
+     selebar ini meninggalkan celah lebar tak beraturan di antara kata, dan itu
+     justru membuatnya lebih lelah dibaca. */
+  text-align: left;
+}
+
+.dok-tag {
+  margin: 0.4rem 0 0;
+  font-size: 8.5pt;
+  color: #4b5563;
+}
+
+.dok-tag strong {
+  color: #374151;
+}
+
+.dok-daftar {
+  margin: 0.3rem 0 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.dok-daftar li {
+  margin-bottom: 0.18rem;
+  color: #374151;
+}
+
+/* Dua kolom untuk daftar pendek seperti sertifikasi. Dipakai hanya di dokumen
+   portofolio, tidak pernah di CV, karena kolom mengacaukan pembacaan mesin. */
+.dok-dua-kolom {
+  column-count: 2;
+  column-gap: 1.5rem;
+}
+
+.dok-dua-kolom > * {
+  break-inside: avoid;
+}
+
+.dok-catatan-kaki {
+  margin-top: 1.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 8pt;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+ *  DOKUMEN CV, GAYA HARVARD DAN RAMAH MESIN PELACAK LAMARAN
+ * --------------------------------------------------------------------------
+ *  Aturan yang dipatuhi di sini, semuanya disengaja:
+ *
+ *    satu kolom       mesin membaca dari atas ke bawah, kolom mengacaukannya
+ *    tanpa tabel      isi tabel sering terbaca berantakan atau terlewat
+ *    tanpa gambar     foto dan logo tidak terbaca sama sekali, hanya menyita ruang
+ *    huruf umum       Arial ada di semua sistem, tidak perlu disulih
+ *    judul baku       PENDIDIKAN, PENGALAMAN, dan seterusnya, mudah dikenali
+ *    teks sungguhan   bukan gambar teks, jadi bisa disalin dan dicari
+ * -------------------------------------------------------------------------- */
+
+.cv {
+  max-width: 178mm;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+  background: #ffffff;
+  color: #000000;
+  /* Arial lebih dulu karena itu huruf paling aman untuk mesin pelacak. */
+  font-family: Arial, Helvetica, 'Liberation Sans', sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.4;
+}
+
+.cv-nama {
+  margin: 0;
+  font-size: 17pt;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cv-kontak {
+  margin: 0.4rem 0 0;
+  font-size: 9.5pt;
+  text-align: center;
+  word-break: break-word;
+}
+
+.cv-kontak span + span::before {
+  content: ' | ';
+}
+
+.cv-bagian {
+  margin-top: 1.05rem;
+}
+
+.cv-judul {
+  margin: 0 0 0.4rem;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid #000000;
+  font-size: 11pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  break-after: avoid;
+}
+
+.cv-entri {
+  margin-bottom: 0.7rem;
+  break-inside: avoid;
+}
+
+.cv-entri:last-child {
+  margin-bottom: 0;
+}
+
+.cv-baris {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.cv-utama {
+  font-weight: 700;
+}
+
+.cv-waktu {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.cv-kedua {
+  font-style: italic;
+}
+
+.cv-daftar {
+  margin: 0.2rem 0 0;
+  padding-left: 1.15rem;
+  list-style: disc;
+}
+
+.cv-daftar li {
+  margin-bottom: 0.12rem;
+}
+
+.cv-padat {
+  margin: 0.1rem 0 0;
+}
+
+/* --------------------------------------------------------------------------
+ *  SAAT DICETAK
+ * -------------------------------------------------------------------------- */
+
+@media print {
+  .dok-lembar {
+    background: #ffffff;
+  }
+
+  .dok-kertas {
+    box-shadow: none;
+  }
+
+  .dok-bilah,
+  [data-cetak='sembunyi'] {
+    display: none !important;
+  }
+
+  .dok,
+  .cv {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Warna aksen tetap dicetak. Tanpa ini sebagian peramban membuang seluruh
+     warna latar dan garis, dan dokumennya jadi datar. */
+  .dok,
+  .cv {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}

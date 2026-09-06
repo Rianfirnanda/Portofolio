@@ -25,7 +25,6 @@ export default function ExperienceCard({ item }) {
 
   const description = t(item.description);
   const isLong = description.length > CLAMP_LENGTH;
-  const visibleText = isLong && !expanded ? `${description.slice(0, CLAMP_LENGTH).trimEnd()}...` : description;
 
   return (
     <GlassCard as="article" featured={item.highlight} className="overflow-hidden">
@@ -80,8 +79,22 @@ export default function ExperienceCard({ item }) {
         ) : null}
 
         {description ? (
-          <p className="mt-3 text-body-sm text-muted">
-            {visibleText}{' '}
+          <div className="mt-3">
+            {/*
+              Teksnya SELALU ditulis utuh di halaman, lalu dipendekkan secara
+              tampilan saja lewat line-clamp. Dulu teksnya benar benar dipotong
+              sebelum ditulis, dan akibatnya mesin pencari cuma melihat 190 huruf
+              pertama dari setiap pengalaman. Bagian paling bernilai dari
+              portofolio ini justru tidak pernah terbaca Google.
+            */}
+            <p
+              className={`text-body-sm text-muted ${
+                isLong && !expanded ? 'line-clamp-3' : ''
+              } print:line-clamp-none`}
+            >
+              {description}
+            </p>
+
             {isLong ? (
               <button
                 type="button"
@@ -90,7 +103,7 @@ export default function ExperienceCard({ item }) {
                 // py-1 dan align-middle menjaga tinggi tombol tetap nyaman
                 // disentuh di layar sentuh, tanpa merusak alirannya di dalam
                 // paragraf.
-                className="inline-flex min-h-6 items-center gap-1 rounded-md align-middle py-1 text-xs font-semibold text-accent transition-colors hover:text-fg"
+                className="mt-1 inline-flex min-h-6 items-center gap-1 rounded-md py-1 text-xs font-semibold text-accent transition-colors hover:text-fg print:hidden"
               >
                 {expanded ? t(portfolio.ui.readLess) : t(portfolio.ui.readMore)}
                 <Icon
@@ -99,7 +112,7 @@ export default function ExperienceCard({ item }) {
                 />
               </button>
             ) : null}
-          </p>
+          </div>
         ) : null}
 
         {item.skills?.length > 0 ? (

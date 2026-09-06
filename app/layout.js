@@ -14,6 +14,7 @@ import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import CommandPalette from '@/components/CommandPalette';
 import MusicPlayer from '@/components/MusicPlayer';
+import ChromeGate from '@/components/ChromeGate';
 import './globals.css';
 
 /**
@@ -95,6 +96,18 @@ export const metadata = {
     follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
+
+  /*
+    Kode verifikasi Google Search Console. Diisi lewat panel di menu
+    Pengaturan, bagian "Kode verifikasi Google". Selama masih kosong, tidak ada
+    tag apa pun yang ikut ditulis ke halaman.
+
+    Search Console adalah tempat kamu memberi tahu Google bahwa situs ini ada,
+    lalu memantau kata kunci apa yang membawa orang ke sini. Langkah lengkapnya
+    ada di data/README.md bagian 21.
+  */
+  ...(meta.googleVerification ? { verification: { google: meta.googleVerification } } : {}),
+
   category: 'technology',
 };
 
@@ -148,19 +161,29 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="antialiased">
-        <MeshBackground />
+        <ChromeGate>
+          <MeshBackground />
+        </ChromeGate>
 
         <ThemeProvider>
           <LanguageProvider>
             <LightboxProvider>
-              <SkipLink />
-              <ScrollProgress />
-              <Navbar />
+              {/* Perabot situs. Halaman dokumen di /cetak/ tampil tanpa ini
+                  semua, supaya isinya bisa berdiri sendiri sebagai berkas. */}
+              <ChromeGate>
+                <SkipLink />
+                <ScrollProgress />
+                <Navbar />
+              </ChromeGate>
+
               <main id="main">{children}</main>
-              <Footer />
-              <BackToTop />
-              <MusicPlayer />
-              <CommandPalette posts={searchablePosts} />
+
+              <ChromeGate>
+                <Footer />
+                <BackToTop />
+                <MusicPlayer />
+                <CommandPalette posts={searchablePosts} />
+              </ChromeGate>
             </LightboxProvider>
           </LanguageProvider>
         </ThemeProvider>

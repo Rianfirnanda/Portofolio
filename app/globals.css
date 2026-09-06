@@ -691,9 +691,14 @@ time,
     background: #ffffff !important;
   }
 
-  /* Lepas semua elemen yang tidak berguna di atas kertas. */
-  header,
-  footer,
+  /*
+    Lepas elemen yang tidak berguna di atas kertas.
+
+    Perabot situs ditandai satu per satu dengan data-print="hide", bukan
+    disembunyikan lewat nama elemen. Dulu aturan di sini menyembunyikan semua
+    <header> dan <footer>, dan itu ikut menelan judul artikel blog serta kepala
+    dokumen portofolio yang kebetulan memakai elemen yang sama.
+  */
   .scroll-progress,
   [data-print='hide'] {
     display: none !important;

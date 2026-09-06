@@ -152,14 +152,25 @@ export default function CommandPalette({ posts = [] }) {
     }
 
     if (portfolio.appearance?.printLink !== false) {
-      list.push({
-        id: 'action-print',
-        group: t(ui.searchGroupActions),
-        label: t(ui.printPage),
-        hint: t(ui.searchActionPrint),
-        icon: 'download',
-        run: () => window.print(),
-      });
+      // Dua berkas siap unduh, masing masing halaman tersendiri di /cetak/.
+      list.push(
+        {
+          id: 'action-dok-portofolio',
+          group: t(ui.searchGroupActions),
+          label: t(ui.unduhPortofolio),
+          hint: t(ui.searchActionPrint),
+          icon: 'download',
+          run: () => router.push('/cetak/portofolio/'),
+        },
+        {
+          id: 'action-dok-cv',
+          group: t(ui.searchGroupActions),
+          label: t(ui.unduhCV),
+          hint: t(ui.searchActionPrint),
+          icon: 'file-text',
+          run: () => router.push('/cetak/cv/'),
+        }
+      );
     }
 
     return list;

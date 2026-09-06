@@ -222,5 +222,13 @@
   "rights": {
     "id": "",
     "en": "All rights reserved."
+  },
+  "unduhPortofolio": {
+    "id": "Portofolio PDF",
+    "en": "Portfolio PDF"
+  },
+  "unduhCV": {
+    "id": "CV untuk lamaran",
+    "en": "CV for applications"
   }
 }

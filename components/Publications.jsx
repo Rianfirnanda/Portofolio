@@ -42,9 +42,28 @@ function PublicationCard({ item }) {
             />
           </button>
 
-          {open ? (
-            <p className="mt-3 border-l-2 border-accent/60 pl-4 text-body-sm text-muted">{abstract}</p>
-          ) : null}
+          {/*
+            Abstraknya selalu ada di halaman, cuma tingginya yang dilipat jadi
+            nol saat ditutup. Dulu abstrak ini hanya ditulis ke halaman setelah
+            tombolnya diklik, sehingga mesin pencari tidak pernah melihatnya
+            sama sekali. Padahal justru di situ isi risetnya.
+
+            Atribut inert membuat isi yang sedang terlipat tidak ikut dibacakan
+            pembaca layar dan tidak bisa dijangkau tombol Tab, jadi tetap benar
+            secara aksesibilitas.
+          */}
+          <div
+            inert={open ? undefined : ''}
+            className={`grid transition-[grid-template-rows] duration-300 ease-out print:grid-rows-[1fr] ${
+              open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+            }`}
+          >
+            <div className="overflow-hidden">
+              <p className="mt-3 border-l-2 border-accent/60 pl-4 text-body-sm text-muted">
+                {abstract}
+              </p>
+            </div>
+          </div>
         </>
       ) : null}
 

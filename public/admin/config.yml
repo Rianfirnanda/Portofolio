@@ -689,6 +689,7 @@ collections:
             widget: object
             fields:
               - { label: "Judul situs", name: "siteTitle", widget: "string", required: true, hint: "Tampil di tab browser dan hasil pencarian Google." }
+              - { label: "Kode verifikasi Google", name: "googleVerification", widget: "string", required: false, hint: "Dipakai sekali untuk membuktikan ke Google bahwa situs ini milikmu, lalu boleh dibiarkan terisi selamanya. Tempel hanya kode di dalam tanda kutip content=\"...\" yang diberikan Google Search Console. Kosongkan kalau belum mendaftar. Langkah lengkapnya ada di data/README.md bagian 21." }
               - label: "Deskripsi singkat"
                 name: "description"
                 widget: object

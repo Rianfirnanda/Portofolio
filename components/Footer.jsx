@@ -13,7 +13,7 @@ export default function Footer() {
   const showPrintLink = portfolio.appearance?.printLink !== false;
 
   return (
-    <footer className="border-t border-line px-4 py-10 sm:px-6">
+    <footer data-print="hide" className="border-t border-line px-4 py-10 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-sm">
@@ -67,17 +67,28 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2" data-print="hide">
             {t(ui.builtWith) ? <p className="text-xs text-subtle">{t(ui.builtWith)}</p> : null}
 
-            {/* Membuka dialog cetak browser. Gaya khusus @media print di
-                app/globals.css membuat hasilnya rapi sebagai PDF. */}
+            {/* Dua berkas siap unduh. Keduanya halaman tersendiri di bawah
+                /cetak/, dirancang khusus untuk kertas, bukan hasil mencetak
+                halaman ini apa adanya. Lihat components/DokumenPortofolio.jsx
+                dan components/DokumenCV.jsx. */}
             {showPrintLink ? (
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="inline-flex min-h-6 items-center gap-1.5 rounded-md py-1 text-xs font-semibold text-subtle transition-colors hover:text-fg"
-              >
-                <Icon name="download" className="h-3.5 w-3.5" />
-                {t(ui.printPage)}
-              </button>
+              <>
+                <Link
+                  href="/cetak/portofolio/"
+                  className="inline-flex min-h-6 items-center gap-1.5 rounded-md py-1 text-xs font-semibold text-subtle transition-colors hover:text-fg"
+                >
+                  <Icon name="download" className="h-3.5 w-3.5" />
+                  {t(ui.unduhPortofolio)}
+                </Link>
+
+                <Link
+                  href="/cetak/cv/"
+                  className="inline-flex min-h-6 items-center gap-1.5 rounded-md py-1 text-xs font-semibold text-subtle transition-colors hover:text-fg"
+                >
+                  <Icon name="file-text" className="h-3.5 w-3.5" />
+                  {t(ui.unduhCV)}
+                </Link>
+              </>
             ) : null}
           </div>
         </div>

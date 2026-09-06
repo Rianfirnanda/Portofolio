@@ -128,7 +128,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4">
+    <header data-print="hide" className="fixed inset-x-0 top-0 z-50 flex justify-center px-4">
       {/* Peredup halaman selama drawer terbuka. */}
       {open ? (
         <button

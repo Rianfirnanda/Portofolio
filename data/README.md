@@ -78,6 +78,11 @@ ganda pada setiap nama field.
 15. [Daftar nama ikon yang tersedia](#15-daftar-nama-ikon-yang-tersedia)
 16. [Menyalakan dan mematikan sentuhan interaktif](#16-menyalakan-dan-mematikan-sentuhan-interaktif)
 17. [Panel konten di /admin](#17-panel-konten-di-admin)
+18. [Menyalakan pemutar musik](#18-menyalakan-pemutar-musik)
+19. [Menerima masukan dan saran dari tamu](#19-menerima-masukan-dan-saran-dari-tamu)
+20. [Tempat berkas yang kamu unggah](#20-tempat-berkas-yang-kamu-unggah)
+21. [Dua berkas unduhan: portofolio dan CV](#21-dua-berkas-unduhan-portofolio-dan-cv)
+22. [Supaya muncul di Google](#22-supaya-muncul-di-google)
 
 ---
 
@@ -1057,3 +1062,143 @@ jarang berubah dan bukan hasil unggahan panel.
 
 Berkas di `public/media/` sengaja ikut masuk ke Git supaya jadi bagian dari
 repositori dan tidak bergantung pada layanan lain.
+
+---
+
+## 21. Dua berkas unduhan: portofolio dan CV
+
+Situs ini menyediakan dua berkas yang berbeda tujuan. Keduanya halaman
+tersendiri, bukan hasil mencetak halaman utama apa adanya.
+
+| Berkas | Alamat | Untuk apa |
+|---|---|---|
+| Portofolio | `/cetak/portofolio/` | Dikirim ke orang, dilampirkan di email, dicetak |
+| CV | `/cetak/cv/` | Dilamarkan ke lowongan kerja |
+
+Buka salah satunya, lalu klik **Simpan sebagai PDF** di bilah atas. Di dialog
+cetak, pilih tujuan **Save as PDF**. Ukuran kertas dan marginnya sudah diatur
+dari dalam, jadi tidak perlu kamu ubah.
+
+Tautan ke keduanya ada di footer situs, dan juga lewat pencarian cepat Ctrl+K.
+
+### Kenapa CV-nya polos
+
+CV itu sengaja dibuat sesederhana mungkin, dan itu bukan kemalasan desain.
+
+Sebagian besar lamaran kerja tidak langsung dibaca manusia. Berkasnya lebih
+dulu melewati mesin pelacak lamaran, yang membaca teksnya lalu memilah mana
+pendidikan, mana pengalaman, mana keahlian. Mesin seperti itu gampang
+tersandung, dan CV yang cantik di mata sering justru tidak terbaca olehnya.
+
+Yang dipatuhi CV ini:
+
+| Aturan | Alasannya |
+|---|---|
+| Satu kolom | Mesin membaca atas ke bawah, kolom mengacaukan urutannya |
+| Tanpa tabel | Isi tabel sering terbaca berantakan atau terlewat sama sekali |
+| Tanpa foto dan ikon | Gambar tidak terbaca, hanya menyita ruang |
+| Huruf Arial | Ada di semua sistem, tidak perlu disulih |
+| Judul baku | PENDIDIKAN, PENGALAMAN, dan seterusnya, mudah dikenali |
+| Teks sungguhan | Bisa disalin dan dicari, bukan gambar teks |
+
+Susunannya mengikuti pola Harvard: identitas ringkas di atas, lalu pendidikan,
+pengalaman, publikasi, kegiatan, sertifikasi, dan keahlian, masing masing dari
+yang terbaru.
+
+Dokumen portofolio sebaliknya. Di sana foto, warna aksen, dan tata letak dua
+kolom untuk sertifikasi justru membantu, karena yang membacanya manusia.
+
+### Isinya diambil dari mana
+
+Dari sumber yang sama dengan situs. Perbarui lewat panel, dan kedua berkas ikut
+berubah sendiri. Tidak ada berkas terpisah yang perlu kamu urus.
+
+Kolom yang kamu kosongkan akan dilewati, bukan dicetak sebagai baris kosong.
+Nilai yang cuma berisi tanda hubung juga diperlakukan sebagai kosong.
+
+### Nama instansi wajib diisi
+
+Ini penting untuk CV. Saat ini seluruh entri di menu **Pengalaman** punya kolom
+**Nama instansi** yang berisi tanda hubung saja. Akibatnya CV kamu memuat
+sembilan peran tanpa satu pun nama tempat bekerja.
+
+Bagi perekrut maupun mesin pelacak, nama instansi adalah bagian yang paling
+dicari. Tanpa itu, pengalaman kamu sulit dinilai.
+
+Buka panel, menu **Isi Halaman**, lalu **Pengalaman**, dan isi kolom
+**Nama instansi** di setiap entri. Contoh isian: `Universitas Bengkulu`,
+`Jurusan Administrasi Publik FISIP Universitas Bengkulu`. Kolom **Lokasi**
+sebaiknya ikut diisi, misalnya `Bengkulu, Indonesia`.
+
+---
+
+## 22. Supaya muncul di Google
+
+Sisi teknisnya sudah beres dan tidak ada yang perlu kamu kerjakan:
+
+| Bagian | Keadaan |
+|---|---|
+| `robots.txt` | Mengizinkan semua mesin pencari, menunjuk ke sitemap |
+| `sitemap.xml` | Dibuat otomatis, ikut bertambah setiap kamu menulis blog |
+| Judul dan deskripsi | Ada di setiap halaman |
+| Alamat kanonik | Ada, mencegah satu halaman terhitung dua kali |
+| Data terstruktur | Tipe `Person` lengkap dengan pendidikan, keahlian, dan media sosial |
+| Kartu berbagi | Gambar preview saat tautan dibagikan |
+
+Yang tersisa cuma memberi tahu Google bahwa situs ini ada. Google memang
+menemukan situs baru sendiri, tapi bisa makan waktu berminggu minggu. Mendaftar
+langsung memangkas itu jadi beberapa hari.
+
+### Mendaftar ke Google Search Console
+
+1. Buka `https://search.google.com/search-console`
+2. Klik **Add property**, pilih **URL prefix**
+3. Isi `https://rianfirnanda.vercel.app` lalu **Continue**
+4. Pada pilihan verifikasi, buka **HTML tag**. Akan muncul baris seperti:
+   `<meta name="google-site-verification" content="AbC123..." />`
+5. Salin **hanya bagian di dalam tanda kutip** setelah `content=`, jadi cuma
+   `AbC123...` saja
+6. Buka panel situsmu, menu **Pengaturan**, lalu **Pengaturan Situs**, isi kolom
+   **Kode verifikasi Google** dengan kode tadi, lalu simpan
+7. Tunggu Vercel selesai membangun, sekitar satu sampai dua menit
+8. Kembali ke Search Console, klik **Verify**
+
+Setelah terverifikasi, buka menu **Sitemaps** di sisi kiri, isi `sitemap.xml`,
+lalu **Submit**. Itu memberi tahu Google seluruh halaman yang kamu punya
+sekaligus.
+
+Kode verifikasinya cukup diisi sekali dan boleh dibiarkan terisi selamanya.
+
+### Yang membuat situs cepat naik
+
+Beberapa hal ini pengaruhnya nyata, dan semuanya ada di tanganmu:
+
+**Tulis blog secara berkala.** Halaman yang isinya bertambah dikunjungi ulang
+lebih sering oleh Google. Satu tulisan sebulan sudah cukup mengubah keadaan.
+
+**Pasang tautan situsmu di tempat lain.** Di profil LinkedIn, Instagram, GitHub,
+dan Google Scholar. Google menemukan situs baru dengan menyusuri tautan, jadi
+setiap tautan dari tempat yang sudah dikenalnya adalah jalan masuk.
+
+**Isi kolom Ringkasan tiap tulisan seperlunya.** Kalau dikosongkan memang
+diambil otomatis dari kalimat pertama, dan itu tidak selalu kalimat yang paling
+menjual di hasil pencarian.
+
+### Berapa lama menunggu
+
+Situs ini baru dibuat. Wajar kalau namamu belum muncul di Google sekarang.
+Biasanya beberapa hari setelah didaftarkan halaman utama sudah terindeks, dan
+beberapa minggu untuk mulai muncul di pencarian nama.
+
+Cara memeriksanya: ketik `site:rianfirnanda.vercel.app` di Google. Kalau sudah
+ada hasilnya, berarti situsmu sudah terindeks.
+
+### Halaman yang sengaja tidak diindeks
+
+Tiga halaman ini sengaja disembunyikan dari mesin pencari:
+
+| Halaman | Alasan |
+|---|---|
+| `/admin` | Panel konten, tidak ada gunanya di hasil pencarian |
+| `/cetak/portofolio/` | Isinya mengulang halaman utama |
+| `/cetak/cv/` | Sama, dan halaman kembar membuat Google bingung memilih |

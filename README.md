@@ -73,6 +73,12 @@ situs statis murni.
 | `app/blog/[slug]/page.js` | Halaman detail satu tulisan, dibuat otomatis dari isi `content/posts/`. |
 | `app/globals.css` | Token warna mode terang dan gelap, kelas `.glass`, keyframes, pengaturan kepekatan latar. |
 | `app/sitemap.js` dan `app/robots.js` | Membuat `sitemap.xml` dan `robots.txt` saat build. |
+| `app/cetak/portofolio/` dan `app/cetak/cv/` | Dua halaman dokumen siap disimpan sebagai PDF. |
+| `app/cetak.css` | Gaya kedua dokumen itu, termasuk ukuran kertas dan aturan pemenggalan halaman. |
+| `components/DokumenPortofolio.jsx` | Dokumen portofolio berwarna, untuk dibaca manusia. |
+| `components/DokumenCV.jsx` | CV satu kolom gaya Harvard, ramah mesin pelacak lamaran. |
+| `components/DokumenBilah.jsx` | Bilah tombol di atas dokumen, tidak ikut tercetak. |
+| `components/ChromeGate.jsx` | Menyembunyikan navbar dan footer di halaman dokumen. |
 | `app/not-found.js` | Halaman 404. |
 | `app/icon.png` dan `app/apple-icon.png` | Favicon dan ikon iOS, dibuat dari foto profil oleh `npm run assets`. |
 | `app/fonts/` | Berkas font variabel yang di-host sendiri. |
@@ -428,3 +434,29 @@ Tidak ada dependency lain. Ikon, animasi, dan sistem dua bahasa ditulis sendiri.
 
 Kolom **English** di seluruh panel boleh dikosongkan. Kalau kosong, versi Inggris
 situs memakai teks Indonesianya.
+
+---
+
+## 9. Dua berkas unduhan
+
+| Berkas | Alamat | Untuk siapa |
+| --- | --- | --- |
+| Portofolio | `/cetak/portofolio/` | Manusia. Berfoto, berwarna, sertifikasi dua kolom. |
+| CV | `/cetak/cv/` | Mesin pelacak lamaran dulu, baru perekrut. Satu kolom, Arial, tanpa gambar. |
+
+Keduanya halaman tersendiri yang dirancang khusus untuk kertas, bukan hasil
+mencetak halaman utama. Isinya diambil dari data yang sama, jadi ikut berubah
+setiap kamu memperbarui sesuatu lewat panel.
+
+Tautannya ada di footer dan di pencarian cepat Ctrl+K. Penjelasan lengkap
+beserta alasan di balik tiap keputusan desainnya ada di `data/README.md`
+bagian 21.
+
+## 10. Mesin pencari
+
+`robots.txt`, `sitemap.xml`, judul, deskripsi, alamat kanonik, dan data
+terstruktur `Person` semuanya sudah terpasang dan dibuat otomatis saat build.
+
+Yang masih perlu dikerjakan sekali: mendaftarkan situs ke Google Search Console
+dan mengisi kolom **Kode verifikasi Google** di panel. Langkahnya ada di
+`data/README.md` bagian 22.
