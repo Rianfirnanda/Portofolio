@@ -44,17 +44,6 @@
   ],
   "gallery": [
     {
-      "src": "/media/117893.jpg",
-      "alt": {
-        "id": "Rekrutmen Anggota Laboratorium Administrasi Publik",
-        "en": ""
-      },
-      "caption": {
-        "id": "Rekrutmen Anggota Laboratorium",
-        "en": ""
-      }
-    },
-    {
       "src": "/media/126577.jpg",
       "alt": {
         "id": "Pelatihan Penggunaan Aplikasi Smart-Mura DPRD Musi Rawas Oleh Laboratorium Administrasi Publik",
@@ -84,17 +73,6 @@
       },
       "caption": {
         "id": "Pemaparan NA Ranperda DPRD Musi Rawas Oleh Laboratorium Administrasi Publik",
-        "en": ""
-      }
-    },
-    {
-      "src": "/media/98193.jpg",
-      "alt": {
-        "id": "Ini saya ulang tahun hehe",
-        "en": ""
-      },
-      "caption": {
-        "id": "Ini saya ulang tahun hehe",
         "en": ""
       }
     },
@@ -161,6 +139,17 @@
       },
       "caption": {
         "id": "Press tour Kemndikbudristek dikti terkait Program MBKM tahun 2022",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/98193.jpg",
+      "alt": {
+        "id": "Ini saya ulang tahun hehe",
+        "en": ""
+      },
+      "caption": {
+        "id": "Ini saya ulang tahun hehe",
         "en": ""
       }
     }
