@@ -9,22 +9,16 @@
     "en": ""
   },
   "audio": {
-    "file": "/media/YTDown.com_YouTube_Nadin-Amizah-Tapi-Diterima-Official-Lyri_Media_ItvyueWMAjA_009_128k.mp3",
+    "file": "/media/NIDJI - Sumpah & Cinta Matiku (Official Music Video).mp3",
     "kind": "lagu",
-    "title": {
-      "id": "Tapi diterima - Nadin Amizah",
-      "en": ""
-    }
+    "title": null
   },
   "cover": "/media/128012.jpg",
   "coverAlt": null,
   "tags": [
     "Catatan Pribadi"
   ],
-  "excerpt": {
-    "id": "Test berita",
-    "en": "Test berita"
-  },
+  "excerpt": null,
   "featured": true,
   "draft": false
 }
