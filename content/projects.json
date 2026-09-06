@@ -37,27 +37,6 @@
       "featured": false
     },
     {
-      "name": "Fly Over Space",
-      "period": "2020 - 2022",
-      "org": {
-        "id": "Organisasi riset roket dan perangkat lunak",
-        "en": "Rocket research and software organisation"
-      },
-      "description": {
-        "id": "Organisasi yang menggabungkan riset roket dengan pengembangan perangkat lunak. Saya menangani sisi perangkat lunak pendukung riset dan merapikan dokumentasi teknis tim.",
-        "en": "An organisation that mixes rocket research with software development. I handled the software side supporting the research and kept the team technical documentation in order."
-      },
-      "tags": [
-        "Riset",
-        "Software Development",
-        "Kerja Tim"
-      ],
-      "image": "/images/projects/fly-over-space.svg",
-      "imageAlt": null,
-      "links": [],
-      "featured": false
-    },
-    {
       "name": "Website Jurusan Administrasi Publik",
       "period": "-",
       "org": null,
