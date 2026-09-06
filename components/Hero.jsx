@@ -145,7 +145,10 @@ export default function Hero() {
                 alt={t(profile.avatarAlt)}
                 width={640}
                 height={640}
-                loading="eager"
+                // Foto ini yang pertama dilihat pengunjung, jadi diunduh lebih
+                // dulu. Petunjuk ukurannya mengikuti lebar kolom fotonya.
+                priority
+                sizes="(max-width: 1024px) 304px, 384px"
                 className="aspect-square w-full rounded-[1.4rem] object-cover"
               />
 

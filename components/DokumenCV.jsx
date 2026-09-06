@@ -242,7 +242,14 @@ export default function DokumenCV() {
               <ul className="cv-daftar">
                 {certifications.map((item, i) => (
                   <li key={i}>
-                    {[terisi(t(item.name)), terisi(t(item.issuer)), terisi(item.year)]
+                    {/* Skor ikut dicantumkan karena untuk ujian seperti UKBI dan
+                        TOEFL, angkanya justru yang paling dicari perekrut. */}
+                    {[
+                      terisi(t(item.name)),
+                      terisi(t(item.issuer)),
+                      terisi(item.year),
+                      terisi(t(item.score)),
+                    ]
                       .filter(Boolean)
                       .join(', ')}
                   </li>

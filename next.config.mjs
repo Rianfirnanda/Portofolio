@@ -21,9 +21,27 @@ const basePath = rawBasePath && !rawBasePath.startsWith('/') ? `/${rawBasePath}`
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Seluruh gambar dipasang lewat tag <img> biasa di komponen SmartImage,
-  // jadi pengoptimal gambar bawaan Next.js tidak dipakai sama sekali.
-  images: { unoptimized: true },
+  /*
+    PENGOPTIMAL GAMBAR
+
+    Dulu ini dimatikan karena situsnya disajikan sebagai berkas statis di
+    GitHub Pages, dan di sana tidak ada yang bisa memproses gambar. Setelah
+    pindah ke Vercel, pengoptimalnya tersedia penuh dan sangat berguna:
+
+      ukuran menyesuaikan   ponsel menerima gambar seukuran layarnya, bukan
+                            berkas asli 5 MB dari kamera
+      format modern         AVIF dan WebP, jauh lebih kecil dari JPEG
+      disimpan di tepi      hasil olahannya dipakai ulang selama 31 hari
+
+    Tampilan gambarnya sama persis. Yang berubah cuma berapa banyak data yang
+    perlu diunduh pengunjung.
+  */
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    // Gambar hasil olahan disimpan lama karena berkas sumbernya jarang
+    // berubah. Kalau kamu mengganti gambar, namanya biasanya ikut berganti.
+    minimumCacheTTL: 2678400,
+  },
 
   // Setiap halaman punya alamat berakhiran garis miring, misalnya /blog/.
   trailingSlash: true,

@@ -88,7 +88,8 @@ export default function PostArticle({ post, others = [], bodyHtml }) {
               alt={t(post.coverAlt) || t(post.title)}
               width={1200}
               height={630}
-              loading="eager"
+              priority
+              sizes="(max-width: 768px) 100vw, 768px"
               className="mt-8 aspect-16/9 w-full rounded-3xl border border-line object-cover"
             />
           </Reveal>

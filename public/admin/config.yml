@@ -35,16 +35,26 @@ publish_mode: simple
 media_folder: "public/media"
 public_folder: "/media"
 
-# Batas ukuran satu berkas: 40 MB.
+# Batas ukuran satu berkas: 10 MB.
 #
-# Angka ini dipilih dengan sengaja. Semua berkas yang kamu unggah ikut tersimpan
-# di repositori, dan repositori yang terlalu gemuk membuat situs makin lama
-# dibangun setiap kali kamu menyimpan perubahan. Untuk video panjang, lebih baik
-# unggah ke YouTube lalu tempel tautannya di dalam tulisan.
+# Angka ini diturunkan dari 40 MB setelah unggahan sering gagal. Sebabnya
+# begini: setiap berkas dikirim ke GitHub lewat sambungan internetmu sebagai
+# satu paket utuh. Berkas besar di jaringan ponsel sering putus di tengah jalan,
+# dan yang terlihat cuma pesan gagal tanpa penjelasan.
+#
+# Dengan batas 10 MB, berkas yang jelas terlalu besar ditolak lebih awal dengan
+# pesan yang jelas, bukan gagal setelah kamu menunggu lama.
+#
+# TIGA HAL YANG MEMBUAT UNGGAHAN LEBIH LANCAR
+#   1. Unggah satu berkas dulu, tunggu selesai, baru berkas berikutnya.
+#      Beberapa unggahan sekaligus bisa saling berebut dan salah satu gagal.
+#   2. Foto tidak perlu ukuran asli kamera. Situs memperkecilnya sendiri, jadi
+#      lebar 1600 piksel sudah lebih dari cukup dan ukurannya jauh lebih ringan.
+#   3. Video panjang unggah ke YouTube, lalu tempel tautannya di tulisan.
 media_libraries:
   default:
     config:
-      max_file_size: 41943040
+      max_file_size: 10485760
 
 collections:
   # ------------------------------------------------------------------------
@@ -320,6 +330,7 @@ collections:
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
               - { label: "Penerbit", name: "issuer", widget: "string" }
               - { label: "Tahun", name: "year", widget: "string", required: false }
+              - { label: "Skor atau predikat", name: "score", widget: "string", required: false, hint: "Untuk ujian yang punya nilai, misalnya UKBI atau TOEFL. Tulis apa adanya beserta satuannya: \"Skor 543, Predikat Unggul\" atau \"TOEFL ITP 520\". Kosongkan untuk sertifikasi biasa, dan lencananya tidak ikut tampil." }
               - { label: "Kelompok", name: "group", widget: "string", required: false, hint: "Pengelompokan bebas, misalnya AI & Cloud atau Keamanan." }
               - { label: "Tautan kredensial", name: "credentialUrl", widget: "string", required: false, hint: "Kosongkan untuk menyembunyikan tombol Lihat kredensial." }
       - name: "education"

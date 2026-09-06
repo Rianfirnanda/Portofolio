@@ -461,3 +461,33 @@ terstruktur `Person` semuanya sudah terpasang dan dibuat otomatis saat build.
 Yang masih perlu dikerjakan sekali: mendaftarkan situs ke Google Search Console
 dan mengisi kolom **Kode verifikasi Google** di panel. Langkahnya ada di
 `data/README.md` bagian 22.
+
+---
+
+## 11. Optimalisasi performa
+
+Pengoptimal gambar bawaan Next.js dulu dimatikan karena situsnya disajikan
+sebagai berkas statis di GitHub Pages. Setelah pindah ke Vercel, pengaturan itu
+tertinggal dan tidak pernah dinyalakan lagi, padahal di sana tersedia penuh.
+
+Hasil pengukuran di ponsel dengan prosesor diperlambat empat kali:
+
+| Ukuran | Sebelum | Sesudah |
+| --- | --- | --- |
+| Total diunduh | 4,62 MB | 1,14 MB |
+| Di antaranya gambar | 3,80 MB | 0,27 MB |
+| Waktu tampil pertama | 492 ms | 308 ms |
+| Waktu terblokir | 311 ms | 134 ms |
+
+Dua perubahan yang menghasilkan itu:
+
+**Gambar dioptimalkan.** Ponsel menerima gambar seukuran layarnya dalam format
+AVIF atau WebP, bukan berkas asli dari kamera. Hasil olahannya disimpan di tepi
+jaringan selama 31 hari. Tampilannya sama persis.
+
+**Pemutar musik dan pencarian cepat dimuat belakangan.** Keduanya baru berguna
+setelah pengunjung melakukan sesuatu, jadi kodenya dipisah dan diambil setelah
+halaman siap. Pintasan Ctrl+K tetap bekerja.
+
+Berkas media yang diunggah lewat panel adalah faktor terbesar berikutnya. Lihat
+`data/README.md` bagian 24.

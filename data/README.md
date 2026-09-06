@@ -83,6 +83,8 @@ ganda pada setiap nama field.
 20. [Tempat berkas yang kamu unggah](#20-tempat-berkas-yang-kamu-unggah)
 21. [Dua berkas unduhan: portofolio dan CV](#21-dua-berkas-unduhan-portofolio-dan-cv)
 22. [Supaya muncul di Google](#22-supaya-muncul-di-google)
+23. [Statistik pengunjung di footer](#23-statistik-pengunjung-di-footer)
+24. [Kalau unggahan sering gagal](#24-kalau-unggahan-sering-gagal)
 
 ---
 
@@ -1202,3 +1204,83 @@ Tiga halaman ini sengaja disembunyikan dari mesin pencari:
 | `/admin` | Panel konten, tidak ada gunanya di hasil pencarian |
 | `/cetak/portofolio/` | Isinya mengulang halaman utama |
 | `/cetak/cv/` | Sama, dan halaman kembar membuat Google bingung memilih |
+
+---
+
+## 23. Statistik pengunjung di footer
+
+Kotak kecil di footer berisi total kunjungan, kunjungan hari ini, dan grafik
+tujuh hari terakhir.
+
+### Yang disimpan dan yang tidak
+
+Yang disimpan cuma **angka**. Tidak ada alamat IP, tidak ada identitas, tidak
+ada catatan siapa membuka halaman apa. Karena itu situs ini tidak butuh banner
+izin cookie, dan tidak ada data pribadi pengunjung yang tersimpan di mana pun.
+
+Satu kunjungan dihitung sekali per sesi peramban. Pengunjung yang berpindah
+dari halaman utama ke blog lalu kembali tetap terhitung satu.
+
+### Memasangnya, sekitar tiga menit
+
+Angkanya perlu tempat disimpan. Vercel menyediakannya gratis:
+
+1. Buka dashboard Vercel, pilih proyek ini, masuk ke tab **Storage**
+2. Klik **Create Database**, pilih **Upstash** lalu **Redis**
+3. Beri nama bebas, misalnya `portofolio-statistik`, pilih region terdekat
+   seperti Singapore, lalu buat
+4. Saat ditanya mau dihubungkan ke proyek mana, pilih proyek ini dan
+   **Connect**
+5. Deploy ulang lewat tab Deployments
+
+Vercel mengisi sendiri dua environment variable yang dibutuhkan
+(`KV_REST_API_URL` dan `KV_REST_API_TOKEN`), jadi tidak ada yang perlu kamu
+salin tempel.
+
+Paket gratisnya jauh lebih dari cukup untuk situs portofolio.
+
+### Kalau belum dipasang
+
+Seluruh kotak statistik tidak ikut tampil, dan tidak ada yang rusak. Situs
+berjalan normal seperti biasa. Jadi kamu boleh memasangnya kapan saja, atau
+tidak sama sekali.
+
+---
+
+## 24. Kalau unggahan sering gagal
+
+Ini keluhan yang wajar, dan sebabnya bisa ditebak dari isi folder medianya.
+
+### Kenapa gagal
+
+Setiap berkas yang kamu unggah dikirim ke GitHub lewat sambungan internetmu
+sebagai satu paket utuh. Berkas besar di jaringan ponsel sering putus di tengah
+jalan, dan yang terlihat cuma pesan gagal tanpa penjelasan.
+
+Batas ukuran satu berkas sekarang **10 MB**, diturunkan dari 40 MB. Dengan batas
+ini, berkas yang jelas terlalu besar ditolak lebih awal dengan pesan yang jelas,
+bukan gagal setelah kamu menunggu lama.
+
+### Tiga hal yang membuatnya lancar
+
+**Unggah satu per satu.** Tunggu satu selesai, baru mulai berikutnya. Beberapa
+unggahan sekaligus bisa saling berebut, dan salah satunya gagal.
+
+**Foto tidak perlu ukuran asli kamera.** Situs memperkecilnya sendiri sebelum
+dikirim ke pengunjung, jadi mengunggah foto 5 MB dari kamera cuma membebani
+proses unggah tanpa membuat tampilannya lebih bagus. Lebar 1600 piksel sudah
+lebih dari cukup.
+
+**Video panjang unggah ke YouTube.** Lalu tempel tautannya di dalam tulisan.
+
+### Rapikan berkas yang menganggur
+
+Folder `public/media/` ikut dikirim ulang setiap kali situs dibangun. Makin
+banyak isinya, makin lambat semuanya, termasuk panel itu sendiri.
+
+Buka panel, klik ikon gambar di pojok kiri atas untuk membuka pustaka media,
+lalu hapus berkas yang sudah tidak dipakai. Yang paling berpengaruh adalah
+berkas lagu, karena ukurannya jauh lebih besar daripada foto.
+
+Berhati hatilah menghapus, karena berkas yang masih dipakai akan membuat
+gambarnya hilang dari situs.

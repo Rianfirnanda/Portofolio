@@ -12,8 +12,7 @@ import ScrollProgress from '@/components/ScrollProgress';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
-import CommandPalette from '@/components/CommandPalette';
-import MusicPlayer from '@/components/MusicPlayer';
+import PerabotTunda from '@/components/PerabotTunda';
 import ChromeGate from '@/components/ChromeGate';
 import './globals.css';
 
@@ -181,8 +180,9 @@ export default function RootLayout({ children }) {
               <ChromeGate>
                 <Footer />
                 <BackToTop />
-                <MusicPlayer />
-                <CommandPalette posts={searchablePosts} />
+                {/* Pemutar musik dan pencarian cepat dimuat belakangan, lihat
+                    components/PerabotTunda.jsx. */}
+                <PerabotTunda posts={searchablePosts} />
               </ChromeGate>
             </LightboxProvider>
           </LanguageProvider>

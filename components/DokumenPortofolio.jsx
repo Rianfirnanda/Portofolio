@@ -244,7 +244,9 @@ export default function DokumenPortofolio() {
                       {t(item.name)}
                     </p>
                     <p className="dok-tag" style={{ marginTop: '0.05rem' }}>
-                      {[terisi(t(item.issuer)), terisi(item.year)].filter(Boolean).join(' · ')}
+                      {[terisi(t(item.issuer)), terisi(item.year), terisi(t(item.score))]
+                        .filter(Boolean)
+                        .join(' · ')}
                     </p>
                   </div>
                 ))}

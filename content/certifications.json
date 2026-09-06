@@ -4,6 +4,7 @@
       "name": "Generative AI Leader",
       "issuer": "Google Cloud",
       "year": "2026",
+      "score": "",
       "group": "AI & Cloud",
       "credentialUrl": ""
     },
@@ -11,6 +12,7 @@
       "name": "AI Fluency",
       "issuer": "Anthropic",
       "year": "2026",
+      "score": "",
       "group": "AI & Cloud",
       "credentialUrl": ""
     },
@@ -18,6 +20,7 @@
       "name": "AI Fundamentals",
       "issuer": "Google",
       "year": "2026",
+      "score": "",
       "group": "AI & Cloud",
       "credentialUrl": ""
     },
@@ -25,6 +28,7 @@
       "name": "Start Writing Prompts like a Pro",
       "issuer": "Google",
       "year": "2026",
+      "score": "",
       "group": "AI & Cloud",
       "credentialUrl": ""
     },
@@ -32,6 +36,7 @@
       "name": "AWS Educate Machine Learning Foundations",
       "issuer": "Amazon Web Services",
       "year": "2026",
+      "score": "",
       "group": "AI & Cloud",
       "credentialUrl": ""
     },
@@ -39,6 +44,7 @@
       "name": "Foundations of Cybersecurity",
       "issuer": "Google",
       "year": "2025",
+      "score": "",
       "group": "Keamanan",
       "credentialUrl": ""
     },
@@ -46,6 +52,7 @@
       "name": "Certified Cyber Security Analyst (C3SA)",
       "issuer": "CyberWarFare Labs",
       "year": "2025",
+      "score": "",
       "group": "Keamanan",
       "credentialUrl": ""
     },
@@ -56,6 +63,7 @@
       },
       "issuer": "BNSP",
       "year": "2022",
+      "score": "",
       "group": "Perangkat Lunak",
       "credentialUrl": ""
     },
@@ -63,6 +71,7 @@
       "name": "Game Development",
       "issuer": "Direktorat SMK",
       "year": "2021",
+      "score": "",
       "group": "Perangkat Lunak",
       "credentialUrl": ""
     },
@@ -73,6 +82,7 @@
       },
       "issuer": "BNSP & Digitalent Kominfo",
       "year": "2022",
+      "score": "",
       "group": "Desain",
       "credentialUrl": ""
     },
@@ -80,6 +90,7 @@
       "name": "Operator Komputer Madya",
       "issuer": "Kominfo",
       "year": "2024",
+      "score": "",
       "group": "Desain",
       "credentialUrl": ""
     },
@@ -90,6 +101,7 @@
       },
       "issuer": "Badan Bahasa",
       "year": "2022",
+      "score": "",
       "group": "Bahasa",
       "credentialUrl": ""
     },
@@ -100,6 +112,7 @@
       },
       "issuer": "UPA Bahasa Universitas Bengkulu",
       "year": "2026",
+      "score": "",
       "group": "Bahasa",
       "credentialUrl": ""
     }

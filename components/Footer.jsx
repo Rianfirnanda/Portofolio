@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
 import Icon from '@/components/Icon';
+import StatistikPengunjung from '@/components/StatistikPengunjung';
 
 /** Footer: identitas singkat, tautan sosial, kredit, dan tombol ke atas. */
 export default function Footer() {
@@ -57,6 +58,10 @@ export default function Footer() {
             ))}
           </ul>
         ) : null}
+
+        {/* Penghitung kunjungan. Menyembunyikan dirinya sendiri kalau
+            penyimpanannya belum dipasang, lihat lib/kunjungan.js. */}
+        <StatistikPengunjung />
 
         {/* Tombol kembali ke atas sengaja tidak diulang di sini karena sudah
             ada tombol melayang di sudut kanan bawah, lihat BackToTop.jsx. */}

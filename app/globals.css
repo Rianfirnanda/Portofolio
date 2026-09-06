@@ -552,9 +552,23 @@ time,
     diwarnai aksen, sisanya abu abu. Persentasenya dikirim komponen lewat
     variabel --lewat.
   */
+  /*
+    Garisnya tetap terlihat setipis 5 piksel, tetapi area yang bisa disentuh
+    dibuat setinggi 24 piksel. Sebelumnya seluruh elemen memang cuma 5 piksel,
+    dan di layar sentuh itu nyaris mustahil digeser dengan jari.
+
+    Caranya: elemennya dibuat tinggi dan bening, lalu garisnya digambar
+    terpisah lewat bagian "track". Tampilannya sama persis.
+  */
   .pemutar-garis {
     -webkit-appearance: none;
     appearance: none;
+    height: 1.5rem;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .pemutar-garis::-webkit-slider-runnable-track {
     height: 5px;
     border-radius: 999px;
     background: linear-gradient(
@@ -564,13 +578,26 @@ time,
       var(--line-strong) var(--lewat, 0%),
       var(--line-strong) 100%
     );
-    cursor: pointer;
   }
+  .pemutar-garis::-moz-range-track {
+    height: 5px;
+    border-radius: 999px;
+    background: linear-gradient(
+      to right,
+      var(--accent-1) 0%,
+      var(--accent-2) var(--lewat, 0%),
+      var(--line-strong) var(--lewat, 0%),
+      var(--line-strong) 100%
+    );
+  }
+
   .pemutar-garis::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 14px;
     height: 14px;
+    /* Menengahkan bulatan pada garis setebal 5 piksel: (5 - 14) / 2. */
+    margin-top: -4.5px;
     border: 2px solid var(--bg);
     border-radius: 50%;
     background: var(--accent-1);

@@ -38,6 +38,16 @@ export default function Certifications() {
                     {item.year ? <span> &bull; {item.year}</span> : null}
                   </p>
 
+                  {/* Skor untuk sertifikasi yang memang berupa ujian bernilai,
+                      seperti UKBI dan TOEFL. Kosongkan untuk sertifikasi biasa
+                      dan lencana ini tidak ikut tampil. */}
+                  {t(item.score) ? (
+                    <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-accent/35 bg-accent/10 px-2.5 py-1 text-xs font-semibold text-accent">
+                      <Icon name="star" className="h-3 w-3" />
+                      {t(item.score)}
+                    </p>
+                  ) : null}
+
                   {item.credentialUrl ? (
                     <a
                       href={item.credentialUrl}
