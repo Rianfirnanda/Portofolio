@@ -282,11 +282,11 @@
     },
     {
       "role": {
-        "id": "Volunteer",
-        "en": "Volunteer"
+        "id": "Volunteer SDGs Center Universitas Bengkulu",
+        "en": ""
       },
       "org": {
-        "id": "-",
+        "id": "SDGs Center Universitas Bengkulu",
         "en": ""
       },
       "type": {
@@ -307,7 +307,7 @@
         "Pelibatan Masyarakat",
         "Dukungan Acara"
       ],
-      "image": null,
+      "image": "/media/1730043733964.jpg",
       "imageAlt": null,
       "logo": null,
       "highlight": false
