@@ -1,6 +1,7 @@
 {
   "meta": {
     "siteTitle": "Rian Firnanda Irsyadani | Portofolio",
+    "googleVerification": "",
     "description": {
       "id": "Portofolio Rian Firnanda Irsyadani. Menggabungkan teknologi informasi dan administrasi publik untuk membenahi layanan pemerintahan.",
       "en": "Portfolio of Rian Firnanda Irsyadani. Bringing information technology and public administration together to improve government services."
@@ -23,8 +24,7 @@
     "locale": "id",
     "defaultTheme": "dark",
     "themeColorLight": "#f5f7fc",
-    "themeColorDark": "#05070f",
-    "googleVerification": ""
+    "themeColorDark": "#05070f"
   },
   "appearance": {
     "spotlight": true,
