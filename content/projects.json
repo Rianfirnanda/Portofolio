@@ -56,6 +56,43 @@
       "imageAlt": null,
       "links": [],
       "featured": false
+    },
+    {
+      "name": "Website Jurusan Administrasi Publik",
+      "period": "-",
+      "org": null,
+      "description": {
+        "id": "Mendesain ulang template wordpress yang terinstall sekaligus menjadi admin pengelola website Jurusan.",
+        "en": ""
+      },
+      "tags": [],
+      "image": "/media/Screenshot 2026-09-06 214847.png",
+      "imageAlt": null,
+      "links": [],
+      "featured": false
+    },
+    {
+      "name": "Website Laboratorium Administrasi Publik",
+      "period": "-",
+      "org": null,
+      "description": {
+        "id": "Mendesain ulang template wordpress yang terinstall sekaligus menjadi admin pengelola website laboratorium.",
+        "en": ""
+      },
+      "tags": [],
+      "image": "/media/pasted-image-1788706241892.png",
+      "imageAlt": null,
+      "links": [
+        {
+          "label": {
+            "id": "https://social.unib.ac.id/bpalab/",
+            "en": ""
+          },
+          "href": "https://social.unib.ac.id/bpalab/",
+          "icon": ""
+        }
+      ],
+      "featured": false
     }
   ]
 }
