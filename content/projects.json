@@ -3,7 +3,7 @@
     {
       "name": "SobatKoding",
       "period": "2021 - 2022",
-      "org": "SMKN 1 Kota Bengkulu",
+      "org": null,
       "description": {
         "id": "Usaha layanan digital yang saya bangun bareng teman-teman sekolah. Kami mengerjakan aplikasi dan website untuk klien kecil, sekaligus membuka jasa pengerjaan dokumen perkantoran seperti Word, Excel, dan PowerPoint untuk mahasiswa dan UMKM sekitar.",
         "en": "A digital service venture I built with school friends. We took on apps and websites for small clients, and also offered office document work in Word, Excel, and PowerPoint for students and nearby small businesses."
@@ -13,15 +13,15 @@
         "Wirausaha",
         "Produktivitas Kantor"
       ],
-      "image": "/images/projects/sobatkoding.svg",
-      "imageAlt": "Sampul proyek SobatKoding",
+      "image": "",
+      "imageAlt": null,
       "links": [],
       "featured": true
     },
     {
       "name": "Health Hero",
       "period": "2021",
-      "org": "Direktorat SMK",
+      "org": null,
       "description": {
         "id": "Proyek kolaboratif tingkat nasional bersama Direktorat SMK yang mengangkat tema kesehatan. Saya masuk di sisi pengembangan sekaligus penyusunan aset digital produknya.",
         "en": "A national level collaborative project with Direktorat SMK on a health theme. I worked on the development side and on preparing the product digital assets."
@@ -32,7 +32,7 @@
         "Kesehatan"
       ],
       "image": "/images/projects/health-hero.svg",
-      "imageAlt": "Sampul proyek Health Hero",
+      "imageAlt": null,
       "links": [],
       "featured": false
     },
@@ -53,7 +53,7 @@
         "Kerja Tim"
       ],
       "image": "/images/projects/fly-over-space.svg",
-      "imageAlt": "Sampul proyek Fly Over Space",
+      "imageAlt": null,
       "links": [],
       "featured": false
     }
