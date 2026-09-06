@@ -15,7 +15,8 @@
     "label": {
       "id": "Terbuka untuk peluang kerja",
       "en": "Open to work"
-    }
+    },
+    "dotColor": "#10b981"
   },
   "avatar": "/images/profile.jpg",
   "avatarFallback": "/images/profile.jpg",

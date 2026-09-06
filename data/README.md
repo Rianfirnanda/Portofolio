@@ -86,6 +86,7 @@ ganda pada setiap nama field.
 23. [Statistik pengunjung di footer](#23-statistik-pengunjung-di-footer)
 24. [Kalau unggahan sering gagal](#24-kalau-unggahan-sering-gagal)
 25. [Gambar preview saat tautan dibagikan](#25-gambar-preview-saat-tautan-dibagikan)
+26. [Mengubah status di halaman depan](#26-mengubah-status-di-halaman-depan)
 
 ---
 
@@ -1332,3 +1333,45 @@ lama. Cara memaksanya menyegarkan:
 Cara memeriksa cepat sebelum membagikan: buka
 `developers.facebook.com/tools/debug`, tempel tautannya, dan lihat apakah
 gambarnya muncul di sana.
+
+---
+
+## 26. Mengubah status di halaman depan
+
+Kapsul kecil di atas namamu, yang sekarang bertuliskan `Terbuka untuk peluang
+kerja` dengan titik hijau berkedip. Semuanya bisa kamu atur.
+
+Panel, menu **Pengaturan**, lalu **Profil Diri**, bagian **Status Ketersediaan**.
+
+| Isian | Fungsinya |
+|---|---|
+| Tampilkan titik berkedip | Hilangkan centangnya kalau ingin teksnya saja |
+| Teks status | Bebas kamu tulis apa saja |
+| Warna titik | Pemilih warna, bebas |
+
+### Teksnya bebas
+
+Tidak harus soal pekerjaan. Beberapa contoh yang masuk akal:
+
+- `Sedang menyelesaikan skripsi`
+- `Terbuka untuk kolaborasi riset`
+- `Sibuk sampai Desember`
+- `Menerima proyek freelance`
+
+Kosongkan kedua kolom teksnya, dan seluruh kapsul status hilang dari halaman.
+
+### Warna yang lazim dipakai
+
+| Warna | Kode | Biasanya untuk |
+|---|---|---|
+| Hijau | `#10b981` | Terbuka, tersedia |
+| Kuning | `#f59e0b` | Sedang sibuk, terbatas |
+| Merah | `#ef4444` | Tidak tersedia |
+| Biru | `#3b82f6` | Kabar netral, bukan soal ketersediaan |
+| Ungu | `#a855f7` | Mengikuti warna aksen situs |
+
+Pilih warna yang cukup terang. Warna yang terlalu gelap akan tenggelam di mode
+gelap, dan yang terlalu pucat hilang di mode terang. Lima warna di atas sudah
+saya periksa terbaca jelas di keduanya.
+
+Kalau kolom warnanya dikosongkan, dipakai hijau seperti semula.

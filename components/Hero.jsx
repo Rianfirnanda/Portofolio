@@ -36,13 +36,22 @@ export default function Hero() {
           {profile.availability?.label ? (
             <Reveal>
               <p className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted">
+                {/*
+                  Titik status. Warnanya kamu atur sendiri lewat panel, di menu
+                  Profil Diri bagian Status Ketersediaan. Kalau dikosongkan,
+                  dipakai hijau seperti semula.
+                */}
                 {profile.availability.available ? (
-                  <span className="relative flex h-2 w-2" aria-hidden="true">
+                  <span
+                    className="relative flex h-2 w-2"
+                    aria-hidden="true"
+                    style={{ color: profile.availability.dotColor || '#10b981' }}
+                  >
                     <span
-                      className="absolute inline-flex h-full w-full rounded-full bg-emerald-500"
+                      className="absolute inline-flex h-full w-full rounded-full bg-current"
                       style={{ animation: 'pulse-dot 2.4s ease-in-out infinite' }}
                     />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-current" />
                   </span>
                 ) : null}
                 {t(profile.availability.label)}

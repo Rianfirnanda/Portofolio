@@ -586,15 +586,17 @@ collections:
             name: "availability"
             widget: object
             fields:
-              - { label: "Sedang terbuka untuk peluang", name: "available", widget: "boolean", default: true }
+              - { label: "Tampilkan titik berkedip", name: "available", widget: "boolean", default: true, hint: "Hilangkan centangnya kalau kamu ingin teksnya saja, tanpa titik di sebelah kiri." }
               - label: "Teks status"
                 name: "label"
                 widget: object
                 collapsed: false
                 required: true
+                hint: "Bebas kamu tulis apa saja. Contoh: Terbuka untuk peluang kerja, Sedang menyelesaikan skripsi, Sibuk sampai Desember, atau Terbuka untuk kolaborasi riset. Kosongkan keduanya untuk menyembunyikan seluruh kapsul status."
                 fields:
                   - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - { label: "Warna titik", name: "dotColor", widget: "color", required: false, allowInput: true, default: "#10b981", hint: "Warna bebas. Yang lazim dipakai: hijau #10b981 untuk terbuka, kuning #f59e0b untuk sedang sibuk, merah #ef4444 untuk tidak tersedia, biru #3b82f6 untuk kabar netral. Pilih warna yang cukup terang supaya tetap terlihat di mode gelap maupun terang." }
           - { label: "Foto profil", name: "avatar", widget: "image", hint: "Bentuk persegi, minimal 640x640. Setelah diganti, jalankan npm run assets agar favicon dan gambar preview ikut diperbarui." }
           - { label: "Foto cadangan", name: "avatarFallback", widget: "image", required: false, hint: "Dipakai kalau foto utama gagal dimuat." }
           - label: "Keterangan foto untuk pembaca layar"
