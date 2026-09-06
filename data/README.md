@@ -87,6 +87,7 @@ ganda pada setiap nama field.
 24. [Kalau unggahan sering gagal](#24-kalau-unggahan-sering-gagal)
 25. [Gambar preview saat tautan dibagikan](#25-gambar-preview-saat-tautan-dibagikan)
 26. [Mengubah status di halaman depan](#26-mengubah-status-di-halaman-depan)
+27. [Kalau panel berat atau Chrome menutup sendiri di ponsel](#27-kalau-panel-berat-atau-chrome-menutup-sendiri-di-ponsel)
 
 ---
 
@@ -1375,3 +1376,60 @@ gelap, dan yang terlalu pucat hilang di mode terang. Lima warna di atas sudah
 saya periksa terbaca jelas di keduanya.
 
 Kalau kolom warnanya dikosongkan, dipakai hijau seperti semula.
+
+---
+
+## 27. Kalau panel berat atau Chrome menutup sendiri di ponsel
+
+Chrome menutup sendiri bukan karena panelnya lambat, tapi karena **memori
+ponselnya habis**. Penyebabnya hampir selalu satu: foto yang terlalu besar.
+
+### Kenapa foto besar membuat memori habis
+
+Foto dari kamera ponsel biasanya 12 megapiksel atau lebih. Saat panel
+menampilkan daftar media, tiap foto harus dibongkar dulu di memori untuk
+dijadikan gambar kecil, dan satu foto sebesar itu memakan sekitar **48 MB RAM**.
+
+Dengan puluhan foto ditampilkan sekaligus, memori Chrome habis dalam hitungan
+detik dan tabnya ditutup paksa oleh sistem.
+
+### Yang sudah diperbaiki, tanpa perlu kamu kerjakan
+
+**Foto diperkecil otomatis saat diunggah.** Panel memperkecilnya di ponselmu
+sendiri sebelum dikirim, ke lebar maksimal 2000 piksel. Foto 5 MB dari kamera
+biasanya menyusut jadi sekitar 300 KB. Unggahannya juga jadi jauh lebih cepat
+dan lebih jarang gagal.
+
+**Daftar panjang kini tampil terlipat.** Membuka menu Pengalaman dulu memuat
+sembilan entri sekaligus beserta seluruh kolomnya, ratusan isian dalam satu
+layar. Sekarang tiap entri tampil sebagai satu baris ringkas, dan hanya terbuka
+saat kamu mengetuknya.
+
+**Foto lama yang terlanjur besar sudah diperkecil.** 31 berkas, dari 47,7 MB
+menjadi 11,8 MB. Nama berkasnya tidak diubah sama sekali, jadi tidak ada rujukan
+yang putus, dan yang asli tetap tersimpan di riwayat Git.
+
+### Kalau suatu saat berat lagi
+
+Jalankan ini di komputer:
+
+```bash
+npm run kecilkan-media
+```
+
+Tambahkan `--coba` di belakangnya untuk melihat dulu apa yang akan terjadi tanpa
+mengubah apa pun. Berkas yang sudah ringan dilewati, dan formatnya dipertahankan
+supaya nama berkasnya tetap sama.
+
+### Tiga kebiasaan yang membantu
+
+**Hapus berkas yang tidak dipakai.** Buka pustaka media lewat ikon gambar di
+pojok kiri atas panel, lalu hapus yang menganggur. Berkas lagu paling
+berpengaruh karena ukurannya jauh lebih besar daripada foto.
+
+**Tutup tab lain saat mengedit.** Chrome membagi memori antar tab, dan panel ini
+memang butuh cukup banyak.
+
+**Untuk pekerjaan besar, pakai komputer.** Menambah satu tulisan atau mengganti
+satu foto nyaman dari ponsel. Merapikan sepuluh entri pengalaman sekaligus lebih
+baik dari layar besar.

@@ -14,7 +14,8 @@
     "start": "next start",
     "assets": "node --no-warnings scripts/generate-assets.mjs",
     "placeholders": "node --no-warnings scripts/generate-placeholders.mjs",
-    "og": "node scripts/generate-og.mjs"
+    "og": "node scripts/generate-og.mjs",
+    "kecilkan-media": "node scripts/shrink-media.mjs"
   },
   "dependencies": {
     "marked": "^18.0.11",

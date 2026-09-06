@@ -56,6 +56,26 @@ media_libraries:
     config:
       max_file_size: 10485760
 
+      # FOTO DIPERKECIL OTOMATIS SAAT DIUNGGAH
+      #
+      # Ini yang membuat panel tidak lagi berat di ponsel.
+      #
+      # Foto dari kamera ponsel biasanya 12 megapiksel atau lebih. Saat panel
+      # menampilkan daftar media, tiap foto harus dibongkar dulu di memori, dan
+      # satu foto sebesar itu memakan sekitar 48 MB RAM. Dengan puluhan foto
+      # sekaligus, memori Chrome di ponsel habis dan tabnya ditutup paksa.
+      #
+      # Sekarang foto diperkecil di ponselmu sendiri sebelum dikirim. Berkas
+      # 5 MB dari kamera biasanya menyusut jadi sekitar 300 KB. Lebar 2000
+      # piksel masih jauh di atas kebutuhan tampilan mana pun di situs ini.
+      #
+      # Efek sampingnya bagus: unggahannya juga jadi jauh lebih cepat dan
+      # lebih jarang gagal, karena yang dikirim jauh lebih kecil.
+      transformations:
+        raster_image:
+          width: 2000
+          quality: 82
+
 collections:
   # ------------------------------------------------------------------------
   # TULISAN BLOG
@@ -183,6 +203,8 @@ collections:
           - label: "Daftar pengalaman"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Pengalaman"
             summary: "{{fields.role.id}}"
             hint: "Urutan di sini sama dengan urutan tampil. Taruh yang terbaru di atas."
@@ -256,6 +278,8 @@ collections:
           - label: "Daftar proyek"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Proyek"
             summary: "{{fields.name}}"
             fields:
@@ -290,6 +314,8 @@ collections:
               - label: "Tombol tautan"
                 name: "links"
                 widget: list
+                collapsed: true
+                minimize_collapsed: true
                 required: false
                 label_singular: "Tautan"
                 fields:
@@ -316,6 +342,8 @@ collections:
           - label: "Daftar sertifikasi"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Sertifikasi"
             summary: "{{fields.issuer}}"
             fields:
@@ -340,6 +368,8 @@ collections:
           - label: "Riwayat pendidikan"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Jenjang"
             summary: "{{fields.school}}"
             fields:
@@ -378,6 +408,8 @@ collections:
           - label: "Daftar publikasi"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Publikasi"
             summary: "{{fields.title}}"
             fields:
@@ -423,6 +455,8 @@ collections:
           - label: "Kelompok keahlian"
             name: "groups"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Kelompok"
             summary: "{{fields.title.id}}"
             fields:
@@ -448,6 +482,8 @@ collections:
           - label: "Daftar kegiatan"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Kegiatan"
             summary: "{{fields.role}}"
             fields:
@@ -492,6 +528,8 @@ collections:
           - label: "Daftar angka"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Angka"
             summary: "{{fields.value}} {{fields.label.id}}"
             hint: "Tampil sebagai kartu kecil di section Tentang Saya."
@@ -518,6 +556,8 @@ collections:
           - label: "Daftar bahasa"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Bahasa"
             summary: "{{fields.name.id}}"
             fields:
@@ -544,6 +584,8 @@ collections:
           - label: "Daftar layanan"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Layanan"
             summary: "{{fields.id}}"
             hint: "Tampil sebagai chip di bagian bawah kartu Kontak."
@@ -630,6 +672,8 @@ collections:
           - label: "Galeri Kegiatan"
             name: "gallery"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             required: false
             label_singular: "Gambar"
             hint: "Strip gambar di bawah ringkasan. Kosongkan untuk menyembunyikannya."
@@ -680,6 +724,8 @@ collections:
           - label: "Tautan"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Tautan"
             summary: "{{fields.label}}"
             fields:
@@ -742,6 +788,8 @@ collections:
           - label: "Item menu"
             name: "items"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Item"
             summary: "{{fields.label.id}}"
             fields:
@@ -1082,6 +1130,8 @@ collections:
           - label: "Daftar lagu"
             name: "tracks"
             widget: list
+            collapsed: true
+            minimize_collapsed: true
             label_singular: "Lagu"
             required: false
             summary: "{{fields.title.id}}"
