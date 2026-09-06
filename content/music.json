@@ -1,5 +1,5 @@
 {
-  "enabled": false,
+  "enabled": true,
   "title": {
     "id": "Musik pilihan",
     "en": "Selected music"
@@ -8,5 +8,17 @@
     "id": "Musik tidak pernah berbunyi sendiri. Pengunjung yang memilih untuk memutarnya.",
     "en": "Music never plays on its own. Visitors choose to start it."
   },
-  "tracks": []
+  "tracks": [
+    {
+      "file": "/media/NOAH - Kota Mati.mp3",
+      "title": {
+        "id": "Kota Mati",
+        "en": ""
+      },
+      "artist": {
+        "id": "NOAH",
+        "en": ""
+      }
+    }
+  ]
 }
