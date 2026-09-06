@@ -121,22 +121,8 @@
       "en": "Blog"
     },
     "subtitle": {
-      "id": "Catatan singkat terkait hal-hal yang saya pelajari sepanjang jalan.",
-      "en": "A quick note on things I learned along the way."
-    }
-  },
-  "feedback": {
-    "eyebrow": {
-      "id": "10 / Masukan",
-      "en": "10 / Feedback"
-    },
-    "title": {
-      "id": "Masukan dan Saran",
-      "en": "Feedback and Suggestions"
-    },
-    "subtitle": {
-      "id": "Pendapat kamu membantu saya berkembang. Boleh dikirim tanpa mencantumkan nama.",
-      "en": "Your thoughts help me grow. You are welcome to send it without a name."
+      "id": "Catatan singkat terkait hal-hal yang saya lalui dan pelajari selama ini. Ini abadi..",
+      "en": "A brief note about the things I've been through and learned so far. This is timeless."
     }
   },
   "contact": {
@@ -151,6 +137,20 @@
     "subtitle": {
       "id": "Punya proyek, tawaran kerja, atau ide yang ingin didiskusikan? Sapa saya.",
       "en": "Have a project, an offer, or an idea worth discussing? Say hello."
+    }
+  },
+  "feedback": {
+    "eyebrow": {
+      "en": "10 / Feedback",
+      "id": "10 / Masukan"
+    },
+    "subtitle": {
+      "en": "Your thoughts help me grow. You are welcome to send it without a name.",
+      "id": "Pendapat kamu membantu saya berkembang. Boleh dikirim tanpa mencantumkan nama."
+    },
+    "title": {
+      "en": "Feedback and Suggestions",
+      "id": "Masukan dan Saran"
     }
   }
 }
