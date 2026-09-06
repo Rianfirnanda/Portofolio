@@ -45,6 +45,20 @@ const LEBAR_MAKS = 2000;
 /** Berkas di bawah ukuran ini dianggap sudah ringan dan dilewati. */
 const AMBANG_BYTE = 500 * 1024;
 
+/**
+ * Berkas yang lebarnya sudah wajar tetapi masih sebesar ini tetap diolah,
+ * biasanya karena kualitas simpannya terlalu tinggi.
+ */
+const AMBANG_BESAR = 1024 * 1024;
+
+/**
+ * Kalau penghematannya di bawah angka ini, berkas dibiarkan apa adanya.
+ * Menyimpan ulang JPEG selalu mengurangi kualitas sedikit, jadi tidak sepadan
+ * kalau yang didapat cuma beberapa kilobyte. Ini juga yang membuat skrip ini
+ * aman dijalankan berkali-kali.
+ */
+const HEMAT_MINIMAL = 0.1;
+
 const JENIS_GAMBAR = ['.jpg', '.jpeg', '.png', '.webp'];
 
 const cobaSaja = process.argv.includes('--coba');
@@ -77,6 +91,11 @@ for (const nama of berkas) {
     const info = await sharp(jalur).metadata();
     if (!info.width) continue;
 
+    // Yang lebarnya sudah wajar dan ukurannya tidak berlebihan tidak perlu
+    // disentuh lagi. Tanpa saringan ini, tiap kali skrip dijalankan semua
+    // berkas disimpan ulang dan kualitasnya turun sedikit demi sedikit.
+    if (info.width <= LEBAR_MAKS && asli < AMBANG_BESAR) continue;
+
     // Format dipertahankan supaya nama berkasnya tidak perlu berubah. Nama
     // yang berubah akan memutus setiap rujukan ke gambar ini di seluruh situs.
     let olahan = sharp(jalur).resize({ width: LEBAR_MAKS, withoutEnlargement: true });
@@ -86,8 +105,8 @@ for (const nama of berkas) {
 
     const hasil = await olahan.toBuffer();
 
-    // Kalau hasil olahannya justru tidak lebih kecil, biarkan yang asli.
-    if (hasil.length >= asli) {
+    // Kalau hasil olahannya tidak cukup lebih kecil, biarkan yang asli.
+    if (hasil.length >= asli * (1 - HEMAT_MINIMAL)) {
       console.log(`  lewati  ${nama.padEnd(46).slice(0, 46)} sudah cukup ringan`);
       continue;
     }
