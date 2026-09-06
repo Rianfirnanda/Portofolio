@@ -1,23 +1,30 @@
 {
   "title": {
-    "id": "Test Blog",
-    "en": "Tes berita"
-  },
-  "date": "2026-09-06",
-  "cover": "/media/127938.jpg",
-  "coverAlt": {
-    "id": "Test",
+    "id": "Untuk Kamu, di Suatu Hari Nanti",
     "en": ""
   },
+  "date": "2026-06-02",
+  "body": {
+    "id": "![](/media/128012.jpg)\n\nuntuk kamu,\nyang kehadirannya belum pernah kutemui,\ntapi keberadaannya sudah lama kupercaya.\nkalau suatu hari nanti kita benar-benar dipertemukan,\naku ingin kamu tahu,\nsebelum mengenalmu,\naku sudah menempuh jalan panjang sendirian,\nbelajar berdiri di atas kaki sendiri,\nbelajar menyembuhkan luka tanpa menunggu siapa pun datang.\naku pernah lelah sampai rasanya ingin berhenti.\naku pernah tersesat dan tidak tahu harus melangkah ke mana.\naku pernah merasa jadi orang asing\ndi dalam hidupku sendiri.\ntapi di setiap malam paling sunyi,\naku selalu percaya,\nakan ada seseorang yang datang,\nbukan untuk menghakimi luka-lukaku,\nmelainkan untuk duduk di sampingku\ndan membiarkan aku merasa cukup, apa adanya.\nnanti, kalau kita akhirnya bertemu,\naku tidak berjanji menjadi sempurna.\ntapi aku berjanji akan menjadi rumah,\ntempat kamu boleh pulang kapan saja,\ntempat cerita-ceritamu didengar sampai larut,\ndan hal-hal kecil tentangmu\nakan selalu terasa istimewa bagiku.\nsampai hari itu tiba,\njaga dirimu baik-baik, di mana pun kamu sekarang.\naku, di sini, juga sedang belajar dan bertumbuh,\nberusaha menjadi seseorang\nyang pantas berdiri di sampingmu, nanti.",
+    "en": ""
+  },
+  "audio": {
+    "file": "/media/YTDown.com_YouTube_Nadin-Amizah-Tapi-Diterima-Official-Lyri_Media_ItvyueWMAjA_009_128k.mp3",
+    "kind": "lagu",
+    "title": {
+      "id": "Tapi diterima - Nadin Amizah",
+      "en": ""
+    }
+  },
+  "cover": "/media/128012.jpg",
+  "coverAlt": null,
+  "tags": [
+    "Catatan Pribadi"
+  ],
   "excerpt": {
     "id": "Test berita",
     "en": "Test berita"
   },
-  "tags": ["Test"],
   "featured": true,
-  "draft": false,
-  "body": {
-    "id": "Ini hanya test",
-    "en": "Inly test"
-  }
+  "draft": false
 }
