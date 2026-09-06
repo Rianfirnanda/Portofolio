@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
-import { formatDate, estimateReadingTime } from '@/lib/format';
+import { formatDate } from '@/lib/format';
 import SmartImage from '@/components/SmartImage';
 import PostBody from '@/components/PostBody';
 import PostCard from '@/components/PostCard';
@@ -17,13 +17,14 @@ import Icon from '@/components/Icon';
  * Tulisannya beserta dua bacaan lanjutan dikirim app/blog/[slug]/page.js
  * sebagai props, karena keduanya dibaca dari folder content/posts/ saat build.
  */
-export default function PostArticle({ post, others = [] }) {
+export default function PostArticle({ post, others = [], bodyHtml }) {
   const { lang, t } = useLanguage();
   const { ui, profile } = portfolio;
 
   if (!post) return null;
 
-  const minutes = post.readingTime ?? estimateReadingTime(post.content, lang);
+  // Waktu baca dihitung otomatis di data/posts.js, satu angka untuk tiap bahasa.
+  const minutes = post.readingTime?.[lang] ?? post.readingTime?.id ?? 1;
 
   return (
     <article className="px-4 pt-32 pb-20 sm:px-6 sm:pb-24">
@@ -31,7 +32,7 @@ export default function PostArticle({ post, others = [] }) {
         <Reveal>
           <Link
             href="/blog/"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-subtle transition-colors hover:text-fg"
+            className="inline-flex min-h-6 items-center gap-2 rounded-md py-1 text-sm font-semibold text-subtle transition-colors hover:text-fg"
           >
             <Icon name="arrow-left" className="h-4 w-4" />
             {t(ui.blogBack)}
@@ -91,7 +92,7 @@ export default function PostArticle({ post, others = [] }) {
             nyaman dibaca di atas latar bergradien. */}
         <Reveal delay={120} className="mt-10">
           <div className="glass rounded-3xl p-6 sm:p-9">
-            <PostBody content={post.content} />
+            <PostBody html={bodyHtml} />
             <ShareButtons title={t(post.title)} path={`/blog/${post.slug}/`} />
           </div>
         </Reveal>

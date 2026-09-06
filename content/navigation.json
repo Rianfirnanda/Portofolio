@@ -58,6 +58,14 @@
       }
     },
     {
+      "id": "feedback",
+      "type": "section",
+      "label": {
+        "id": "Masukan",
+        "en": "Feedback"
+      }
+    },
+    {
       "id": "contact",
       "type": "section",
       "label": {

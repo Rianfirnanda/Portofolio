@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
-import { formatDate, estimateReadingTime } from '@/lib/format';
+import { formatDate } from '@/lib/format';
 import GlassCard from '@/components/GlassCard';
 import SmartImage from '@/components/SmartImage';
 import Icon from '@/components/Icon';
@@ -14,7 +14,7 @@ import Icon from '@/components/Icon';
  */
 export default function PostCard({ post, compact = false }) {
   const { lang, t } = useLanguage();
-  const minutes = post.readingTime ?? estimateReadingTime(post.content, lang);
+  const minutes = post.readingTime?.[lang] ?? post.readingTime?.id ?? 1;
   const title = t(post.title);
 
   return (

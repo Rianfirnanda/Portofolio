@@ -184,7 +184,11 @@ export default function Navbar() {
               <li key={item.id}>
                 <NavLink
                   item={item}
-                  className={`link-underline relative rounded-full px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                  // inline-flex penting di sini. Tanpa itu tautan ini jadi
+                  // elemen sebaris biasa, padding atas bawahnya diabaikan saat
+                  // menghitung posisi, dan hurufnya duduk belasan piksel lebih
+                  // tinggi daripada nama di logo.
+                  className={`link-underline relative inline-flex items-center rounded-full px-3 py-2 text-sm font-medium leading-none transition-colors duration-200 ${
                     active === item.id ? 'text-fg' : 'text-subtle hover:text-fg'
                   }`}
                 >

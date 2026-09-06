@@ -58,9 +58,14 @@ situs statis murni.
 | `data/portfolio.js` | Perakit tipis yang menyatukan berkas di `content/` menjadi satu objek. |
 | `data/posts.js` | Membaca folder `content/posts/` saat build. |
 | `data/README.md` | Panduan operasional dengan cuplikan siap tempel, termasuk cara memasang panel konten. |
+| `public/media/` | Semua berkas yang diunggah lewat panel: gambar, video, musik, PDF. |
+| `content/feedback/` | Masukan dari tamu, satu berkas per kiriman, dibuat otomatis oleh situs. |
 | `public/admin/index.html` dan `config.yml` | Halaman panel konten dan definisi form-nya. |
 | `app/api/auth/` dan `app/api/callback/` | Dua endpoint login GitHub untuk panel konten. |
-| `lib/oauth.js` | Bagian bersama kedua endpoint di atas. |
+| `app/api/feedback/` | Penerima kiriman formulir masukan, menyimpannya ke `content/feedback/`. |
+| `lib/oauth.js` | Bagian bersama kedua endpoint login di atas. |
+| `lib/github.js` | Menitipkan berkas masukan baru ke repositori. |
+| `lib/markdown.js` | Mengubah tulisan blog menjadi HTML, sekaligus menyisipkan pemutar video, musik, dan PDF. |
 | `scripts/copy-cms.mjs` | Menyalin berkas panel dari node_modules saat build. |
 | `app/layout.js` | Kerangka HTML, metadata SEO, JSON-LD, font, skrip anti kedip tema, provider tema dan bahasa. |
 | `app/page.js` | Server component yang menyusun urutan section halaman utama. |
@@ -84,6 +89,8 @@ situs statis murni.
 | `components/BlogIndex.jsx` | Isi halaman `/blog` beserta filter topik. |
 | `components/PostArticle.jsx` dan `PostBody.jsx` | Halaman artikel dan perender blok tulisan. |
 | `components/PostCard.jsx` | Kartu tulisan di daftar blog. |
+| `components/Feedback.jsx` | Formulir masukan untuk tamu, boleh anonim, lengkap dengan penyaring robot. |
+| `components/MusicPlayer.jsx` | Pemutar musik kecil di pojok kiri bawah, daftar lagunya dari panel. |
 | `components/Contact.jsx` | Kartu kontak, tombol email, salin alamat, daftar sosial, layanan. |
 | `components/Footer.jsx` | Identitas singkat, tautan cepat, sosial, tombol ke atas. |
 | `components/GlassCard.jsx` | Primitif kaca tunggal yang dipakai ulang semua kartu. |
@@ -222,6 +229,16 @@ new client secret** dan salin nilainya. Rahasia itu hanya ditampilkan sekali.
 | --- | --- |
 | `GITHUB_CLIENT_ID` | Client ID dari langkah 1 |
 | `GITHUB_CLIENT_SECRET` | Client secret dari langkah 1 |
+
+Satu variabel lagi diperlukan **hanya kalau kamu memakai formulir masukan**:
+
+| Name | Value |
+| --- | --- |
+| `GITHUB_CONTENT_TOKEN` | Fine-grained token dengan izin Contents: Read and write, khusus repositori ini |
+
+Sebelum mengisi variabel itu, jadikan repositori ini privat lebih dulu. Masukan
+dari tamu tersimpan di dalam repositori, dan repositori publik berarti siapa pun
+bisa membacanya. Langkah lengkapnya ada di `data/README.md` bagian 19.
 
 Terakhir, buka tab **Deployments** dan **Redeploy** deployment terakhir.
 Variabel baru hanya terbaca oleh deployment yang dibuat setelahnya.
@@ -394,3 +411,18 @@ Perintah `npm run placeholders` tidak memakai dependency apa pun, hanya modul
 bawaan Node.
 
 Tidak ada dependency lain. Ikon, animasi, dan sistem dua bahasa ditulis sendiri.
+
+---
+
+## 8. Fitur yang ditambahkan belakangan
+
+| Fitur | Di mana diatur | Catatan |
+| --- | --- | --- |
+| Menulis blog tanpa blok | Panel, Tulisan Blog | Satu editor teks biasa. Alamat, waktu baca, dan ringkasan dihitung otomatis. |
+| Unggah video, musik, PDF | Panel, tombol gambar di editor | Tampilannya dipilih otomatis sesuai jenis berkas. Batas 40 MB per berkas. |
+| Kartu nama dan motto di foto | Panel, Profil Diri, Kartu pada foto | Dua baris di bawah foto profil. Kosongkan mottonya kalau ingin nama saja. |
+| Pemutar musik | Panel, Pengaturan, Musik | Tidak pernah berbunyi sendiri. Lihat `data/README.md` bagian 18. |
+| Masukan dari tamu | Panel, Masukan Masuk | Butuh `GITHUB_CONTENT_TOKEN` dan repositori privat. Lihat bagian 19. |
+
+Kolom **English** di seluruh panel boleh dikosongkan. Kalau kosong, versi Inggris
+situs memakai teks Indonesianya.

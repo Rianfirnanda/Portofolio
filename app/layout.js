@@ -13,6 +13,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import CommandPalette from '@/components/CommandPalette';
+import MusicPlayer from '@/components/MusicPlayer';
 import './globals.css';
 
 /**
@@ -158,6 +159,7 @@ export default function RootLayout({ children }) {
               <main id="main">{children}</main>
               <Footer />
               <BackToTop />
+              <MusicPlayer />
               <CommandPalette posts={searchablePosts} />
             </LightboxProvider>
           </LanguageProvider>

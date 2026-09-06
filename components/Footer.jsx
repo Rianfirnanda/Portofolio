@@ -22,18 +22,20 @@ export default function Footer() {
           </div>
 
           {/* Tautan cepat ke tiap bagian */}
-          <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2">
-            {nav.map((item) =>
-              item.type === 'page' ? (
-                <Link key={item.id} href={item.href} className="text-sm text-subtle transition-colors hover:text-fg">
-                  {t(item.label)}
-                </Link>
-              ) : (
-                <Link key={item.id} href={`/#${item.id}`} className="text-sm text-subtle transition-colors hover:text-fg">
-                  {t(item.label)}
-                </Link>
-              )
-            )}
+          {/*
+            Tinggi minimum 24px supaya nyaman disentuh di layar ponsel. Tanpa
+            itu tautan ini hanya setinggi hurufnya dan sering meleset ditekan.
+          */}
+          <nav aria-label="Footer" className="flex flex-wrap gap-x-4 gap-y-1">
+            {nav.map((item) => (
+              <Link
+                key={item.id}
+                href={item.type === 'page' ? item.href : `/#${item.id}`}
+                className="inline-flex min-h-6 items-center rounded-md px-1 py-1 text-sm text-subtle transition-colors hover:text-fg"
+              >
+                {t(item.label)}
+              </Link>
+            ))}
           </nav>
         </div>
 
@@ -71,7 +73,7 @@ export default function Footer() {
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-subtle transition-colors hover:text-fg"
+                className="inline-flex min-h-6 items-center gap-1.5 rounded-md py-1 text-xs font-semibold text-subtle transition-colors hover:text-fg"
               >
                 <Icon name="download" className="h-3.5 w-3.5" />
                 {t(ui.printPage)}

@@ -100,7 +100,7 @@ export default function BlogIndex({ posts = [], tags = [] }) {
         <Reveal delay={120} className="mt-12">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-subtle transition-colors hover:text-fg"
+            className="inline-flex min-h-6 items-center gap-2 rounded-md py-1 text-sm font-semibold text-subtle transition-colors hover:text-fg"
           >
             <Icon name="arrow-left" className="h-4 w-4" />
             {t(ui.blogHome)}

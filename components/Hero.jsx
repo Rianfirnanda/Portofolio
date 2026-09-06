@@ -14,7 +14,7 @@ import Reveal from '@/components/Reveal';
  */
 export default function Hero() {
   const { lang, t } = useLanguage();
-  const { profile, social, ui, contact } = portfolio;
+  const { profile, social, ui } = portfolio;
 
   const featuredSocial = social.filter((item) => item.featured !== false);
   const isExternalResume = profile.resumeUrl.startsWith('http');
@@ -25,7 +25,10 @@ export default function Hero() {
     // halaman jadi bisa digulir. Tidak ada yang saling menimpa.
     <section
       id="top"
-      className="relative flex min-h-svh flex-col justify-center px-4 pt-28 pb-28 print:pt-4 sm:px-6"
+      // overflow-x-clip menahan cahaya lembut di belakang foto. Cahaya itu
+      // sengaja melebar keluar kotaknya, dan di layar 320px kelebihannya
+      // membuat halaman bisa digeser ke samping.
+      className="relative flex min-h-svh flex-col justify-center overflow-x-clip px-4 pt-28 pb-28 print:pt-4 sm:px-6"
     >
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
         {/* ---------------- Kolom teks ---------------- */}
@@ -146,10 +149,21 @@ export default function Hero() {
                 className="aspect-square w-full rounded-[1.4rem] object-cover"
               />
 
-              {/* Kartu identitas kecil menempel di bawah foto. */}
+              {/*
+                Kartu kecil yang menempel di bawah foto. Isinya cuma dua baris
+                dan keduanya kamu atur sendiri lewat panel, di menu Profil
+                bagian "Kartu pada foto". Kosongkan mottonya kalau kamu ingin
+                namanya saja yang tampil.
+              */}
               <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-line bg-surface-solid/85 px-4 py-3 backdrop-blur-xl">
-                <p className="truncate text-sm font-semibold text-fg">{profile.name}</p>
-                <p className="truncate text-xs text-subtle">{contact.email}</p>
+                <p className="truncate text-sm font-semibold text-fg">
+                  {profile.photoCard?.name || profile.name}
+                </p>
+                {t(profile.photoCard?.motto) ? (
+                  <p className="line-clamp-2 text-xs leading-snug text-subtle">
+                    {t(profile.photoCard.motto)}
+                  </p>
+                ) : null}
               </div>
             </div>
           </div>

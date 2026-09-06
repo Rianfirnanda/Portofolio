@@ -44,6 +44,8 @@ import skills from '@/content/skills.json';
 import volunteering from '@/content/volunteering.json';
 import languages from '@/content/languages.json';
 import services from '@/content/services.json';
+import music from '@/content/music.json';
+import feedback from '@/content/feedback-settings.json';
 import navigation from '@/content/navigation.json';
 import sections from '@/content/sections.json';
 import labels from '@/content/labels.json';
@@ -100,6 +102,12 @@ export const portfolio = {
 
   // content/contact.json  email, telepon, catatan
   contact,
+
+  // content/music.json  pemutar musik kecil di pojok kiri bawah
+  music: { ...music, tracks: list(music, 'tracks') },
+
+  // content/feedback-settings.json  formulir masukan dan saran dari tamu
+  feedback,
 
   // content/navigation.json  isi menu navigasi
   nav: list(navigation),

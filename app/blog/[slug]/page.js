@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { portfolio } from '@/data/portfolio';
 import { getPublishedPosts, getPostBySlug } from '@/data/posts';
 import { t } from '@/lib/i18n';
+import { renderMarkdown } from '@/lib/markdown';
 import PostArticle from '@/components/PostArticle';
 
 const { meta, profile } = portfolio;
@@ -52,6 +53,13 @@ export default async function BlogPostPage({ params }) {
   // Dua tulisan lain sebagai bacaan lanjutan di bawah artikel.
   const others = all.filter((item) => item.slug !== slug).slice(0, 2);
 
+  // Tulisan diubah jadi HTML di sini, saat situs dibangun. Keduanya dikirim
+  // sekaligus supaya tombol ID dan EN bisa berpindah seketika tanpa memuat
+  // ulang halaman.
+  const isiId = typeof post.body === 'string' ? post.body : (post.body?.id ?? '');
+  const isiEn = typeof post.body === 'string' ? post.body : (post.body?.en || isiId);
+  const bodyHtml = { id: renderMarkdown(isiId), en: renderMarkdown(isiEn) };
+
   // Data terstruktur agar tulisan bisa muncul sebagai artikel di mesin pencari.
   const articleJsonLd = {
     '@context': 'https://schema.org',
@@ -71,7 +79,7 @@ export default async function BlogPostPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <PostArticle post={post} others={others} />
+      <PostArticle post={post} others={others} bodyHtml={bodyHtml} />
     </>
   );
 }

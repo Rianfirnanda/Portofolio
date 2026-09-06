@@ -1,29 +1,23 @@
 {
-  "slug": "Test",
   "title": {
     "id": "Test Blog",
     "en": "Tes berita"
+  },
+  "date": "2026-09-06",
+  "cover": "/media/127938.jpg",
+  "coverAlt": {
+    "id": "Test",
+    "en": ""
   },
   "excerpt": {
     "id": "Test berita",
     "en": "Test berita"
   },
-  "date": "2026-09-06",
-  "readingTime": 1,
-  "tags": [
-    "Test"
-  ],
-  "cover": "/images/uploads/127938.jpg",
-  "coverAlt": "Test",
+  "tags": ["Test"],
   "featured": true,
   "draft": false,
-  "content": [
-    {
-      "type": "p",
-      "text": {
-        "id": "Ini hanya test",
-        "en": "Inly test"
-      }
-    }
-  ]
+  "body": {
+    "id": "Ini hanya test",
+    "en": "Inly test"
+  }
 }

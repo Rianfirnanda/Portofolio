@@ -87,7 +87,10 @@ export default function ExperienceCard({ item }) {
                 type="button"
                 onClick={() => setExpanded((value) => !value)}
                 aria-expanded={expanded}
-                className="inline-flex items-center gap-1 rounded-md text-xs font-semibold text-accent transition-colors hover:text-fg"
+                // py-1 dan align-middle menjaga tinggi tombol tetap nyaman
+                // disentuh di layar sentuh, tanpa merusak alirannya di dalam
+                // paragraf.
+                className="inline-flex min-h-6 items-center gap-1 rounded-md align-middle py-1 text-xs font-semibold text-accent transition-colors hover:text-fg"
               >
                 {expanded ? t(portfolio.ui.readLess) : t(portfolio.ui.readMore)}
                 <Icon

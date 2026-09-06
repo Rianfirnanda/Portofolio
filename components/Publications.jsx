@@ -33,7 +33,7 @@ function PublicationCard({ item }) {
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
-            className="mt-4 inline-flex items-center gap-1.5 rounded-md text-sm font-semibold text-muted transition-colors hover:text-fg"
+            className="mt-4 inline-flex min-h-6 items-center gap-1.5 rounded-md py-1 text-sm font-semibold text-muted transition-colors hover:text-fg"
           >
             {open ? t(portfolio.ui.hideAbstract) : t(portfolio.ui.readAbstract)}
             <Icon

@@ -323,84 +323,110 @@ projects: [
 
 ## 6. Menulis tulisan blog baru
 
-Lewat panel: menu **Tulisan Blog**, lalu tombol tambah. Bloknya tinggal dipilih
-dari daftar, jadi tidak perlu menghafal strukturnya.
+Menulis blog sekarang seperti menulis di aplikasi catatan biasa. Tidak ada blok
+yang perlu disusun satu per satu lagi.
 
-Lewat berkas: salin salah satu berkas di `content/posts/`, beri nama baru sesuai
-slug-nya, lalu ganti isinya.
+### Lewat panel, cara yang disarankan
 
-```js
+Buka `/admin`, menu **Tulisan Blog**, klik tombol tambah. Yang wajib diisi cuma
+tiga:
+
+| Kolom | Keterangan |
+|---|---|
+| Judul | Alamat tulisannya dibuat otomatis dari sini |
+| Tanggal terbit | Pilih dari kalender |
+| Isi tulisan | Ketik biasa, ada tombol tebal, miring, daftar, dan kutipan |
+
+Sisanya boleh dilewati. Tiga hal ini dihitung sendiri oleh situs:
+
+- **Alamat tulisan** dibuat dari judul, jadi tidak ada lagi slug salah ketik
+- **Waktu baca** dihitung dari panjang tulisan
+- **Ringkasan** diambil dari kalimat pertama kalau kamu mengosongkannya
+
+Kolom **English** di setiap bagian boleh dibiarkan kosong. Kalau kosong, versi
+Inggris situs akan memakai teks Indonesianya.
+
+### Menyisipkan foto, video, musik, atau PDF ke dalam tulisan
+
+Klik tombol gambar di bilah alat editor, pilih atau unggah berkasnya, selesai.
+Situs otomatis memilihkan tampilan yang pas berdasarkan jenis berkasnya:
+
+| Jenis berkas | Tampil sebagai |
+|---|---|
+| `jpg` `png` `webp` `gif` `avif` | gambar dengan keterangan di bawahnya |
+| `mp4` `webm` `mov` | pemutar video lengkap dengan tombol putar |
+| `mp3` `wav` `ogg` `m4a` | pemutar musik ramping |
+| `pdf` | pembaca dokumen, plus tombol buka di tab baru |
+| lainnya | tombol unduh |
+
+Kamu tidak perlu memilih jenisnya sendiri. Tempel saja tautan berkasnya.
+
+**Untuk video panjang, pakai YouTube.** Semua berkas yang diunggah lewat panel
+ikut tersimpan di repositori, dan repositori yang gemuk membuat situs makin lama
+dibangun setiap kali kamu menyimpan. Batas satu berkas dipasang di 40 MB. Video
+di atas satu dua menit sebaiknya diunggah ke YouTube, lalu tempel tautannya
+sebagai tautan biasa di dalam tulisan.
+
+### Lewat berkas, kalau kamu memang ingin
+
+Salin salah satu berkas di `content/posts/`, beri nama baru. **Nama berkas itu
+yang menjadi alamat tulisan**, jadi pakai huruf kecil dan tanda hubung.
+
+```json
 {
-  slug: 'judul-tulisan-baru',      // jadi alamat /blog/judul-tulisan-baru/
-  title: {
-    id: 'Judul Tulisan Baru',
-    en: 'A New Post Title',
+  "title": {
+    "id": "Judul Tulisan Baru",
+    "en": ""
   },
-  excerpt: {
-    id: 'Ringkasan satu sampai dua kalimat yang tampil di kartu daftar.',
-    en: 'A one to two sentence summary shown on the list card.',
-  },
-  date: '2027-01-15',              // format YYYY-MM-DD
-  readingTime: 5,                  // perkiraan menit baca, boleh dihapus
-  tags: ['Kebijakan Publik', 'AI'],// otomatis jadi tombol filter di /blog
-  cover: '/images/blog/judul-tulisan-baru.jpg',  // atau null untuk gradien
-  coverAlt: 'Keterangan singkat gambar sampul',
-  featured: false,                 // true memberi border gradien beranimasi
-  draft: false,                    // true menyembunyikan dari situs
-  content: [
-    { type: 'p', text: { id: 'Paragraf pertama.', en: 'First paragraph.' } },
-    { type: 'h2', text: { id: 'Subjudul', en: 'Subheading' } },
-    { type: 'p', text: { id: 'Paragraf berikutnya.', en: 'Next paragraph.' } },
-  ],
-},
+  "date": "2027-01-15",
+  "cover": "/media/sampul.jpg",
+  "coverAlt": { "id": "Keterangan singkat gambar sampul", "en": "" },
+  "excerpt": { "id": "", "en": "" },
+  "tags": ["Kebijakan Publik", "AI"],
+  "featured": false,
+  "draft": false,
+  "body": {
+    "id": "Paragraf pertama.\n\n## Subjudul\n\nParagraf berikutnya.\n\n- poin pertama\n- poin kedua\n\n> Ini kutipan.\n\n![Keterangan gambar](/media/diagram.png)",
+    "en": ""
+  }
+}
 ```
 
-### Jenis blok yang bisa dipakai di `content`
+### Cara menata tulisan
 
-```js
-// Paragraf
-{ type: 'p', text: { id: '...', en: '...' } }
+Kalau kamu memakai mode teks biasa di editor, atau menulis langsung di berkas,
+ini semua aturannya. Cuma segini.
 
-// Subjudul besar dan kecil
-{ type: 'h2', text: { id: '...', en: '...' } }
-{ type: 'h3', text: { id: '...', en: '...' } }
+```
+# Judul besar
+## Subjudul
+### Subjudul kecil
 
-// Daftar bertitik
-{ type: 'ul', items: [
-  { id: 'Poin pertama', en: 'First point' },
-  { id: 'Poin kedua', en: 'Second point' },
-] }
+Baris kosong memisahkan paragraf.
 
-// Daftar bernomor, angkanya digambar otomatis
-{ type: 'ol', items: [
-  { id: 'Langkah pertama', en: 'First step' },
-  { id: 'Langkah kedua', en: 'Second step' },
-] }
+**tebal**  dan  *miring*
 
-// Kutipan
-{ type: 'quote',
-  text: { id: 'Isi kutipan.', en: 'The quote itself.' },
-  cite: { id: 'Nama sumber', en: 'Source name' } }
+- daftar bertitik
+- baris kedua
 
-// Kotak sorotan, ikon boleh diganti, lihat daftar ikon di bagian 15
-{ type: 'callout', icon: 'sparkles',
-  text: { id: 'Catatan penting.', en: 'An important note.' } }
+1. daftar bernomor
+2. baris kedua
 
-// Gambar di tengah tulisan
-{ type: 'image',
-  src: '/images/blog/diagram.png',
-  alt: 'Diagram alur verifikasi data',
-  caption: { id: 'Alur verifikasi berjenjang.', en: 'The tiered verification flow.' } }
+> kutipan
+
+[teks tautan](https://alamat-tujuan.com)
+![keterangan gambar](/media/gambar.jpg)
 ```
 
-Blok yang tidak dikenali akan dilewati begitu saja, jadi salah ketik `type`
-tidak pernah membuat halaman gagal tampil.
+**Kode HTML tidak akan dijalankan.** Kalau kamu menempel potongan HTML ke dalam
+tulisan, isinya dibuang, bukan dijalankan. Ini disengaja supaya tidak ada skrip
+berbahaya yang bisa masuk lewat isi tulisan.
 
-**Menyimpan draf.** Isi `draft: true` untuk menyembunyikan tulisan dari situs
-tanpa menghapusnya. Tulisan itu juga tidak masuk ke sitemap.
+**Menyimpan draf.** Centang "Simpan sebagai draf" untuk menyembunyikan tulisan
+dari situs tanpa menghapusnya. Draf juga tidak masuk ke sitemap.
 
-**Menambah ikon topik.** Filter topik di `/blog` dibangun otomatis dari field
-`tags` seluruh tulisan, tidak ada daftar terpisah yang perlu diurus.
+**Topik.** Tombol penyaring di halaman `/blog` dibangun otomatis dari kolom
+Topik seluruh tulisan, tidak ada daftar terpisah yang perlu diurus.
 
 ---
 
@@ -860,3 +886,142 @@ Dua hal sengaja tidak dimasukkan karena hampir tidak pernah diubah:
 | `Konfigurasi OAuth belum lengkap` | `GITHUB_CLIENT_ID` atau `GITHUB_CLIENT_SECRET` belum terisi di Vercel, atau belum di-redeploy setelah diisi. |
 | `Kode keamanan tidak cocok` | Proses login memakan waktu lebih dari sepuluh menit, atau cookie diblokir. Tutup jendela login lalu ulangi. |
 | Sudah Publish tapi situs belum berubah | Vercel masih membangun. Tunggu satu sampai dua menit, lalu muat ulang halaman. |
+
+---
+
+## 18. Menyalakan pemutar musik
+
+Pemutar kecil di pojok kiri bawah situs. Isinya kamu atur sendiri.
+
+**Cara memasangnya:** panel, menu **Pengaturan**, lalu **Musik**.
+
+1. Centang **Tampilkan pemutar musik**
+2. Di **Daftar lagu**, klik tambah
+3. Unggah berkas lagunya, isi judulnya, selesai
+
+Pemutar baru muncul kalau sakelarnya menyala **dan** ada minimal satu lagu.
+Kalau salah satu tidak terpenuhi, seluruh pemutar tidak ikut tampil.
+
+**Musik tidak pernah berbunyi sendiri.** Ini disengaja dan sebaiknya jangan
+diubah. Suara yang tiba tiba muncul saat halaman dibuka itu mengagetkan, memakan
+kuota pengunjung, dan mengganggu orang yang sedang mendengarkan hal lain. Semua
+peramban modern juga memblokirnya. Pengunjung yang memutuskan untuk memutar.
+
+Pilihan terakhir pengunjung, lagu yang sedang diputar dan besar suaranya,
+diingat di perangkat mereka sendiri dan tidak dikirim ke mana pun.
+
+**Soal hak cipta.** Pakai lagu yang memang boleh kamu sebarkan: karya sendiri,
+musik berlisensi bebas, atau yang sudah kamu beli izinnya. Situs portofolio itu
+etalase profesional, dan lagu bajakan di dalamnya bisa merugikan kesan yang
+justru ingin kamu bangun.
+
+Format `mp3` paling aman karena bisa diputar di semua perangkat.
+
+---
+
+## 19. Menerima masukan dan saran dari tamu
+
+Formulir di halaman depan tempat pengunjung menulis masukan, boleh dengan nama
+atau tanpa nama sama sekali. Kirimannya muncul di panel pada menu
+**Masukan Masuk**.
+
+### PENTING: jadikan repositori privat dulu
+
+Masukan yang masuk tersimpan sebagai berkas di dalam repositori ini. Selama
+repositorinya masih publik, **siapa pun bisa membaca masukan yang dikirim orang
+ke kamu**, termasuk nama dan kontak yang mereka tulis. Itu melanggar janji
+privasi yang tertulis di formulirnya sendiri.
+
+Jadi lakukan ini lebih dulu:
+
+1. Buka `https://github.com/Rianfirnanda/Portofolio/settings`
+2. Gulir ke bawah sampai **Danger Zone**
+3. Klik **Change visibility**, pilih **Make private**
+
+Situsmu tetap bisa diakses publik seperti biasa. Yang berubah cuma kode dan
+isinya jadi tidak bisa diintip orang lain. Vercel dan panel `/admin` tetap
+bekerja normal dengan repositori privat.
+
+### Menyiapkan izin menulis
+
+Formulirnya belum bisa menyimpan apa pun sampai langkah ini selesai. Jadi tidak
+ada data yang bisa bocor sebelum kamu siap.
+
+1. Buka `https://github.com/settings/personal-access-tokens/new`
+2. **Token name**: `Masukan Portofolio`
+3. **Expiration**: pilih yang panjang, misalnya satu tahun
+4. **Repository access**: pilih **Only select repositories**, lalu pilih
+   `Rianfirnanda/Portofolio`
+5. **Permissions**, bagian Repository permissions: cari **Contents**, ubah jadi
+   **Read and write**. Biarkan yang lain apa adanya.
+6. Klik **Generate token**, lalu salin hasilnya
+
+Lalu di Vercel, Settings, Environment Variables, tambahkan:
+
+| Key | Value | Type |
+|---|---|---|
+| `GITHUB_CONTENT_TOKEN` | token yang baru disalin | Secret |
+
+Deploy ulang, dan formulirnya langsung aktif.
+
+Token ini sengaja dibuat sesempit mungkin. Dia hanya bisa membaca dan menulis
+berkas di satu repositori ini, tidak bisa menghapus repositori, tidak bisa
+mengubah pengaturan, dan tidak bisa menyentuh repositori lain.
+
+### Membaca masukan yang masuk
+
+Panel, menu **Masukan Masuk**. Ada penyaring **Belum dibaca** dan
+**Sudah dibaca** di atas daftarnya.
+
+Tiap kiriman punya dua kolom yang bisa kamu ubah:
+
+- **Sudah dibaca**, centang setelah kamu baca supaya yang baru gampang dikenali
+- **Catatan pribadi**, untuk dirimu sendiri, tidak pernah tampil di situs
+
+Kolom nama, kontak, dan isi masukan sengaja dikunci supaya kamu tidak sengaja
+mengubah kiriman orang. Kalau ada kiriman sampah, hapus saja berkasnya.
+
+Isi masukan **tidak pernah ditampilkan di situs**. Ini disengaja: teks dari orang
+asing tidak boleh langsung tampil di halaman yang kamu tanggung namanya.
+
+### Penyaring robot
+
+Formulir di internet selalu didatangi robot pengirim iklan. Ada empat lapis
+penyaring yang bekerja diam diam, tanpa merepotkan tamu dengan teka teki gambar:
+
+| Lapis | Cara kerjanya |
+|---|---|
+| Kolom umpan | Kolom tersembunyi yang cuma diisi robot |
+| Jeda mengetik | Kiriman yang datang kurang dari 2,5 detik ditolak |
+| Batas panjang | Pesan dibatasi 3000 huruf, nama 80, kontak 120 |
+| Jeda antar kirim | Satu pengirim dibatasi lima kiriman per jam |
+
+Robot yang tertangkap tetap dijawab "berhasil" supaya tidak belajar dari
+penolakan dan mencoba cara lain.
+
+### Mematikan fiturnya
+
+Panel, menu **Pengaturan**, lalu **Masukan, Pengaturan**, hilangkan centang
+**Tampilkan formulir masukan**. Seluruh bagian itu langsung hilang dari situs.
+
+---
+
+## 20. Tempat berkas yang kamu unggah
+
+Semua berkas yang diunggah lewat panel masuk ke satu folder: `public/media/`.
+Di dalam tulisan dan isian, alamatnya ditulis `/media/nama-berkas.jpg`.
+
+Dulu namanya `public/images/uploads/`. Diganti karena isinya sekarang bukan cuma
+gambar, tapi juga video, musik, dan PDF. Berkas lama sudah dipindahkan dan semua
+rujukannya ikut diperbarui, jadi tidak ada yang perlu kamu kerjakan.
+
+Foto profil dan gambar bawaan situs tetap di `public/images/`. Itu berkas yang
+jarang berubah dan bukan hasil unggahan panel.
+
+| Batas | Nilai |
+|---|---|
+| Ukuran satu berkas | 40 MB |
+| Jenis berkas | bebas, tapi gambar, video, musik, dan PDF punya tampilan khusus |
+
+Berkas di `public/media/` sengaja ikut masuk ke Git supaya jadi bagian dari
+repositori dan tidak bergantung pada layanan lain.

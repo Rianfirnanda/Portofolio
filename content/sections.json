@@ -125,10 +125,24 @@
       "en": "Short notes on technology, policy, and things I pick up along the way."
     }
   },
+  "feedback": {
+    "eyebrow": {
+      "id": "10 / Masukan",
+      "en": "10 / Feedback"
+    },
+    "title": {
+      "id": "Masukan dan Saran",
+      "en": "Feedback and Suggestions"
+    },
+    "subtitle": {
+      "id": "Pendapat kamu membantu saya berkembang. Boleh dikirim tanpa mencantumkan nama.",
+      "en": "Your thoughts help me grow. You are welcome to send it without a name."
+    }
+  },
   "contact": {
     "eyebrow": {
-      "id": "10 / Kontak",
-      "en": "10 / Contact"
+      "id": "11 / Kontak",
+      "en": "11 / Contact"
     },
     "title": {
       "id": "Mari Terhubung",

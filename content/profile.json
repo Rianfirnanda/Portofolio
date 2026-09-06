@@ -23,6 +23,13 @@
     "id": "Foto profil Rian Firnanda Irsyadani",
     "en": "Profile photo of Rian Firnanda Irsyadani"
   },
+  "photoCard": {
+    "name": "Rian Firnanda Irsyadani",
+    "motto": {
+      "id": "Teknologi untuk pelayanan publik yang lebih sederhana",
+      "en": "Technology for simpler public services"
+    }
+  },
   "resumeUrl": "https://www.linkedin.com/in/rian-firnanda/",
   "summaryId": [
     "Saya lulus Administrasi Publik di Universitas Bengkulu dengan predikat Cum Laude dan IPK 3,84. Sebelum itu saya sekolah di SMKN 1 Kota Bengkulu jurusan Rekayasa Perangkat Lunak, jadi saya terbiasa membaca kebutuhan birokrasi sekaligus menerjemahkannya jadi solusi teknis yang benar-benar bisa dipakai sehari-hari.",
@@ -36,7 +43,7 @@
   ],
   "gallery": [
     {
-      "src": "/images/uploads/123701.jpg",
+      "src": "/media/123701.jpg",
       "alt": {
         "id": "Kegiatan riset lapangan dan pengolahan data",
         "en": "Field research and data work"
@@ -47,7 +54,7 @@
       }
     },
     {
-      "src": "/images/uploads/117893.jpg",
+      "src": "/media/117893.jpg",
       "alt": {
         "id": "Kerja sama tim dan kegiatan komunitas",
         "en": "Team collaboration and community activities"
@@ -58,7 +65,7 @@
       }
     },
     {
-      "src": "/images/uploads/IMG-20260831-WA0158.jpg",
+      "src": "/media/IMG-20260831-WA0158.jpg",
       "alt": {
         "id": "Pengelolaan sistem dan infrastruktur web",
         "en": "Web systems and infrastructure work"

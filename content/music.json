@@ -1,0 +1,12 @@
+{
+  "enabled": false,
+  "title": {
+    "id": "Musik pilihan",
+    "en": "Selected music"
+  },
+  "note": {
+    "id": "Musik tidak pernah berbunyi sendiri. Pengunjung yang memilih untuk memutarnya.",
+    "en": "Music never plays on its own. Visitors choose to start it."
+  },
+  "tracks": []
+}

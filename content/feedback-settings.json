@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "title": {
+    "id": "Masukan dan Saran",
+    "en": "Feedback and Suggestions"
+  },
+  "subtitle": {
+    "id": "Punya kritik, ide, atau sekadar ingin menyapa? Tulis di sini. Nama boleh dikosongkan kalau kamu ingin mengirim tanpa identitas.",
+    "en": "Have a critique, an idea, or just want to say hello? Write it here. Leave the name blank if you would rather stay anonymous."
+  },
+  "placeholder": {
+    "id": "Tulis masukan kamu di sini...",
+    "en": "Write your feedback here..."
+  },
+  "success": {
+    "id": "Terima kasih. Masukan kamu sudah masuk dan akan saya baca.",
+    "en": "Thank you. Your feedback has been received and I will read it."
+  },
+  "privacy": {
+    "id": "Masukan ini hanya dibaca oleh saya. Nama dan kontak boleh dikosongkan.",
+    "en": "This feedback is read only by me. Name and contact are optional."
+  }
+}
