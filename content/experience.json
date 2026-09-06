@@ -62,7 +62,7 @@
         "Pengumpulan Data",
         "Dokumentasi"
       ],
-      "image": null,
+      "image": "/media/128278.jpg",
       "imageAlt": null,
       "logo": "/media/Logo-UNIB-HD-580x580.png",
       "highlight": false
@@ -95,7 +95,7 @@
         "Komunikasi Digital",
         "CMS"
       ],
-      "image": "/images/experience/website-jurusan.svg",
+      "image": "/media/128280.jpg",
       "imageAlt": {
         "id": "Tampilan pengelolaan website resmi jurusan",
         "en": "The department official website being managed"
