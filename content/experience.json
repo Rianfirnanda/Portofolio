@@ -311,6 +311,35 @@
       "imageAlt": null,
       "logo": null,
       "highlight": false
+    },
+    {
+      "role": {
+        "id": "Peserta kegiatan Sayembara Kompetensi Siswa SMK Indonesia 2021",
+        "en": ""
+      },
+      "org": {
+        "id": "Direktorat Sekolah Menengah Kejuruan",
+        "en": ""
+      },
+      "type": null,
+      "period": {
+        "id": "Des 2021",
+        "en": ""
+      },
+      "location": null,
+      "description": {
+        "id": "-",
+        "en": ""
+      },
+      "skills": [
+        "Coding",
+        "Programming",
+        "Software Development"
+      ],
+      "image": "",
+      "imageAlt": null,
+      "logo": "",
+      "highlight": false
     }
   ]
 }
