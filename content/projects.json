@@ -68,7 +68,16 @@
       "tags": [],
       "image": "/media/Screenshot 2026-09-06 214847.png",
       "imageAlt": null,
-      "links": [],
+      "links": [
+        {
+          "label": {
+            "id": "https://social.unib.ac.id/bpa/",
+            "en": ""
+          },
+          "href": "https://social.unib.ac.id/bpa/",
+          "icon": ""
+        }
+      ],
       "featured": false
     },
     {
