@@ -340,6 +340,34 @@
       "imageAlt": null,
       "logo": "",
       "highlight": false
+    },
+    {
+      "role": {
+        "id": "Peserta KAMP Kreatif Siswa SMK (KKSI) 2021",
+        "en": ""
+      },
+      "org": {
+        "id": "Direktorat Sekolah Menengah Kejuruan",
+        "en": ""
+      },
+      "type": null,
+      "period": {
+        "id": "Agustus 2021 - November 2021",
+        "en": ""
+      },
+      "location": null,
+      "description": {
+        "id": "Peserta pada Kegiatan KAMP kreatif siswa SMK yang diadakan oleh dirjen pendidikan vokasi oada tahun 2021. Mengikuti kompetisi game development bersama tim mewakili SMKN 1 Kota Bengkulu dan mendapatkan Predikat \"baik\"",
+        "en": ""
+      },
+      "skills": [
+        "Software Engineer",
+        "Game Development"
+      ],
+      "image": "/media/128286.jpg",
+      "imageAlt": null,
+      "logo": "",
+      "highlight": false
     }
   ]
 }
