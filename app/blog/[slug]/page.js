@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import path from 'node:path';
 import { notFound } from 'next/navigation';
 import { portfolio } from '@/data/portfolio';
 import { getPublishedPosts, getPostBySlug } from '@/data/posts';
@@ -23,7 +25,25 @@ export async function generateMetadata({ params }) {
 
   const title = t(post.title, meta.locale);
   const description = t(post.excerpt, meta.locale);
-  const image = post.cover || meta.ogImage;
+
+  /*
+    KARTU PREVIEW SAAT TAUTAN DIBAGIKAN
+
+    Yang dipakai bukan berkas sampulnya langsung, melainkan kartu khusus yang
+    dibuat scripts/generate-og.mjs setiap kali situs dibangun.
+
+    Alasannya: sampul yang kamu unggah bisa berukuran beberapa megabita, dan
+    WhatsApp menyerah sebelum selesai mengunduhnya, sehingga yang muncul cuma
+    tautan polos tanpa gambar. Kartu khusus itu 1200 x 630 piksel dan di bawah
+    300 KB, ukuran yang diterima semua layanan.
+
+    Ukuran dan tipenya ikut disebutkan. Tanpa itu sebagian layanan menampilkan
+    gambar kecil di samping tautan, bukan kartu besar.
+  */
+  const kartu = path.join(process.cwd(), 'public', 'images', 'og', `${post.slug}.jpg`);
+  const gambar = existsSync(kartu)
+    ? { url: `/images/og/${post.slug}.jpg`, width: 1200, height: 630, type: 'image/jpeg' }
+    : { url: meta.ogImage, width: 1200, height: 630, type: 'image/jpeg' };
 
   return {
     title,
@@ -37,9 +57,9 @@ export async function generateMetadata({ params }) {
       publishedTime: post.date,
       authors: [profile.name],
       tags: post.tags,
-      images: [image],
+      images: [{ ...gambar, alt: title }],
     },
-    twitter: { card: 'summary_large_image', title, description, images: [image] },
+    twitter: { card: 'summary_large_image', title, description, images: [gambar.url] },
   };
 }
 

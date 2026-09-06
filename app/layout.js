@@ -80,6 +80,9 @@ export const metadata = {
         url: meta.ogImage,
         width: 1200,
         height: 630,
+        // Tipe berkas ikut disebutkan supaya layanan seperti WhatsApp langsung
+        // tahu ini gambar besar, tanpa harus mengunduhnya dulu untuk memeriksa.
+        type: 'image/jpeg',
         alt: `${profile.name}, ${t(profile.headline, locale)}`,
       },
     ],

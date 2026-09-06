@@ -8,23 +8,24 @@
   },
   "scripts": {
     "dev": "next dev",
-    "predev": "node scripts/copy-cms.mjs",
+    "predev": "node scripts/copy-cms.mjs && node scripts/generate-og.mjs",
     "build": "next build",
-    "prebuild": "node scripts/copy-cms.mjs",
+    "prebuild": "node scripts/copy-cms.mjs && node scripts/generate-og.mjs",
     "start": "next start",
     "assets": "node --no-warnings scripts/generate-assets.mjs",
-    "placeholders": "node --no-warnings scripts/generate-placeholders.mjs"
+    "placeholders": "node --no-warnings scripts/generate-placeholders.mjs",
+    "og": "node scripts/generate-og.mjs"
   },
   "dependencies": {
     "marked": "^18.0.11",
     "next": "16.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "sharp": "0.35.4"
   },
   "devDependencies": {
     "@sveltia/cms": "0.205.4",
     "@tailwindcss/postcss": "4.3.3",
-    "sharp": "0.35.4",
     "tailwindcss": "4.3.3"
   }
 }

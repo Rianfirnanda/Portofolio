@@ -85,6 +85,7 @@ ganda pada setiap nama field.
 22. [Supaya muncul di Google](#22-supaya-muncul-di-google)
 23. [Statistik pengunjung di footer](#23-statistik-pengunjung-di-footer)
 24. [Kalau unggahan sering gagal](#24-kalau-unggahan-sering-gagal)
+25. [Gambar preview saat tautan dibagikan](#25-gambar-preview-saat-tautan-dibagikan)
 
 ---
 
@@ -117,7 +118,7 @@ ulang tiga berkas sekaligus:
 | --- | --- |
 | `app/icon.png` | Favicon bundar berbingkai gradien, 512 x 512 |
 | `app/apple-icon.png` | Ikon layar utama iOS, 180 x 180 |
-| `public/images/og-image.png` | Kartu preview 1200 x 630 berisi foto, nama, dan status |
+|  `public/images/og-image.jpg` | Kartu preview 1200 x 630 berisi foto, nama, dan status |
 
 Setelah itu `git commit` dan `git push`. Vercel akan membangun ulang sendiri.
 
@@ -1284,3 +1285,50 @@ berkas lagu, karena ukurannya jauh lebih besar daripada foto.
 
 Berhati hatilah menghapus, karena berkas yang masih dipakai akan membuat
 gambarnya hilang dari situs.
+
+---
+
+## 25. Gambar preview saat tautan dibagikan
+
+Saat kamu membagikan tautan tulisan ke WhatsApp, LinkedIn, atau X, yang muncul
+adalah kartu berisi gambar, judul, dan ringkasan. Kartu itu dibuat otomatis,
+satu untuk setiap tulisan, dan tidak ada yang perlu kamu kerjakan.
+
+### Kenapa dibuatkan khusus
+
+Dulu kartunya memakai berkas sampul apa adanya. Masalahnya, foto dari kamera
+bisa berukuran beberapa megabita, dan WhatsApp menyerah sebelum selesai
+mengunduhnya. Yang terlihat cuma tautan polos tanpa gambar.
+
+Sekarang setiap tulisan punya kartu sendiri yang dibuat saat situs dibangun:
+
+| Sifat | Nilai | Kenapa begitu |
+|---|---|---|
+| Ukuran | 1200 x 630 piksel | Rasio yang dipakai kartu preview besar |
+| Format | JPEG | Dimengerti semua layanan tanpa kecuali |
+| Berat | di bawah 300 KB | Jauh di dalam batas WhatsApp |
+
+Isinya foto sampulmu dengan lapisan gelap di bagian bawah, judul tulisan, dan
+alamat situs. Jadi orang tahu isinya sebelum mengklik.
+
+### Kalau tulisan belum punya sampul
+
+Kartunya memakai gambar preview bawaan situs, yaitu foto profilmu beserta nama
+dan status. Tetap tampil, cuma tidak spesifik ke tulisannya.
+
+### Kalau previewnya masih yang lama
+
+Semua layanan menyimpan hasil pemeriksaan tautan selama beberapa hari. Kalau
+kamu mengganti sampul lalu membagikan lagi, yang muncul bisa saja masih yang
+lama. Cara memaksanya menyegarkan:
+
+| Layanan | Caranya |
+|---|---|
+| WhatsApp | Tambahkan `?v=2` di akhir tautan, misalnya `.../blog/judul/?v=2` |
+| Facebook dan Instagram | Buka `developers.facebook.com/tools/debug`, tempel tautannya, klik **Scrape Again** |
+| LinkedIn | Buka `linkedin.com/post-inspector`, tempel tautannya |
+| X | Biasanya menyegarkan sendiri dalam beberapa jam |
+
+Cara memeriksa cepat sebelum membagikan: buka
+`developers.facebook.com/tools/debug`, tempel tautannya, dan lihat apakah
+gambarnya muncul di sana.

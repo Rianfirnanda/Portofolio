@@ -193,12 +193,16 @@ async function buildOgImage(outPath) {
   const photoX = 760;
   const photoY = Math.round((H - size) / 2);
 
+  // Disimpan sebagai JPEG, bukan PNG. Isinya foto beserta gradien, dan untuk
+  // gambar semacam itu PNG menghasilkan berkas berkali lipat lebih besar tanpa
+  // beda tampilan yang terlihat. Ukuran berkas penting di sini karena WhatsApp
+  // menyerah mengunduh kartu preview yang terlalu berat.
   await sharp(background)
     .composite([
       { input: frame, top: photoY - ring, left: photoX - ring },
       { input: photo, top: photoY, left: photoX },
     ])
-    .png({ compressionLevel: 9 })
+    .jpeg({ quality: 84, mozjpeg: true })
     .toFile(outPath);
 
   console.log(`  ${outPath}  ${W}x${H}`);

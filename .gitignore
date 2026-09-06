@@ -35,3 +35,6 @@ Thumbs.db
 # Gambar yang diunggah lewat panel konten TIDAK diabaikan.
 # Berkas di public/images/uploads/ sengaja ikut masuk ke Git supaya jadi
 # bagian dari repositori, sama seperti gambar lainnya.
+
+# Kartu preview per tulisan, dibuat ulang otomatis setiap build.
+/public/images/og/
