@@ -6,7 +6,7 @@
         "en": "Internal Quality Audit (AMI) Document Team"
       },
       "org": {
-        "id": "-",
+        "id": "Universitas Bengkulu",
         "en": ""
       },
       "type": {
@@ -32,7 +32,7 @@
         "id": "Dokumentasi penyusunan berkas Audit Mutu Internal bersama tim dosen",
         "en": "Documentation of Internal Quality Audit drafting with the faculty team"
       },
-      "logo": null,
+      "logo": "/media/Logo-UNIB-HD-580x580.png",
       "highlight": true
     },
     {
@@ -41,7 +41,7 @@
         "en": "2026 Departmental Accreditation Document Team"
       },
       "org": {
-        "id": "-",
+        "id": "Universitas Bengkulu",
         "en": ""
       },
       "type": {
@@ -64,7 +64,7 @@
       ],
       "image": null,
       "imageAlt": null,
-      "logo": null,
+      "logo": "/media/Logo-UNIB-HD-580x580.png",
       "highlight": false
     },
     {
@@ -73,7 +73,7 @@
         "en": "Website Manager, Public Administration Department FISIP"
       },
       "org": {
-        "id": "-",
+        "id": "Universitas Bengkulu",
         "en": ""
       },
       "type": {
@@ -100,7 +100,7 @@
         "id": "Tampilan pengelolaan website resmi jurusan",
         "en": "The department official website being managed"
       },
-      "logo": null,
+      "logo": "/media/Logo-UNIB-HD-580x580.png",
       "highlight": true
     },
     {
@@ -109,7 +109,7 @@
         "en": "Tracer Study Team, Public Administration Department"
       },
       "org": {
-        "id": "-",
+        "id": "Universitas Bengkulu",
         "en": ""
       },
       "type": {
@@ -136,7 +136,7 @@
         "id": "Rekap dan analisis data alumni untuk tracer study",
         "en": "Alumni data recap and analysis for the tracer study"
       },
-      "logo": null,
+      "logo": "/media/Logo-UNIB-HD-580x580.png",
       "highlight": false
     },
     {
@@ -167,12 +167,12 @@
         "SDGs",
         "Presentasi Riset"
       ],
-      "image": "/images/experience/konferensi-sdgs.svg",
+      "image": "/media/122_Rian Firnanda Irsyadani, S.A.P_page-0001.jpg",
       "imageAlt": {
         "id": "Sesi presentasi makalah di konferensi internasional SDGs 2030",
         "en": "Paper presentation session at the SDGs 2030 international conference"
       },
-      "logo": null,
+      "logo": "/media/Bali-Sruti-ICON-150x150.jpg",
       "highlight": true
     },
     {
@@ -181,7 +181,7 @@
         "en": "Intern"
       },
       "org": {
-        "id": "-",
+        "id": "Dinas Pemberdayaan Masyarakat dan Desa Provinsi Bengkulu",
         "en": ""
       },
       "type": {
@@ -202,7 +202,7 @@
         "Pemberdayaan Desa",
         "Administrasi Pemerintahan"
       ],
-      "image": "/images/experience/magang-dpmd.svg",
+      "image": "/media/IMG-20250903-WA0039.jpg",
       "imageAlt": {
         "id": "Kegiatan pendampingan program pemberdayaan desa bersama DPMD",
         "en": "Village empowerment program mentoring with DPMD"
@@ -227,7 +227,10 @@
         "id": "Nov 2024 - sekarang",
         "en": "Nov 2024 - present"
       },
-      "location": null,
+      "location": {
+        "id": "Universitas Bengkulu",
+        "en": ""
+      },
       "description": {
         "id": "Mendukung kegiatan akademik, penelitian, pelatihan, dan pengabdian masyarakat di laboratorium. Saya menyiapkan materi praktikum, mendampingi peserta selama kegiatan, dan merapikan dokumentasinya.",
         "en": "Supporting academic, research, training, and community service activities in the lab. I prepare practicum materials, assist participants during sessions, and keep the documentation tidy."
@@ -242,7 +245,7 @@
         "id": "Persiapan materi praktikum di Laboratorium Administrasi Publik",
         "en": "Preparing practicum materials at the Public Administration Laboratory"
       },
-      "logo": null,
+      "logo": "/media/WhatsApp Image 2026-01-10 at 19.35.21.jpeg",
       "highlight": false
     },
     {
@@ -251,7 +254,7 @@
         "en": "Kesmawa Volunteer"
       },
       "org": {
-        "id": "-",
+        "id": "Universitas Bengkulu",
         "en": ""
       },
       "type": {
