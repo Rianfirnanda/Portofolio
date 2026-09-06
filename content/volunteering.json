@@ -1,15 +1,21 @@
 {
   "items": [
     {
-      "role": "Aksi Muda Jaga Iklim (AMJI) 2023 & 2024",
-      "org": "SDGs Center Universitas Bengkulu",
+      "role": {
+        "id": "Aksi muda Jaga Iklim",
+        "en": ""
+      },
+      "org": {
+        "id": "SDGs Center Universitas Bengkulu",
+        "en": ""
+      },
       "period": "2023 - 2024",
       "description": {
         "id": "Menanam mangrove, bersih-bersih kawasan pesisir, dan ikut mengisi webinar isu iklim bersama Indorelawan dan EcoNusa Foundation.",
         "en": "Planting mangroves, cleaning up coastal areas, and helping run climate webinars together with Indorelawan and the EcoNusa Foundation."
       },
-      "image": null,
-      "imageAlt": ""
+      "image": "/media/128303.jpg",
+      "imageAlt": null
     }
   ]
 }
