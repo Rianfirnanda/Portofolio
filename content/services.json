@@ -23,6 +23,42 @@
     {
       "id": "Jaringan Komputer",
       "en": "Computer Networking"
+    },
+    {
+      "id": "Administrasi Umum",
+      "en": ""
+    },
+    {
+      "id": "Tata Kelola",
+      "en": ""
+    },
+    {
+      "id": "Manajemen Informasi",
+      "en": ""
+    },
+    {
+      "id": "Generative AI",
+      "en": ""
+    },
+    {
+      "id": "Kecerdasan Buatan",
+      "en": ""
+    },
+    {
+      "id": "Prompt Engineering",
+      "en": ""
+    },
+    {
+      "id": "Perangkat Keras",
+      "en": ""
+    },
+    {
+      "id": "Cyber Security Analysis",
+      "en": ""
+    },
+    {
+      "id": "Sistem Operasi",
+      "en": ""
     }
   ]
 }
