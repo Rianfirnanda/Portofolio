@@ -131,17 +131,37 @@ export function LightboxProvider({ children }) {
             className="relative z-10 flex max-h-full w-full max-w-4xl flex-col"
             style={{ animation: 'lightbox-in 0.35s cubic-bezier(0.22, 1, 0.36, 1)' }}
           >
-            {/* Tanpa w-full supaya bingkainya memeluk gambar, bukan memeluk
-                kotak kosong di kiri dan kanan gambar.
+            {/* Tanpa w-full supaya bingkainya memeluk isinya, bukan memeluk
+                kotak kosong di kiri dan kanannya.
 
-                key memaksa peramban mengganti gambarnya, bukan menampilkan
-                gambar lama sambil menunggu yang baru selesai diunduh. */}
-            <img
-              key={item.src}
-              src={withBasePath(item.src)}
-              alt={t(item.alt)}
-              className="mx-auto max-h-[78svh] max-w-full rounded-2xl border border-white/15 object-contain shadow-2xl"
-            />
+                key memaksa peramban mengganti berkasnya, bukan menampilkan
+                yang lama sambil menunggu yang baru selesai diunduh. */}
+            {item.jenis === 'video' ? (
+              /*
+                Videonya baru diunduh di sini, saat benar benar dibuka.
+                Di kisi galeri tidak ada satu bita pun yang diambil, jadi
+                halaman tetap ringan berapa pun video yang kamu pasang.
+              */
+              <video
+                key={item.src}
+                src={withBasePath(item.src)}
+                poster={item.poster ? withBasePath(item.poster) : undefined}
+                controls
+                autoPlay
+                playsInline
+                preload="metadata"
+                className="mx-auto max-h-[78svh] max-w-full rounded-2xl border border-white/15 bg-black object-contain shadow-2xl"
+              >
+                {t(portfolio.ui.videoUnsupported)}
+              </video>
+            ) : (
+              <img
+                key={item.src}
+                src={withBasePath(item.src)}
+                alt={t(item.alt)}
+                className="mx-auto max-h-[78svh] max-w-full rounded-2xl border border-white/15 object-contain shadow-2xl"
+              />
+            )}
 
             {t(item.caption) ? (
               <figcaption className="mt-4 text-center text-sm text-slate-200">

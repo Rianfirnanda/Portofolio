@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
+import { useAmbangGulir } from '@/hooks/useGulir';
 import ThemeToggle from '@/components/ThemeToggle';
 import SmartImage from '@/components/SmartImage';
 import { CommandPaletteTrigger } from '@/components/CommandPalette';
@@ -22,10 +23,11 @@ import Icon from '@/components/Icon';
  *  - Di layar kecil menunya berubah jadi drawer dengan latar peredup.
  */
 export default function Navbar() {
-  const { lang, toggleLang, t } = useLanguage();
+  const { lang, langLangsung, toggleLang, t } = useLanguage();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  // Menumpang pendengar gulir bersama, lihat hooks/useGulir.js
+  const scrolled = useAmbangGulir(24);
   const [active, setActive] = useState('');
 
   const items = portfolio.nav ?? [];
@@ -40,14 +42,6 @@ export default function Navbar() {
     .join('')
     .slice(0, 2)
     .toUpperCase();
-
-  // Perkecil tinggi navbar setelah halaman digulir sedikit.
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   // Sorot menu sesuai section yang sedang terlihat. Hanya berlaku di beranda.
   useEffect(() => {
@@ -227,23 +221,30 @@ export default function Navbar() {
             {/* Pencarian cepat, juga bisa dibuka dengan Ctrl+K atau Cmd+K */}
             <CommandPaletteTrigger />
 
-            {/* Ganti bahasa */}
+            {/*
+              Ganti bahasa.
+
+              Penanda ID/EN di sini mengikuti langLangsung, bukan lang. Isi
+              halaman butuh waktu untuk digambar ulang seluruhnya, dan kalau
+              tombolnya ikut menunggu, sentuhan pengunjung terasa tidak terjawab
+              selama menunggu itu. Lihat components/LanguageProvider.jsx.
+            */}
             <button
               type="button"
               onClick={toggleLang}
-              aria-label={`${t(portfolio.ui.switchLanguage)}, ${lang === 'id' ? 'English' : 'Bahasa Indonesia'}`}
+              aria-label={`${t(portfolio.ui.switchLanguage)}, ${langLangsung === 'id' ? 'English' : 'Bahasa Indonesia'}`}
               className="flex items-center gap-1 rounded-full border border-line bg-surface p-0.5 text-xs font-semibold transition-colors hover:border-line-strong"
             >
               <span
                 className={`rounded-full px-2.5 py-1 transition-colors ${
-                  lang === 'id' ? 'bg-linear-to-r from-accent-1 to-accent-2 text-white' : 'text-subtle'
+                  langLangsung === 'id' ? 'bg-linear-to-r from-accent-1 to-accent-2 text-white' : 'text-subtle'
                 }`}
               >
                 ID
               </span>
               <span
                 className={`rounded-full px-2.5 py-1 transition-colors ${
-                  lang === 'en' ? 'bg-linear-to-r from-accent-1 to-accent-2 text-white' : 'text-subtle'
+                  langLangsung === 'en' ? 'bg-linear-to-r from-accent-1 to-accent-2 text-white' : 'text-subtle'
                 }`}
               >
                 EN

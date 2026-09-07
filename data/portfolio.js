@@ -50,6 +50,7 @@ import feedback from '@/content/feedback-settings.json';
 import navigation from '@/content/navigation.json';
 import sections from '@/content/sections.json';
 import labels from '@/content/labels.json';
+import { jenisBerkas } from '@/lib/berkas';
 
 /**
  * Daftar di dalam berkas JSON dibungkus objek dengan field `items` atau
@@ -59,29 +60,39 @@ import labels from '@/content/labels.json';
 const list = (source, key = 'items') => (Array.isArray(source?.[key]) ? source[key] : []);
 
 /**
- * Menyusun isi galeri foto.
+ * Menyusun isi galeri foto dan video.
  *
- * Panel menyimpan daftar fotonya sebagai array alamat biasa, bukan array objek.
- * Bentuk itu yang dipakai karena hanya bentuk itu yang mengizinkan kamu memilih
- * banyak foto sekaligus di perpustakaan media, bukan satu per satu.
+ * Panel menyimpan daftar berkasnya sebagai array alamat biasa, bukan array
+ * objek. Bentuk itu yang dipakai karena hanya bentuk itu yang mengizinkan kamu
+ * memilih banyak berkas sekaligus di perpustakaan media, bukan satu per satu.
  *
- * Keterangan fotonya ditulis di daftar terpisah dan dijodohkan di sini, jadi
- * komponennya cukup menerima satu daftar yang sudah rapi. Foto yang tidak punya
- * keterangan tetap tampil, keterangannya saja yang kosong.
+ * Keterangan dan sampul videonya ditulis di daftar terpisah dan dijodohkan di
+ * sini, jadi komponennya cukup menerima satu daftar yang sudah rapi. Berkas
+ * yang tidak punya keterangan tetap tampil, keterangannya saja yang kosong.
  */
 function susunGaleri(sumber) {
-  const keterangan = new Map(
+  const tambahan = new Map(
     (Array.isArray(sumber?.captions) ? sumber.captions : [])
       .filter((baris) => typeof baris?.src === 'string' && baris.src)
-      .map((baris) => [baris.src, baris.text ?? null])
+      .map((baris) => [baris.src, { caption: baris.text ?? null, poster: baris.poster || null }])
   );
 
   const daftar = (Array.isArray(sumber?.photos) ? sumber.photos : []).filter(
     (src) => typeof src === 'string' && src.trim()
   );
 
-  // Foto yang kebetulan terpilih dua kali cukup ditampilkan sekali.
-  return [...new Set(daftar)].map((src) => ({ src, caption: keterangan.get(src) ?? null }));
+  // Berkas yang kebetulan terpilih dua kali cukup ditampilkan sekali.
+  return [...new Set(daftar)].map((src) => {
+    const ekstra = tambahan.get(src) ?? {};
+    return {
+      src,
+      caption: ekstra.caption ?? null,
+      poster: ekstra.poster ?? null,
+      // Video dikenali dari nama berkasnya, jadi kamu tidak perlu menandainya
+      // sendiri di panel. Selain video, semuanya diperlakukan sebagai gambar.
+      jenis: jenisBerkas(src) === 'video' ? 'video' : 'gambar',
+    };
+  });
 }
 
 const galeri = susunGaleri(gallery);

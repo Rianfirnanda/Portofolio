@@ -112,8 +112,16 @@
     "en": "Next image"
   },
   "lightboxDownload": {
-    "id": "Unduh gambar ini",
-    "en": "Download this image"
+    "id": "Unduh berkas ini",
+    "en": "Download this file"
+  },
+  "videoPlay": {
+    "id": "Putar video",
+    "en": "Play video"
+  },
+  "videoUnsupported": {
+    "id": "Peramban kamu belum bisa memutar video ini.",
+    "en": "Your browser cannot play this video."
   },
   "galleryMore": {
     "id": "Muat lebih banyak",

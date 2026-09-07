@@ -5,6 +5,7 @@ import { portfolio } from '@/data/portfolio';
 import { getPublishedPosts, getPostBySlug } from '@/data/posts';
 import { t } from '@/lib/i18n';
 import { renderMarkdown } from '@/lib/markdown';
+import { ukurGambarTulisan } from '@/lib/ukuran-gambar';
 import PostArticle from '@/components/PostArticle';
 
 const { meta, profile } = portfolio;
@@ -78,7 +79,12 @@ export default async function BlogPostPage({ params }) {
   // ulang halaman.
   const isiId = typeof post.body === 'string' ? post.body : (post.body?.id ?? '');
   const isiEn = typeof post.body === 'string' ? post.body : (post.body?.en || isiId);
-  const bodyHtml = { id: renderMarkdown(isiId), en: renderMarkdown(isiEn) };
+
+  // Tiap gambar diukur lebih dulu supaya tempatnya bisa dipesan sebelum
+  // gambarnya datang, dan tulisan di bawahnya tidak melompat saat memuat.
+  const ukuran = await ukurGambarTulisan(isiId, isiEn);
+
+  const bodyHtml = { id: renderMarkdown(isiId, ukuran), en: renderMarkdown(isiEn, ukuran) };
 
   // Data terstruktur agar tulisan bisa muncul sebagai artikel di mesin pencari.
   const articleJsonLd = {

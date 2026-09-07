@@ -730,6 +730,31 @@ time,
     left: 20%;
     width: 60%;
   }
+
+  /*
+    ------------------------------------------------------------------------
+    CATATAN: DUA PERCOBAAN YANG SENGAJA TIDAK DIPAKAI
+    ------------------------------------------------------------------------
+
+    Keduanya terdengar seperti penghematan yang jelas, dan keduanya diukur
+    lebih dulu sebelum diputuskan. Ditulis di sini supaya tidak dicoba lagi
+    tanpa alasan baru.
+
+    content-visibility: auto pada tiap bagian halaman.
+      Melewatkan bagian yang sedang di luar layar. Masalahnya tinggi halaman
+      jadi ditebak dari satu angka perkiraan, sementara bagian di situs ini
+      tingginya berbeda beda jauh, dari 700 sampai 7500 piksel. Hasil ukur di
+      layar 390 piksel: tinggi halaman terbaca 15.031 piksel padahal aslinya
+      28.457, dan angkanya berubah ubah selama digulir. Batang gulirnya jadi
+      meloncat, persis hal yang mau dihindari.
+
+    contain: layout style pada tiap bagian halaman.
+      Membatasi perhitungan tata letak di tiap bagian. Diukur tiga kali di
+      ponsel dengan prosesor diperlambat empat kali: waktu tata letak cuma 5
+      sampai 9 milidetik, jadi tidak ada yang bisa dihemat. Sebagai gantinya
+      pembulatan posisinya bergeser satu piksel di sebagian baris. Tidak
+      sepadan.
+  */
 }
 
 /* ==========================================================================
@@ -773,6 +798,7 @@ time,
   [data-print='hide'] {
     display: none !important;
   }
+
 
   .glass,
   .glass-featured::before,

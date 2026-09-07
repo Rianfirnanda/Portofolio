@@ -590,13 +590,14 @@ collections:
               - { label: "Persegi 1:1", value: "1/1" }
               - { label: "Lebar 16:9", value: "16/9" }
               - { label: "Tegak 3:4, cocok untuk foto ponsel", value: "3/4" }
-          - label: "Foto galeri"
+          - label: "Foto dan video galeri"
             name: "photos"
-            widget: image
+            widget: file
             multiple: true
             required: false
-            hint: "Pilih sebanyak apa pun sekaligus. Seret barisnya untuk mengubah urutan tampil."
-          - label: "Keterangan foto (opsional)"
+            accept: "image/*,video/mp4,video/webm,video/quicktime"
+            hint: "Pilih sebanyak apa pun sekaligus, foto maupun video. Seret barisnya untuk mengubah urutan tampil."
+          - label: "Keterangan dan sampul video (opsional)"
             name: "captions"
             widget: list
             required: false
@@ -604,17 +605,29 @@ collections:
             minimize_collapsed: true
             label_singular: "Keterangan"
             summary: "{{fields.text.id}}"
-            hint: "Isi hanya untuk foto yang perlu diberi keterangan. Foto lain tetap tampil tanpa teks."
+            hint: "Isi hanya untuk berkas yang perlu diberi keterangan atau sampul. Sisanya tetap tampil apa adanya."
             fields:
-              - { label: "Fotonya yang mana", name: "src", widget: "image", required: true, hint: "Pilih foto yang sama dengan yang ada di daftar atas." }
+              - { label: "Berkasnya yang mana", name: "src", widget: "file", required: true, accept: "image/*,video/mp4,video/webm,video/quicktime", hint: "Pilih berkas yang sama dengan yang ada di daftar atas." }
               - label: "Keterangan"
                 name: "text"
                 widget: object
                 collapsed: false
-                required: true
+                required: false
                 fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              # SAMPUL VIDEO
+              #
+              # Kotak video di kisi galeri sengaja tidak memuat videonya sendiri.
+              # Kalau dimuat, peramban mengunduh tiap video di halaman itu hanya
+              # untuk mencari gambar bingkai pertamanya, dan galeri berisi
+              # selusin video bisa memakan puluhan megabita kuota pengunjung
+              # sebelum satu pun ditonton.
+              #
+              # Isi kolom ini dengan satu foto kalau kamu ingin kotaknya
+              # menampilkan gambar, bukan warna polos berikon film. Videonya
+              # sendiri baru diunduh saat pengunjung menekannya.
+              - { label: "Sampul video", name: "poster", widget: "image", required: false, hint: "Hanya untuk video. Foto yang tampil di kotaknya sebelum videonya dibuka." }
 
       - name: "stats"
         label: "Angka Sorotan"

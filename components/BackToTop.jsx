@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
+import { useAmbangGulir } from '@/hooks/useGulir';
 import Icon from '@/components/Icon';
 
 /**
@@ -13,17 +13,9 @@ import Icon from '@/components/Icon';
  */
 export default function BackToTop() {
   const { t } = useLanguage();
-  const [visible, setVisible] = useState(false);
+  // Menumpang pendengar gulir bersama, lihat hooks/useGulir.js
+  const visible = useAmbangGulir(0, 0.9);
   const enabled = portfolio.appearance?.backToTop !== false;
-
-  useEffect(() => {
-    if (!enabled) return;
-
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.9);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [enabled]);
 
   if (!enabled) return null;
 

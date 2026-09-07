@@ -85,7 +85,16 @@ export default function PostAudio({ audio }) {
       <audio
         ref={audioRef}
         src={withBasePath(audio.file)}
-        preload="metadata"
+        /*
+          preload="none", bukan "metadata".
+
+          Dengan "metadata", Chrome mengunduh berkas MP3-nya utuh hanya untuk
+          mencari tahu durasinya. Satu tulisan berlagu jadi memakan hampir
+          sembilan megabita kuota pembaca sebelum tombol putar disentuh sama
+          sekali. Sekarang tidak ada satu bita pun yang diunduh sampai pembaca
+          menekan putar, dan durasinya muncul begitu pemutarannya mulai.
+        */
+        preload="none"
         onTimeUpdate={(e) => setPosisi(e.currentTarget.currentTime)}
         onDurationChange={(e) => setDurasi(e.currentTarget.duration)}
         onEnded={() => setMain(false)}

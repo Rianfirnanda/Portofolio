@@ -82,6 +82,8 @@ export default function Galeri() {
     src: item.src,
     alt: t(item.caption) || `${judul} ${index + 1}`,
     caption: item.caption ?? null,
+    jenis: item.jenis,
+    poster: item.poster,
   }));
 
   return (
@@ -104,16 +106,50 @@ export default function Galeri() {
               const keterangan = t(item.caption);
               const alt = keterangan || `${judul} ${index + 1}`;
 
+              const video = item.jenis === 'video';
+
               const gambar = (
                 <>
-                  <SmartImage
-                    src={item.src}
-                    alt={alt}
-                    width={900}
-                    height={675}
-                    sizes={ukuran}
-                    className={`${rasio} w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]`}
-                  />
+                  {video && !item.poster ? (
+                    /*
+                      Video tanpa sampul.
+
+                      Sengaja TIDAK memasang elemen video di sini. Peramban akan
+                      mulai mengunduh tiap video di kisi ini hanya untuk mencari
+                      gambar bingkai pertamanya, dan galeri berisi selusin video
+                      bisa memakan puluhan megabita kuota sebelum satu pun
+                      ditonton. Videonya baru dimuat saat dibuka.
+
+                      Pasang sampulnya di panel kalau kamu ingin kotak ini
+                      menampilkan gambar, bukan warna polos.
+                    */
+                    <div
+                      className={`${rasio} grid w-full place-items-center bg-linear-to-br from-accent-1/25 via-surface to-accent-2/20`}
+                    >
+                      <Icon name="film" className="h-8 w-8 text-fg opacity-30" />
+                    </div>
+                  ) : (
+                    <SmartImage
+                      src={video ? item.poster : item.src}
+                      alt={alt}
+                      width={900}
+                      height={675}
+                      sizes={ukuran}
+                      className={`${rasio} w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]`}
+                    />
+                  )}
+
+                  {/* Lencana putar, penanda bahwa isinya video bukan foto. */}
+                  {video ? (
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 grid place-items-center"
+                    >
+                      <span className="grid h-12 w-12 place-items-center rounded-full border border-white/30 bg-black/45 text-white backdrop-blur-md transition-transform duration-300 group-hover:scale-110">
+                        <Icon name="play" className="ml-0.5 h-5 w-5" />
+                      </span>
+                    </span>
+                  ) : null}
 
                   {/* Peredup hanya dipasang kalau ada keterangan yang perlu
                       dibaca di atasnya, supaya foto tanpa keterangan tetap
@@ -131,7 +167,7 @@ export default function Galeri() {
                     </span>
                   ) : null}
 
-                  {lightboxEnabled ? (
+                  {lightboxEnabled && !video ? (
                     <span className="pointer-events-none absolute right-2.5 top-2.5 grid h-8 w-8 place-items-center rounded-full border border-white/25 bg-black/40 text-white opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
                       <Icon name="image" className="h-4 w-4" />
                     </span>
@@ -145,8 +181,10 @@ export default function Galeri() {
                     <button
                       type="button"
                       onClick={() => openLightbox({ ...rangkaian[index], group: rangkaian })}
-                      aria-label={`${t(ui.imageZoom)}: ${alt}`}
-                      className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl border border-line"
+                      aria-label={`${video ? t(ui.videoPlay) : t(ui.imageZoom)}: ${alt}`}
+                      className={`group relative block w-full overflow-hidden rounded-2xl border border-line ${
+                        video ? 'cursor-pointer' : 'cursor-zoom-in'
+                      }`}
                     >
                       {gambar}
                     </button>

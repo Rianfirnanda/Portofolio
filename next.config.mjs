@@ -38,6 +38,13 @@ const nextConfig = {
   */
   images: {
     formats: ['image/avif', 'image/webp'],
+    /*
+      Mutu yang diizinkan. Daftar ini wajib ditulis: permintaan dengan angka
+      mutu di luar daftar dijawab galat 400 dan gambarnya tidak muncul sama
+      sekali. Isi tulisan blog menyusun alamat gambarnya sendiri di
+      lib/berkas.js, jadi keduanya harus memakai angka yang sama.
+    */
+    qualities: [75],
     // Gambar hasil olahan disimpan lama karena berkas sumbernya jarang
     // berubah. Kalau kamu mengganti gambar, namanya biasanya ikut berganti.
     minimumCacheTTL: 2678400,

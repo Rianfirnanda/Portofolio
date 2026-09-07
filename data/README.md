@@ -90,6 +90,7 @@ ganda pada setiap nama field.
 27. [Kalau panel berat atau Chrome menutup sendiri di ponsel](#27-kalau-panel-berat-atau-chrome-menutup-sendiri-di-ponsel)
 28. [Bagian Galeri](#28-bagian-galeri)
 29. [Melampirkan berkas yang bisa diunduh ke pengalaman](#29-melampirkan-berkas-yang-bisa-diunduh-ke-pengalaman)
+30. [Supaya situs tetap ringan di perangkat pengunjung](#30-supaya-situs-tetap-ringan-di-perangkat-pengunjung)
 
 ---
 
@@ -1446,16 +1447,33 @@ bawah Tentang Saya. Bedanya begini:
 | | Sekilas Kegiatan | Galeri |
 |---|---|---|
 | Letak | di dalam Tentang Saya | bagian sendiri, setelah Kesukarelawanan |
-| Jumlah foto | sedikit, pilihan terbaik | sebanyak yang kamu mau |
-| Menambah foto | satu per satu, tiap foto wajib berketerangan | banyak sekaligus, keterangan opsional |
+| Isinya | foto saja | foto dan video |
+| Jumlah | sedikit, pilihan terbaik | sebanyak yang kamu mau |
+| Menambahnya | satu per satu, tiap foto wajib berketerangan | banyak sekaligus, keterangan opsional |
 
-### Menambah foto, banyak sekaligus
+### Menambah foto dan video, banyak sekaligus
 
-Panel > **Isi Halaman** > **Galeri** > kolom **Foto galeri**.
+Panel > **Isi Halaman** > **Galeri** > kolom **Foto dan video galeri**.
 
 Buka pustaka media, centang sebanyak apa pun, lalu simpan. Ini satu satunya
 kolom di seluruh panel yang menerima banyak berkas dalam sekali pilih. Urutan
 tampilnya sama dengan urutan di daftar, dan barisnya bisa diseret.
+
+Foto dan video boleh dicampur dalam daftar yang sama. Mana yang video dikenali
+sendiri dari nama berkasnya, jadi tidak ada yang perlu kamu tandai.
+
+### Soal video
+
+Kotak video di kisi galeri **tidak memuat videonya sendiri**. Kalau dimuat,
+peramban akan mengunduh tiap video di halaman itu hanya untuk mencari gambar
+bingkai pertamanya, dan galeri berisi selusin video bisa memakan puluhan
+megabita kuota pengunjung sebelum satu pun ditonton.
+
+Jadi yang tampil di kisi cuma kotak berwarna dengan ikon film dan tombol putar.
+Videonya baru diunduh saat pengunjung menekannya.
+
+Kalau kamu ingin kotaknya menampilkan gambar, isi kolom **Sampul video** di
+daftar keterangan. Ambil satu foto dari videonya, unggah, lalu pilih di situ.
 
 ### Mengatur tampilannya
 
@@ -1468,28 +1486,30 @@ tampilnya sama dengan urutan di daftar, dan barisnya bisa diseret.
 Judul, label kecil di atasnya, dan subjudulnya diatur di
 **Pengaturan** > **Judul Tiap Bagian** > **Galeri**.
 
-### Keterangan foto
+### Keterangan
 
-Opsional, dan sengaja dipisah ke kolom **Keterangan foto** di bawahnya.
-Sebagian besar foto galeri memang tidak butuh keterangan, dan kalau tiap foto
-wajib diberi teks, keuntungan memilih banyak foto sekaligus jadi hilang.
+Opsional, dan sengaja dipisah ke kolom **Keterangan dan sampul video** di
+bawahnya. Sebagian besar foto galeri memang tidak butuh keterangan, dan kalau
+tiap foto wajib diberi teks, keuntungan memilih banyak berkas sekaligus jadi
+hilang.
 
-Cara mengisinya: tambah satu baris, pilih fotonya yang mana, lalu tulis
-keterangannya. Foto yang tidak ada di daftar ini tetap tampil, hanya tanpa teks.
+Cara mengisinya: tambah satu baris, pilih berkasnya yang mana, lalu tulis
+keterangannya. Berkas yang tidak ada di daftar ini tetap tampil, hanya tanpa
+teks.
 
 ### Yang berjalan sendiri
 
-**Bagian ini hilang selama fotonya kosong**, beserta item menunya di navbar.
-Begitu foto pertama masuk, keduanya muncul kembali.
+**Bagian ini hilang selama isinya kosong**, beserta item menunya di navbar.
+Begitu berkas pertama masuk, keduanya muncul kembali.
 
-**Foto dimuat bertahap.** Dua belas foto pertama dipasang lebih dulu, sisanya
-menyusul lewat tombol **Muat lebih banyak**. Galeri berisi lima puluh foto pun
-tidak membuat halaman berat dibuka di ponsel.
+**Isinya dimuat bertahap.** Dua belas berkas pertama dipasang lebih dulu,
+sisanya menyusul lewat tombol **Muat lebih banyak**. Galeri berisi lima puluh
+foto pun tidak membuat halaman berat dibuka di ponsel.
 
-**Foto bisa disusuri tanpa menutup.** Diklik satu, lalu maju mundur dengan
+**Isinya bisa disusuri tanpa menutup.** Diklik satu, lalu maju mundur dengan
 tombol panah di layar atau tombol panah kiri kanan di papan ketik. Ada tombol
-unduh juga di pojok kanan atas, berlaku untuk semua gambar di situs ini, bukan
-cuma galeri.
+unduh juga di pojok kanan atas, berlaku untuk semua gambar dan video di situs
+ini, bukan cuma galeri.
 
 ---
 
@@ -1517,3 +1537,66 @@ membuka tab baru.
 
 Entri tanpa lampiran tidak menampilkan apa apa, jadi kolom ini aman dibiarkan
 kosong.
+
+---
+
+## 30. Supaya situs tetap ringan di perangkat pengunjung
+
+Bagian ini bukan sesuatu yang perlu kamu kerjakan. Ini catatan tentang apa yang
+sudah dipasang supaya situsnya tidak berat dibuka, terutama di ponsel dengan
+kuota terbatas, dan apa yang perlu kamu hindari supaya tetap begitu.
+
+### Yang sudah berjalan sendiri
+
+**Gambar di dalam tulisan diperkecil otomatis.** Foto 1,4 MB yang kamu tempel di
+tulisan dikirim ke ponsel pengunjung sebagai berkas sekitar 120 KB, seukuran
+layarnya. Tampilannya sama, dan kamu tetap menempel foto seperti biasa.
+
+**Ukuran tiap gambar dihitung saat situs dibangun.** Peramban jadi tahu setinggi
+apa tempat yang harus dipesan sebelum gambarnya datang, sehingga tulisan di
+bawahnya tidak melompat saat gambarnya muncul.
+
+**Lagu dan video tidak diunduh sebelum ditekan.** Ini yang paling besar
+pengaruhnya. Dulu satu tulisan berlagu memakan 8,6 MB kuota pembaca hanya untuk
+membuka halamannya, padahal tombol putarnya belum tentu disentuh.
+
+**Foto di luar layar belum diunduh.** Beranda memuat 45 gambar, tapi yang
+diambil saat pertama dibuka cuma enam yang benar benar terlihat.
+
+### Angka sebelum dan sesudah
+
+Diukur di ponsel dengan prosesor diperlambat empat kali:
+
+| Halaman | Sebelum | Sesudah |
+|---|---|---|
+| Tulisan "Someday" | 8,63 MB | 0,13 MB |
+| Tulisan "Akhirnya Sidang" | 7,53 MB | 0,42 MB |
+| Tulisan "Perjalanan ke DPRD" | 1,21 MB | 0,20 MB |
+| Beranda, sebelum digulir | 0,41 MB | 0,41 MB |
+| Menekan tombol ID/EN | 961 ms | 481 ms |
+
+### Tiga kebiasaan yang menjaganya tetap ringan
+
+**Unggah lagu seperlunya saja.** Satu lagu MP3 berdurasi empat menit besarnya
+sekitar 5 sampai 9 MB, jauh lebih besar daripada foto mana pun di situs ini.
+Sekarang lagu itu tidak diunduh sampai ditekan, tapi tetap saja pembaca yang
+menekannya harus menunggu.
+
+**Video panjang lebih baik diunggah ke YouTube,** lalu tempel tautannya di
+tulisan. Video 30 MB di folder media tetap 30 MB saat ditonton pengunjung.
+
+**Foto tidak perlu ukuran asli kamera.** Panel sudah memperkecilnya sendiri ke
+lebar 2000 piksel saat diunggah, dan itu sudah lebih dari cukup.
+
+### Dua hal yang sengaja tidak dipakai
+
+Dicoba, diukur, lalu dibatalkan. Ditulis di sini supaya tidak dicoba lagi tanpa
+alasan baru. Keterangan lengkapnya ada sebagai catatan di `app/globals.css`.
+
+**Melewatkan bagian halaman yang belum terlihat** (`content-visibility`). Tinggi
+halaman jadi ditebak dari satu angka, padahal tiap bagian tingginya berbeda jauh.
+Akibatnya batang gulir meloncat loncat.
+
+**Membatasi perhitungan tata letak per bagian** (`contain`). Waktu tata letaknya
+memang cuma 5 sampai 9 milidetik, jadi tidak ada yang bisa dihemat, sementara
+posisi teksnya bergeser satu piksel.

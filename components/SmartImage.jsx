@@ -45,7 +45,9 @@ export default function SmartImage({
   loading = 'lazy',
   priority = false,
   sizes,
-  quality = 78,
+  // 75, mengikuti images.qualities di next.config.mjs. Angka di luar daftar
+  // itu ditolak pengoptimal dengan galat 400 dan gambarnya hilang.
+  quality = 75,
   ...rest
 }) {
   const [failed, setFailed] = useState(false);

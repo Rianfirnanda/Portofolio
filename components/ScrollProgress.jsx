@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { portfolio } from '@/data/portfolio';
+import { berlangganGulir } from '@/hooks/useGulir';
 
 /**
  * ScrollProgress: garis tipis bergradien di tepi paling atas layar yang
@@ -19,34 +20,21 @@ export default function ScrollProgress() {
   useEffect(() => {
     if (!enabled) return;
 
-    let frame = 0;
-
-    const update = () => {
-      frame = 0;
+    // Menumpang pendengar gulir bersama, yang sudah dibatasi satu kali per
+    // bingkai gambar. Lihat hooks/useGulir.js
+    const update = (y) => {
       const bar = barRef.current;
       if (!bar) return;
 
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const ratio = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+      const ratio = scrollable > 0 ? Math.min(1, Math.max(0, y / scrollable)) : 0;
 
       bar.style.transform = `scaleX(${ratio})`;
       bar.style.opacity = ratio > 0.005 ? '1' : '0';
     };
 
-    const onScroll = () => {
-      if (frame) return;
-      frame = requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-
-    return () => {
-      if (frame) cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
+    update(window.scrollY);
+    return berlangganGulir(update);
   }, [enabled]);
 
   if (!enabled) return null;
