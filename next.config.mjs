@@ -60,6 +60,61 @@ const nextConfig = {
   // bisa menyusun alamat gambar dengan benar.
   env: { NEXT_PUBLIC_BASE_PATH: basePath },
 
+  /*
+    HEADER KEAMANAN
+
+    Situs ini tidak menyimpan data pribadi pengunjung dan tidak punya halaman
+    login sendiri, jadi risikonya kecil. Tetapi ada satu hal yang benar benar
+    berharga di dalamnya: panel di /admin memegang token GitHub milikmu selama
+    kamu login, dan token itu bisa menulis ke seluruh repositori.
+
+    Header di bawah menutup jalan yang paling umum dipakai untuk mencuri hal
+    seperti itu, dan tidak satu pun mengubah tampilan situs.
+
+    Sengaja TANPA Content-Security-Policy penuh. CSP yang ketat butuh nonce
+    pada tiap skrip, dan nonce hanya bisa dibuat saat halaman diminta, bukan
+    saat dibangun. Memakainya berarti seluruh halaman berhenti dibuat sekali
+    di awal dan harus dihitung ulang tiap kunjungan, dan situsnya jadi lebih
+    lambat demi perlindungan yang tidak seberapa untuk situs tanpa masukan
+    pengguna seperti ini. Bagian CSP yang berguna tanpa nonce, yaitu
+    frame-ancestors, tetap dipasang di bawah.
+  */
+  async headers() {
+    const keamanan = [
+      // Menutup pembajakan klik: situs ini tidak boleh dipasang di dalam
+      // bingkai situs lain. Penting untuk /admin, yang memegang token GitHub.
+      { key: 'Content-Security-Policy', value: "frame-ancestors 'self'" },
+      { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+
+      // Peramban tidak boleh menebak nebak jenis berkas. Tanpa ini, berkas
+      // yang diunggah lewat panel bisa saja diperlakukan sebagai halaman web.
+      { key: 'X-Content-Type-Options', value: 'nosniff' },
+
+      // Alamat halaman yang sedang dibuka tidak ikut dikirim ke situs lain
+      // saat pengunjung mengeklik tautan keluar.
+      { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+
+      // Situs ini tidak butuh kamera, mikrofon, maupun lokasi. Ditutup semua
+      // supaya tidak ada yang bisa memintanya diam diam.
+      {
+        key: 'Permissions-Policy',
+        value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
+      },
+
+      // Peramban wajib memakai sambungan terenkripsi untuk situs ini.
+      { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains' },
+    ];
+
+    return [
+      { source: '/:path*', headers: keamanan },
+      {
+        // Jawaban endpoint tidak boleh disimpan perantara mana pun.
+        source: '/api/:path*',
+        headers: [...keamanan, { key: 'Cache-Control', value: 'no-store, max-age=0' }],
+      },
+    ];
+  },
+
   async rewrites() {
     return [
       // Panel konten berupa halaman HTML biasa di public/admin/index.html.

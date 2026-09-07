@@ -94,6 +94,7 @@ ganda pada setiap nama field.
 29. [Melampirkan berkas yang bisa diunduh ke pengalaman](#29-melampirkan-berkas-yang-bisa-diunduh-ke-pengalaman)
 30. [Supaya situs tetap ringan di perangkat pengunjung](#30-supaya-situs-tetap-ringan-di-perangkat-pengunjung)
 31. [Setiap bagian halaman depan diubah di mana](#31-setiap-bagian-halaman-depan-diubah-di-mana)
+32. [Keamanan situs](#32-keamanan-situs)
 
 ---
 
@@ -1669,3 +1670,77 @@ Yang **tidak** ada di menu itu:
 | Deretan ikon media sosial di bawah tombol | Pengaturan Situs > Media Sosial |
 | Strip keahlian berjalan di bagian bawah | Isi Halaman > Keahlian |
 | Tombol "Gulir ke bawah" | tidak bisa diubah, teksnya bawaan situs |
+
+
+---
+
+## 32. Keamanan situs
+
+Bagian ini bukan sesuatu yang perlu kamu kerjakan. Ini catatan tentang apa yang
+sudah dijaga, supaya kalau suatu saat ada yang mengubah kode, penjagaannya tidak
+ikut terlepas tanpa sengaja.
+
+### Apa yang sebenarnya berharga di sini
+
+Situs ini tidak menyimpan data pribadi pengunjung dan tidak punya halaman login
+sendiri. Yang benar benar berharga cuma satu: **panel di /admin memegang token
+GitHub milikmu selama kamu login**, dan token itu bisa menulis ke seluruh
+repositori. Hampir semua penjagaan di bawah berpusat pada satu hal itu.
+
+### Yang dijaga
+
+**Token login tidak bisa dialihkan ke situs lain.** Halaman perantara setelah
+login GitHub hanya membalas ke situs ini sendiri. Sebelumnya ia membalas ke
+alamat mana pun yang menyapanya lebih dulu, dan itu berarti jendela dari situs
+lain bisa memancing tokennya keluar.
+
+**Isi tulisan tidak bisa menyisipkan kode.** Kode HTML mentah di dalam tulisan
+dibuang, bukan dijalankan, dan alamat yang bisa menjalankan kode seperti
+`javascript:` dan `data:` ditolak. Diuji dengan empat belas bentuk serangan
+yang lazim, semuanya tertahan.
+
+**Formulir masukan dibatasi berlapis.** Kolom umpan tersembunyi, jeda mengetik
+minimal, batas panjang, lima kiriman per jam per alamat, dan empat puluh per jam
+secara menyeluruh. Yang terakhir itu penting karena tiap kiriman menjadi commit
+permanen: riwayat Git tidak bisa dihapus sebagian, jadi banjir kiriman
+meninggalkan bekas selamanya.
+
+**Penghitung kunjungan dibatasi.** Tanpa itu siapa pun bisa menggelembungkan
+angkanya dengan memanggil alamatnya berulang, sekaligus menghabiskan jatah
+permintaan penyimpanan.
+
+**Header keamanan dipasang di semua halaman.** Situs tidak bisa dipasang di
+dalam bingkai situs lain, peramban tidak menebak nebak jenis berkas, alamat
+halaman tidak bocor ke situs luar, dan kamera, mikrofon, serta lokasi ditutup.
+
+**Rahasia tidak pernah sampai ke peramban.** Client Secret GitHub dan token
+penyimpan masukan hanya dipakai di sisi server. Folder `content/` tidak
+disajikan sebagai berkas publik, jadi kiriman masukan tidak bisa dibuka
+sembarang orang lewat alamat.
+
+**/admin dan /api tidak diindeks mesin pencari.** Panel tetap butuh login, tapi
+tidak ada gunanya alamatnya muncul di Google.
+
+### Yang perlu kamu jaga sendiri
+
+| Hal | Kenapa |
+|---|---|
+| **Jangan pernah bagikan Client Secret** | Satu satunya kunci yang bisa memalsukan login panelmu. Kalau pernah terlihat orang lain, buat ulang di halaman OAuth App GitHub |
+| **Token penyimpan masukan dibatasi izinnya** | Cukup Contents Read and write untuk satu repositori ini saja. Jangan diberi izin lebih |
+| **Repositori sebaiknya tetap privat** | Kiriman masukan berisi nama dan kontak orang. Kalau repositorinya publik, semua orang bisa membacanya |
+| **Jangan tempel berkas rahasia ke folder media** | Apa pun di `public/` bisa dibuka siapa saja yang tahu alamatnya, meski tidak ada tautan ke sana |
+
+### Yang sengaja tidak dipasang
+
+**Content-Security-Policy penuh.** CSP yang ketat butuh nonce pada tiap skrip,
+dan nonce hanya bisa dibuat saat halaman diminta, bukan saat dibangun.
+Memakainya berarti seluruh halaman berhenti dibuat sekali di awal dan harus
+dihitung ulang tiap kunjungan. Situsnya jadi lebih lambat demi perlindungan yang
+tidak seberapa untuk situs yang tidak menerima masukan pengguna di halamannya.
+Bagian CSP yang tetap berguna tanpa nonce, yaitu `frame-ancestors`, sudah
+dipasang.
+
+**Layanan pembatas permintaan tersendiri.** Pembatas yang ada sekarang disimpan
+di memori server, jadi catatannya hilang tiap kali server berganti. Itu bukan
+penjaga mutlak, melainkan lapis yang menaikkan biaya penyalahgunaan sampai tidak
+sepadan. Untuk situs portofolio itu sudah cukup.

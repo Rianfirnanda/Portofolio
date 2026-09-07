@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { buatBerkas } from '@/lib/github';
+import { pengirimPermintaan, terlaluSering } from '@/lib/pembatas';
 
 /**
  * =============================================================================
@@ -26,34 +27,24 @@ const BATAS = { pesan: 3000, nama: 80, kontak: 120 };
 const PESAN_MINIMAL = 5;
 const JEDA_MENGETIK_MS = 2500;
 
-/**
- * Catatan kiriman terakhir per pengirim.
- *
- * Disimpan di memori, jadi ikut hilang saat server berganti. Itu diterima
- * dengan sadar: ini lapis tambahan, bukan satu satunya penjaga.
- */
-const riwayat = new Map();
 const JENDELA_MS = 60 * 60 * 1000;
-const MAKS_PER_JENDELA = 5;
 
-function terlaluSering(kunci) {
-  const sekarang = Date.now();
-  const sebelumnya = (riwayat.get(kunci) ?? []).filter((waktu) => sekarang - waktu < JENDELA_MS);
+/** Batas per pengirim. Tamu sungguhan jarang mengirim lebih dari sekali. */
+const MAKS_PER_ALAMAT = 5;
 
-  if (sebelumnya.length >= MAKS_PER_JENDELA) return true;
+/*
+  BATAS MENYELURUH, berapa pun alamat pengirimnya.
 
-  sebelumnya.push(sekarang);
-  riwayat.set(kunci, sebelumnya);
+  Tiap kiriman menjadi satu berkas baru beserta satu commit di repositori, dan
+  riwayat Git tidak pernah bisa dihapus sebagian. Artinya banjir kiriman bukan
+  cuma merepotkan, tapi meninggalkan bekas permanen yang menggelembungkan
+  repositori selamanya.
 
-  // Bersihkan catatan lama supaya memorinya tidak menumpuk.
-  if (riwayat.size > 500) {
-    for (const [k, v] of riwayat) {
-      if (v.every((waktu) => sekarang - waktu >= JENDELA_MS)) riwayat.delete(k);
-    }
-  }
-
-  return false;
-}
+  Penyaring lain di bawah sudah menahan robot biasa. Batas ini untuk keadaan
+  yang lebih buruk, yaitu pengirim yang berganti ganti alamat. Empat puluh per
+  jam masih jauh di atas jumlah masukan wajar untuk satu portofolio.
+*/
+const MAKS_SEMUA = 40;
 
 /** Merapikan teks kiriman: buang spasi berlebih dan potong sesuai batas. */
 function rapikan(nilai, batas) {
@@ -93,15 +84,19 @@ export async function POST(request) {
     );
   }
 
-  // Lapis 4: batas jumlah kiriman per pengirim.
-  const pengirim =
-    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-    request.headers.get('x-real-ip') ||
-    'tak-dikenal';
+  // Lapis 4: batas jumlah kiriman, per pengirim dan secara menyeluruh.
+  const pengirim = pengirimPermintaan(request);
 
-  if (terlaluSering(pengirim)) {
+  if (terlaluSering('masukan-alamat', pengirim, MAKS_PER_ALAMAT, JENDELA_MS)) {
     return NextResponse.json(
       { ok: false, pesan: 'Kamu sudah mengirim beberapa masukan. Coba lagi nanti ya.' },
+      { status: 429 }
+    );
+  }
+
+  if (terlaluSering('masukan-semua', 'semua', MAKS_SEMUA, JENDELA_MS)) {
+    return NextResponse.json(
+      { ok: false, pesan: 'Sedang banyak kiriman masuk. Coba lagi sebentar lagi ya.' },
       { status: 429 }
     );
   }

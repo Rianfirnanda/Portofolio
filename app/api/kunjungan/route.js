@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { bacaKunjungan, catatKunjungan, siap } from '@/lib/kunjungan';
+import { pengirimPermintaan, terlaluSering } from '@/lib/pembatas';
 
 /**
  * =============================================================================
@@ -36,8 +37,31 @@ export async function GET() {
   return data ? jawab(data) : belumSiap();
 }
 
-export async function POST() {
+/*
+  BATAS PENAMBAHAN
+
+  Sisi pengunjung sudah membatasi satu hitungan per sesi peramban, tetapi itu
+  aturan yang dijalankan di perangkat pengunjung dan gampang dilewati dengan
+  memanggil alamat ini langsung. Tanpa batas di sisi server, siapa pun bisa
+  menggelembungkan angka pengunjung, dan setiap panggilan juga memakai jatah
+  permintaan penyimpanan yang jumlahnya terbatas.
+
+  Dua belas per jam per alamat sudah jauh di atas pemakaian wajar, karena satu
+  orang normalnya cuma menambah sekali per sesi.
+*/
+const MAKS_PER_ALAMAT = 12;
+const JENDELA_MS = 60 * 60 * 1000;
+
+export async function POST(request) {
   if (!siap()) return belumSiap();
+
+  if (terlaluSering('kunjungan', pengirimPermintaan(request), MAKS_PER_ALAMAT, JENDELA_MS)) {
+    // Dijawab dengan angka terbarunya saja, tanpa menambah. Dari sisi
+    // pengunjung tidak ada bedanya, jadi tidak ada yang perlu ditangani.
+    const data = await bacaKunjungan();
+    return data ? jawab(data) : belumSiap();
+  }
+
   const data = await catatKunjungan();
   return data ? jawab(data) : belumSiap();
 }
