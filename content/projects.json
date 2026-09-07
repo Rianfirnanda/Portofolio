@@ -103,7 +103,16 @@
       ],
       "image": "/media/128300.jpg",
       "imageAlt": null,
-      "links": [],
+      "links": [
+        {
+          "label": {
+            "id": "Youtube Video",
+            "en": ""
+          },
+          "href": "https://youtu.be/uAuKcbU9Az8?si=e_30riUBc7nFtDeQ",
+          "icon": "youtube"
+        }
+      ],
       "featured": true
     },
     {
@@ -121,6 +130,26 @@
       ],
       "image": "/media/128301.jpg",
       "imageAlt": null,
+      "links": [],
+      "featured": false
+    },
+    {
+      "name": "Kalula Digital Agency",
+      "period": "2021",
+      "org": {
+        "id": "Rafflesia Cerdas Teknologi (RCT)",
+        "en": ""
+      },
+      "description": {
+        "id": "Kalula Digital Agency adalah Projek intern yang telah saya kerjakan bersama rekan saya, website ini bertujuan sebagai penyedia layanan digital, mulai dari jasa pembuatan website, penyedia gambar bebas hak cipta dan juga musik bebas hak cipta untuk pengembang lain atau publik yang membutuhkannya.",
+        "en": ""
+      },
+      "tags": [],
+      "image": "/media/pasted-image-1788794758337.webp",
+      "imageAlt": {
+        "id": "KDA",
+        "en": ""
+      },
       "links": [],
       "featured": false
     }
