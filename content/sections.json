@@ -111,10 +111,24 @@
       "en": "Social and environmental activities outside the classroom."
     }
   },
+  "gallery": {
+    "eyebrow": {
+      "id": "09 / Dokumentasi",
+      "en": "09 / Documentation"
+    },
+    "title": {
+      "id": "Galeri",
+      "en": "Gallery"
+    },
+    "subtitle": {
+      "id": "Kumpulan foto kegiatan, kepanitiaan, dan momen yang sempat terekam.",
+      "en": "A collection of photos from activities, committees, and moments that got captured."
+    }
+  },
   "blog": {
     "eyebrow": {
-      "id": "09 / Tulisan",
-      "en": "09 / Writing"
+      "id": "10 / Tulisan",
+      "en": "10 / Writing"
     },
     "title": {
       "id": "Blog",
@@ -127,8 +141,8 @@
   },
   "contact": {
     "eyebrow": {
-      "id": "11 / Kontak",
-      "en": "11 / Contact"
+      "id": "12 / Kontak",
+      "en": "12 / Contact"
     },
     "title": {
       "id": "Mari Terhubung",
@@ -141,8 +155,8 @@
   },
   "feedback": {
     "eyebrow": {
-      "en": "10 / Feedback",
-      "id": "10 / Masukan"
+      "en": "11 / Feedback",
+      "id": "11 / Masukan"
     },
     "subtitle": {
       "en": "Your thoughts help me grow. You are welcome to send it without a name.",

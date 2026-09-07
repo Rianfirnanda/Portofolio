@@ -49,6 +49,14 @@
       }
     },
     {
+      "id": "gallery",
+      "type": "section",
+      "label": {
+        "id": "Galeri",
+        "en": "Gallery"
+      }
+    },
+    {
       "id": "blog",
       "type": "page",
       "href": "/blog/",

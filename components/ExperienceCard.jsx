@@ -6,6 +6,7 @@ import { useLanguage } from '@/components/LanguageProvider';
 import { useLightbox } from '@/components/LightboxProvider';
 import GlassCard from '@/components/GlassCard';
 import SmartImage from '@/components/SmartImage';
+import BerkasUnduhan from '@/components/BerkasUnduhan';
 import Icon from '@/components/Icon';
 
 /** Panjang teks sebelum deskripsi dipotong dan tombol Selengkapnya muncul. */
@@ -124,6 +125,14 @@ export default function ExperienceCard({ item }) {
             ))}
           </ul>
         ) : null}
+
+        {/*
+          Lampiran yang bisa diunduh pengunjung: PDF surat keputusan, sertifikat
+          hasil pindai, foto kegiatan, apa saja. Diisi lewat panel di menu
+          Isi Halaman > Pengalaman > Berkas untuk diunduh. Tidak muncul di
+          dokumen cetak karena tautan unduhan tidak ada gunanya di atas kertas.
+        */}
+        <BerkasUnduhan items={item.files} className="mt-4 print:hidden" />
         </div>
       </div>
     </GlassCard>

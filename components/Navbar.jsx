@@ -135,14 +135,25 @@ export default function Navbar() {
           type="button"
           aria-label={t(portfolio.ui.closeMenu)}
           onClick={() => setOpen(false)}
-          className="fixed inset-0 -z-10 cursor-default bg-black/50 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 -z-10 cursor-default bg-black/50 backdrop-blur-sm xl:hidden"
         />
       ) : null}
 
       <nav
         aria-label={lang === 'id' ? 'Navigasi utama' : 'Main navigation'}
         className={[
-          'glass glass-nav relative z-50 mt-4 w-full max-w-5xl px-3 transition-all duration-300',
+          /*
+            max-w-6xl, bukan 5xl.
+
+            Lebar pill ini sebenarnya tidak pernah bisa lebih sempit daripada
+            isinya: logo, sepuluh item menu, dan tiga tombol di kanan tidak
+            boleh dipotong, jadi kotaknya melar melewati batas berapa pun yang
+            ditulis di sini. Dulu batasnya 5xl dan isinya butuh lebih dari itu,
+            akibatnya pill-nya menonjol ke kanan dan tombol tema ikut terdorong
+            keluar layar. Batas baru ini memang muat, jadi pill-nya benar benar
+            berada di tengah lagi.
+          */
+          'glass glass-nav relative z-50 mt-4 w-full max-w-6xl px-3 transition-all duration-300',
           open ? 'rounded-3xl' : 'rounded-full',
           scrolled ? 'py-1.5' : 'py-2.5',
           // Dipekatkan saat halaman digulir, dan saat menu ponsel terbuka.
@@ -178,8 +189,16 @@ export default function Navbar() {
             <span className="hidden whitespace-nowrap sm:inline">{profile.shortName}</span>
           </Link>
 
-          {/* Menu layar besar */}
-          <ul className="hidden items-center gap-0.5 lg:flex">
+          {/*
+            Menu layar besar.
+
+            Ambangnya xl, bukan lg. Di layar 1024 sampai 1279 piksel deretan
+            menu ini sebenarnya tidak muat: isinya mendorong tombol pencarian,
+            pengalih bahasa, dan tombol tema keluar dari tepi kanan layar,
+            sehingga ketiganya tidak bisa dipakai sama sekali. Di lebar itu
+            sekarang dipakai menu laci yang memang muat.
+          */}
+          <ul className="hidden items-center gap-0.5 xl:flex">
             {items.map((item) => (
               <li key={item.id}>
                 <NavLink
@@ -188,7 +207,7 @@ export default function Navbar() {
                   // elemen sebaris biasa, padding atas bawahnya diabaikan saat
                   // menghitung posisi, dan hurufnya duduk belasan piksel lebih
                   // tinggi daripada nama di logo.
-                  className={`link-underline relative inline-flex items-center rounded-full px-3 py-2 text-sm font-medium leading-none transition-colors duration-200 ${
+                  className={`link-underline relative inline-flex items-center rounded-full px-2.5 py-2 text-sm font-medium leading-none transition-colors duration-200 ${
                     active === item.id ? 'text-fg' : 'text-subtle hover:text-fg'
                   }`}
                 >
@@ -241,7 +260,7 @@ export default function Navbar() {
               aria-label={open ? t(portfolio.ui.closeMenu) : t(portfolio.ui.openMenu)}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              className="grid h-9 w-9 place-items-center rounded-full border border-line bg-surface text-fg transition-colors hover:border-line-strong lg:hidden"
+              className="grid h-9 w-9 place-items-center rounded-full border border-line bg-surface text-fg transition-colors hover:border-line-strong xl:hidden"
             >
               <Icon name={open ? 'close' : 'menu'} className="h-5 w-5" />
             </button>
@@ -253,7 +272,7 @@ export default function Navbar() {
           <div
             id="mobile-menu"
             style={{ animation: 'drawer-in 0.25s ease-out' }}
-            className="mt-3 border-t border-line pt-3 lg:hidden"
+            className="mt-3 border-t border-line pt-3 xl:hidden"
           >
             <ul className="flex flex-col gap-1 pb-2">
               {items.map((item) => (

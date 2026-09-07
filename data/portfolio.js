@@ -44,6 +44,7 @@ import skills from '@/content/skills.json';
 import volunteering from '@/content/volunteering.json';
 import languages from '@/content/languages.json';
 import services from '@/content/services.json';
+import gallery from '@/content/gallery.json';
 import music from '@/content/music.json';
 import feedback from '@/content/feedback-settings.json';
 import navigation from '@/content/navigation.json';
@@ -56,6 +57,35 @@ import labels from '@/content/labels.json';
  * Fungsi ini membuka bungkus itu dan tetap aman kalau berkasnya masih kosong.
  */
 const list = (source, key = 'items') => (Array.isArray(source?.[key]) ? source[key] : []);
+
+/**
+ * Menyusun isi galeri foto.
+ *
+ * Panel menyimpan daftar fotonya sebagai array alamat biasa, bukan array objek.
+ * Bentuk itu yang dipakai karena hanya bentuk itu yang mengizinkan kamu memilih
+ * banyak foto sekaligus di perpustakaan media, bukan satu per satu.
+ *
+ * Keterangan fotonya ditulis di daftar terpisah dan dijodohkan di sini, jadi
+ * komponennya cukup menerima satu daftar yang sudah rapi. Foto yang tidak punya
+ * keterangan tetap tampil, keterangannya saja yang kosong.
+ */
+function susunGaleri(sumber) {
+  const keterangan = new Map(
+    (Array.isArray(sumber?.captions) ? sumber.captions : [])
+      .filter((baris) => typeof baris?.src === 'string' && baris.src)
+      .map((baris) => [baris.src, baris.text ?? null])
+  );
+
+  const daftar = (Array.isArray(sumber?.photos) ? sumber.photos : []).filter(
+    (src) => typeof src === 'string' && src.trim()
+  );
+
+  // Foto yang kebetulan terpilih dua kali cukup ditampilkan sekali.
+  return [...new Set(daftar)].map((src) => ({ src, caption: keterangan.get(src) ?? null }));
+}
+
+const galeri = susunGaleri(gallery);
+const galeriTampil = gallery?.enabled !== false && galeri.length > 0;
 
 export const portfolio = {
   // content/settings.json  judul situs, SEO, bahasa awal, tema awal
@@ -103,14 +133,25 @@ export const portfolio = {
   // content/contact.json  email, telepon, catatan
   contact,
 
+  // content/gallery.json  bagian Galeri, foto ditambah banyak sekaligus
+  gallery: { ...gallery, items: galeri },
+
   // content/music.json  pemutar musik kecil di pojok kiri bawah
   music: { ...music, tracks: list(music, 'tracks') },
 
   // content/feedback-settings.json  formulir masukan dan saran dari tamu
   feedback,
 
-  // content/navigation.json  isi menu navigasi
-  nav: list(navigation),
+  /*
+    content/navigation.json  isi menu navigasi
+
+    Bagian Galeri menyembunyikan dirinya sendiri selama fotonya masih kosong,
+    jadi item menunya ikut dilepas di sini. Kalau tidak, ada tombol di navbar
+    yang menunjuk ke bagian yang tidak ada di halaman dan diklik pun tidak
+    terjadi apa apa. Begitu foto pertama masuk lewat panel, menunya muncul
+    kembali sendiri tanpa perlu diatur.
+  */
+  nav: list(navigation).filter((item) => item.id !== 'gallery' || galeriTampil),
 
   // content/sections.json  judul dan subjudul tiap bagian halaman
   sections,

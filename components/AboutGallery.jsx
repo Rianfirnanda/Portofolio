@@ -52,16 +52,25 @@ export default function AboutGallery() {
                 className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100"
               />
 
-              <span className="pointer-events-none absolute inset-x-4 bottom-4 flex items-end justify-between gap-2">
-                <span className="text-sm font-semibold leading-snug text-white drop-shadow">
-                  {t(item.caption)}
-                </span>
-                {lightboxEnabled ? (
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/25 bg-white/15 text-white opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
-                    <Icon name="image" className="h-4 w-4" />
-                  </span>
-                ) : null}
+              {/*
+                Keterangan foto.
+
+                Dulu keterangan ini duduk sebaris dengan ikon perbesar, dan
+                ikon itu memakan sekitar 40 piksel di sebelah kanannya. Teksnya
+                jadi rata tengah terhadap sisa ruang, bukan terhadap fotonya,
+                sehingga selalu terlihat miring ke kiri. Sekarang ikonnya
+                dipindah ke pojok kanan atas, sama seperti pada kartu
+                Pengalaman, dan keterangannya memakai seluruh lebar foto.
+              */}
+              <span className="pointer-events-none absolute inset-x-4 bottom-4 block text-center text-sm font-semibold leading-snug text-white drop-shadow">
+                {t(item.caption)}
               </span>
+
+              {lightboxEnabled ? (
+                <span className="pointer-events-none absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full border border-white/25 bg-white/15 text-white opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
+                  <Icon name="image" className="h-4 w-4" />
+                </span>
+              ) : null}
             </>
           );
 
@@ -70,7 +79,11 @@ export default function AboutGallery() {
               {lightboxEnabled ? (
                 <button
                   type="button"
-                  onClick={() => openLightbox({ src: item.src, alt: item.alt, caption: item.caption })}
+                  // group membuat lightbox menampilkan tombol maju mundur, jadi
+                  // pengunjung bisa menyusuri semua foto tanpa menutupnya dulu.
+                  onClick={() =>
+                    openLightbox({ src: item.src, alt: item.alt, caption: item.caption, group: items })
+                  }
                   aria-label={`${t(ui.imageZoom)}: ${t(item.caption)}`}
                   className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl border border-line"
                 >

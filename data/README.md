@@ -88,6 +88,8 @@ ganda pada setiap nama field.
 25. [Gambar preview saat tautan dibagikan](#25-gambar-preview-saat-tautan-dibagikan)
 26. [Mengubah status di halaman depan](#26-mengubah-status-di-halaman-depan)
 27. [Kalau panel berat atau Chrome menutup sendiri di ponsel](#27-kalau-panel-berat-atau-chrome-menutup-sendiri-di-ponsel)
+28. [Bagian Galeri](#28-bagian-galeri)
+29. [Melampirkan berkas yang bisa diunduh ke pengalaman](#29-melampirkan-berkas-yang-bisa-diunduh-ke-pengalaman)
 
 ---
 
@@ -1433,3 +1435,85 @@ memang butuh cukup banyak.
 **Untuk pekerjaan besar, pakai komputer.** Menambah satu tulisan atau mengganti
 satu foto nyaman dari ponsel. Merapikan sepuluh entri pengalaman sekaligus lebih
 baik dari layar besar.
+
+---
+
+## 28. Bagian Galeri
+
+Dinding foto tersendiri, terpisah dari strip **Sekilas Kegiatan** yang ada di
+bawah Tentang Saya. Bedanya begini:
+
+| | Sekilas Kegiatan | Galeri |
+|---|---|---|
+| Letak | di dalam Tentang Saya | bagian sendiri, setelah Kesukarelawanan |
+| Jumlah foto | sedikit, pilihan terbaik | sebanyak yang kamu mau |
+| Menambah foto | satu per satu, tiap foto wajib berketerangan | banyak sekaligus, keterangan opsional |
+
+### Menambah foto, banyak sekaligus
+
+Panel > **Isi Halaman** > **Galeri** > kolom **Foto galeri**.
+
+Buka pustaka media, centang sebanyak apa pun, lalu simpan. Ini satu satunya
+kolom di seluruh panel yang menerima banyak berkas dalam sekali pilih. Urutan
+tampilnya sama dengan urutan di daftar, dan barisnya bisa diseret.
+
+### Mengatur tampilannya
+
+| Kolom | Isinya |
+|---|---|
+| Tampilkan bagian Galeri | matikan untuk menyembunyikan seluruh bagian tanpa menghapus fotonya |
+| Jumlah kolom | 2, 3, atau 4. Di ponsel selalu dua, berapa pun pilihanmu |
+| Bentuk foto | mendatar 4:3, persegi 1:1, lebar 16:9, atau tegak 3:4 |
+
+Judul, label kecil di atasnya, dan subjudulnya diatur di
+**Pengaturan** > **Judul Tiap Bagian** > **Galeri**.
+
+### Keterangan foto
+
+Opsional, dan sengaja dipisah ke kolom **Keterangan foto** di bawahnya.
+Sebagian besar foto galeri memang tidak butuh keterangan, dan kalau tiap foto
+wajib diberi teks, keuntungan memilih banyak foto sekaligus jadi hilang.
+
+Cara mengisinya: tambah satu baris, pilih fotonya yang mana, lalu tulis
+keterangannya. Foto yang tidak ada di daftar ini tetap tampil, hanya tanpa teks.
+
+### Yang berjalan sendiri
+
+**Bagian ini hilang selama fotonya kosong**, beserta item menunya di navbar.
+Begitu foto pertama masuk, keduanya muncul kembali.
+
+**Foto dimuat bertahap.** Dua belas foto pertama dipasang lebih dulu, sisanya
+menyusul lewat tombol **Muat lebih banyak**. Galeri berisi lima puluh foto pun
+tidak membuat halaman berat dibuka di ponsel.
+
+**Foto bisa disusuri tanpa menutup.** Diklik satu, lalu maju mundur dengan
+tombol panah di layar atau tombol panah kiri kanan di papan ketik. Ada tombol
+unduh juga di pojok kanan atas, berlaku untuk semua gambar di situs ini, bukan
+cuma galeri.
+
+---
+
+## 29. Melampirkan berkas yang bisa diunduh ke pengalaman
+
+Tiap entri di bagian Pengalaman bisa membawa berkas yang boleh diunduh
+pengunjung: PDF surat keputusan, sertifikat hasil pindai, foto kegiatan, atau
+dokumen apa pun.
+
+Panel > **Isi Halaman** > **Pengalaman** > buka entrinya > **Berkas untuk
+diunduh** > **Add Berkas**.
+
+| Kolom | Isinya |
+|---|---|
+| Nama tombol | Contoh: SK Rektor, Sertifikat, Foto kegiatan. Boleh dikosongkan, nanti dipakai nama berkasnya |
+| Berkas | berkas yang diunggah. Bebas jenis apa saja |
+
+Hasilnya muncul sebagai deretan tombol kecil di bawah daftar keahlian pada kartu
+itu, lengkap dengan ikon dan label jenis berkasnya. Ikon dan labelnya dikenali
+sendiri dari nama berkas, jadi tidak ada yang perlu kamu atur.
+
+Kalau berkasnya milik situs ini, tombolnya langsung menyimpan berkas itu ke
+perangkat pengunjung. Kalau yang kamu isi adalah alamat ke situs lain, tombolnya
+membuka tab baru.
+
+Entri tanpa lampiran tidak menampilkan apa apa, jadi kolom ini aman dibiarkan
+kosong.

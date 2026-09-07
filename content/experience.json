@@ -33,7 +33,16 @@
         "en": ""
       },
       "logo": "/media/Logo-UNIB-HD-580x580.png",
-      "highlight": true
+      "highlight": true,
+      "files": [
+        {
+          "label": {
+            "id": "SK Tim AMI Jurusan AP 2026",
+            "en": "AMI Team Decree 2026"
+          },
+          "file": "/media/SK TIM AMI JUR. AP 2026 - Copy.pdf"
+        }
+      ]
     },
     {
       "role": {

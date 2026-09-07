@@ -7,6 +7,7 @@ import Skills from '@/components/Skills';
 import Certifications from '@/components/Certifications';
 import Education from '@/components/Education';
 import Volunteering from '@/components/Volunteering';
+import Galeri from '@/components/Galeri';
 import BlogPreview from '@/components/BlogPreview';
 import Feedback from '@/components/Feedback';
 import Contact from '@/components/Contact';
@@ -35,6 +36,7 @@ export default function HomePage() {
       <Certifications />
       <Education />
       <Volunteering />
+      <Galeri />
       <BlogPreview posts={latestPosts} />
       <Feedback />
       <Contact />

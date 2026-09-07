@@ -346,6 +346,49 @@ time,
     box-shadow: 0 0 18px -6px color-mix(in oklab, var(--accent-2) 80%, transparent);
   }
 
+  /*
+    Tombol unduh berkas pada kartu Pengalaman. Bentuknya mengikuti chip supaya
+    menyatu dengan deretan keahlian di atasnya, tetapi diberi ruang sentuh yang
+    lebih tinggi karena ini tautan yang benar benar diklik, bukan label.
+  */
+  .tombol-berkas {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    max-width: 100%;
+    min-height: 2.25rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.2;
+    border-radius: 999px;
+    background-color: var(--chip-bg);
+    border: 1px solid var(--line);
+    color: var(--fg-muted);
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      background-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .tombol-berkas:hover {
+    color: var(--fg);
+    border-color: color-mix(in oklab, var(--accent-2) 45%, transparent);
+    box-shadow: 0 0 18px -6px color-mix(in oklab, var(--accent-2) 80%, transparent);
+  }
+  /* Label jenis berkas: pdf, jpg, mp4, dan seterusnya. */
+  .tombol-berkas-jenis {
+    flex-shrink: 0;
+    padding: 0.05rem 0.35rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 0.35rem;
+    background-color: color-mix(in oklab, var(--accent-2) 16%, transparent);
+    color: var(--accent-2);
+  }
+
   /* Tombol utama bergradien. */
   .btn-primary {
     display: inline-flex;

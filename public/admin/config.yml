@@ -270,6 +270,35 @@ collections:
                   - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
               - { label: "Logo instansi", name: "logo", widget: "image", required: false, hint: "Bentuk persegi, tampil kecil di samping judul." }
+
+              # BERKAS YANG BISA DIUNDUH PENGUNJUNG
+              #
+              # Muncul sebagai tombol kecil di bawah daftar keahlian pada kartu
+              # ini. Bebas jenis apa saja: PDF surat keputusan, sertifikat hasil
+              # pindai, foto kegiatan, atau dokumen lain. Jenis berkasnya
+              # dikenali sendiri dari nama berkas, jadi ikon dan labelnya tidak
+              # perlu kamu atur.
+              - label: "Berkas untuk diunduh"
+                name: "files"
+                widget: list
+                required: false
+                collapsed: true
+                minimize_collapsed: true
+                label_singular: "Berkas"
+                summary: "{{fields.label.id}}"
+                hint: "Opsional. Tampil sebagai tombol unduh di kartu ini."
+                fields:
+                  - label: "Nama tombol"
+                    name: "label"
+                    widget: object
+                    collapsed: false
+                    required: false
+                    hint: "Contoh: SK Rektor, Sertifikat, Foto kegiatan. Kalau dikosongkan, dipakai nama berkasnya."
+                    fields:
+                      - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                      - { label: "English (opsional)", name: "en", widget: "string", required: false }
+                  - { label: "Berkas", name: "file", widget: "file", required: true, hint: "PDF, foto, dokumen, apa saja." }
+
               - { label: "Jadikan sorotan", name: "highlight", widget: "boolean", default: false, required: false, hint: "Memberi kartu border gradien beranimasi." }
       - name: "projects"
         label: "Proyek"
@@ -521,6 +550,72 @@ collections:
                 fields:
                   - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
+      # ------------------------------------------------------------------------
+      # GALERI
+      #
+      # Ini satu satunya bagian yang menerima banyak foto dalam sekali pilih.
+      # Buka "Foto galeri", centang sebanyak apa pun di perpustakaan media,
+      # lalu simpan. Urutannya bisa digeser dengan menyeret barisnya.
+      #
+      # Keterangan foto sengaja dipisah ke kolom tersendiri di bawahnya dan
+      # sifatnya opsional. Sebagian besar foto galeri tidak butuh keterangan,
+      # dan memaksa mengisinya satu per satu justru menghapus keuntungan dari
+      # memilih banyak foto sekaligus.
+      #
+      # Bagian ini hilang sendiri dari situs kalau fotonya kosong.
+      # ------------------------------------------------------------------------
+      - name: "gallery"
+        label: "Galeri"
+        file: "content/gallery.json"
+        fields:
+          - { label: "Tampilkan bagian Galeri", name: "enabled", widget: "boolean", default: true, required: false, hint: "Hilangkan centangnya untuk menyembunyikan seluruh bagian tanpa menghapus fotonya." }
+          - label: "Jumlah kolom"
+            name: "columns"
+            widget: select
+            default: "3"
+            required: false
+            hint: "Di ponsel selalu dua kolom, berapa pun pilihanmu di sini."
+            options:
+              - { label: "2 kolom, foto paling besar", value: "2" }
+              - { label: "3 kolom", value: "3" }
+              - { label: "4 kolom, foto paling banyak sekaligus", value: "4" }
+          - label: "Bentuk foto"
+            name: "ratio"
+            widget: select
+            default: "4/3"
+            required: false
+            hint: "Semua foto dipotong mengikuti bentuk ini supaya kisinya rapi."
+            options:
+              - { label: "Mendatar 4:3", value: "4/3" }
+              - { label: "Persegi 1:1", value: "1/1" }
+              - { label: "Lebar 16:9", value: "16/9" }
+              - { label: "Tegak 3:4, cocok untuk foto ponsel", value: "3/4" }
+          - label: "Foto galeri"
+            name: "photos"
+            widget: image
+            multiple: true
+            required: false
+            hint: "Pilih sebanyak apa pun sekaligus. Seret barisnya untuk mengubah urutan tampil."
+          - label: "Keterangan foto (opsional)"
+            name: "captions"
+            widget: list
+            required: false
+            collapsed: true
+            minimize_collapsed: true
+            label_singular: "Keterangan"
+            summary: "{{fields.text.id}}"
+            hint: "Isi hanya untuk foto yang perlu diberi keterangan. Foto lain tetap tampil tanpa teks."
+            fields:
+              - { label: "Fotonya yang mana", name: "src", widget: "image", required: true, hint: "Pilih foto yang sama dengan yang ada di daftar atas." }
+              - label: "Keterangan"
+                name: "text"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+
       - name: "stats"
         label: "Angka Sorotan"
         file: "content/stats.json"
@@ -793,7 +888,7 @@ collections:
             label_singular: "Item"
             summary: "{{fields.label.id}}"
             fields:
-              - { label: "Penanda bagian", name: "id", widget: "string", hint: "Untuk tipe bagian, isi sama dengan id section: about, experience, projects, publications, skills, certifications, education, volunteering, blog, contact." }
+              - { label: "Penanda bagian", name: "id", widget: "string", hint: "Untuk tipe bagian, isi sama dengan id section: about, experience, projects, publications, skills, certifications, education, volunteering, gallery, feedback, blog, contact." }
               - { label: "Tipe", name: "type", widget: "select", options: ["section", "page"], hint: "section melompat ke bagian di halaman utama, page pindah ke halaman lain." }
               - { label: "Alamat halaman", name: "href", widget: "string", required: false, hint: "Diisi hanya kalau tipenya page. Contoh: /blog/" }
               - label: "Teks menu"
@@ -1013,6 +1108,35 @@ collections:
                   - { label: "English (opsional)", name: "en", widget: "text", required: false }
           - label: "Kesukarelawanan"
             name: "volunteering"
+            widget: object
+            collapsed: true
+            fields:
+              - label: "Label kecil di atas judul"
+                name: "eyebrow"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - label: "Judul"
+                name: "title"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - label: "Subjudul"
+                name: "subtitle"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "text", required: false }
+          - label: "Galeri"
+            name: "gallery"
             widget: object
             collapsed: true
             fields:

@@ -14,9 +14,19 @@ import Icon from '@/components/Icon';
  *   const { openLightbox } = useLightbox();
  *   openLightbox({ src: '/images/foto.jpg', alt: 'Keterangan', caption: 'Judul' });
  *
+ * SATU GAMBAR ATAU SATU RANGKAIAN
+ * Kalau pemanggilnya menyertakan `group`, yaitu daftar gambar yang berada di
+ * satu kumpulan, lightbox menampilkan tombol maju mundur dan nomor urut. Ini
+ * yang dipakai galeri: pengunjung membuka satu foto lalu bisa terus menggeser
+ * tanpa menutup dan membuka lagi.
+ *
+ *   openLightbox({ src: foto.src, group: semuaFoto });
+ *
+ * Tanpa `group`, tampilannya persis seperti semula: satu gambar saja.
+ *
  * Ditutup dengan tombol Escape, klik di luar gambar, atau tombol silang.
- * Fokus keyboard dikembalikan ke elemen yang membukanya, dan halaman di
- * belakangnya dikunci selama lightbox terbuka.
+ * Panah kiri dan kanan berpindah gambar. Fokus keyboard dikembalikan ke elemen
+ * yang membukanya, dan halaman di belakangnya dikunci selama lightbox terbuka.
  *
  * Matikan seluruh fiturnya lewat appearance.lightbox di data/portfolio.js.
  */
@@ -24,7 +34,8 @@ const LightboxContext = createContext(null);
 
 export function LightboxProvider({ children }) {
   const { t } = useLanguage();
-  const [item, setItem] = useState(null);
+  // Isinya { daftar, posisi }. Gambar tunggal disimpan sebagai daftar berisi satu.
+  const [tampilan, setTampilan] = useState(null);
   const closeButtonRef = useRef(null);
   const openerRef = useRef(null);
 
@@ -33,21 +44,45 @@ export function LightboxProvider({ children }) {
   const openLightbox = useCallback(
     (next) => {
       if (!enabled || !next?.src) return;
+
+      const rangkaian = Array.isArray(next.group) ? next.group.filter((foto) => foto?.src) : [];
+      const daftar = rangkaian.length > 0 ? rangkaian : [next];
+
+      // Cari posisi gambar yang diklik di dalam rangkaiannya. Kalau tidak
+      // ketemu, mulai dari gambar pertama supaya tetap ada yang tampil.
+      const ditemukan = daftar.findIndex((foto) => foto.src === next.src);
+
       openerRef.current = document.activeElement;
-      setItem(next);
+      setTampilan({ daftar, posisi: ditemukan >= 0 ? ditemukan : 0 });
     },
     [enabled]
   );
 
   const closeLightbox = useCallback(() => {
-    setItem(null);
+    setTampilan(null);
     // Kembalikan fokus ke gambar yang tadi diklik supaya alur keyboard tidak putus.
     if (openerRef.current instanceof HTMLElement) openerRef.current.focus();
   }, []);
 
-  // Kunci gulir halaman, tutup dengan Escape, dan pindahkan fokus ke tombol tutup.
+  /** Maju atau mundur satu gambar, berputar saat sampai di ujung. */
+  const geser = useCallback((langkah) => {
+    setTampilan((kini) => {
+      if (!kini || kini.daftar.length < 2) return kini;
+      const jumlah = kini.daftar.length;
+      return { ...kini, posisi: (kini.posisi + langkah + jumlah) % jumlah };
+    });
+  }, []);
+
+  const terbuka = Boolean(tampilan);
+
+  /*
+    Kunci gulir halaman, pasang pintasan papan ketik, dan pindahkan fokus ke
+    tombol tutup. Sengaja bergantung pada `terbuka`, bukan pada gambar yang
+    sedang tampil, supaya berpindah gambar tidak mengulang semua persiapan ini
+    dan tidak merebut fokus dari tombol panah yang baru saja ditekan.
+  */
   useEffect(() => {
-    if (!item) return;
+    if (!terbuka) return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -55,6 +90,8 @@ export function LightboxProvider({ children }) {
 
     const onKeyDown = (event) => {
       if (event.key === 'Escape') closeLightbox();
+      else if (event.key === 'ArrowLeft') geser(-1);
+      else if (event.key === 'ArrowRight') geser(1);
     };
     window.addEventListener('keydown', onKeyDown);
 
@@ -62,9 +99,12 @@ export function LightboxProvider({ children }) {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [item, closeLightbox]);
+  }, [terbuka, closeLightbox, geser]);
 
   const value = useMemo(() => ({ openLightbox, closeLightbox, enabled }), [openLightbox, closeLightbox, enabled]);
+
+  const item = tampilan ? tampilan.daftar[tampilan.posisi] : null;
+  const banyak = tampilan ? tampilan.daftar.length > 1 : false;
 
   return (
     <LightboxContext.Provider value={value}>
@@ -92,8 +132,12 @@ export function LightboxProvider({ children }) {
             style={{ animation: 'lightbox-in 0.35s cubic-bezier(0.22, 1, 0.36, 1)' }}
           >
             {/* Tanpa w-full supaya bingkainya memeluk gambar, bukan memeluk
-                kotak kosong di kiri dan kanan gambar. */}
+                kotak kosong di kiri dan kanan gambar.
+
+                key memaksa peramban mengganti gambarnya, bukan menampilkan
+                gambar lama sambil menunggu yang baru selesai diunduh. */}
             <img
+              key={item.src}
               src={withBasePath(item.src)}
               alt={t(item.alt)}
               className="mx-auto max-h-[78svh] max-w-full rounded-2xl border border-white/15 object-contain shadow-2xl"
@@ -104,17 +148,62 @@ export function LightboxProvider({ children }) {
                 {t(item.caption)}
               </figcaption>
             ) : null}
+
+            {banyak ? (
+              <p className="mt-2 text-center text-xs tabular-nums text-slate-400">
+                {tampilan.posisi + 1} / {tampilan.daftar.length}
+              </p>
+            ) : null}
           </figure>
 
-          <button
-            ref={closeButtonRef}
-            type="button"
-            onClick={closeLightbox}
-            aria-label={t(portfolio.ui.lightboxClose)}
-            className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl transition-colors hover:bg-white/20 sm:right-6 sm:top-6"
-          >
-            <Icon name="close" className="h-5 w-5" />
-          </button>
+          {/* Tombol maju mundur, hanya muncul kalau gambarnya memang serangkaian. */}
+          {banyak ? (
+            <>
+              <button
+                type="button"
+                onClick={() => geser(-1)}
+                aria-label={t(portfolio.ui.lightboxPrev)}
+                className="absolute left-2 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl transition-colors hover:bg-white/20 sm:left-6"
+              >
+                <Icon name="arrow-left" className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => geser(1)}
+                aria-label={t(portfolio.ui.lightboxNext)}
+                className="absolute right-2 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl transition-colors hover:bg-white/20 sm:right-6"
+              >
+                <Icon name="arrow-right" className="h-5 w-5" />
+              </button>
+            </>
+          ) : null}
+
+          <div className="absolute right-4 top-4 z-20 flex items-center gap-2 sm:right-6 sm:top-6">
+            {/*
+              Unduh gambar yang sedang dibuka. Berlaku untuk semua gambar di
+              situs ini, jadi foto dokumentasi pengalaman maupun foto galeri
+              sama sama bisa disimpan pengunjung.
+            */}
+            <a
+              href={withBasePath(item.src)}
+              download
+              aria-label={t(portfolio.ui.lightboxDownload)}
+              title={t(portfolio.ui.lightboxDownload)}
+              className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl transition-colors hover:bg-white/20"
+            >
+              <Icon name="download" className="h-5 w-5" />
+            </a>
+
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={closeLightbox}
+              aria-label={t(portfolio.ui.lightboxClose)}
+              className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl transition-colors hover:bg-white/20"
+            >
+              <Icon name="close" className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       ) : null}
     </LightboxContext.Provider>

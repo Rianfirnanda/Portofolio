@@ -103,6 +103,34 @@
     "id": "Tutup gambar",
     "en": "Close image"
   },
+  "lightboxPrev": {
+    "id": "Gambar sebelumnya",
+    "en": "Previous image"
+  },
+  "lightboxNext": {
+    "id": "Gambar berikutnya",
+    "en": "Next image"
+  },
+  "lightboxDownload": {
+    "id": "Unduh gambar ini",
+    "en": "Download this image"
+  },
+  "galleryMore": {
+    "id": "Muat lebih banyak",
+    "en": "Load more"
+  },
+  "galleryCount": {
+    "id": "foto",
+    "en": "photos"
+  },
+  "attachments": {
+    "id": "Berkas terkait",
+    "en": "Related files"
+  },
+  "downloadFile": {
+    "id": "Unduh",
+    "en": "Download"
+  },
   "imageZoom": {
     "id": "Perbesar gambar",
     "en": "Enlarge image"
