@@ -2,6 +2,16 @@
   "enabled": true,
   "columns": "3",
   "ratio": "4/3",
-  "photos": [],
+  "photos": [
+    "/media/122795.webp",
+    "/media/122775.webp",
+    "/media/DSC03361-1.JPG",
+    "/media/98193.jpg",
+    "/media/128476.webp",
+    "/media/128520.webp",
+    "/media/128531.webp",
+    "/media/128692.jpg",
+    "/media/128701.webp"
+  ],
   "captions": []
 }
