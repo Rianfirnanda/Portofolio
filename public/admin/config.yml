@@ -9,6 +9,27 @@
 #  Alur kerjanya: kamu menyimpan perubahan di panel, panel menulis commit ke
 #  repositori GitHub, lalu Vercel membangun ulang situsnya sendiri.
 #
+#  ---------------------------------------------------------------------------
+#  SUSUNAN MENUNYA
+#
+#    Tulisan Blog        satu tulisan satu berkas
+#
+#    Isi Halaman         urutannya sama dengan urutan bagian di halaman, dari
+#                        atas ke bawah. Halaman Depan, Tentang Saya, Angka
+#                        Sorotan, Bahasa, Pengalaman, Proyek, Publikasi,
+#                        Keahlian, Sertifikasi, Pendidikan, Kesukarelawanan,
+#                        Galeri, Kontak, Layanan.
+#
+#    Pengaturan Situs    hal hal yang mengatur cara situs bekerja, bukan isinya
+#
+#    Masukan Masuk       kiriman dari tamu lewat formulir di situs
+#
+#  Aturan yang dipegang di sini: satu menu untuk satu berkas di folder
+#  content/, dan namanya sama dengan nama bagian yang dilihat pengunjung.
+#  Dua menu tidak boleh menunjuk ke berkas yang sama, karena menyimpan salah
+#  satunya akan menghapus kolom yang tidak ikut terdaftar di menu itu.
+#  ---------------------------------------------------------------------------
+#
 #  Petunjuk lengkap ada di data/README.md bagian 17.
 # =============================================================================
 
@@ -89,6 +110,7 @@ collections:
   # ------------------------------------------------------------------------
   - name: "posts"
     label: "Tulisan Blog"
+    icon: "edit_note"
     label_singular: "Tulisan"
     folder: "content/posts"
     create: true
@@ -187,17 +209,211 @@ collections:
 
       - { label: "Jadikan sorotan", name: "featured", widget: "boolean", default: false, required: false, hint: "Memberi kartu tulisan ini bingkai gradien beranimasi." }
       - { label: "Simpan sebagai draf", name: "draft", widget: "boolean", default: false, required: false, hint: "Draf tersimpan tapi belum tampil di situs. Hilangkan centangnya kalau sudah siap terbit." }
-
-
   # ------------------------------------------------------------------------
-  # ISI HALAMAN UTAMA
-  # Setiap berkas di sini berisi satu daftar yang bisa ditambah dan diurutkan.
+  # ISI HALAMAN
+  #
+  # Urutan menu di bawah sama dengan urutan bagiannya di halaman, dari atas ke
+  # bawah. Jadi kalau kamu ingin mengubah sesuatu, cari saja menu yang namanya
+  # sama dengan bagian yang kamu lihat di situs.
   # ------------------------------------------------------------------------
   - name: "isi"
     label: "Isi Halaman"
+    icon: "web"
     files:
+
+      # ------------------------------------------------------------------------
+      # HALAMAN DEPAN
+      #
+      # Semua yang terlihat pengunjung sebelum menggulir sedikit pun. Urutan
+      # kolom di bawah sengaja dibuat sama dengan urutan tampilnya di layar,
+      # dari atas ke bawah, supaya gampang dicocokkan.
+      #
+      # Ringkasan dan strip foto kegiatan tidak ada di sini. Keduanya milik
+      # bagian Tentang Saya dan punya menunya sendiri di bawah.
+      # ------------------------------------------------------------------------
+      - name: "profile"
+        label: "Halaman Depan"
+        icon: "home"
+        file: "content/profile.json"
+        fields:
+          - { label: "Nama lengkap", name: "name", widget: "string", required: true, hint: "Tampil besar di halaman depan." }
+          - { label: "Nama panggilan", name: "shortName", widget: "string", required: true, hint: "Tampil di navbar, di sebelah foto kecil." }
+          - label: "Status ketersediaan"
+            name: "availability"
+            widget: object
+            collapsed: false
+            hint: "Kapsul kecil paling atas, di atas namamu."
+            fields:
+              - { label: "Tampilkan titik berkedip", name: "available", widget: "boolean", default: true, hint: "Hilangkan centangnya kalau kamu ingin teksnya saja, tanpa titik di sebelah kiri." }
+              - label: "Teks status"
+                name: "label"
+                widget: object
+                collapsed: false
+                required: true
+                hint: "Bebas kamu tulis apa saja. Contoh: Terbuka untuk peluang kerja, Sedang menyelesaikan skripsi, Sibuk sampai Desember, atau Terbuka untuk kolaborasi riset. Kosongkan keduanya untuk menyembunyikan seluruh kapsul status."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - { label: "Warna titik", name: "dotColor", widget: "color", required: false, allowInput: true, default: "#10b981", hint: "Warna bebas. Yang lazim dipakai: hijau #10b981 untuk terbuka, kuning #f59e0b untuk sedang sibuk, merah #ef4444 untuk tidak tersedia, biru #3b82f6 untuk kabar netral. Pilih warna yang cukup terang supaya tetap terlihat di mode gelap maupun terang." }
+          - label: "Headline"
+            name: "headline"
+            widget: object
+            collapsed: false
+            required: true
+            hint: "Kalimat besar tepat di bawah namamu."
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+              - { label: "English (opsional)", name: "en", widget: "text", required: false }
+          - label: "Kalimat pembuka"
+            name: "tagline"
+            widget: object
+            collapsed: false
+            required: false
+            hint: "Kalimat personal singkat di bawah headline, bergaris di sebelah kiri."
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
+              - { label: "English (opsional)", name: "en", widget: "text", required: false }
+          - { label: "Lokasi", name: "location", widget: "string", required: true, hint: "Tampil dengan ikon peta di bawah kalimat pembuka. Contoh: Bengkulu, Indonesia" }
+          - { label: "Tautan tombol Unduh CV", name: "resumeUrl", widget: "file", required: false, accept: ".pdf,.doc,.docx", choose_url: true, hint: "Unggah berkas CV kamu, atau tempel alamat web seperti tautan LinkedIn. Kosongkan untuk menyembunyikan tombolnya." }
+          - { label: "Foto profil", name: "avatar", widget: "image", hint: "Bentuk persegi, minimal 640x640 piksel." }
+          - label: "Kartu pada foto"
+            name: "photoCard"
+            widget: object
+            collapsed: false
+            required: false
+            hint: "Kotak kecil yang menempel di bagian bawah foto profil. Isinya cuma dua baris ini."
+            fields:
+              - { label: "Nama yang tampil", name: "name", widget: "string", required: false, hint: "Kosongkan untuk memakai nama lengkap di atas." }
+              - label: "Motto"
+                name: "motto"
+                widget: object
+                collapsed: false
+                required: false
+                hint: "Satu kalimat pendek. Kosongkan kalau kamu ingin namanya saja yang tampil."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+
+      # ------------------------------------------------------------------------
+      # TENTANG SAYA
+      #
+      # Bagian kedua halaman, tepat di bawah halaman depan. Isinya paragraf
+      # ringkasan dan strip foto kegiatan di bawahnya.
+      #
+      # Angka sorotan dan daftar bahasa juga tampil di bagian ini, tetapi
+      # keduanya berupa daftar sendiri, jadi menunya terpisah di bawah.
+      # ------------------------------------------------------------------------
+          - label: "Keterangan foto untuk pembaca layar"
+            name: "avatarAlt"
+            widget: object
+            collapsed: false
+            required: true
+            hint: "Dibacakan untuk pengunjung tunanetra. Tidak tampil di layar."
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - { label: "Foto cadangan", name: "avatarFallback", widget: "image", required: false, hint: "Dipakai hanya kalau foto utama gagal dimuat. Boleh diisi foto yang sama." }
+      - name: "about"
+        label: "Tentang Saya"
+        icon: "person"
+        file: "content/about.json"
+        fields:
+          - { label: "Ringkasan, Bahasa Indonesia", name: "summaryId", widget: "list", label_singular: "Paragraf", field: { label: "Paragraf", name: "text", widget: "text" }, hint: "Satu baris sama dengan satu paragraf." }
+          - { label: "Ringkasan, English", name: "summaryEn", widget: "list", required: false, label_singular: "Paragraph", field: { label: "Paragraph", name: "text", widget: "text" }, hint: "Boleh dikosongkan kalau kamu hanya ingin versi Indonesia." }
+          - label: "Sekilas Kegiatan"
+            name: "gallery"
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            required: false
+            label_singular: "Foto"
+            hint: "Strip tiga foto di bawah ringkasan. Ini BUKAN bagian Galeri. Yang ini isinya sedikit dan tiap foto wajib berketerangan. Untuk kumpulan foto yang banyak, pakai menu Galeri di bawah."
+            fields:
+              - { label: "Berkas gambar", name: "src", widget: "image" }
+              - label: "Keterangan untuk pembaca layar"
+                name: "alt"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - label: "Keterangan di atas gambar"
+                name: "caption"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+
+      # Empat kotak angka di sebelah kanan ringkasan Tentang Saya.
+
+      - name: "stats"
+        label: "Angka Sorotan"
+        icon: "tag"
+        file: "content/stats.json"
+        fields:
+          - label: "Daftar angka"
+            name: "items"
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            label_singular: "Angka"
+            summary: "{{fields.value}} {{fields.label.id}}"
+            hint: "Tampil sebagai kartu kecil di section Tentang Saya."
+            fields:
+              - { label: "Angka", name: "value", widget: "string", hint: "Boleh dengan imbuhan, misalnya 16+ atau 3.84" }
+              - label: "Keterangan"
+                name: "label"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - label: "Ikon"
+                name: "icon"
+                widget: select
+                required: false
+                hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
+                options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
+
+      # Kartu kecil di bawah angka sorotan, masih di bagian Tentang Saya.
+      - name: "languages"
+        label: "Bahasa yang Dikuasai"
+        icon: "translate"
+        file: "content/languages.json"
+        fields:
+          - label: "Daftar bahasa"
+            name: "items"
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            label_singular: "Bahasa"
+            summary: "{{fields.name.id}}"
+            hint: "Tampil sebagai kartu kecil di bagian Tentang Saya, di bawah angka sorotan."
+            fields:
+              - label: "Nama bahasa"
+                name: "name"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - label: "Tingkat kemampuan"
+                name: "level"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+
       - name: "experience"
         label: "Pengalaman"
+        icon: "work"
         file: "content/experience.json"
         fields:
           - label: "Daftar pengalaman"
@@ -300,8 +516,10 @@ collections:
                   - { label: "Berkas", name: "file", widget: "file", required: true, hint: "PDF, foto, dokumen, apa saja." }
 
               - { label: "Jadikan sorotan", name: "highlight", widget: "boolean", default: false, required: false, hint: "Memberi kartu border gradien beranimasi." }
+
       - name: "projects"
         label: "Proyek"
+        icon: "folder"
         file: "content/projects.json"
         fields:
           - label: "Daftar proyek"
@@ -311,6 +529,7 @@ collections:
             minimize_collapsed: true
             label_singular: "Proyek"
             summary: "{{fields.name}}"
+            hint: "Tampil sebagai kartu di bagian Proyek. Urutan di sini sama dengan urutan tampil."
             fields:
               - { label: "Nama proyek", name: "name", widget: "string" }
               - { label: "Rentang waktu", name: "period", widget: "string" }
@@ -364,74 +583,10 @@ collections:
                     hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
                     options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
               - { label: "Jadikan sorotan", name: "featured", widget: "boolean", default: false, required: false }
-      - name: "certifications"
-        label: "Sertifikasi"
-        file: "content/certifications.json"
-        fields:
-          - label: "Daftar sertifikasi"
-            name: "items"
-            widget: list
-            collapsed: true
-            minimize_collapsed: true
-            label_singular: "Sertifikasi"
-            summary: "{{fields.issuer}}"
-            fields:
-              - label: "Nama sertifikasi"
-                name: "name"
-                widget: object
-                collapsed: false
-                required: true
-                hint: "Kalau namanya sama di kedua bahasa, cukup isi kolom Indonesia saja."
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
-              - { label: "Penerbit", name: "issuer", widget: "string" }
-              - { label: "Tahun", name: "year", widget: "string", required: false }
-              - { label: "Skor atau predikat", name: "score", widget: "string", required: false, hint: "Untuk ujian yang punya nilai, misalnya UKBI atau TOEFL. Tulis apa adanya beserta satuannya: \"Skor 543, Predikat Unggul\" atau \"TOEFL ITP 520\". Kosongkan untuk sertifikasi biasa, dan lencananya tidak ikut tampil." }
-              - { label: "Kelompok", name: "group", widget: "string", required: false, hint: "Pengelompokan bebas, misalnya AI & Cloud atau Keamanan." }
-              - { label: "Tautan kredensial", name: "credentialUrl", widget: "string", required: false, hint: "Kosongkan untuk menyembunyikan tombol Lihat kredensial." }
-      - name: "education"
-        label: "Pendidikan"
-        file: "content/education.json"
-        fields:
-          - label: "Riwayat pendidikan"
-            name: "items"
-            widget: list
-            collapsed: true
-            minimize_collapsed: true
-            label_singular: "Jenjang"
-            summary: "{{fields.school}}"
-            fields:
-              - label: "Jenjang dan jurusan"
-                name: "degree"
-                widget: object
-                collapsed: false
-                required: true
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
-              - { label: "Nama sekolah atau kampus", name: "school", widget: "string" }
-              - { label: "Rentang waktu", name: "period", widget: "string" }
-              - label: "Nilai akhir"
-                name: "gpa"
-                widget: object
-                collapsed: false
-                required: false
-                hint: "Kosongkan kalau tidak ingin ditampilkan."
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
-              - label: "Catatan"
-                name: "notes"
-                widget: object
-                collapsed: false
-                required: false
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
-                  - { label: "English (opsional)", name: "en", widget: "text", required: false }
-              - { label: "Logo", name: "logo", widget: "image", required: false }
+
       - name: "publications"
         label: "Publikasi"
+        icon: "menu_book"
         file: "content/publications.json"
         fields:
           - label: "Daftar publikasi"
@@ -441,6 +596,7 @@ collections:
             minimize_collapsed: true
             label_singular: "Publikasi"
             summary: "{{fields.title}}"
+            hint: "Tampil di bagian Publikasi."
             fields:
               - { label: "Judul", name: "title", widget: "text" }
               - label: "Nama jurnal atau forum"
@@ -477,8 +633,10 @@ collections:
                 fields:
                   - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
                   - { label: "English (opsional)", name: "en", widget: "text", required: false }
+
       - name: "skills"
         label: "Keahlian"
+        icon: "psychology"
         file: "content/skills.json"
         fields:
           - label: "Kelompok keahlian"
@@ -488,6 +646,7 @@ collections:
             minimize_collapsed: true
             label_singular: "Kelompok"
             summary: "{{fields.title.id}}"
+            hint: "Tampil sebagai kartu berkelompok di bagian Keahlian, dan sebagai strip berjalan di halaman depan."
             fields:
               - label: "Nama kelompok"
                 name: "title"
@@ -504,8 +663,82 @@ collections:
                 hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
                 options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
               - { label: "Isi keahlian", name: "items", widget: "list", label_singular: "Keahlian" }
+
+      - name: "certifications"
+        label: "Sertifikasi"
+        icon: "workspace_premium"
+        file: "content/certifications.json"
+        fields:
+          - label: "Daftar sertifikasi"
+            name: "items"
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            label_singular: "Sertifikasi"
+            summary: "{{fields.issuer}}"
+            hint: "Tampil di bagian Sertifikasi."
+            fields:
+              - label: "Nama sertifikasi"
+                name: "name"
+                widget: object
+                collapsed: false
+                required: true
+                hint: "Kalau namanya sama di kedua bahasa, cukup isi kolom Indonesia saja."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - { label: "Penerbit", name: "issuer", widget: "string" }
+              - { label: "Tahun", name: "year", widget: "string", required: false }
+              - { label: "Skor atau predikat", name: "score", widget: "string", required: false, hint: "Untuk ujian yang punya nilai, misalnya UKBI atau TOEFL. Tulis apa adanya beserta satuannya: \"Skor 543, Predikat Unggul\" atau \"TOEFL ITP 520\". Kosongkan untuk sertifikasi biasa, dan lencananya tidak ikut tampil." }
+              - { label: "Kelompok", name: "group", widget: "string", required: false, hint: "Pengelompokan bebas, misalnya AI & Cloud atau Keamanan." }
+              - { label: "Tautan kredensial", name: "credentialUrl", widget: "string", required: false, hint: "Kosongkan untuk menyembunyikan tombol Lihat kredensial." }
+
+      - name: "education"
+        label: "Pendidikan"
+        icon: "school"
+        file: "content/education.json"
+        fields:
+          - label: "Riwayat pendidikan"
+            name: "items"
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            label_singular: "Jenjang"
+            summary: "{{fields.school}}"
+            hint: "Tampil di bagian Pendidikan. Taruh jenjang tertinggi di atas."
+            fields:
+              - label: "Jenjang dan jurusan"
+                name: "degree"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - { label: "Nama sekolah atau kampus", name: "school", widget: "string" }
+              - { label: "Rentang waktu", name: "period", widget: "string" }
+              - label: "Nilai akhir"
+                name: "gpa"
+                widget: object
+                collapsed: false
+                required: false
+                hint: "Kosongkan kalau tidak ingin ditampilkan."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - label: "Catatan"
+                name: "notes"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
+                  - { label: "English (opsional)", name: "en", widget: "text", required: false }
+              - { label: "Logo", name: "logo", widget: "image", required: false }
+
       - name: "volunteering"
         label: "Kesukarelawanan"
+        icon: "volunteer_activism"
         file: "content/volunteering.json"
         fields:
           - label: "Daftar kegiatan"
@@ -515,6 +748,7 @@ collections:
             minimize_collapsed: true
             label_singular: "Kegiatan"
             summary: "{{fields.role}}"
+            hint: "Tampil di bagian Kesukarelawanan."
             fields:
               - label: "Nama kegiatan"
                 name: "role"
@@ -550,6 +784,7 @@ collections:
                 fields:
                   - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
+
       # ------------------------------------------------------------------------
       # GALERI
       #
@@ -566,6 +801,7 @@ collections:
       # ------------------------------------------------------------------------
       - name: "gallery"
         label: "Galeri"
+        icon: "photo_library"
         file: "content/gallery.json"
         fields:
           - { label: "Tampilkan bagian Galeri", name: "enabled", widget: "boolean", default: true, required: false, hint: "Hilangkan centangnya untuk menyembunyikan seluruh bagian tanpa menghapus fotonya." }
@@ -596,7 +832,7 @@ collections:
             multiple: true
             required: false
             accept: "image/*,video/mp4,video/webm,video/quicktime"
-            hint: "Pilih sebanyak apa pun sekaligus, foto maupun video. Seret barisnya untuk mengubah urutan tampil."
+            hint: "Pilih sebanyak apa pun sekaligus, foto maupun video. Seret barisnya untuk mengubah urutan tampil. Ini bagian Galeri tersendiri, bukan strip Sekilas Kegiatan yang ada di menu Tentang Saya."
           - label: "Keterangan dan sampul video (opsional)"
             name: "captions"
             widget: list
@@ -629,182 +865,9 @@ collections:
               # sendiri baru diunduh saat pengunjung menekannya.
               - { label: "Sampul video", name: "poster", widget: "image", required: false, hint: "Hanya untuk video. Foto yang tampil di kotaknya sebelum videonya dibuka." }
 
-      - name: "stats"
-        label: "Angka Sorotan"
-        file: "content/stats.json"
-        fields:
-          - label: "Daftar angka"
-            name: "items"
-            widget: list
-            collapsed: true
-            minimize_collapsed: true
-            label_singular: "Angka"
-            summary: "{{fields.value}} {{fields.label.id}}"
-            hint: "Tampil sebagai kartu kecil di section Tentang Saya."
-            fields:
-              - { label: "Angka", name: "value", widget: "string", hint: "Boleh dengan imbuhan, misalnya 16+ atau 3.84" }
-              - label: "Keterangan"
-                name: "label"
-                widget: object
-                collapsed: false
-                required: true
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
-              - label: "Ikon"
-                name: "icon"
-                widget: select
-                required: false
-                hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
-                options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
-      - name: "languages"
-        label: "Bahasa"
-        file: "content/languages.json"
-        fields:
-          - label: "Daftar bahasa"
-            name: "items"
-            widget: list
-            collapsed: true
-            minimize_collapsed: true
-            label_singular: "Bahasa"
-            summary: "{{fields.name.id}}"
-            fields:
-              - label: "Nama bahasa"
-                name: "name"
-                widget: object
-                collapsed: false
-                required: true
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
-              - label: "Tingkat kemampuan"
-                name: "level"
-                widget: object
-                collapsed: false
-                required: true
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
-      - name: "services"
-        label: "Layanan"
-        file: "content/services.json"
-        fields:
-          - label: "Daftar layanan"
-            name: "items"
-            widget: list
-            collapsed: true
-            minimize_collapsed: true
-            label_singular: "Layanan"
-            summary: "{{fields.id}}"
-            hint: "Tampil sebagai chip di bagian bawah kartu Kontak."
-            fields:
-              - { label: "Bahasa Indonesia", name: "id", widget: "string" }
-              - { label: "English (opsional)", name: "en", widget: "string", required: false }
-
-  # ------------------------------------------------------------------------
-  # PENGATURAN
-  # Bagian yang jarang disentuh setelah situs berjalan.
-  # ------------------------------------------------------------------------
-  - name: "pengaturan"
-    label: "Pengaturan"
-    files:
-      - name: "profile"
-        label: "Profil Diri"
-        file: "content/profile.json"
-        fields:
-          - { label: "Nama lengkap", name: "name", widget: "string", required: true }
-          - { label: "Nama panggilan", name: "shortName", widget: "string", required: true, hint: "Tampil di navbar sebelah foto." }
-          - label: "Headline"
-            name: "headline"
-            widget: object
-            collapsed: false
-            required: true
-            fields:
-              - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
-              - { label: "English (opsional)", name: "en", widget: "text", required: false }
-          - label: "Kalimat pembuka"
-            name: "tagline"
-            widget: object
-            collapsed: false
-            required: false
-            hint: "Kalimat personal singkat di bawah headline."
-            fields:
-              - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
-              - { label: "English (opsional)", name: "en", widget: "text", required: false }
-          - { label: "Lokasi", name: "location", widget: "string", required: true }
-          - label: "Status Ketersediaan"
-            name: "availability"
-            widget: object
-            fields:
-              - { label: "Tampilkan titik berkedip", name: "available", widget: "boolean", default: true, hint: "Hilangkan centangnya kalau kamu ingin teksnya saja, tanpa titik di sebelah kiri." }
-              - label: "Teks status"
-                name: "label"
-                widget: object
-                collapsed: false
-                required: true
-                hint: "Bebas kamu tulis apa saja. Contoh: Terbuka untuk peluang kerja, Sedang menyelesaikan skripsi, Sibuk sampai Desember, atau Terbuka untuk kolaborasi riset. Kosongkan keduanya untuk menyembunyikan seluruh kapsul status."
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
-              - { label: "Warna titik", name: "dotColor", widget: "color", required: false, allowInput: true, default: "#10b981", hint: "Warna bebas. Yang lazim dipakai: hijau #10b981 untuk terbuka, kuning #f59e0b untuk sedang sibuk, merah #ef4444 untuk tidak tersedia, biru #3b82f6 untuk kabar netral. Pilih warna yang cukup terang supaya tetap terlihat di mode gelap maupun terang." }
-          - { label: "Foto profil", name: "avatar", widget: "image", hint: "Bentuk persegi, minimal 640x640. Setelah diganti, jalankan npm run assets agar favicon dan gambar preview ikut diperbarui." }
-          - { label: "Foto cadangan", name: "avatarFallback", widget: "image", required: false, hint: "Dipakai kalau foto utama gagal dimuat." }
-          - label: "Keterangan foto untuk pembaca layar"
-            name: "avatarAlt"
-            widget: object
-            collapsed: false
-            required: true
-            fields:
-              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-              - { label: "English (opsional)", name: "en", widget: "string", required: false }
-          - label: "Kartu pada foto"
-            name: "photoCard"
-            widget: object
-            collapsed: false
-            required: false
-            hint: "Kotak kecil yang menempel di bagian bawah foto profil di halaman depan. Isinya cuma dua baris ini."
-            fields:
-              - { label: "Nama yang tampil", name: "name", widget: "string", required: false, hint: "Kosongkan untuk memakai nama lengkap di atas." }
-              - label: "Motto"
-                name: "motto"
-                widget: object
-                collapsed: false
-                required: false
-                hint: "Satu kalimat pendek. Kosongkan kalau kamu ingin namanya saja yang tampil."
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
-          - { label: "Tautan tombol Unduh CV", name: "resumeUrl", widget: "file", required: false, accept: ".pdf,.doc,.docx", choose_url: true, hint: "Unggah berkas CV kamu, atau tempel alamat web seperti tautan LinkedIn. Kosongkan untuk menyembunyikan tombolnya." }
-          - { label: "Ringkasan, Bahasa Indonesia", name: "summaryId", widget: "list", label_singular: "Paragraf", field: { label: "Paragraf", name: "text", widget: "text" }, hint: "Satu baris sama dengan satu paragraf." }
-          - { label: "Ringkasan, English", name: "summaryEn", widget: "list", required: false, label_singular: "Paragraph", field: { label: "Paragraph", name: "text", widget: "text" } }
-          - label: "Galeri Kegiatan"
-            name: "gallery"
-            widget: list
-            collapsed: true
-            minimize_collapsed: true
-            required: false
-            label_singular: "Gambar"
-            hint: "Strip gambar di bawah ringkasan. Kosongkan untuk menyembunyikannya."
-            fields:
-              - { label: "Berkas gambar", name: "src", widget: "image" }
-              - label: "Keterangan untuk pembaca layar"
-                name: "alt"
-                widget: object
-                collapsed: false
-                required: true
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
-              - label: "Keterangan di atas gambar"
-                name: "caption"
-                widget: object
-                collapsed: false
-                required: true
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
       - name: "contact"
         label: "Kontak"
+        icon: "mail"
         file: "content/contact.json"
         fields:
           - { label: "Alamat email", name: "email", widget: "string", hint: "Dipakai untuk tombol kirim email dan tombol salin." }
@@ -825,95 +888,44 @@ collections:
             fields:
               - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
               - { label: "English (opsional)", name: "en", widget: "text", required: false }
-      - name: "social"
-        label: "Media Sosial"
-        file: "content/social.json"
+
+      # Daftar kecil di dalam bagian Kontak, di bawah alamat surel dan telepon.
+      - name: "services"
+        label: "Layanan yang Ditawarkan"
+        icon: "handshake"
+        file: "content/services.json"
         fields:
-          - label: "Tautan"
+          - label: "Daftar layanan"
             name: "items"
             widget: list
             collapsed: true
             minimize_collapsed: true
-            label_singular: "Tautan"
-            summary: "{{fields.label}}"
+            label_singular: "Layanan"
+            summary: "{{fields.id}}"
+            hint: "Tampil sebagai chip di bagian bawah kartu Kontak."
             fields:
-              - { label: "Nama platform", name: "label", widget: "string" }
-              - { label: "Nama akun", name: "handle", widget: "string", required: false, hint: "Tampil kecil di bawah nama platform pada bagian Kontak." }
-              - { label: "Alamat lengkap", name: "href", widget: "string", hint: "WhatsApp memakai format https://wa.me/62..., email memakai mailto:..." }
-              - label: "Ikon"
-                name: "icon"
-                widget: select
-                required: true
-                hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
-                options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
-              - { label: "Tampilkan juga di Hero", name: "featured", widget: "boolean", default: false, required: false, hint: "Sebaiknya empat sampai lima akun saja agar Hero tidak penuh." }
-      - name: "settings"
-        label: "Pengaturan Situs"
-        file: "content/settings.json"
-        fields:
-          - label: "Identitas Situs"
-            name: "meta"
-            widget: object
-            fields:
-              - { label: "Judul situs", name: "siteTitle", widget: "string", required: true, hint: "Tampil di tab browser dan hasil pencarian Google." }
-              - { label: "Kode verifikasi Google", name: "googleVerification", widget: "string", required: false, hint: "Dipakai sekali untuk membuktikan ke Google bahwa situs ini milikmu, lalu boleh dibiarkan terisi selamanya. Tempel hanya kode di dalam tanda kutip content=\"...\" yang diberikan Google Search Console. Kosongkan kalau belum mendaftar. Langkah lengkapnya ada di data/README.md bagian 21." }
-              - label: "Deskripsi singkat"
-                name: "description"
-                widget: object
-                collapsed: false
-                required: true
-                hint: "Maksimal sekitar 160 karakter."
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "text", required: false }
-              - { label: "Kata kunci", name: "keywords", widget: "list", required: false, label_singular: "Kata kunci" }
-              - { label: "Gambar preview tautan", name: "ogImage", widget: "image", hint: "Ukuran 1200x630. Dibuat ulang otomatis oleh perintah npm run assets." }
-              - { label: "Alamat situs", name: "baseUrl", widget: "string", hint: "Tanpa garis miring di akhir. Contoh: https://rianfirnanda.vercel.app" }
-              - { label: "Bahasa awal", name: "locale", widget: "select", options: ["id", "en"], hint: "Bahasa yang aktif saat halaman pertama dibuka." }
-              - { label: "Tema awal", name: "defaultTheme", widget: "select", options: ["system", "light", "dark"], hint: "system berarti mengikuti pengaturan perangkat pengunjung." }
-              - { label: "Warna bilah alamat, mode terang", name: "themeColorLight", widget: "color", required: false }
-              - { label: "Warna bilah alamat, mode gelap", name: "themeColorDark", widget: "color", required: false }
-          - label: "Sentuhan Interaktif"
-            name: "appearance"
-            widget: object
-            collapsed: true
-            hint: "Semua boleh dimatikan. Tidak ada yang rusak, halamannya hanya jadi lebih tenang."
-            fields:
-              - { label: "Sorotan mengikuti kursor di kartu", name: "spotlight", widget: "boolean", default: true, required: false }
-              - { label: "Garis progres gulir di tepi atas", name: "scrollProgress", widget: "boolean", default: true, required: false }
-              - { label: "Angka statistik menghitung naik", name: "countUpStats", widget: "boolean", default: true, required: false }
-              - { label: "Tombol kembali ke atas", name: "backToTop", widget: "boolean", default: true, required: false }
-              - { label: "Foto profil sebagai logo navbar", name: "photoAsLogo", widget: "boolean", default: true, required: false }
-              - { label: "Tombol berbagi di tulisan blog", name: "shareButtons", widget: "boolean", default: true, required: false }
-              - { label: "Strip keahlian berjalan di Hero", name: "heroMarquee", widget: "boolean", default: true, required: false }
-              - { label: "Tautan simpan sebagai PDF", name: "printLink", widget: "boolean", default: true, required: false }
-              - { label: "Gambar bisa diperbesar", name: "lightbox", widget: "boolean", default: true, required: false }
-              - { label: "Pencarian cepat Ctrl+K", name: "commandPalette", widget: "boolean", default: true, required: false }
-      - name: "navigation"
-        label: "Menu Navigasi"
-        file: "content/navigation.json"
-        fields:
-          - label: "Item menu"
-            name: "items"
-            widget: list
-            collapsed: true
-            minimize_collapsed: true
-            label_singular: "Item"
-            summary: "{{fields.label.id}}"
-            fields:
-              - { label: "Penanda bagian", name: "id", widget: "string", hint: "Untuk tipe bagian, isi sama dengan id section: about, experience, projects, publications, skills, certifications, education, volunteering, gallery, feedback, blog, contact." }
-              - { label: "Tipe", name: "type", widget: "select", options: ["section", "page"], hint: "section melompat ke bagian di halaman utama, page pindah ke halaman lain." }
-              - { label: "Alamat halaman", name: "href", widget: "string", required: false, hint: "Diisi hanya kalau tipenya page. Contoh: /blog/" }
-              - label: "Teks menu"
-                name: "label"
-                widget: object
-                collapsed: false
-                required: true
-                fields:
-                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
-                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - { label: "Bahasa Indonesia", name: "id", widget: "string" }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+
+  # Garis pemisah di bilah sisi. Di atasnya isi halaman, di bawahnya
+  # pengaturan yang jarang disentuh.
+  - { name: "pemisah-pengaturan", divider: true }
+
+  # ------------------------------------------------------------------------
+  # PENGATURAN SITUS
+  #
+  # Bukan isi halaman, melainkan hal hal yang mengatur bagaimana situsnya
+  # bekerja. Sekali diatur di awal, jarang disentuh lagi.
+  # ------------------------------------------------------------------------
+  - name: "pengaturan"
+    label: "Pengaturan Situs"
+    icon: "settings"
+    files:
+
+      # Label kecil, judul besar, dan subjudul di kepala tiap bagian halaman.
       - name: "sections"
         label: "Judul Tiap Bagian"
+        icon: "title"
         file: "content/sections.json"
         fields:
           - label: "Tentang Saya"
@@ -1236,13 +1248,64 @@ collections:
                   - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
                   - { label: "English (opsional)", name: "en", widget: "text", required: false }
 
+      - name: "navigation"
+        label: "Menu Navigasi"
+        icon: "menu"
+        file: "content/navigation.json"
+        fields:
+          - label: "Item menu"
+            name: "items"
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            label_singular: "Item"
+            summary: "{{fields.label.id}}"
+            fields:
+              - { label: "Penanda bagian", name: "id", widget: "string", hint: "Untuk tipe bagian, isi sama dengan id section: about, experience, projects, publications, skills, certifications, education, volunteering, gallery, feedback, blog, contact." }
+              - { label: "Tipe", name: "type", widget: "select", options: ["section", "page"], hint: "section melompat ke bagian di halaman utama, page pindah ke halaman lain." }
+              - { label: "Alamat halaman", name: "href", widget: "string", required: false, hint: "Diisi hanya kalau tipenya page. Contoh: /blog/" }
+              - label: "Teks menu"
+                name: "label"
+                widget: object
+                collapsed: false
+                required: true
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+
+      - name: "social"
+        label: "Media Sosial"
+        icon: "share"
+        file: "content/social.json"
+        fields:
+          - label: "Tautan"
+            name: "items"
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            label_singular: "Tautan"
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "Nama platform", name: "label", widget: "string" }
+              - { label: "Nama akun", name: "handle", widget: "string", required: false, hint: "Tampil kecil di bawah nama platform pada bagian Kontak." }
+              - { label: "Alamat lengkap", name: "href", widget: "string", hint: "WhatsApp memakai format https://wa.me/62..., email memakai mailto:..." }
+              - label: "Ikon"
+                name: "icon"
+                widget: select
+                required: true
+                hint: "Nama ikon dari daftar yang tersedia. Lihat data/README.md bagian 15."
+                options: ["linkedin", "github", "instagram", "whatsapp", "mail", "x", "youtube", "facebook", "tiktok", "telegram", "scholar", "medium", "phone", "globe", "briefcase", "graduation-cap", "book", "newspaper", "pen-line", "folder", "award", "calendar", "clock", "tag", "image", "map-pin", "building", "users", "heart", "star", "sparkles", "shield", "code", "palette", "languages", "layers", "compass", "rocket"]
+              - { label: "Tampilkan juga di Hero", name: "featured", widget: "boolean", default: false, required: false, hint: "Sebaiknya empat sampai lima akun saja agar Hero tidak penuh." }
+
+
       # ------------------------------------------------------------------
       # MUSIK
       # Pemutar kecil di pojok kiri bawah situs. Kosongkan daftar lagunya
       # atau matikan sakelarnya, dan pemutarnya tidak ikut tampil.
       # ------------------------------------------------------------------
       - name: "music"
-        label: "Musik"
+        label: "Pemutar Musik"
+        icon: "music_note"
         file: "content/music.json"
         fields:
           - { label: "Tampilkan pemutar musik", name: "enabled", widget: "boolean", default: false, hint: "Pemutar baru muncul kalau sakelar ini menyala dan ada minimal satu lagu di bawah." }
@@ -1292,12 +1355,15 @@ collections:
                   - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
 
+      # Pengaturan formulirnya. Kiriman yang masuk ada di menu Masukan Masuk.
+
       # ------------------------------------------------------------------
       # MASUKAN, PENGATURAN FORMULIRNYA
       # Kiriman yang masuk ada di menu tersendiri bernama "Masukan Masuk".
       # ------------------------------------------------------------------
       - name: "feedback-settings"
-        label: "Masukan, Pengaturan"
+        label: "Formulir Masukan"
+        icon: "rate_review"
         file: "content/feedback-settings.json"
         fields:
           - { label: "Tampilkan formulir masukan", name: "enabled", widget: "boolean", default: true, hint: "Hilangkan centangnya untuk menyembunyikan seluruh bagian masukan dari situs." }
@@ -1345,6 +1411,53 @@ collections:
               - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
               - { label: "English (opsional)", name: "en", widget: "text", required: false }
 
+      - name: "settings"
+        label: "Nama Situs dan SEO"
+        icon: "settings"
+        file: "content/settings.json"
+        fields:
+          - label: "Identitas Situs"
+            name: "meta"
+            widget: object
+            fields:
+              - { label: "Judul situs", name: "siteTitle", widget: "string", required: true, hint: "Tampil di tab browser dan hasil pencarian Google." }
+              - { label: "Kode verifikasi Google", name: "googleVerification", widget: "string", required: false, hint: "Dipakai sekali untuk membuktikan ke Google bahwa situs ini milikmu, lalu boleh dibiarkan terisi selamanya. Tempel hanya kode di dalam tanda kutip content=\"...\" yang diberikan Google Search Console. Kosongkan kalau belum mendaftar. Langkah lengkapnya ada di data/README.md bagian 21." }
+              - label: "Deskripsi singkat"
+                name: "description"
+                widget: object
+                collapsed: false
+                required: true
+                hint: "Maksimal sekitar 160 karakter."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "text", required: true }
+                  - { label: "English (opsional)", name: "en", widget: "text", required: false }
+              - { label: "Kata kunci", name: "keywords", widget: "list", required: false, label_singular: "Kata kunci" }
+              - { label: "Gambar preview tautan", name: "ogImage", widget: "image", hint: "Ukuran 1200x630. Dibuat ulang otomatis oleh perintah npm run assets." }
+              - { label: "Alamat situs", name: "baseUrl", widget: "string", hint: "Tanpa garis miring di akhir. Contoh: https://rianfirnanda.vercel.app" }
+              - { label: "Bahasa awal", name: "locale", widget: "select", options: ["id", "en"], hint: "Bahasa yang aktif saat halaman pertama dibuka." }
+              - { label: "Tema awal", name: "defaultTheme", widget: "select", options: ["system", "light", "dark"], hint: "system berarti mengikuti pengaturan perangkat pengunjung." }
+              - { label: "Warna bilah alamat, mode terang", name: "themeColorLight", widget: "color", required: false }
+              - { label: "Warna bilah alamat, mode gelap", name: "themeColorDark", widget: "color", required: false }
+          - label: "Sentuhan Interaktif"
+            name: "appearance"
+            widget: object
+            collapsed: true
+            hint: "Semua boleh dimatikan. Tidak ada yang rusak, halamannya hanya jadi lebih tenang."
+            fields:
+              - { label: "Sorotan mengikuti kursor di kartu", name: "spotlight", widget: "boolean", default: true, required: false }
+              - { label: "Garis progres gulir di tepi atas", name: "scrollProgress", widget: "boolean", default: true, required: false }
+              - { label: "Angka statistik menghitung naik", name: "countUpStats", widget: "boolean", default: true, required: false }
+              - { label: "Tombol kembali ke atas", name: "backToTop", widget: "boolean", default: true, required: false }
+              - { label: "Foto profil sebagai logo navbar", name: "photoAsLogo", widget: "boolean", default: true, required: false }
+              - { label: "Tombol berbagi di tulisan blog", name: "shareButtons", widget: "boolean", default: true, required: false }
+              - { label: "Strip keahlian berjalan di Hero", name: "heroMarquee", widget: "boolean", default: true, required: false }
+              - { label: "Tautan simpan sebagai PDF", name: "printLink", widget: "boolean", default: true, required: false }
+              - { label: "Gambar bisa diperbesar", name: "lightbox", widget: "boolean", default: true, required: false }
+              - { label: "Pencarian cepat Ctrl+K", name: "commandPalette", widget: "boolean", default: true, required: false }
+
+
+  - { name: "pemisah-masukan", divider: true }
+
   # ------------------------------------------------------------------------
   # MASUKAN MASUK
   #
@@ -1354,6 +1467,7 @@ collections:
   # ------------------------------------------------------------------------
   - name: "masukan"
     label: "Masukan Masuk"
+    icon: "inbox"
     label_singular: "Masukan"
     folder: "content/feedback"
     create: false

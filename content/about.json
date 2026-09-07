@@ -1,0 +1,124 @@
+{
+  "summaryId": [
+    "Saya lulus Administrasi Publik di Universitas Bengkulu dengan predikat Cum Laude dan IPK 3,84. Sebelum itu saya sekolah di SMKN 1 Kota Bengkulu jurusan Rekayasa Perangkat Lunak, jadi saya terbiasa membaca kebutuhan birokrasi sekaligus menerjemahkannya jadi solusi teknis yang benar-benar bisa dipakai sehari-hari.",
+    "Di sisi teknis, saya tersertifikasi BNSP untuk Pengembangan Perangkat Lunak dan membangun aplikasi web dengan Laravel serta CodeIgniter. Untuk keamanan, saya memegang Certified Cyber Security Analyst dari CyberWarFare Labs dan Foundations of Cybersecurity dari Google. Saya juga punya sertifikasi Junior Graphic Designer dari BNSP bersama Digitalent Kominfo dan Operator Komputer Madya.",
+    "Belakangan saya banyak belajar AI dan cloud lewat Google Cloud Generative AI Leader, Anthropic AI Fluency, program produktivitas AI dari Google, serta AWS Educate Machine Learning Foundations. Tujuannya satu, memakai teknologi untuk membuat pelayanan publik lebih cepat dan alur kerja administrasi lebih masuk akal."
+  ],
+  "summaryEn": [
+    "I graduated in Public Administration from Universitas Bengkulu with Cum Laude honours and a 3.84 GPA. Before that I studied Software Engineering at SMKN 1 Kota Bengkulu, so I am used to reading what a bureaucracy actually needs and turning it into something technical that people can use day to day.",
+    "On the technical side I am BNSP-certified in Software Development and build web applications with Laravel and CodeIgniter. For security I hold the Certified Cyber Security Analyst credential from CyberWarFare Labs and Foundations of Cybersecurity from Google. I am also a BNSP and Digitalent Kominfo certified Junior Graphic Designer and an Intermediate Computer Operator.",
+    "More recently I have been learning AI and cloud through Google Cloud Generative AI Leader, Anthropic AI Fluency, Google AI productivity programs, and AWS Educate Machine Learning Foundations. The goal stays the same, using technology to make public services faster and administrative workflows make more sense."
+  ],
+  "gallery": [
+    {
+      "src": "/media/126577.jpg",
+      "alt": {
+        "id": "Pelatihan Penggunaan Aplikasi Smart-Mura DPRD Musi Rawas Oleh Laboratorium Administrasi Publik",
+        "en": ""
+      },
+      "caption": {
+        "id": "Pelatihan Penggunaan Aplikasi Smart-Mura DPRD Musi Rawas Oleh Laboratorium Administrasi Publik",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/123588.jpg",
+      "alt": {
+        "id": "Pemaparan NA Ranperda Di DPRD Lubuk Linggau",
+        "en": ""
+      },
+      "caption": {
+        "id": "Pemaparan NA Ranperda Di DPRD Lubuk Linggau  Oleh Laboratorium Administrasi Publik",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/IMG-20260127-WA0206.jpg",
+      "alt": {
+        "id": "Pemaparan NA Ranperda DPRD Musi Rawas",
+        "en": ""
+      },
+      "caption": {
+        "id": "Pemaparan NA Ranperda DPRD Musi Rawas Oleh Laboratorium Administrasi Publik",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/79016.jpg",
+      "alt": {
+        "id": "Pelatihan Pengolahan data menggunakan SPSS oleh Laboratorium administrasi publik bersama Perwakilan Kemendukbangga BKKBN Provinsi Bengkulu",
+        "en": ""
+      },
+      "caption": {
+        "id": "Pelatihan Pengolahan data menggunakan SPSS oleh Laboratorium administrasi publik bersama Perwakilan Kemendukbangga BKKBN Provinsi Bengkulu",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/55736.jpg",
+      "alt": {
+        "id": "Seminar Nasional & Pelantikan DPD IAPA 2026",
+        "en": ""
+      },
+      "caption": {
+        "id": "Seminar Nasional & Pelantikan DPD IAPA 2026",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/17522.jpg",
+      "alt": {
+        "id": "Magang Mahasiswa Di Dinas Pemberdayaan Masyarakat dan Desa (DPMD) Provinsi Bengkulu",
+        "en": ""
+      },
+      "caption": {
+        "id": "Magang Mahasiswa Di Dinas Pemberdayaan Masyarakat dan Desa (DPMD) Provinsi Bengkulu",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/7648.jpg",
+      "alt": {
+        "id": "Rakorda Tim Pembina Posyandu",
+        "en": ""
+      },
+      "caption": {
+        "id": "Rakorda Tim Pembina Posyandu 6 SPM",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/IMG-20250824-WA0004.jpg",
+      "alt": {
+        "id": "Kelompok KKN 243 Periode 105 Desa Cinta Mandi Baru",
+        "en": ""
+      },
+      "caption": {
+        "id": "Kelompok KKN 243 Periode 105 Desa Cinta Mandi Baru",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/128692.jpg",
+      "alt": {
+        "id": "Press tour Kemndikbudristek dikti terkait Program MBKM tahun 2022",
+        "en": ""
+      },
+      "caption": {
+        "id": "Press tour Kemndikbudristek dikti terkait Program MBKM tahun 2022",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/98193.jpg",
+      "alt": {
+        "id": "Ini saya ulang tahun hehe",
+        "en": ""
+      },
+      "caption": {
+        "id": "Ini saya ulang tahun hehe",
+        "en": ""
+      }
+    }
+  ]
+}

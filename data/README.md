@@ -18,7 +18,8 @@ atau langsung lewat tampilan web GitHub.
 
 | Berkas | Isinya |
 | --- | --- |
-| `content/profile.json` | Nama, headline, ringkasan, foto, galeri |
+| `content/profile.json` | Isi halaman depan: foto, nama, status, headline, lokasi |
+| `content/about.json` | Bagian Tentang Saya: paragraf ringkasan dan strip foto |
 | `content/settings.json` | Judul situs, SEO, bahasa awal, tema awal, sakelar tampilan |
 | `content/contact.json` | Email, telepon, catatan kontak |
 | `content/social.json` | Tautan media sosial |
@@ -32,6 +33,7 @@ atau langsung lewat tampilan web GitHub.
 | `content/languages.json` | Bahasa yang dikuasai |
 | `content/services.json` | Layanan yang ditawarkan |
 | `content/stats.json` | Angka sorotan di section Tentang |
+| `content/gallery.json` | Bagian Galeri: daftar foto dan video |
 | `content/navigation.json` | Isi menu navigasi |
 | `content/sections.json` | Judul dan subjudul tiap bagian |
 | `content/labels.json` | Label tombol dan teks antarmuka |
@@ -91,6 +93,7 @@ ganda pada setiap nama field.
 28. [Bagian Galeri](#28-bagian-galeri)
 29. [Melampirkan berkas yang bisa diunduh ke pengalaman](#29-melampirkan-berkas-yang-bisa-diunduh-ke-pengalaman)
 30. [Supaya situs tetap ringan di perangkat pengunjung](#30-supaya-situs-tetap-ringan-di-perangkat-pengunjung)
+31. [Setiap bagian halaman depan diubah di mana](#31-setiap-bagian-halaman-depan-diubah-di-mana)
 
 ---
 
@@ -131,7 +134,7 @@ Setelah itu `git commit` dan `git push`. Vercel akan membangun ulang sendiri.
 > hanya favicon dan kartu preview yang masih memakai foto lama.
 
 **Kalau foto barumu berformat PNG atau WebP**, ubah dua baris di
-`content/profile.json` supaya cocok, atau ganti lewat panel di menu Profil Diri:
+`content/profile.json` supaya cocok, atau ganti lewat panel di menu **Isi Halaman > Halaman Depan**:
 
 ```js
 profile: {
@@ -261,7 +264,8 @@ gradien dengan inisial nama proyek, dan tetap terlihat rapi.
 ### Galeri di section Tentang Saya
 
 Strip tiga gambar di bawah ringkasan diatur lewat field `gallery` di
-`content/profile.json`, atau lewat panel di menu Profil Diri:
+`content/about.json`, atau lewat panel di menu **Isi Halaman > Tentang Saya**,
+bagian **Sekilas Kegiatan**:
 
 ```js
 profile: {
@@ -823,6 +827,41 @@ kamu urus, dan tidak ada konten yang hilang, hanya geraknya yang tidak dijalanka
 Panel ini memungkinkan kamu mengubah seluruh isi situs lewat form biasa, tanpa
 membuka GitHub sama sekali. Bisa dipakai dari laptop maupun ponsel.
 
+### Peta menunya
+
+Menu di sisi kiri disusun **mengikuti urutan bagian di halaman, dari atas ke
+bawah**. Jadi kalau kamu ingin mengubah sesuatu, cari saja menu yang namanya
+sama dengan bagian yang kamu lihat di situs.
+
+| Menu | Isinya | Muncul di mana |
+|---|---|---|
+| **Tulisan Blog** | tulisan blog | halaman /blog |
+| **Isi Halaman** | | |
+| Halaman Depan | foto, nama, status, headline, **lokasi**, tombol Unduh CV | layar pertama |
+| Tentang Saya | paragraf ringkasan dan strip Sekilas Kegiatan | bagian Tentang Saya |
+| Angka Sorotan | kotak angka | di dalam Tentang Saya |
+| Bahasa yang Dikuasai | kartu bahasa | di dalam Tentang Saya |
+| Pengalaman, Proyek, Publikasi, Keahlian, Sertifikasi, Pendidikan, Kesukarelawanan, Galeri | isi tiap bagian | bagian bernama sama |
+| Kontak | surel, telepon, catatan | bagian Kontak |
+| Layanan yang Ditawarkan | daftar layanan | di dalam Kontak |
+| **Pengaturan Situs** | | |
+| Judul Tiap Bagian | judul dan subjudul kepala tiap bagian | semua bagian |
+| Menu Navigasi | isi navbar | navbar |
+| Media Sosial | tautan sosial | halaman depan dan footer |
+| Pemutar Musik | daftar lagu | tombol di pojok kiri bawah |
+| Formulir Masukan | pengaturan formulirnya | bagian Masukan |
+| Nama Situs dan SEO | judul situs, kata kunci, tema awal | seluruh situs |
+| **Masukan Masuk** | kiriman dari tamu | tidak ditampilkan di situs |
+
+Dua hal yang dulu paling sering tertukar:
+
+**Sekilas Kegiatan bukan Galeri.** Sekilas Kegiatan adalah strip tiga foto di
+dalam Tentang Saya, isinya sedikit dan tiap foto wajib berketerangan. Galeri
+adalah bagian tersendiri untuk kumpulan foto dan video yang banyak.
+
+**Formulir Masukan bukan Masukan Masuk.** Yang pertama mengatur tampilan
+formulirnya, yang kedua berisi kiriman yang sudah masuk dari pengunjung.
+
 ### Cara kerjanya
 
 ```
@@ -1345,7 +1384,7 @@ gambarnya muncul di sana.
 Kapsul kecil di atas namamu, yang sekarang bertuliskan `Terbuka untuk peluang
 kerja` dengan titik hijau berkedip. Semuanya bisa kamu atur.
 
-Panel, menu **Pengaturan**, lalu **Profil Diri**, bagian **Status Ketersediaan**.
+Panel > **Isi Halaman** > **Halaman Depan** > bagian **Status ketersediaan**.
 
 | Isian | Fungsinya |
 |---|---|
@@ -1600,3 +1639,33 @@ Akibatnya batang gulir meloncat loncat.
 **Membatasi perhitungan tata letak per bagian** (`contain`). Waktu tata letaknya
 memang cuma 5 sampai 9 milidetik, jadi tidak ada yang bisa dihemat, sementara
 posisi teksnya bergeser satu piksel.
+
+
+---
+
+## 31. Setiap bagian halaman depan diubah di mana
+
+Semuanya ada di satu tempat: panel > **Isi Halaman** > **Halaman Depan**.
+Urutan kolom di sana sengaja dibuat sama dengan urutan tampilnya di layar.
+
+| Yang kamu lihat di layar | Nama kolomnya di panel |
+|---|---|
+| Kapsul kecil paling atas, misalnya "Terbuka untuk peluang kerja" | Status ketersediaan > Teks status |
+| Titik berkedip di sebelahnya, beserta warnanya | Status ketersediaan > Warna titik |
+| "Halo, saya" lalu nama besar bergradien | Nama lengkap |
+| Nama pendek di navbar sebelah foto kecil | Nama panggilan |
+| Kalimat besar di bawah nama | Headline |
+| Kalimat miring bergaris di sebelah kiri | Kalimat pembuka |
+| Baris berikon peta, misalnya "Bengkulu, Indonesia" | **Lokasi** |
+| Tombol "Unduh CV" | Tautan tombol Unduh CV |
+| Foto besar di sebelah kanan | Foto profil |
+| Kotak kecil menempel di bawah foto | Kartu pada foto |
+| Motto di dalam kotak itu | Kartu pada foto > Motto |
+
+Yang **tidak** ada di menu itu:
+
+| Yang kamu lihat | Menunya |
+|---|---|
+| Deretan ikon media sosial di bawah tombol | Pengaturan Situs > Media Sosial |
+| Strip keahlian berjalan di bagian bawah | Isi Halaman > Keahlian |
+| Tombol "Gulir ke bawah" | tidak bisa diubah, teksnya bawaan situs |

@@ -32,6 +32,7 @@
 
 import settings from '@/content/settings.json';
 import profile from '@/content/profile.json';
+import about from '@/content/about.json';
 import contact from '@/content/contact.json';
 import social from '@/content/social.json';
 import stats from '@/content/stats.json';
@@ -105,8 +106,22 @@ export const portfolio = {
   // content/settings.json  sakelar hidup dan mati untuk sentuhan interaktif
   appearance: settings.appearance ?? {},
 
-  // content/profile.json  nama, headline, ringkasan, foto, galeri
-  profile,
+  /*
+    content/profile.json  isi halaman depan: foto, nama, status, lokasi
+    content/about.json    isi bagian Tentang Saya: ringkasan dan strip foto
+
+    Dua berkas, satu objek.
+
+    Dulu keduanya jadi satu berkas, dan di panel isinya muncul sebagai satu
+    formulir sepanjang empat belas kolom. Kolom Lokasi terkubur di tengahnya
+    dan susah ditemukan. Sekarang berkasnya dipisah mengikuti apa yang dilihat
+    pengunjung: satu untuk layar pertama, satu untuk bagian Tentang Saya.
+
+    Di sini keduanya disatukan kembali menjadi objek `profile` dengan bentuk
+    yang sama persis seperti sebelumnya, jadi tidak ada komponen yang perlu
+    ikut berubah.
+  */
+  profile: { ...profile, ...about },
 
   // content/social.json  deretan tautan media sosial
   social: list(social),
