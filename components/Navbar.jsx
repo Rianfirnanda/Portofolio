@@ -147,7 +147,24 @@ export default function Navbar() {
             keluar layar. Batas baru ini memang muat, jadi pill-nya benar benar
             berada di tengah lagi.
           */
-          'glass glass-nav relative z-50 mt-4 w-full max-w-6xl px-3 transition-all duration-300',
+          /*
+            Daftar properti yang dianimasikan ditulis satu per satu, bukan
+            transition-all.
+
+            Sebabnya sudut kotak ini. Saat menu ponsel dibuka, bentuknya
+            berubah dari rounded-full menjadi rounded-3xl. rounded-full di
+            Tailwind bernilai tak hingga, dan transition-all menganggap itu
+            angka yang harus dilewati pelan pelan menuju 24 piksel. Bingkai
+            pertama setelah tombol ditekan sempat bernilai tiga puluh juta
+            piksel, dan pada kotak setinggi laci menu itu tampil sebagai
+            lonjong raksasa yang menutupi seluruh menunya selama sepertiga
+            detik. Terlihat seperti halaman yang gagal memuat.
+
+            Sekarang sudutnya berganti seketika, sementara warna, bayangan,
+            dan jarak dalamnya tetap berubah halus seperti semula.
+          */
+          'glass glass-nav relative z-50 mt-4 w-full max-w-6xl px-3',
+          'transition-[background-color,border-color,box-shadow,padding] duration-300',
           open ? 'rounded-3xl' : 'rounded-full',
           scrolled ? 'py-1.5' : 'py-2.5',
           // Dipekatkan saat halaman digulir, dan saat menu ponsel terbuka.
@@ -272,7 +289,7 @@ export default function Navbar() {
         {open ? (
           <div
             id="mobile-menu"
-            style={{ animation: 'drawer-in 0.25s ease-out' }}
+            style={{ animation: 'drawer-in 0.16s ease-out' }}
             className="mt-3 border-t border-line pt-3 xl:hidden"
           >
             <ul className="flex flex-col gap-1 pb-2">
