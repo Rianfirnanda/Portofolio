@@ -2,53 +2,6 @@
   "groups": [
     {
       "title": {
-        "id": "Web & Perangkat Lunak",
-        "en": "Web & Software"
-      },
-      "icon": "code",
-      "items": [
-        "PHP",
-        "Laravel",
-        "CodeIgniter",
-        "JavaScript",
-        "HTML/CSS",
-        "Web Development",
-        "Git & GitHub",
-        "Database"
-      ]
-    },
-    {
-      "title": {
-        "id": "AI & Cloud",
-        "en": "AI & Cloud"
-      },
-      "icon": "sparkles",
-      "items": [
-        "Generative AI",
-        "Prompt Engineering",
-        "Google AI Studio",
-        "AWS",
-        "Machine Learning Foundations",
-        "AI Enablement",
-        "AI Product Strategy"
-      ]
-    },
-    {
-      "title": {
-        "id": "Keamanan & Sistem",
-        "en": "Security & Systems"
-      },
-      "icon": "shield",
-      "items": [
-        "Cyber Security Analysis",
-        "Sistem Operasi",
-        "Perangkat Keras",
-        "Jaringan",
-        "Technical Support"
-      ]
-    },
-    {
-      "title": {
         "id": "Sektor Publik & Tata Kelola",
         "en": "Public Sector & Governance"
       },
@@ -74,6 +27,53 @@
         "Microsoft Office tingkat lanjut",
         "Dokumentasi",
         "Manajemen Informasi"
+      ]
+    },
+    {
+      "title": {
+        "id": "AI & Cloud",
+        "en": "AI & Cloud"
+      },
+      "icon": "sparkles",
+      "items": [
+        "Generative AI",
+        "Prompt Engineering",
+        "Google AI Studio",
+        "AWS",
+        "Machine Learning Foundations",
+        "AI Enablement",
+        "AI Product Strategy"
+      ]
+    },
+    {
+      "title": {
+        "id": "Web & Perangkat Lunak",
+        "en": "Web & Software"
+      },
+      "icon": "code",
+      "items": [
+        "PHP",
+        "Laravel",
+        "CodeIgniter",
+        "JavaScript",
+        "HTML/CSS",
+        "Web Development",
+        "Git & GitHub",
+        "Database"
+      ]
+    },
+    {
+      "title": {
+        "id": "Keamanan & Sistem",
+        "en": "Security & Systems"
+      },
+      "icon": "shield",
+      "items": [
+        "Cyber Security Analysis",
+        "Sistem Operasi",
+        "Perangkat Keras",
+        "Jaringan",
+        "Technical Support"
       ]
     }
   ]

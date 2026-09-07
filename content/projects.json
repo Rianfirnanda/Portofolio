@@ -1,37 +1,43 @@
 {
   "items": [
     {
-      "name": "SobatKoding",
-      "period": "2021 - 2022",
+      "name": "Company Profile Laboratorium Administrasi Publik",
+      "period": "2026",
       "org": null,
       "description": {
-        "id": "Usaha layanan digital yang saya bangun bareng teman-teman sekolah. Kami mengerjakan aplikasi dan website untuk klien kecil, sekaligus membuka jasa pengerjaan dokumen perkantoran seperti Word, Excel, dan PowerPoint untuk mahasiswa dan UMKM sekitar.",
-        "en": "A digital service venture I built with school friends. We took on apps and websites for small clients, and also offered office document work in Word, Excel, and PowerPoint for students and nearby small businesses."
+        "id": "Membuat Company Profile Laboratorium",
+        "en": ""
       },
-      "tags": [
-        "Web Development",
-        "Wirausaha",
-        "Produktivitas Kantor"
-      ],
-      "image": "/media/128300.jpg",
+      "tags": [],
+      "image": "/media/pasted-image-1788707860014.png",
       "imageAlt": null,
       "links": [],
-      "featured": true
+      "featured": false
     },
     {
-      "name": "Health Hero",
-      "period": "2021",
+      "name": "Desain Logo Administrasi Publik",
+      "period": "2026",
       "org": null,
       "description": {
-        "id": "Proyek kolaboratif tingkat nasional bersama Direktorat SMK yang mengangkat tema kesehatan. Saya masuk di sisi pengembangan sekaligus penyusunan aset digital produknya.",
-        "en": "A national level collaborative project with Direktorat SMK on a health theme. I worked on the development side and on preparing the product digital assets."
+        "id": "Membuat dan mendesain Logo",
+        "en": ""
       },
-      "tags": [
-        "Kolaborasi",
-        "Game Development",
-        "Kesehatan"
-      ],
-      "image": "/media/128301.jpg",
+      "tags": [],
+      "image": "/media/WhatsApp Image 2026-01-10 at 19.35.22.jpeg",
+      "imageAlt": null,
+      "links": [],
+      "featured": false
+    },
+    {
+      "name": "Desain Logo Lab",
+      "period": "2026",
+      "org": null,
+      "description": {
+        "id": "Membuat dan mendesain Logo",
+        "en": ""
+      },
+      "tags": [],
+      "image": "/media/WhatsApp Image 2026-01-10 at 19.35.21.jpeg",
       "imageAlt": null,
       "links": [],
       "featured": false
@@ -83,44 +89,67 @@
       "featured": false
     },
     {
-      "name": "Desain Logo Administrasi Publik",
-      "period": "2026",
+      "name": "SobatKoding",
+      "period": "2021 - 2022",
       "org": null,
       "description": {
-        "id": "Membuat dan mendesain Logo",
-        "en": ""
+        "id": "Usaha layanan digital yang saya bangun bareng teman-teman sekolah. Kami mengerjakan aplikasi dan website untuk klien kecil, sekaligus membuka jasa pengerjaan dokumen perkantoran seperti Word, Excel, dan PowerPoint untuk mahasiswa dan UMKM sekitar.",
+        "en": "A digital service venture I built with school friends. We took on apps and websites for small clients, and also offered office document work in Word, Excel, and PowerPoint for students and nearby small businesses."
       },
-      "tags": [],
-      "image": "/media/WhatsApp Image 2026-01-10 at 19.35.22.jpeg",
+      "tags": [
+        "Web Development",
+        "Wirausaha",
+        "Produktivitas Kantor"
+      ],
+      "image": "/media/128300.jpg",
+      "imageAlt": null,
+      "links": [
+        {
+          "label": {
+            "id": "Youtube Video",
+            "en": ""
+          },
+          "href": "https://youtu.be/uAuKcbU9Az8?si=e_30riUBc7nFtDeQ",
+          "icon": "youtube"
+        }
+      ],
+      "featured": true
+    },
+    {
+      "name": "Health Hero",
+      "period": "2021",
+      "org": null,
+      "description": {
+        "id": "Proyek kolaboratif tingkat nasional bersama Direktorat SMK yang mengangkat tema kesehatan. Saya masuk di sisi pengembangan sekaligus penyusunan aset digital produknya.",
+        "en": "A national level collaborative project with Direktorat SMK on a health theme. I worked on the development side and on preparing the product digital assets."
+      },
+      "tags": [
+        "Kolaborasi",
+        "Game Development",
+        "Kesehatan"
+      ],
+      "image": "/media/128301.jpg",
       "imageAlt": null,
       "links": [],
       "featured": false
     },
     {
-      "name": "Desain Logo Lab",
-      "period": "2026",
-      "org": null,
+      "name": "Kalula Digital Agency",
+      "period": "2021",
+      "org": {
+        "id": "Rafflesia Cerdas Teknologi (RCT)",
+        "en": ""
+      },
       "description": {
-        "id": "Membuat dan mendesain Logo",
+        "id": "Kalula Digital Agency adalah Projek intern yang telah saya kerjakan bersama rekan saya, website ini bertujuan sebagai penyedia layanan digital, mulai dari jasa pembuatan website, penyedia gambar bebas hak cipta dan juga musik bebas hak cipta untuk pengembang lain atau publik yang membutuhkannya.",
         "en": ""
       },
       "tags": [],
-      "image": "/media/WhatsApp Image 2026-01-10 at 19.35.21.jpeg",
-      "imageAlt": null,
-      "links": [],
-      "featured": false
-    },
-    {
-      "name": "Company Profile Laboratorium Administrasi Publik",
-      "period": "2026",
-      "org": null,
-      "description": {
-        "id": "Membuat Company Profile Laboratorium",
+      "image": "/media/pasted-image-1788794758337.webp",
+      "imageAlt": {
+        "id": "KDA",
         "en": ""
       },
-      "tags": [],
-      "image": "/media/pasted-image-1788707860014.png",
-      "imageAlt": null,
       "links": [],
       "featured": false
     }

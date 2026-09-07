@@ -13,7 +13,7 @@
   "availability": {
     "available": true,
     "label": {
-      "id": "Terbuka untuk peluang kerja hehe",
+      "id": "Terbuka untuk peluang kerja",
       "en": "Open to work"
     },
     "dotColor": "#10b981"
@@ -27,8 +27,8 @@
   "photoCard": {
     "name": "Rian Firnanda Irsyadani",
     "motto": {
-      "id": "Kehidupan yang tidak pernah dipertanyakan, tidak layak untuk dijalani.",
-      "en": "An unexamined life is not worth living."
+      "id": "Kedamaian dimulai saat ekspektasi berakhir dan penerimaan dimulai",
+      "en": "Peace begins when expectations end and acceptance begins."
     }
   },
   "resumeUrl": "https://rianfirnanda.vercel.app/cetak/cv/",
@@ -43,17 +43,6 @@
     "More recently I have been learning AI and cloud through Google Cloud Generative AI Leader, Anthropic AI Fluency, Google AI productivity programs, and AWS Educate Machine Learning Foundations. The goal stays the same, using technology to make public services faster and administrative workflows make more sense."
   ],
   "gallery": [
-    {
-      "src": "/media/117893.jpg",
-      "alt": {
-        "id": "Rekrutmen Anggota Laboratorium Administrasi Publik",
-        "en": ""
-      },
-      "caption": {
-        "id": "Rekrutmen Anggota Laboratorium",
-        "en": ""
-      }
-    },
     {
       "src": "/media/126577.jpg",
       "alt": {
@@ -84,17 +73,6 @@
       },
       "caption": {
         "id": "Pemaparan NA Ranperda DPRD Musi Rawas Oleh Laboratorium Administrasi Publik",
-        "en": ""
-      }
-    },
-    {
-      "src": "/media/98193.jpg",
-      "alt": {
-        "id": "Ini saya ulang tahun hehe",
-        "en": ""
-      },
-      "caption": {
-        "id": "Ini saya ulang tahun hehe",
         "en": ""
       }
     },
@@ -161,6 +139,17 @@
       },
       "caption": {
         "id": "Press tour Kemndikbudristek dikti terkait Program MBKM tahun 2022",
+        "en": ""
+      }
+    },
+    {
+      "src": "/media/98193.jpg",
+      "alt": {
+        "id": "Ini saya ulang tahun hehe",
+        "en": ""
+      },
+      "caption": {
+        "id": "Ini saya ulang tahun hehe",
         "en": ""
       }
     }
