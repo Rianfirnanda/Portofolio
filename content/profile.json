@@ -1,10 +1,4 @@
 {
-  "avatar": "/images/profile.jpg",
-  "avatarFallback": "/images/profile.jpg",
-  "avatarAlt": {
-    "id": "Foto profil Rian Firnanda Irsyadani",
-    "en": "Profile photo of Rian Firnanda Irsyadani"
-  },
   "name": "Rian Firnanda Irsyadani",
   "shortName": "Rian Firnanda",
   "availability": {
@@ -23,13 +17,19 @@
     "id": "Saya senang mengubah proses administrasi yang berbelit menjadi sesuatu yang sederhana dan benar-benar dipakai orang.",
     "en": "I enjoy turning tangled administrative processes into something simple that people actually use."
   },
-  "location": "Bengkulu, Indonesia",
+  "location": "Bentiring, Bengkulu, Indonesia",
   "resumeUrl": "https://rianfirnanda.vercel.app/cetak/cv/",
+  "avatar": "/images/profile.jpg",
   "photoCard": {
     "name": "Rian Firnanda Irsyadani",
     "motto": {
       "id": "Kedamaian dimulai saat ekspektasi berakhir dan penerimaan dimulai",
       "en": "Peace begins when expectations end and acceptance begins."
     }
-  }
+  },
+  "avatarAlt": {
+    "id": "Foto profil Rian Firnanda Irsyadani",
+    "en": "Profile photo of Rian Firnanda Irsyadani"
+  },
+  "avatarFallback": "/images/profile.jpg"
 }
