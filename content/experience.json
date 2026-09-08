@@ -18,7 +18,7 @@
         "en": "Mar 2026 - present"
       },
       "location": {
-        "id": "Universitas Bengkulu",
+        "id": "Jalan W.R. Supratman, Kandang Limun, Bengkulu",
         "en": ""
       },
       "description": {
@@ -65,7 +65,7 @@
         "en": "Jan 2026 - present"
       },
       "location": {
-        "id": "Universitas Bengkulu",
+        "id": "Jalan W.R. Supratman, Kandang Limun, Bengkulu",
         "en": ""
       },
       "description": {
@@ -108,7 +108,10 @@
         "id": "Jan 2026 - sekarang",
         "en": "Jan 2026 - present"
       },
-      "location": null,
+      "location": {
+        "id": "Jalan W.R. Supratman, Kandang Limun, Bengkulu",
+        "en": ""
+      },
       "description": {
         "id": "Ditunjuk lewat SK Rektor No. 019/UN30.9/HK/2026 untuk mengelola website resmi jurusan. Saya menangani pemeliharaan sistem, menyusun strategi kontennya, dan menjaga komunikasi digital ke publik supaya informasi akademik selalu akurat dan gampang dicari.",
         "en": "Appointed through Rector Decree No. 019/UN30.9/HK/2026 to manage the department official website. I handle system maintenance, shape the content strategy, and keep public digital communication running so academic information stays accurate and easy to find."
@@ -125,7 +128,15 @@
         "en": "The department official website being managed"
       },
       "logo": "/media/Logo-UNIB-HD-580x580.png",
-      "files": [],
+      "files": [
+        {
+          "label": {
+            "id": "SK Pengelola Web",
+            "en": ""
+          },
+          "file": "/media/SK pengelola web ap.pdf"
+        }
+      ],
       "highlight": true
     },
     {
@@ -145,7 +156,10 @@
         "id": "Jan 2026 - sekarang",
         "en": "Jan 2026 - present"
       },
-      "location": null,
+      "location": {
+        "id": "Jalan W.R. Supratman, Kandang Limun, Bengkulu",
+        "en": ""
+      },
       "description": {
         "id": "Ditunjuk lewat SK Rektor No. 068/UN30.9/HK/2026. Saya melacak data alumni, menjalankan riset dan pengumpulan datanya, lalu menganalisis hasilnya sebagai bahan pendukung akreditasi jurusan.",
         "en": "Appointed through Rector Decree No. 068/UN30.9/HK/2026. I track alumni data, run the research and data collection, then analyse the results as supporting evidence for the departmental accreditation."
@@ -162,7 +176,15 @@
         "en": "Alumni data recap and analysis for the tracer study"
       },
       "logo": "/media/Logo-UNIB-HD-580x580.png",
-      "files": [],
+      "files": [
+        {
+          "label": {
+            "id": "SK Rektor Tim Tracer Study",
+            "en": ""
+          },
+          "file": "/media/SK TIM tracer studi JUR. AP 2026.pdf"
+        }
+      ],
       "highlight": false
     },
     {
@@ -199,7 +221,15 @@
         "en": "Paper presentation session at the SDGs 2030 international conference"
       },
       "logo": "/media/Bali-Sruti-ICON-150x150.jpg",
-      "files": [],
+      "files": [
+        {
+          "label": {
+            "id": "Sertifikat Konferensi",
+            "en": ""
+          },
+          "file": "/media/122_Rian Firnanda Irsyadani, S.A.P_page-0001.webp"
+        }
+      ],
       "highlight": true
     },
     {
@@ -219,7 +249,10 @@
         "id": "Sep - Okt 2025",
         "en": "Sep - Oct 2025"
       },
-      "location": null,
+      "location": {
+        "id": "Jl. Cendana No.18, Padang Jati, Kota Bengkulu",
+        "en": ""
+      },
       "description": {
         "id": "Terlibat langsung di tata kelola pemerintahan daerah dan program pemberdayaan desa. Saya ikut menangani proses administrasi, pengelolaan berkas, dan pendampingan kegiatan dinas, jadi bisa melihat sendiri bagaimana kebijakan bekerja di lapangan.",
         "en": "Worked directly on regional governance and village empowerment programs. I helped with administrative processes, document handling, and support for agency activities, which let me see first hand how policy plays out on the ground."
@@ -234,8 +267,13 @@
         "id": "Kegiatan pendampingan program pemberdayaan desa bersama DPMD",
         "en": "Village empowerment program mentoring with DPMD"
       },
-      "logo": null,
-      "files": [],
+      "logo": "",
+      "files": [
+        {
+          "label": null,
+          "file": "/media/pasted-image-1788884652801.webp"
+        }
+      ],
       "highlight": false
     },
     {
@@ -279,8 +317,8 @@
     },
     {
       "role": {
-        "id": "Volunteer Kesmawa",
-        "en": "Kesmawa Volunteer"
+        "id": "Volunteer Kesmawa Rektorat Universitas Bengkulu",
+        "en": ""
       },
       "org": {
         "id": "Universitas Bengkulu",
@@ -294,7 +332,10 @@
         "id": "Apr 2024 - sekarang",
         "en": "Apr 2024 - present"
       },
-      "location": null,
+      "location": {
+        "id": "Rektorat Universitas Bengkulu",
+        "en": ""
+      },
       "description": {
         "id": "Memverifikasi berkas mahasiswa baru, mewawancarai pendaftar beasiswa, dan mengelola data pendaftar supaya proses seleksinya tertib dan bisa dipertanggungjawabkan.",
         "en": "Verifying new student files, interviewing scholarship applicants, and managing applicant data so the selection process stays orderly and accountable."
