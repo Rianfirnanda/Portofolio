@@ -91,7 +91,7 @@ ganda pada setiap nama field.
 26. [Mengubah status di halaman depan](#26-mengubah-status-di-halaman-depan)
 27. [Kalau panel berat atau Chrome menutup sendiri di ponsel](#27-kalau-panel-berat-atau-chrome-menutup-sendiri-di-ponsel)
 28. [Bagian Galeri](#28-bagian-galeri)
-29. [Melampirkan berkas yang bisa diunduh ke pengalaman](#29-melampirkan-berkas-yang-bisa-diunduh-ke-pengalaman)
+29. [Melampirkan foto dan berkas ke pengalaman dan pendidikan](#29-melampirkan-foto-dan-berkas-ke-pengalaman-dan-pendidikan)
 30. [Supaya situs tetap ringan di perangkat pengunjung](#30-supaya-situs-tetap-ringan-di-perangkat-pengunjung)
 31. [Setiap bagian halaman depan diubah di mana](#31-setiap-bagian-halaman-depan-diubah-di-mana)
 32. [Keamanan situs](#32-keamanan-situs)
@@ -1759,30 +1759,56 @@ ini, bukan cuma galeri.
 
 ---
 
-## 29. Melampirkan berkas yang bisa diunduh ke pengalaman
+## 29. Melampirkan foto dan berkas ke pengalaman dan pendidikan
 
-Tiap entri di bagian Pengalaman bisa membawa berkas yang boleh diunduh
-pengunjung: PDF surat keputusan, sertifikat hasil pindai, foto kegiatan, atau
-dokumen apa pun.
+Tiap entri di bagian **Pengalaman** dan **Pendidikan** bisa membawa dua hal
+tambahan, dan keduanya opsional:
 
-Panel > **Isi Halaman** > **Pengalaman** > buka entrinya > **Berkas untuk
-diunduh** > **Add Berkas**.
+| Yang bisa ditambahkan | Contoh isinya |
+|---|---|
+| Foto dokumentasi | Foto wisuda, suasana kampus, foto kegiatan |
+| Berkas untuk diunduh | Ijazah, transkrip nilai, SK Rektor, sertifikat hasil pindai |
+
+Panel > **Isi Halaman** > **Pengalaman** atau **Pendidikan** > buka entrinya >
+**Foto dokumentasi** untuk fotonya, atau **Berkas untuk diunduh** >
+**Add Berkas** untuk dokumennya.
 
 | Kolom | Isinya |
 |---|---|
 | Nama tombol | Contoh: SK Rektor, Sertifikat, Foto kegiatan. Boleh dikosongkan, nanti dipakai nama berkasnya |
 | Berkas | berkas yang diunggah. Bebas jenis apa saja |
 
-Hasilnya muncul sebagai deretan tombol kecil di bawah daftar keahlian pada kartu
-itu, lengkap dengan ikon dan label jenis berkasnya. Ikon dan labelnya dikenali
-sendiri dari nama berkas, jadi tidak ada yang perlu kamu atur.
+Hasilnya muncul sebagai deretan tombol kecil di bagian bawah kartu itu, lengkap
+dengan ikon dan label jenis berkasnya. Ikon dan labelnya dikenali sendiri dari
+nama berkas, jadi tidak ada yang perlu kamu atur.
+
+Fotonya tampil di atas kartu dan bisa diklik untuk diperbesar.
 
 Kalau berkasnya milik situs ini, tombolnya langsung menyimpan berkas itu ke
 perangkat pengunjung. Kalau yang kamu isi adalah alamat ke situs lain, tombolnya
 membuka tab baru.
 
 Entri tanpa lampiran tidak menampilkan apa apa, jadi kolom ini aman dibiarkan
-kosong.
+kosong. Kartu yang tidak berfoto tetap sama tingginya dengan kartu yang berfoto
+di sebelahnya, jadi kamu boleh mengisi sebagian saja.
+
+### Foto pendidikan TIDAK ikut ke CV
+
+Ini disengaja dan penting. CV gaya Harvard harus bebas gambar supaya terbaca
+mesin pelacak lamaran, dan itu salah satu hal yang diperiksa otomatis. Jadi
+silakan pasang foto sebanyak yang kamu mau: yang berubah cuma tampilan situs,
+CV-nya tetap bersih.
+
+Berkas unduhan juga tidak ikut tercetak. Di halaman cetak, tombol tombolnya
+disembunyikan lewat `print:hidden`.
+
+### Satu jalur, bukan dua
+
+Pendidikan memakai komponen yang sama persis dengan Pengalaman, yaitu
+`LightboxProvider` untuk memperbesar foto dan `BerkasUnduhan` untuk tombol
+unduhnya. Itu disengaja: kalau suatu saat cara membuka gambar atau bentuk
+tombol unduh diperbaiki, kedua bagian ikut berubah tanpa perlu diingat dua
+kali.
 
 ---
 

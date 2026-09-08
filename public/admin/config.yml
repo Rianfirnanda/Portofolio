@@ -761,6 +761,44 @@ collections:
                   - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
                   - { label: "English (opsional)", name: "en", widget: "text", required: false }
               - { label: "Logo", name: "logo", widget: "image", required: false }
+              - { label: "Foto dokumentasi", name: "image", widget: "image", required: false, hint: "Rasio 16:9 atau 4:3. Misalnya foto wisuda atau suasana kampus. Kosongkan kalau belum ada." }
+              - label: "Keterangan foto"
+                name: "imageAlt"
+                widget: object
+                collapsed: false
+                required: false
+                hint: "Menjelaskan isi foto untuk pembaca yang tidak bisa melihatnya."
+                fields:
+                  - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                  - { label: "English (opsional)", name: "en", widget: "string", required: false }
+
+              # BERKAS YANG BISA DIUNDUH PENGUNJUNG
+              #
+              # Sama persis dengan yang ada di menu Pengalaman. Muncul sebagai
+              # tombol kecil di bawah catatan pada kartu ini. Bebas jenis apa
+              # saja: ijazah, transkrip nilai, sertifikat akreditasi, atau
+              # dokumen lain. Jenis berkasnya dikenali sendiri dari nama
+              # berkasnya, jadi ikon dan labelnya tidak perlu kamu atur.
+              - label: "Berkas untuk diunduh"
+                name: "files"
+                widget: list
+                required: false
+                collapsed: true
+                minimize_collapsed: true
+                label_singular: "Berkas"
+                summary: "{{fields.label.id}}"
+                hint: "Opsional. Tampil sebagai tombol unduh di kartu ini."
+                fields:
+                  - label: "Nama tombol"
+                    name: "label"
+                    widget: object
+                    collapsed: false
+                    required: false
+                    hint: "Contoh: Ijazah, Transkrip Nilai, Sertifikat Akreditasi. Kalau dikosongkan, dipakai nama berkasnya."
+                    fields:
+                      - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+                      - { label: "English (opsional)", name: "en", widget: "string", required: false }
+                  - { label: "Berkas", name: "file", widget: "file", required: true, hint: "PDF, foto, dokumen, apa saja." }
 
       - name: "volunteering"
         label: "Kesukarelawanan"
