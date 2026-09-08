@@ -270,7 +270,10 @@
       "logo": "",
       "files": [
         {
-          "label": null,
+          "label": {
+            "id": "Pamflet Magang",
+            "en": ""
+          },
           "file": "/media/pasted-image-1788884652801.webp"
         }
       ],
