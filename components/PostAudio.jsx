@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useLanguage } from '@/components/LanguageProvider';
 import { withBasePath } from '@/lib/asset';
+import { adaSuaraLain, jedakanYangLain } from '@/lib/audio-tunggal';
+import { jam, potongan } from '@/lib/waktu-audio';
 import Icon from '@/components/Icon';
 
 /**
@@ -22,12 +24,51 @@ import Icon from '@/components/Icon';
  *  Kosongkan kalau tulisan itu tidak punya audio, dan seluruh pemutar ini
  *  tidak ikut tampil.
  *
- *  Tidak pernah berbunyi sendiri. Pembaca yang menekan tombol putar.
+ *  ---------------------------------------------------------------------------
+ *  MEMUTAR SENDIRI, DAN KENAPA KADANG TIDAK BISA
+ *  ---------------------------------------------------------------------------
+ *  Kalau "Putar sendiri" dinyalakan, musiknya mulai begitu tulisan dibuka.
+ *  Tapi ada satu aturan peramban yang tidak bisa dilawan siapa pun:
+ *
+ *      Suara tidak boleh keluar sebelum pengunjung menyentuh halaman.
+ *
+ *  Chrome, Safari, dan Firefox sama-sama memakai aturan ini untuk menghentikan
+ *  iklan yang tiba-tiba berteriak. Akibatnya:
+ *
+ *    - Pembaca yang MENGEKLIK tulisan dari daftar blog  -> langsung berbunyi.
+ *      Kliknya tadi sudah dihitung sebagai sentuhan.
+ *
+ *    - Pembaca yang membuka alamatnya langsung dari Google atau dari tautan
+ *      yang dibagikan  -> belum berbunyi. Pemutar ini lalu menunggu diam-diam,
+ *      dan mulai pada sentuhan pertama, entah klik, ketikan, atau ketukan
+ *      di layar. Pembaca tidak perlu menekan tombol putar.
+ *
+ *  Yang tidak dihitung sebagai sentuhan oleh Chrome adalah menggulir halaman,
+ *  jadi menggulir sengaja tidak dipasang sebagai pemicu. Memasangnya cuma
+ *  membuat pemutarannya gagal diam-diam.
+ *
+ *  Suaranya juga dinaikkan pelan selama satu detik, bukan langsung keras.
+ *  Musik yang menyambar begitu halaman terbuka itu mengagetkan.
+ *
+ *  Kalau pembaca menekan jeda, pemutar ini tidak akan menyalakan dirinya lagi.
+ *  Sekali orang bilang tidak, jawabannya dihormati.
  * =============================================================================
  */
 
 /** Pilihan kecepatan putar, sama seperti pemutar podcast pada umumnya. */
 const KECEPATAN = [1, 1.25, 1.5, 2];
+
+/** Besar suara yang dituju saat musiknya mulai sendiri. */
+const SUARA_OTOMATIS = 0.85;
+
+/** Lama suara dinaikkan dari senyap, dalam milidetik. */
+const LAMA_NAIK = 1000;
+
+/*
+  Peristiwa yang oleh peramban dihitung sebagai "pengunjung menyentuh halaman".
+  Menggulir dan menggerakkan tetikus TIDAK termasuk, jadi tidak didaftarkan.
+*/
+const SENTUHAN = ['pointerdown', 'keydown', 'touchend'];
 
 const JENIS = {
   narasi: { ikon: 'headphones', id: 'Dengarkan tulisan ini', en: 'Listen to this post' },
@@ -46,20 +87,120 @@ export default function PostAudio({ audio }) {
   const [kecepatan, setKecepatan] = useState(1);
   const [gagal, setGagal] = useState(false);
 
+  /* Menandai bahwa pembaca sudah menekan jeda sendiri. Sesudah itu pemutar
+     tidak boleh menyalakan dirinya lagi. */
+  const dijedaPembaca = useRef(false);
+
+  /* Lompatan ke menit awal cuma boleh sekali. Tanpa penanda ini, tiap kali
+     berkasnya dimuat ulang posisi pembaca akan ditarik balik ke awal. */
+  const sudahDilompat = useRef(false);
+
+  const { mulai, selesai } = potongan(audio);
+  const otomatis = audio?.autoplay !== false;
+  const ulang = audio?.loop === true;
+
   useEffect(() => {
     if (audioRef.current) audioRef.current.playbackRate = kecepatan;
   }, [kecepatan]);
+
+  /** Menaikkan suara pelan-pelan dari senyap sampai besar yang dituju. */
+  const naikkanSuara = useCallback((el) => {
+    const awal = performance.now();
+    const langkah = (waktu) => {
+      /*
+        Dijepit ke rentang nol sampai satu. Cap waktu yang dikirim
+        requestAnimationFrame itu waktu MULAI bingkainya, dan itu bisa
+        sedikit lebih awal daripada performance.now() yang baru saja dicatat
+        di atas. Tanpa penjepit ini, kemajuannya sempat bernilai minus,
+        volumenya ikut minus, dan peramban melempar IndexSizeError.
+      */
+      const maju = Math.min(1, Math.max(0, (waktu - awal) / LAMA_NAIK));
+      el.volume = SUARA_OTOMATIS * maju;
+      if (maju < 1) requestAnimationFrame(langkah);
+    };
+    requestAnimationFrame(langkah);
+  }, []);
+
+  /*
+    Memutar sendiri saat tulisan dibuka.
+
+    Percobaan pertama dilakukan langsung. Kalau ditolak peramban, pemutar
+    menunggu sentuhan pertama pengunjung lalu mencoba sekali lagi. Panggilan
+    play() di dalam penangan sentuhan itu harus langsung, tanpa await, karena
+    Safari cuma menerima pemutaran yang terjadi di dalam gerakan pengguna.
+  */
+  useEffect(() => {
+    if (!otomatis || !audio?.file) return undefined;
+
+    const el = audioRef.current;
+    if (!el) return undefined;
+
+    let dilepas = false;
+
+    const lepas = () => {
+      if (dilepas) return;
+      dilepas = true;
+      SENTUHAN.forEach((nama) => window.removeEventListener(nama, coba));
+    };
+
+    function coba() {
+      if (dijedaPembaca.current) return lepas();
+      // Pengunjung sudah menyalakan musik lain. Jangan direbut.
+      if (adaSuaraLain(el)) return lepas();
+
+      el.volume = 0;
+      const janji = el.play();
+      if (janji?.then) {
+        janji.then(
+          () => {
+            lepas();
+            naikkanSuara(el);
+          },
+          () => {
+            // Ditolak peramban. Biarkan pendengar sentuhan tetap terpasang.
+          }
+        );
+      }
+    }
+
+    coba();
+    SENTUHAN.forEach((nama) => window.addEventListener(nama, coba, { passive: true }));
+
+    return () => {
+      lepas();
+      el.pause();
+    };
+  }, [otomatis, audio?.file, naikkanSuara]);
 
   if (!audio?.file || gagal) return null;
 
   const jenis = JENIS[audio.kind] ?? JENIS.narasi;
   const judul = t(audio.title) || jenis[lang] || jenis.id;
 
+  /*
+    Garis waktu memperlihatkan POTONGANNYA, bukan seluruh lagu. Kalau kamu
+    memilih menit 1:00 sampai 2:30, pembaca melihat 0:00 sampai 1:30, karena
+    itulah yang benar-benar akan dia dengar.
+  */
+  const ujung = selesai ?? durasi;
+  const panjang = Math.max(0, ujung - mulai);
+  const majuSegmen = Math.min(Math.max(0, posisi - mulai), panjang);
+  const persen = panjang > 0 ? (majuSegmen / panjang) * 100 : 0;
+
   const putarJeda = () => {
     const el = audioRef.current;
     if (!el) return;
-    if (el.paused) el.play().then(() => setMain(true)).catch(() => setMain(false));
-    else {
+
+    if (el.paused) {
+      dijedaPembaca.current = false;
+      el.volume = SUARA_OTOMATIS;
+      el.play().then(
+        () => setMain(true),
+        () => setMain(false)
+      );
+    } else {
+      // Ditekan orang, bukan oleh akhir potongan. Jangan menyala sendiri lagi.
+      dijedaPembaca.current = true;
       el.pause();
       setMain(false);
     }
@@ -67,18 +208,31 @@ export default function PostAudio({ audio }) {
 
   const mundur = () => {
     const el = audioRef.current;
-    if (el) el.currentTime = Math.max(0, el.currentTime - 15);
+    if (el) el.currentTime = Math.max(mulai, el.currentTime - 15);
   };
 
-  const jam = (detik) => {
-    if (!Number.isFinite(detik)) return '0:00';
-    const m = Math.floor(detik / 60);
-    const d = Math.floor(detik % 60);
-    return `${m}:${String(d).padStart(2, '0')}`;
+  /* Melompat ke menit awal yang kamu pilih, begitu panjang lagunya diketahui. */
+  const siapkanPosisi = (el) => {
+    if (sudahDilompat.current || mulai <= 0) return;
+    if (!Number.isFinite(el.duration) || mulai >= el.duration) return;
+    sudahDilompat.current = true;
+    el.currentTime = mulai;
   };
 
-  // Persentase dipakai untuk mewarnai bagian yang sudah lewat pada garis waktu.
-  const persen = durasi > 0 ? (posisi / durasi) * 100 : 0;
+  /* Menjaga agar pemutaran berhenti tepat di menit yang kamu pilih. */
+  const jagaUjung = (el) => {
+    if (selesai === null || el.currentTime < selesai) return;
+
+    if (ulang) {
+      el.currentTime = mulai;
+      return;
+    }
+
+    el.pause();
+    el.currentTime = mulai;
+    sudahDilompat.current = true;
+    setPosisi(mulai);
+  };
 
   return (
     <div data-print="hide" className="glass mt-7 rounded-2xl p-3.5 sm:p-4">
@@ -91,14 +245,28 @@ export default function PostAudio({ audio }) {
           Dengan "metadata", Chrome mengunduh berkas MP3-nya utuh hanya untuk
           mencari tahu durasinya. Satu tulisan berlagu jadi memakan hampir
           sembilan megabita kuota pembaca sebelum tombol putar disentuh sama
-          sekali. Sekarang tidak ada satu bita pun yang diunduh sampai pembaca
-          menekan putar, dan durasinya muncul begitu pemutarannya mulai.
+          sekali. Sekarang tidak ada satu bita pun yang diunduh sampai
+          pemutarannya benar-benar dimulai.
         */
         preload="none"
-        onTimeUpdate={(e) => setPosisi(e.currentTarget.currentTime)}
+        onLoadedMetadata={(e) => {
+          setDurasi(e.currentTarget.duration);
+          siapkanPosisi(e.currentTarget);
+        }}
+        onTimeUpdate={(e) => {
+          setPosisi(e.currentTarget.currentTime);
+          jagaUjung(e.currentTarget);
+        }}
         onDurationChange={(e) => setDurasi(e.currentTarget.duration)}
-        onEnded={() => setMain(false)}
-        onPlay={() => setMain(true)}
+        onEnded={(e) => {
+          if (!ulang) return setMain(false);
+          e.currentTarget.currentTime = mulai;
+          e.currentTarget.play().catch(() => setMain(false));
+        }}
+        onPlay={(e) => {
+          setMain(true);
+          jedakanYangLain(e.currentTarget);
+        }}
         onPause={() => setMain(false)}
         onError={() => setGagal(true)}
       />
@@ -127,21 +295,24 @@ export default function PostAudio({ audio }) {
             id={idBar}
             type="range"
             min={0}
-            max={durasi || 0}
+            max={panjang || 0}
             step={1}
-            value={Math.min(posisi, durasi || 0)}
+            value={majuSegmen}
             onChange={(e) => {
               const nilai = Number(e.target.value);
-              setPosisi(nilai);
-              if (audioRef.current) audioRef.current.currentTime = nilai;
+              setPosisi(mulai + nilai);
+              if (audioRef.current) {
+                sudahDilompat.current = true;
+                audioRef.current.currentTime = mulai + nilai;
+              }
             }}
             className="pemutar-garis mt-2 w-full"
             style={{ '--lewat': `${persen}%` }}
           />
 
           <div className="mt-1 flex items-center justify-between text-[0.7rem] tabular-nums text-subtle">
-            <span>{jam(posisi)}</span>
-            <span>{durasi ? jam(durasi) : ''}</span>
+            <span>{jam(majuSegmen)}</span>
+            <span>{panjang ? jam(panjang) : ''}</span>
           </div>
         </div>
 

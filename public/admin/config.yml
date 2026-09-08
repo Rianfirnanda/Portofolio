@@ -182,6 +182,30 @@ collections:
             fields:
               - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
               - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Putar sendiri saat tulisan dibuka"
+            name: "autoplay"
+            widget: "boolean"
+            required: false
+            default: true
+            hint: "Pembaca yang mengeklik tulisan ini dari daftar blog akan langsung mendengarnya. Pembaca yang membuka alamatnya langsung dari Google baru mendengarnya setelah menyentuh halaman, karena semua peramban melarang suara keluar sebelum itu. Matikan kalau tulisan ini sebaiknya dibaca dalam sunyi."
+          - label: "Mulai dari menit"
+            name: "start"
+            widget: "string"
+            required: false
+            pattern: ["^$|^[0-9]{1,2}(:[0-5][0-9]){1,2}$", "Tulis seperti 1:30 untuk menit satu lewat tiga puluh detik."]
+            hint: "Contoh 1:30. Kosongkan untuk memutar dari awal lagu."
+          - label: "Berhenti di menit"
+            name: "end"
+            widget: "string"
+            required: false
+            pattern: ["^$|^[0-9]{1,2}(:[0-5][0-9]){1,2}$", "Tulis seperti 3:05 untuk menit tiga lewat lima detik."]
+            hint: "Contoh 3:05. Kosongkan untuk memutar sampai lagunya habis. Diabaikan kalau isinya lebih awal daripada kolom di atas."
+          - label: "Ulangi terus potongan ini"
+            name: "loop"
+            widget: "boolean"
+            required: false
+            default: false
+            hint: "Begitu sampai menit berhenti, musiknya kembali ke menit mulai dan berputar lagi. Berguna kalau potongannya pendek sedangkan tulisannya panjang."
 
       - { label: "Gambar sampul", name: "cover", widget: "image", required: false, hint: "Bentuk mendatar paling pas. Kosongkan untuk memakai latar gradien otomatis." }
 

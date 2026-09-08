@@ -371,13 +371,17 @@ Setiap tulisan boleh punya satu pemutar audio yang menempel tepat di bawah
 judulnya. Pembaca yang lebih suka mendengarkan tinggal menekan tombol putar,
 tanpa harus mencari cari.
 
-Panel, buka tulisannya, lalu bagian **Audio pendamping**. Isinya tiga:
+Panel, buka tulisannya, lalu bagian **Audio pendamping**:
 
 | Kolom | Keterangan |
 |---|---|
 | Berkas audio | Unggah `mp3` atau `wav`. Kosongkan untuk menyembunyikan pemutarnya. |
 | Jenis audio | Menentukan ikon dan tulisan bawaannya |
 | Judul pemutar | Kosongkan untuk memakai tulisan bawaan sesuai jenis |
+| Putar sendiri saat tulisan dibuka | Menyala secara bawaan. Baca bagian di bawah ini dulu. |
+| Mulai dari menit | Misalnya `1:30`. Kosongkan untuk memutar dari awal lagu. |
+| Berhenti di menit | Misalnya `3:05`. Kosongkan untuk memutar sampai habis. |
+| Ulangi terus potongan ini | Kembali ke menit mulai begitu sampai menit berhenti |
 
 Tiga pilihan jenis, masing masing punya tulisan bawaan sendiri:
 
@@ -391,7 +395,62 @@ Pemutarnya punya tombol mundur 15 detik dan pengatur kecepatan 1x sampai 2x,
 seperti aplikasi podcast pada umumnya. Tulisan yang punya audio juga diberi
 penanda kecil di kartu daftar blog, jadi pembaca tahu sebelum membukanya.
 
-Audio ini tidak pernah berbunyi sendiri. Pembaca yang menekan tombol putar.
+### Memilih potongan lagunya
+
+Dua kolom menit itu memotong lagu tanpa mengubah berkasnya. Kamu tidak perlu
+mengedit mp3 di aplikasi lain, cukup tulis menitnya.
+
+Tulis seperti yang biasa kamu baca di YouTube:
+
+| Kamu tulis | Artinya |
+|---|---|
+| `1:30` | menit satu lewat tiga puluh detik |
+| `0:45` | empat puluh lima detik |
+| `45` | juga empat puluh lima detik |
+| `1:02:03` | satu jam dua menit tiga detik |
+
+Yang perlu diketahui:
+
+- Garis waktu di halaman memperlihatkan panjang **potongannya**, bukan panjang
+  lagu aslinya. Kalau kamu pilih `1:00` sampai `2:30`, pembaca melihat
+  `0:00` sampai `1:30`, karena memang segitu yang akan dia dengar.
+- Kolom berhenti diabaikan kalau isinya lebih awal daripada kolom mulai.
+  Menurutinya berarti memutar potongan sepanjang nol detik.
+- Salah ketik di kolom menit tidak merusak apa apa. Kolomnya cuma dianggap
+  kosong, dan lagunya diputar utuh.
+- Kalau potongannya pendek sedangkan tulisannya panjang, nyalakan
+  **Ulangi terus potongan ini** supaya musiknya tidak habis di tengah bacaan.
+
+### Kenapa kadang tidak langsung berbunyi
+
+Ada satu aturan peramban yang tidak bisa dilawan oleh situs mana pun:
+
+> Suara tidak boleh keluar sebelum pengunjung menyentuh halaman.
+
+Chrome, Safari, dan Firefox sama sama memakainya untuk menghentikan iklan yang
+tiba tiba berteriak. Jadi hasilnya berbeda tergantung bagaimana pembaca sampai
+ke tulisanmu:
+
+| Pembaca datang dari | Yang terjadi |
+|---|---|
+| Mengeklik tulisan di halaman blog | Langsung berbunyi. Kliknya tadi sudah dihitung sebagai sentuhan. |
+| Membuka alamatnya langsung dari Google, WhatsApp, atau tautan yang dibagikan | Belum berbunyi. Pemutar menunggu diam diam, lalu mulai pada sentuhan pertama, entah klik, ketikan, atau ketukan di layar. Pembaca tidak perlu mencari tombol putar. |
+
+Menggulir halaman tidak dihitung sebagai sentuhan oleh Chrome, jadi menggulir
+saja belum cukup untuk memicunya.
+
+Tiga hal lain yang sudah dijaga:
+
+- Suaranya naik pelan selama satu detik, tidak langsung keras.
+- Kalau pembaca menekan jeda, pemutarnya tidak akan menyalakan dirinya lagi di
+  halaman itu. Sekali orang bilang tidak, jawabannya dihormati.
+- Kalau pengunjung sudah menyalakan pemutar musik di pojok kiri bawah, tulisan
+  yang baru dibuka tidak merebutnya. Sebaliknya juga: yang paling terakhir
+  dinyalakan akan menjeda yang lain, jadi tidak pernah ada dua lagu sekaligus.
+
+Pemutar musik di pojok kiri bawah tetap **tidak pernah** berbunyi sendiri. Yang
+boleh memutar sendiri cuma audio pendamping di halaman tulisan, dan itu pun
+kamu yang menyalakannya per tulisan.
 
 ### Menyisipkan foto, video, musik, atau PDF ke tengah tulisan
 

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
 import { withBasePath } from '@/lib/asset';
+import { jedakanYangLain } from '@/lib/audio-tunggal';
 import Icon from '@/components/Icon';
 
 /**
@@ -17,9 +18,14 @@ import Icon from '@/components/Icon';
  *  sakelarnya mati, seluruh pemutar ini tidak ikut tampil sama sekali.
  *
  *  JANJI KE PENGUNJUNG
- *  Musik tidak pernah berbunyi sendiri saat halaman dibuka. Itu disengaja.
+ *  Pemutar INI tidak pernah berbunyi sendiri saat halaman dibuka. Itu disengaja.
  *  Suara yang tiba tiba muncul mengagetkan, memakan kuota, dan mengganggu orang
  *  yang sedang mendengarkan hal lain. Pengunjung yang memutuskan untuk memutar.
+ *
+ *  Yang boleh berbunyi sendiri cuma audio pendamping di halaman tulisan blog,
+ *  dan itu pun kamu yang menyalakannya per tulisan lewat panel. Lihat
+ *  components/PostAudio.jsx. Supaya keduanya tidak pernah berbunyi bersamaan,
+ *  yang paling terakhir dinyalakan menjeda yang lain, lihat lib/audio-tunggal.js.
  *
  *  Pilihan terakhir pengunjung (lagu yang sedang diputar dan besar suaranya)
  *  diingat di perangkat mereka sendiri, tidak dikirim ke mana pun.
@@ -110,7 +116,12 @@ export default function MusicPlayer() {
         onTimeUpdate={(e) => setPosisi(e.currentTarget.currentTime)}
         onDurationChange={(e) => setDurasi(e.currentTarget.duration)}
         onEnded={() => pindah(1)}
-        onPlay={() => setMain(true)}
+        onPlay={(e) => {
+          setMain(true);
+          // Audio pendamping di halaman blog bisa berbunyi sendiri. Kalau
+          // pengunjung menyalakan pemutar ini, yang itu harus mengalah.
+          jedakanYangLain(e.currentTarget);
+        }}
         onPause={() => setMain(false)}
       />
 
