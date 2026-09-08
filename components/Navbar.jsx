@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { portfolio } from '@/data/portfolio';
@@ -34,6 +34,84 @@ export default function Navbar() {
   const profile = portfolio.profile;
   const isHome = pathname === '/' || pathname === '';
   const usePhotoLogo = portfolio.appearance?.photoAsLogo !== false && Boolean(profile.avatar);
+
+  /*
+    ------------------------------------------------------------------------
+    APAKAH MENU MENDATAR MASIH MUAT
+    ------------------------------------------------------------------------
+    Dulu jawabannya ditebak lewat satu ambang lebar layar, xl. Tebakan itu
+    pasti meleset cepat atau lambat, karena isi menunya kamu yang tentukan
+    lewat panel. Begitu menu Galeri dan Masukan ditambahkan, isinya jadi 28
+    piksel lebih lebar daripada pill-nya, dan tombol tema, sebagai anak
+    terakhir, terdorong setengah keluar dari kotak kacanya. Itu yang terlihat
+    seperti navbar rusak.
+
+    Sekarang lebarnya benar benar diukur. Kalau isinya tidak muat, menu laci
+    yang dipakai, berapa pun lebar layarnya, jadi menambah menu lewat panel
+    tidak akan pernah lagi merusak tampilannya.
+  */
+  const barisRef = useRef(null);
+  const menuRef = useRef(null);
+
+  /* Lebar yang dibutuhkan, disimpan dari pengukuran terakhir saat menunya
+     memang sedang digambar. Tanpa disimpan, angkanya hilang begitu menunya
+     disembunyikan, dan navbar akan berkedip bolak balik antara dua bentuk. */
+  const butuhRef = useRef(0);
+  const [muat, setMuat] = useState(true);
+
+  const periksaMuat = useCallback(() => {
+    const baris = barisRef.current;
+    if (!baris) return;
+
+    const menu = menuRef.current;
+    if (menu && menu.offsetWidth > 0) {
+      const anak = [...baris.children];
+      // gap-3 pada barisnya, 0,75rem, dihitung sebagai 12 piksel
+      const jarak = 12 * Math.max(0, anak.length - 1);
+      butuhRef.current = anak.reduce((jumlah, el) => jumlah + el.offsetWidth, 0) + jarak;
+    }
+
+    // Delapan piksel kelonggaran supaya tidak berkedip tepat di batasnya.
+    if (butuhRef.current > 0) setMuat(baris.clientWidth >= butuhRef.current + 8);
+  }, []);
+
+  useEffect(() => {
+    const baris = barisRef.current;
+    if (!baris || typeof ResizeObserver === 'undefined') return undefined;
+
+    periksaMuat();
+
+    const pengamat = new ResizeObserver(periksaMuat);
+
+    // Barisnya, untuk menangkap layar yang diubah ukurannya.
+    pengamat.observe(baris);
+
+    /*
+      Deretan menunya juga, dan ini bukan berlebihan.
+
+      Lebar baris tidak berubah saat isinya berubah, karena barisnya w-full.
+      Jadi kalau cuma barisnya yang diamati, dua hal lolos tanpa terdeteksi:
+      huruf webfont yang baru selesai dimuat lalu melebarkan semua tulisan
+      menu, dan menu yang bertambah. Mengamati deretannya menangkap keduanya.
+    */
+    if (menuRef.current) pengamat.observe(menuRef.current);
+
+    /*
+      Pengukuran pertama sering terjadi saat huruf cadangan masih dipakai,
+      dan huruf cadangan lebarnya berbeda. Diukur ulang setelah hurufnya
+      benar benar siap.
+    */
+    let batal = false;
+    document.fonts?.ready.then(() => {
+      if (!batal) periksaMuat();
+    });
+
+    return () => {
+      batal = true;
+      pengamat.disconnect();
+    };
+    // lang ikut jadi pemicu karena panjang tulisan menu berbeda tiap bahasa
+  }, [periksaMuat, lang, items.length]);
 
   // Inisial dari nama, dipakai kalau logo foto dimatikan lewat data.
   const initials = profile.name
@@ -129,7 +207,7 @@ export default function Navbar() {
           type="button"
           aria-label={t(portfolio.ui.closeMenu)}
           onClick={() => setOpen(false)}
-          className="fixed inset-0 -z-10 cursor-default bg-black/50 backdrop-blur-sm xl:hidden"
+          className={`fixed inset-0 -z-10 cursor-default bg-black/50 backdrop-blur-sm ${muat ? 'xl:hidden' : ''}`}
         />
       ) : null}
 
@@ -137,15 +215,14 @@ export default function Navbar() {
         aria-label={lang === 'id' ? 'Navigasi utama' : 'Main navigation'}
         className={[
           /*
-            max-w-6xl, bukan 5xl.
+            max-w-7xl, naik dari 6xl.
 
-            Lebar pill ini sebenarnya tidak pernah bisa lebih sempit daripada
-            isinya: logo, sepuluh item menu, dan tiga tombol di kanan tidak
-            boleh dipotong, jadi kotaknya melar melewati batas berapa pun yang
-            ditulis di sini. Dulu batasnya 5xl dan isinya butuh lebih dari itu,
-            akibatnya pill-nya menonjol ke kanan dan tombol tema ikut terdorong
-            keluar layar. Batas baru ini memang muat, jadi pill-nya benar benar
-            berada di tengah lagi.
+            Isi navbar saat ini butuh 1154 piksel, sedangkan 6xl cuma 1152.
+            Kurang dua piksel saja sudah cukup membuat tombol tema terdorong
+            keluar pill. Batas baru ini memberi ruang lebih, dan pengukuran
+            di periksaMuat yang menjaga kalau suatu saat isinya bertambah
+            lagi. Dua duanya dibutuhkan: yang satu supaya sekarang lega,
+            yang satu supaya nanti tidak rusak diam diam.
           */
           /*
             Daftar properti yang dianimasikan ditulis satu per satu, bukan
@@ -163,7 +240,7 @@ export default function Navbar() {
             Sekarang sudutnya berganti seketika, sementara warna, bayangan,
             dan jarak dalamnya tetap berubah halus seperti semula.
           */
-          'glass glass-nav relative z-50 mt-4 w-full max-w-6xl px-3',
+          'glass glass-nav relative z-50 mt-4 w-full max-w-7xl px-3',
           'transition-[background-color,border-color,box-shadow,padding] duration-300',
           open ? 'rounded-3xl' : 'rounded-full',
           scrolled ? 'py-1.5' : 'py-2.5',
@@ -171,7 +248,7 @@ export default function Navbar() {
           scrolled || open ? 'glass-nav-solid' : '',
         ].join(' ')}
       >
-        <div className="flex items-center justify-between gap-3">
+        <div ref={barisRef} className="flex items-center justify-between gap-3">
           {/* Logo, mengarah kembali ke beranda. Memakai foto profil dengan
               bingkai gradien. Isi appearance.photoAsLogo dengan false untuk
               kembali memakai inisial nama. */}
@@ -209,7 +286,16 @@ export default function Navbar() {
             sehingga ketiganya tidak bisa dipakai sama sekali. Di lebar itu
             sekarang dipakai menu laci yang memang muat.
           */}
-          <ul className="hidden items-center gap-0.5 xl:flex">
+          {/*
+            shrink-0 penting untuk pengukuran. Tanpa itu deretan menu ini
+            dipepetkan oleh flexbox saat kekurangan ruang, offsetWidth-nya
+            ikut mengecil, dan lebar yang sebenarnya dibutuhkan jadi tidak
+            pernah ketahuan.
+          */}
+          <ul
+            ref={menuRef}
+            className={`hidden shrink-0 items-center gap-0.5 ${muat ? 'xl:flex' : ''}`}
+          >
             {items.map((item) => (
               <li key={item.id}>
                 <NavLink
@@ -278,7 +364,9 @@ export default function Navbar() {
               aria-label={open ? t(portfolio.ui.closeMenu) : t(portfolio.ui.openMenu)}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              className="grid h-9 w-9 place-items-center rounded-full border border-line bg-surface text-fg transition-colors hover:border-line-strong xl:hidden"
+              className={`grid h-9 w-9 place-items-center rounded-full border border-line bg-surface text-fg transition-colors hover:border-line-strong ${
+                muat ? 'xl:hidden' : ''
+              }`}
             >
               <Icon name={open ? 'close' : 'menu'} className="h-5 w-5" />
             </button>
@@ -290,7 +378,7 @@ export default function Navbar() {
           <div
             id="mobile-menu"
             style={{ animation: 'drawer-in 0.16s ease-out' }}
-            className="mt-3 border-t border-line pt-3 xl:hidden"
+            className={`mt-3 border-t border-line pt-3 ${muat ? 'xl:hidden' : ''}`}
           >
             <ul className="flex flex-col gap-1 pb-2">
               {items.map((item) => (

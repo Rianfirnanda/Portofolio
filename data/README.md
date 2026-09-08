@@ -720,6 +720,21 @@ Ingin menampilkan section Kesukarelawanan di menu? Tambahkan:
 { id: 'volunteering', type: 'section', label: { id: 'Relawan', en: 'Volunteering' } },
 ```
 
+### Tambah menu sebanyak apa pun, navbar tidak akan rusak
+
+Navbar mengukur sendiri apakah deretan menunya masih muat. Kalau tidak, dia
+berpindah ke menu laci, berapa pun lebar layarnya.
+
+Ini bukan hiasan. Sebelumnya navbar cuma menebak lewat satu ambang lebar layar,
+dan tebakan itu meleset begitu menu Galeri dan Masukan ditambahkan. Isinya jadi
+28 piksel lebih lebar daripada kotak kacanya, dan tombol tema, sebagai kendali
+paling kanan, terdorong setengah keluar. Sekarang lebarnya benar benar diukur,
+termasuk diukur ulang setelah huruf selesai dimuat, karena huruf cadangan yang
+dipakai sesaat di awal lebarnya berbeda.
+
+Jadi silakan tambah menu sesukamu. Yang berubah cuma bentuk menunya, bukan
+kerapiannya.
+
 ---
 
 ## 13. Memasang tombol Unduh CV
@@ -1223,6 +1238,39 @@ berubah sendiri. Tidak ada berkas terpisah yang perlu kamu urus.
 
 Kolom yang kamu kosongkan akan dilewati, bukan dicetak sebagai baris kosong.
 Nilai yang cuma berisi tanda hubung juga diperlakukan sebagai kosong.
+
+### Bagaimana tautan ditulis di CV
+
+Alamat web di CV itu dilema. Ditulis utuh, sebagian panjang sekali dan merusak
+kerapian. Alamat bukti sertifikat LinkedIn misalnya, panjangnya lebih dari dua
+ratus huruf, dan kalau dicetak apa adanya dia menghabiskan empat baris
+sendirian. Tapi kalau semua diganti kata seperti "LinkedIn" saja, mesin pelacak
+lamaran yang cuma membaca teks kehilangan alamatnya.
+
+Jalan tengah yang dipakai:
+
+| Yang mana | Bagaimana ditulis |
+|---|---|
+| Alamat pendek dan terbaca | Ditulis apa adanya, misalnya `linkedin.com/in/rian-firnanda`, dan sekaligus jadi tautan |
+| Alamat panjang atau penuh tanda tanya | Diganti namanya, misalnya `Google Scholar`, alamat aslinya tetap menempel sebagai tautan |
+| Sertifikat | Nama sertifikatnya yang jadi tautan ke bukti kreditnya, alamatnya tidak dicetak |
+| Publikasi | Judulnya yang jadi tautan, alamatnya tidak dicetak |
+
+Semua tautan **berwarna hitam tanpa garis bawah**, sesuai kebiasaan CV Harvard.
+CV yang tautannya biru bergaris bawah terlihat seperti tangkapan layar halaman
+web, bukan dokumen lamaran. Di dalam PDF tautannya tetap bisa diklik, dan
+saat ini ada sembilan belas tautan yang tertanam di sana.
+
+Alamatnya juga tidak akan pernah patah di tengah lagi. Dulu
+`scholar.google.com/citations?user=...` terbelah jadi dua baris sehingga tidak
+bisa disalin maupun diklik.
+
+Identitas di atas dipecah jadi dua baris: tempat tinggal, telepon, dan surel di
+baris pertama, lalu alamat web di baris kedua. Kalau kamu ingin baris kedua
+lebih pendek, kurangi jumlah media sosial di panel, menu
+**Pengaturan Situs** lalu **Media Sosial**. Instagram dan WhatsApp misalnya,
+keduanya jarang membantu di CV lamaran kerja, sedangkan WhatsApp isinya sama
+dengan nomor telepon yang sudah ada di baris pertama.
 
 ### Nama instansi wajib diisi
 

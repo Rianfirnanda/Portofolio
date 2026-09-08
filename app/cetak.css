@@ -304,14 +304,56 @@
 }
 
 .cv-kontak {
-  margin: 0.4rem 0 0;
+  margin: 0.3rem 0 0;
   font-size: 9.5pt;
   text-align: center;
-  word-break: break-word;
 }
 
-.cv-kontak span + span::before {
-  content: ' | ';
+/*
+  Tautan di dalam CV.
+
+  Warnanya diwarisi, jadi tetap hitam. Ini disengaja. CV gaya Harvard memakai
+  satu tinta saja, dan tautan biru bergaris bawah membuat berkasnya terlihat
+  seperti tangkapan layar halaman web, bukan dokumen lamaran. Alamatnya tetap
+  tertanam sebagai tautan sungguhan, jadi di dalam PDF tetap bisa diklik.
+
+  Warna dan garis bawah berlaku untuk semua tautan di dalam CV, termasuk judul
+  publikasi dan nama sertifikat.
+*/
+.cv-tautan {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*
+  Larangan patah baris HANYA untuk alamat di bagian identitas.
+
+  Ini yang membereskan keluhan aslinya. Sebelumnya .cv-kontak memakai
+  word-break: break-word, dan alamat sepanjang
+  scholar.google.com/citations?user=PW0IcAsAAAAJ&hl=en dipatahkan di tengah
+  tengah kata sehingga tidak bisa disalin maupun diklik.
+
+  Aturannya sengaja dibatasi ke .cv-kontak saja. Sempat dipasang ke seluruh
+  .cv-tautan, dan akibatnya judul publikasi yang panjang ikut dilarang patah:
+  satu judul melar jadi 927 piksel dan mendorong halaman CV melebar ke samping
+  di layar ponsel. Nama dan judul harus tetap boleh berpindah baris, yang tidak
+  boleh dipatahkan cuma alamat.
+*/
+.cv-kontak .cv-tautan,
+.cv-utuh {
+  white-space: nowrap;
+}
+
+/*
+  Pemisah sengaja jadi elemen tersendiri, bukan ::before pada tiap butir.
+
+  Kalau pemisahnya menempel di dalam butir yang nowrap, dia ikut pindah baris
+  dan barisnya jadi dimulai dengan tanda garis tegak. Sebagai elemen sendiri,
+  patahan barisnya jatuh pada spasi sesudah pemisah, jadi tanda itu tetap
+  tinggal di ujung baris sebelumnya seperti kebiasaan penulisan pada umumnya.
+*/
+.cv-pemisah {
+  white-space: normal;
 }
 
 .cv-bagian {

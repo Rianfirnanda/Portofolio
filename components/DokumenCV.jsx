@@ -2,6 +2,7 @@
 
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
+import { labelTautan } from '@/lib/tautan-cv';
 import DokumenBilah from '@/components/DokumenBilah';
 
 /**
@@ -96,19 +97,43 @@ export default function DokumenCV() {
           bahasa: 'Languages',
         };
 
-  // Baris kontak. Alamat web ditulis tanpa awalan https:// supaya ringkas,
-  // tetapi tetap utuh sebagai teks yang bisa disalin.
-  const kontak = [
-    terisi(profile.location),
-    terisi(contact.phone),
-    terisi(contact.email),
-    // Alamat portofolio ikut dicantumkan. Perekrut sering ingin melihat karya
-    // sungguhannya, dan CV satu halaman ini tidak memuat semuanya.
-    terisi(meta.baseUrl).replace(/^https?:\/\//, ''),
+  /*
+    Identitas dipecah jadi dua baris, bukan satu baris panjang.
+
+    Baris pertama yang selalu dibaca perekrut lebih dulu: tempat tinggal,
+    nomor telepon, surel. Baris kedua barulah alamat web. Dulu kesembilannya
+    dijejer dalam satu paragraf, dan hasilnya alamat panjang terpotong di
+    tengah tengah sehingga tidak bisa disalin maupun diklik.
+  */
+  const jati = [terisi(profile.location), terisi(contact.phone)].filter(Boolean);
+
+  const surel = terisi(contact.email);
+
+  /*
+    Alamat web. Yang pendek ditulis apa adanya supaya mesin pelacak lamaran
+    tetap membaca alamatnya, yang panjang diganti namanya. Lihat
+    lib/tautan-cv.js untuk alasan lengkapnya.
+  */
+  const tautan = [
+    terisi(meta.baseUrl) ? { href: meta.baseUrl, nama: 'Portofolio' } : null,
     ...social
       .filter((s) => s.href?.startsWith('http'))
-      .map((s) => s.href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')),
+      .map((s) => ({ href: s.href, nama: terisi(t(s.label)) })),
   ].filter(Boolean);
+
+  /**
+   * Satu tautan di dalam CV. Warnanya diwarisi dari teks sekitarnya, jadi
+   * tetap hitam seperti CV Harvard pada umumnya, tapi di dalam PDF tetap
+   * bisa diklik.
+   */
+  const Tautan = ({ href, children }) =>
+    href ? (
+      <a className="cv-tautan" href={href} rel="noopener noreferrer">
+        {children}
+      </a>
+    ) : (
+      children
+    );
 
   const Bagian = ({ judul, children }) => (
     <section className="cv-bagian">
@@ -130,11 +155,32 @@ export default function DokumenCV() {
           {/* ---------------- Identitas ---------------- */}
           <header>
             <h1 className="cv-nama">{profile.name}</h1>
+
             <p className="cv-kontak">
-              {kontak.map((baris) => (
-                <span key={baris}>{baris}</span>
+              {jati.map((isi, i) => (
+                <span key={isi}>
+                  {i > 0 ? <span className="cv-pemisah"> | </span> : null}
+                  <span className="cv-utuh">{isi}</span>
+                </span>
               ))}
+              {surel ? (
+                <span>
+                  {jati.length > 0 ? <span className="cv-pemisah"> | </span> : null}
+                  <Tautan href={`mailto:${surel}`}>{surel}</Tautan>
+                </span>
+              ) : null}
             </p>
+
+            {tautan.length > 0 ? (
+              <p className="cv-kontak">
+                {tautan.map((item, i) => (
+                  <span key={item.href}>
+                    {i > 0 ? <span className="cv-pemisah"> | </span> : null}
+                    <Tautan href={item.href}>{labelTautan(item.href, item.nama)}</Tautan>
+                  </span>
+                ))}
+              </p>
+            ) : null}
           </header>
 
           {/* ---------------- Pendidikan ---------------- */}
@@ -198,13 +244,18 @@ export default function DokumenCV() {
               {publications.map((item, i) => (
                 <div key={i} className="cv-entri">
                   <div className="cv-baris">
-                    <span className="cv-utama">{t(item.title)}</span>
+                    {/* Judulnya sendiri yang jadi tautan. Alamat publikasi
+                        sering panjang sekali, dan mencetaknya sebagai baris
+                        tersendiri cuma menghabiskan ruang tanpa menambah
+                        keterangan apa pun buat perekrut. */}
+                    <span className="cv-utama">
+                      <Tautan href={item.url}>{t(item.title)}</Tautan>
+                    </span>
                     <span className="cv-waktu">{t(item.date)}</span>
                   </div>
                   <p className="cv-kedua cv-padat">
                     {[terisi(t(item.venue)), terisi(t(item.role))].filter(Boolean).join(', ')}
                   </p>
-                  {item.url ? <p className="cv-padat">{item.url}</p> : null}
                 </div>
               ))}
             </Bagian>
@@ -242,16 +293,18 @@ export default function DokumenCV() {
               <ul className="cv-daftar">
                 {certifications.map((item, i) => (
                   <li key={i}>
+                    {/* Nama sertifikatnya yang jadi tautan ke bukti kreditnya.
+                        Alamat bukti kredit LinkedIn panjangnya bisa lebih dari
+                        dua ratus huruf, jadi mencetaknya sebagai teks bukan
+                        pilihan. Begini perekrut tetap bisa membuka buktinya
+                        dengan satu klik, dan halamannya tetap bersih. */}
+                    <Tautan href={item.credentialUrl}>{terisi(t(item.name))}</Tautan>
                     {/* Skor ikut dicantumkan karena untuk ujian seperti UKBI dan
                         TOEFL, angkanya justru yang paling dicari perekrut. */}
-                    {[
-                      terisi(t(item.name)),
-                      terisi(t(item.issuer)),
-                      terisi(item.year),
-                      terisi(t(item.score)),
-                    ]
+                    {[terisi(t(item.issuer)), terisi(item.year), terisi(t(item.score))]
                       .filter(Boolean)
-                      .join(', ')}
+                      .map((isi) => `, ${isi}`)
+                      .join('')}
                   </li>
                 ))}
               </ul>
