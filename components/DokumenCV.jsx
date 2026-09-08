@@ -2,7 +2,7 @@
 
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
-import { terisi } from '@/lib/teks-dokumen';
+import { barisInstansi, rapikanTanggal, terisi } from '@/lib/teks-dokumen';
 import { labelTautan } from '@/lib/tautan-cv';
 import DokumenBilah from '@/components/DokumenBilah';
 
@@ -129,6 +129,23 @@ export default function DokumenCV() {
       children
     );
 
+  /*
+    Sertifikasi diurutkan dari tahun terbaru.
+
+    Panduan Harvard meminta setiap bagian disusun terbalik menurut waktu, dari
+    yang paling baru. Urutan di data mengikuti kapan kamu memasukkannya lewat
+    panel, dan hasilnya melompat lompat: 2022, 2024, 2026, 2026, 2026, 2026,
+    2023, dan seterusnya. Diurutkan di sini, bukan di data, supaya kamu tetap
+    bebas menyusunnya sesuka hati di panel.
+
+    Angka tahun diambil dengan parseInt supaya isian seperti "2026" maupun
+    "Mei 2026" sama sama terbaca. Yang tidak berisi angka ditaruh di belakang.
+  */
+  const sertifikatTerurut = [...certifications].sort((a, b) => {
+    const tahun = (x) => Number.parseInt(String(x.year ?? '').match(/\d{4}/)?.[0] ?? '0', 10);
+    return tahun(b) - tahun(a);
+  });
+
   const Bagian = ({ judul, children }) => (
     <section className="cv-bagian">
       <h2 className="cv-judul">{judul}</h2>
@@ -182,9 +199,13 @@ export default function DokumenCV() {
             <Bagian judul={L.pendidikan}>
               {education.map((item, i) => (
                 <div key={i} className="cv-entri">
+                  {/* Sekolah dan kotanya di kiri, tanggal rata kanan, gelar
+                      turun ke baris kedua. Susunan yang sama dengan bagian
+                      Pengalaman di bawah, dan itu memang disengaja: panduan
+                      Harvard memakai satu bentuk entri untuk seluruh CV. */}
                   <div className="cv-baris">
-                    <span className="cv-utama">{t(item.school)}</span>
-                    <span className="cv-waktu">{t(item.period)}</span>
+                    <span className="cv-utama">{barisInstansi(t(item.school), t(item.location))}</span>
+                    <span className="cv-waktu">{rapikanTanggal(t(item.period))}</span>
                   </div>
                   <p className="cv-kedua cv-padat">
                     {[terisi(t(item.degree)), terisi(t(item.gpa))].filter(Boolean).join(', ')}
@@ -208,17 +229,37 @@ export default function DokumenCV() {
                 const jenis = terisi(t(item.type));
                 const bulir = keBulir(t(item.description));
 
+                /*
+                  Jenis dilewati kalau isinya sama dengan jabatannya. Tanpa
+                  penjagaan ini, satu entri di data ini tercetak sebagai
+                  "Magang, Magang".
+                */
+                const sama = jenis.toLowerCase() === terisi(t(item.role)).toLowerCase();
+                const barisKedua = [terisi(t(item.role)), sama ? '' : jenis]
+                  .filter(Boolean)
+                  .join(', ');
+
                 return (
                   <div key={i} className="cv-entri">
-                    {/* Nama instansi ditaruh di baris pertama kalau ada, karena
-                        itu yang paling dicari mesin pelacak maupun perekrut. */}
+                    {/*
+                      Susunan baku Harvard, dan urutannya bukan selera:
+
+                        baris 1 kiri   nama instansi, lalu kotanya
+                        baris 1 kanan  tanggal
+                        baris 2        jabatan
+
+                      Sebelumnya lokasi ikut ditumpuk di baris kedua bersama
+                      jabatan dan jenis kerja. Selain menyalahi susunan, tiga
+                      hal dalam satu baris membuatnya patah ke baris ketiga
+                      dan CV-nya jadi terlihat berantakan.
+                    */}
                     <div className="cv-baris">
-                      <span className="cv-utama">{org || t(item.role)}</span>
-                      <span className="cv-waktu">{t(item.period)}</span>
+                      <span className="cv-utama">
+                        {org ? barisInstansi(org, lokasi) : terisi(t(item.role))}
+                      </span>
+                      <span className="cv-waktu">{rapikanTanggal(t(item.period))}</span>
                     </div>
-                    <p className="cv-kedua cv-padat">
-                      {[org ? t(item.role) : '', jenis, lokasi].filter(Boolean).join(', ')}
-                    </p>
+                    {org && barisKedua ? <p className="cv-kedua cv-padat">{barisKedua}</p> : null}
                     {bulir.length > 0 ? (
                       <ul className="cv-daftar">
                         {bulir.map((b, j) => (
@@ -245,7 +286,7 @@ export default function DokumenCV() {
                     <span className="cv-utama">
                       <Tautan href={item.url}>{t(item.title)}</Tautan>
                     </span>
-                    <span className="cv-waktu">{t(item.date)}</span>
+                    <span className="cv-waktu">{rapikanTanggal(t(item.date))}</span>
                   </div>
                   <p className="cv-kedua cv-padat">
                     {[terisi(t(item.venue)), terisi(t(item.role))].filter(Boolean).join(', ')}
@@ -264,8 +305,8 @@ export default function DokumenCV() {
                 return (
                   <div key={i} className="cv-entri">
                     <div className="cv-baris">
-                      <span className="cv-utama">{org || t(item.role)}</span>
-                      <span className="cv-waktu">{t(item.period)}</span>
+                      <span className="cv-utama">{barisInstansi(org || t(item.role), t(item.location))}</span>
+                      <span className="cv-waktu">{rapikanTanggal(t(item.period))}</span>
                     </div>
                     {org ? <p className="cv-kedua cv-padat">{t(item.role)}</p> : null}
                     {bulir.length > 0 ? (
@@ -285,7 +326,7 @@ export default function DokumenCV() {
           {certifications.length > 0 ? (
             <Bagian judul={L.sertifikasi}>
               <ul className="cv-daftar">
-                {certifications.map((item, i) => (
+                {sertifikatTerurut.map((item, i) => (
                   <li key={i}>
                     {/* Nama sertifikatnya yang jadi tautan ke bukti kreditnya.
                         Alamat bukti kredit LinkedIn panjangnya bisa lebih dari

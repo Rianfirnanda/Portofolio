@@ -483,11 +483,12 @@ collections:
                 fields:
                   - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
-              - label: "Lokasi"
+              - label: "Kota"
                 name: "location"
                 widget: object
                 collapsed: false
                 required: false
+                hint: "Cukup kotanya saja, contoh: Bengkulu, Indonesia. Format CV Harvard menaruhnya tepat setelah nama instansi di baris yang sama, jadi alamat jalan lengkap akan membuat barisnya patah dan CV terlihat berantakan."
                 fields:
                   - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
@@ -740,7 +741,8 @@ collections:
                   - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
               - { label: "Nama sekolah atau kampus", name: "school", widget: "string" }
-              - { label: "Rentang waktu", name: "period", widget: "string" }
+              - { label: "Kota", name: "location", widget: "string", required: false, hint: "Contoh: Bengkulu, Indonesia. Format CV Harvard menaruhnya tepat setelah nama kampus di baris yang sama. Cukup kota, tidak perlu alamat jalan." }
+              - { label: "Rentang waktu", name: "period", widget: "string", hint: "Contoh: 2022 - 2026. Nama bulan boleh ditulis lengkap, nanti disingkat otomatis supaya seragam." }
               - label: "Nilai akhir"
                 name: "gpa"
                 widget: object
@@ -790,6 +792,7 @@ collections:
                 fields:
                   - { label: "Bahasa Indonesia", name: "id", widget: "string", required: true }
                   - { label: "English (opsional)", name: "en", widget: "string", required: false }
+              - { label: "Kota", name: "location", widget: "string", required: false, hint: "Contoh: Bengkulu, Indonesia. Cukup kota, tidak perlu alamat jalan." }
               - { label: "Rentang waktu", name: "period", widget: "string" }
               - label: "Uraian"
                 name: "description"

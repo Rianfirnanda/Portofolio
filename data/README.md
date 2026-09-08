@@ -1269,6 +1269,48 @@ Susunannya mengikuti pola Harvard: identitas ringkas di atas, lalu pendidikan,
 pengalaman, publikasi, kegiatan, sertifikasi, dan keahlian, masing masing dari
 yang terbaru.
 
+### Susunan tiap entri, dan kenapa begitu
+
+Panduan resmi Harvard menentukan satu bentuk entri yang dipakai di seluruh CV:
+
+```
+Nama Instansi, Kota                                    Mar 2026 - sekarang
+Jabatan, Jenis Kerja
+  • butir, diawali kata kerja
+```
+
+Nama instansi dan **kotanya** di kiri baris pertama, **tanggal rata kanan**,
+**jabatan turun ke baris kedua**. Bukan selera, itu yang diminta panduannya.
+
+Tiga hal berjalan sendiri, jadi kamu tidak perlu memikirkannya:
+
+| Yang dijaga | Caranya |
+|---|---|
+| Kota tidak ditulis dua kali | Dilewati kalau isinya sudah termuat di nama instansi |
+| Jenis kerja tidak diulang | Dilewati kalau isinya sama dengan jabatan, dulu tercetak "Magang, Magang" |
+| Nama bulan seragam | Ditulis lengkap di panel pun, dicetak disingkat tiga huruf |
+
+Sertifikasi juga diurutkan sendiri dari tahun terbaru, berapa pun urutan yang
+kamu pakai di panel.
+
+### Kolom Kota, bukan alamat jalan
+
+Kolom **Lokasi** di Pengalaman dan Pendidikan diisi **kota saja**, misalnya
+`Bengkulu, Indonesia`. Bukan alamat jalan.
+
+Alasannya dua. Pertama, CV memang tidak pernah mencantumkan alamat jalan
+tempat kerja. Kedua, alamat panjang membuat baris pertama patah ke baris
+berikutnya, dan tanggal yang harusnya rata kanan jadi terlihat menggantung.
+
+### Memeriksa sendiri apakah masih sesuai standar
+
+Aturan yang bisa diperiksa mesin sudah dibuatkan pemeriksanya. Dua puluh
+pemeriksaan, mulai dari bentuk dokumen, susunan bagian, susunan tiap entri,
+penulisan tanggal, urutan terbalik menurut waktu, sampai ada tidaknya kata
+ganti orang pertama, dan apakah PDF-nya benar benar terbaca mesin pelacak.
+
+Jalankan setelah kamu banyak mengubah isi lewat panel.
+
 Dokumen portofolio sebaliknya. Di sana foto, warna aksen, dan tata letak dua
 kolom untuk sertifikasi justru membantu, karena yang membacanya manusia.
 
