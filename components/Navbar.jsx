@@ -199,8 +199,32 @@ export default function Navbar() {
     );
   };
 
+  /*
+    ------------------------------------------------------------------------
+    BENTUK CIUT DI LAYAR KECIL
+    ------------------------------------------------------------------------
+    Di ponsel, pill navbar selebar layar menutupi bagian atas tulisan yang
+    sedang dibaca. Begitu halaman digulir, pill-nya menciut jadi satu tombol
+    bundar berisi ikon menu saja, menempel di pojok kanan atas. Ditekan sekali,
+    dia memanjang lagi jadi pill utuh beserta laci menunya.
+
+    Hanya berlaku di bawah xl. Setiap kelas di bawah punya pasangan xl: yang
+    mengembalikan bentuk semula, karena di desktop tampilannya memang sudah
+    pas dan tidak perlu diubah.
+  */
+  const ciut = scrolled && !open;
+
+  /* Kendali yang ikut disembunyikan saat menciut. Tombol menu tidak termasuk,
+     justru dialah satu satunya yang tersisa. */
+  const sembunyiSaatCiut = ciut ? 'hidden xl:flex' : 'flex';
+
   return (
-    <header data-print="hide" className="fixed inset-x-0 top-0 z-50 flex justify-center px-4">
+    <header
+      data-print="hide"
+      className={`fixed inset-x-0 top-0 z-50 flex px-4 xl:justify-center ${
+        ciut ? 'justify-end' : 'justify-center'
+      }`}
+    >
       {/* Peredup halaman selama drawer terbuka. */}
       {open ? (
         <button
@@ -240,10 +264,17 @@ export default function Navbar() {
             Sekarang sudutnya berganti seketika, sementara warna, bayangan,
             dan jarak dalamnya tetap berubah halus seperti semula.
           */
-          'glass glass-nav relative z-50 mt-4 w-full max-w-7xl px-3',
+          'glass glass-nav relative z-50 mt-4 max-w-7xl',
           'transition-[background-color,border-color,box-shadow,padding] duration-300',
           open ? 'rounded-3xl' : 'rounded-full',
-          scrolled ? 'py-1.5' : 'py-2.5',
+          /*
+            Saat menciut, lebarnya mengikuti isi, dan isinya tinggal satu
+            tombol. Jarak dalamnya dibuat sama rata supaya hasilnya bundar
+            sempurna, bukan lonjong. Di xl semuanya kembali seperti semula.
+          */
+          ciut
+            ? 'w-auto p-1.5 xl:w-full xl:px-3 xl:py-1.5'
+            : `w-full px-3 ${scrolled ? 'py-1.5' : 'py-2.5'}`,
           // Dipekatkan saat halaman digulir, dan saat menu ponsel terbuka.
           scrolled || open ? 'glass-nav-solid' : '',
         ].join(' ')}
@@ -255,7 +286,7 @@ export default function Navbar() {
           <Link
             href="/"
             aria-label={`${portfolio.profile.name}, ${lang === 'id' ? 'kembali ke beranda' : 'back to home'}`}
-            className="group ml-1 flex shrink-0 items-center gap-2.5 rounded-full py-1 pl-1 pr-2 text-sm font-bold text-fg"
+            className={`group ml-1 shrink-0 items-center gap-2.5 rounded-full py-1 pl-1 pr-2 text-sm font-bold text-fg ${sembunyiSaatCiut}`}
           >
             {usePhotoLogo ? (
               <span className="grid h-8 w-8 place-items-center rounded-full bg-linear-to-br from-accent-1 via-accent-2 to-accent-3 p-[1.5px] transition-transform duration-300 group-hover:scale-105">
@@ -322,7 +353,9 @@ export default function Navbar() {
 
           <div className="flex shrink-0 items-center gap-2">
             {/* Pencarian cepat, juga bisa dibuka dengan Ctrl+K atau Cmd+K */}
-            <CommandPaletteTrigger />
+            <span className={sembunyiSaatCiut}>
+              <CommandPaletteTrigger />
+            </span>
 
             {/*
               Ganti bahasa.
@@ -336,7 +369,7 @@ export default function Navbar() {
               type="button"
               onClick={toggleLang}
               aria-label={`${t(portfolio.ui.switchLanguage)}, ${langLangsung === 'id' ? 'English' : 'Bahasa Indonesia'}`}
-              className="flex items-center gap-1 rounded-full border border-line bg-surface p-0.5 text-xs font-semibold transition-colors hover:border-line-strong"
+              className={`items-center gap-1 rounded-full border border-line bg-surface p-0.5 text-xs font-semibold transition-colors hover:border-line-strong ${sembunyiSaatCiut}`}
             >
               <span
                 className={`rounded-full px-2.5 py-1 transition-colors ${
@@ -354,8 +387,17 @@ export default function Navbar() {
               </span>
             </button>
 
-            {/* Ganti mode terang dan gelap */}
-            <ThemeToggle />
+            {/*
+              Ganti mode terang dan gelap.
+
+              Dibungkus span, bukan diberi kelas 'hidden' langsung, karena
+              tombolnya sendiri sudah memakai 'grid'. Dua kelas display pada
+              satu elemen membuat yang menang bergantung urutan Tailwind
+              menuliskannya, dan itu bukan sesuatu yang pantas ditebak.
+            */}
+            <span className={sembunyiSaatCiut}>
+              <ThemeToggle />
+            </span>
 
             {/* Tombol menu untuk layar kecil */}
             <button

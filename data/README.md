@@ -735,6 +735,47 @@ dipakai sesaat di awal lebarnya berbeda.
 Jadi silakan tambah menu sesukamu. Yang berubah cuma bentuk menunya, bukan
 kerapiannya.
 
+### Di ponsel, navbar menciut saat digulir
+
+Pill navbar selebar layar itu menutupi bagian atas tulisan yang sedang dibaca.
+Karena itu di layar kecil dia berubah bentuk mengikuti posisi gulir:
+
+| Kapan | Bentuknya |
+|---|---|
+| Di puncak halaman | Pill utuh, ada logo, pencarian, bahasa, tema, dan tombol menu |
+| Setelah digulir | Menciut jadi satu tombol bundar berisi ikon menu, menempel di pojok kanan atas |
+| Tombol itu ditekan | Memanjang lagi jadi pill utuh beserta laci menunya |
+| Digulir balik ke puncak | Memanjang sendiri lagi |
+
+Hanya berlaku di bawah lebar 1280 piksel. Di desktop tampilannya tidak berubah
+sama sekali.
+
+Ukuran tombol ciutnya 50 kali 50 piksel, di atas ambang sentuh yang nyaman
+untuk jempol.
+
+### Kepekatan navbar saat digulir
+
+Angkanya sengaja berbeda antara mode terang dan gelap, dan ini bukan
+kelalaian. Yang dicampur adalah warna `--bg`, dan nilainya jauh berbeda:
+
+| Mode | `--bg` | Kepekatan | Hasilnya |
+|---|---|---|---|
+| Terang | `#f5f7fc`, hampir putih | 92 persen | Terasa lapang |
+| Gelap | `#05070f`, hampir hitam | 64 persen | Terasa kaca, bukan papan hitam |
+
+Dulu keduanya 94 persen. Di mode gelap itu membuat navbar terlihat seperti
+balok gelap yang menempel di atas halaman.
+
+Kenapa mode terang tidak ikut dibeningkan sejauh itu: tulisan menu di mode
+terang memakai warna tipis, dan saat navbar lewat di atas foto, kontrasnya
+diukur cuma 3,0 banding 1 pada kepekatan 64 persen. Itu di bawah ambang yang
+bisa dibaca. Di mode gelap pada kepekatan yang sama, kontrasnya 4,9 sampai
+7,5 banding 1, aman.
+
+Kalau kamu ingin mengubahnya, cari `.glass-nav-solid` di `app/globals.css`.
+Turunkan angkanya kalau ingin lebih bening, tapi periksa dulu apakah menunya
+masih terbaca saat navbar lewat di atas foto galeri.
+
 ---
 
 ## 13. Memasang tombol Unduh CV
