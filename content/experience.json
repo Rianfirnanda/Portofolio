@@ -17,7 +17,10 @@
         "id": "Mar 2026 - sekarang",
         "en": "Mar 2026 - present"
       },
-      "location": null,
+      "location": {
+        "id": "Universitas Bengkulu",
+        "en": ""
+      },
       "description": {
         "id": "Saya ditunjuk sebagai perwakilan mahasiswa lewat SK Rektor No. 1664/UN30.9/HK/2026 untuk membantu persiapan akreditasi jurusan 2026. Tugas saya menyusun dokumen Audit Mutu Internal bersama dosen, mulai dari mengumpulkan bukti dukung sampai merapikan narasinya agar sesuai instrumen penjaminan mutu.",
         "en": "I was appointed student representative through Rector Decree No. 1664/UN30.9/HK/2026 to help prepare the 2026 departmental accreditation. My job is drafting the Internal Quality Audit documents with faculty members, from gathering supporting evidence to shaping the narrative so it fits the quality assurance instrument."
@@ -33,7 +36,6 @@
         "en": ""
       },
       "logo": "/media/Logo-UNIB-HD-580x580.png",
-      "highlight": true,
       "files": [
         {
           "label": {
@@ -42,7 +44,8 @@
           },
           "file": "/media/SK TIM AMI JUR. AP 2026 - Copy.pdf"
         }
-      ]
+      ],
+      "highlight": true
     },
     {
       "role": {
@@ -61,7 +64,10 @@
         "id": "Jan 2026 - sekarang",
         "en": "Jan 2026 - present"
       },
-      "location": null,
+      "location": {
+        "id": "Universitas Bengkulu",
+        "en": ""
+      },
       "description": {
         "id": "Menyiapkan berkas akreditasi jurusan dari nol, mulai dari mengumpulkan data internal, menyelaraskannya dengan instrumen akreditasi, sampai menulis narasi dokumennya supaya enak dibaca asesor.",
         "en": "Preparing the departmental accreditation files from scratch, from collecting internal data and aligning it with the accreditation instrument to writing the document narrative so assessors can follow it easily."
@@ -74,6 +80,15 @@
       "image": "/media/128278.jpg",
       "imageAlt": null,
       "logo": "/media/Logo-UNIB-HD-580x580.png",
+      "files": [
+        {
+          "label": {
+            "id": "SK Tim Akreditasi",
+            "en": ""
+          },
+          "file": "/media/SK tim penyusun dokumen akreditasi jurusan AP 2026.pdf"
+        }
+      ],
       "highlight": false
     },
     {
@@ -110,6 +125,7 @@
         "en": "The department official website being managed"
       },
       "logo": "/media/Logo-UNIB-HD-580x580.png",
+      "files": [],
       "highlight": true
     },
     {
@@ -146,6 +162,7 @@
         "en": "Alumni data recap and analysis for the tracer study"
       },
       "logo": "/media/Logo-UNIB-HD-580x580.png",
+      "files": [],
       "highlight": false
     },
     {
@@ -182,6 +199,7 @@
         "en": "Paper presentation session at the SDGs 2030 international conference"
       },
       "logo": "/media/Bali-Sruti-ICON-150x150.jpg",
+      "files": [],
       "highlight": true
     },
     {
@@ -217,6 +235,7 @@
         "en": "Village empowerment program mentoring with DPMD"
       },
       "logo": null,
+      "files": [],
       "highlight": false
     },
     {
@@ -255,6 +274,7 @@
         "en": "Preparing practicum materials at the Public Administration Laboratory"
       },
       "logo": "/media/WhatsApp Image 2026-01-10 at 19.35.21.jpeg",
+      "files": [],
       "highlight": false
     },
     {
@@ -287,6 +307,7 @@
       "image": null,
       "imageAlt": null,
       "logo": "/media/Logo-UNIB-HD-580x580.png",
+      "files": [],
       "highlight": false
     },
     {
@@ -319,6 +340,7 @@
       "image": "/media/1730043733964.jpg",
       "imageAlt": null,
       "logo": "/media/128288.jpg",
+      "files": [],
       "highlight": false
     },
     {
@@ -348,6 +370,7 @@
       "image": "/media/128287.jpg",
       "imageAlt": null,
       "logo": "",
+      "files": [],
       "highlight": false
     },
     {
@@ -376,6 +399,7 @@
       "image": "/media/128286.jpg",
       "imageAlt": null,
       "logo": "",
+      "files": [],
       "highlight": false
     },
     {
@@ -403,6 +427,7 @@
       "image": "/media/128290.jpg",
       "imageAlt": null,
       "logo": "",
+      "files": [],
       "highlight": false
     }
   ]
