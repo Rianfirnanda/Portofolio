@@ -2,6 +2,7 @@
 
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
+import { terisi } from '@/lib/teks-dokumen';
 import { labelTautan } from '@/lib/tautan-cv';
 import DokumenBilah from '@/components/DokumenBilah';
 
@@ -32,13 +33,6 @@ import DokumenBilah from '@/components/DokumenBilah';
  *  lewat panel dan CV ini ikut berubah.
  * =============================================================================
  */
-
-/** Mengabaikan nilai kosong maupun yang cuma berisi tanda hubung. */
-function terisi(teks) {
-  const bersih = String(teks ?? '').trim();
-  if (bersih === '' || /^[-–—.]+$/.test(bersih)) return '';
-  return bersih;
-}
 
 /**
  * Memecah satu paragraf menjadi beberapa butir.
@@ -210,7 +204,7 @@ export default function DokumenCV() {
             <Bagian judul={L.pengalaman}>
               {experience.map((item, i) => {
                 const org = terisi(t(item.org));
-                const lokasi = terisi(item.location);
+                const lokasi = terisi(t(item.location));
                 const jenis = terisi(t(item.type));
                 const bulir = keBulir(t(item.description));
 

@@ -2,6 +2,7 @@
 
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
+import { terisi } from '@/lib/teks-dokumen';
 import { withBasePath } from '@/lib/asset';
 import DokumenBilah from '@/components/DokumenBilah';
 
@@ -26,20 +27,6 @@ import DokumenBilah from '@/components/DokumenBilah';
  *  memperbarui sesuatu lewat panel, berkas ini ikut berubah sendiri.
  * =============================================================================
  */
-
-/**
- * Mengembalikan teks hanya kalau isinya betulan ada.
- *
- * Kolom yang dikosongkan lewat panel kadang tersimpan sebagai tanda hubung
- * atau strip. Di layar itu tidak terlalu mengganggu, tetapi di dokumen resmi
- * baris berisi "-" terlihat seperti kesalahan. Jadi nilai seperti itu
- * diperlakukan sama dengan kosong.
- */
-function terisi(teks) {
-  const bersih = String(teks ?? '').trim();
-  if (bersih === '' || /^[-–—.]+$/.test(bersih)) return '';
-  return bersih;
-}
 
 export default function DokumenPortofolio() {
   const { lang, t } = useLanguage();
@@ -142,7 +129,7 @@ export default function DokumenPortofolio() {
               {experience.map((item, i) => {
                 const org = terisi(t(item.org));
                 const jenis = terisi(t(item.type));
-                const lokasi = terisi(item.location);
+                const lokasi = terisi(t(item.location));
                 const baris2 = [org, jenis, lokasi].filter(Boolean).join(' · ');
 
                 return (

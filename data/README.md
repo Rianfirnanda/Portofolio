@@ -1313,19 +1313,34 @@ lebih pendek, kurangi jumlah media sosial di panel, menu
 keduanya jarang membantu di CV lamaran kerja, sedangkan WhatsApp isinya sama
 dengan nomor telepon yang sudah ada di baris pertama.
 
-### Nama instansi wajib diisi
+### Nama instansi dan lokasi
 
-Ini penting untuk CV. Saat ini seluruh entri di menu **Pengalaman** punya kolom
-**Nama instansi** yang berisi tanda hubung saja. Akibatnya CV kamu memuat
-sembilan peran tanpa satu pun nama tempat bekerja.
+Keduanya penting untuk CV. Bagi perekrut maupun mesin pelacak, nama instansi
+adalah bagian yang paling dicari, dan tanpa itu pengalaman kamu sulit dinilai.
 
-Bagi perekrut maupun mesin pelacak, nama instansi adalah bagian yang paling
-dicari. Tanpa itu, pengalaman kamu sulit dinilai.
+**Nama instansi** sudah terisi di seluruh dua belas entri, jadi bagian ini
+beres. **Lokasi** masih kosong di lima entri. Kalau sempat, isi lewat panel,
+menu **Isi Halaman** lalu **Pengalaman**, misalnya `Bengkulu, Indonesia`.
 
-Buka panel, menu **Isi Halaman**, lalu **Pengalaman**, dan isi kolom
-**Nama instansi** di setiap entri. Contoh isian: `Universitas Bengkulu`,
-`Jurusan Administrasi Publik FISIP Universitas Bengkulu`. Kolom **Lokasi**
-sebaiknya ikut diisi, misalnya `Bengkulu, Indonesia`.
+### Kalau tiba-tiba muncul tulisan "[object Object]"
+
+Artinya ada kolom dua bahasa yang dicetak tanpa lewat penerjemah bahasa lebih
+dulu. Ini pernah terjadi sungguhan: kolom **Lokasi** diubah jadi dua bahasa,
+isinya berubah dari teks biasa menjadi pasangan `{id, en}`, dan di satu baris
+kode penerjemahnya terlewat. Hasilnya CV yang dicetak memuat
+`[object Object]` di setiap entri pengalaman.
+
+Sekarang ada dua lapis penjagaan:
+
+1. Semua tempat yang mencetak kolom itu sudah diperbaiki.
+2. Fungsi pembersih teks di `lib/teks-dokumen.js` diberi jaring pengaman. Kalau
+   suatu saat ada kolom lain yang diubah jadi dua bahasa dan penerjemahnya
+   terlewat lagi, yang tercetak adalah teks Indonesianya, bukan sampah. Salah
+   bahasa masih bisa dimaafkan pembaca, `[object Object]` tidak, apalagi di
+   berkas yang dikirim melamar kerja.
+
+Kalau kamu tetap melihatnya di suatu tempat, laporkan halaman mana, karena
+berarti ada jalur ketiga yang belum tertutup.
 
 ---
 
