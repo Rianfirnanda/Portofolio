@@ -33,6 +33,32 @@
 #  Petunjuk lengkap ada di data/README.md bagian 17.
 # =============================================================================
 
+# -----------------------------------------------------------------------------
+#  TAMPILAN PANELNYA SENDIRI
+# -----------------------------------------------------------------------------
+#  Dua baris ini mengganti tulisan "Sveltia CMS" dan gambar bawaannya yang
+#  muncul di halaman masuk, di pojok kiri atas panel, dan di judul tab peramban.
+#
+#  Tulisannya boleh kamu ganti apa saja, misalnya "Masuk Panel Admin".
+app_title: "Panel Rian Firnanda"
+
+logo:
+  # Sengaja menunjuk ke /icon.png, dan itu bukan berkas sembarangan.
+  #
+  # Berkas itu dibuat ulang otomatis tiap kali situs dibangun, dari gambar yang
+  # kamu pilih di menu Pengaturan Situs > Nama Situs dan SEO > Ikon situs.
+  # Artinya, ganti ikon situsnya lewat panel, dan gambar di halaman masuk panel
+  # ikut berganti sendiri. Tidak ada berkas kedua yang perlu kamu urus, dan
+  # tidak ada yang perlu diedit di sini.
+  #
+  # Lihat scripts/generate-favicon.mjs.
+  src: /icon.png
+
+  # Gambarnya tidak ikut ditampilkan di bilah atas panel. Di halaman masuk dia
+  # besar dan memang jadi penanda, tapi di bilah atas dia cuma menyempitkan
+  # ruang untuk kotak pencarian tanpa memberi keterangan apa pun.
+  show_in_header: false
+
 backend:
   name: github
   repo: Rianfirnanda/Portofolio

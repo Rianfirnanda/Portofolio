@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Panel Konten</title>
+    <title>Panel Rian Firnanda</title>
     <link rel="icon" href="/icon.png" />
     <style>
       /* Tampilan sementara sebelum panelnya selesai dimuat. */
@@ -26,6 +26,22 @@
         max-width: 30rem;
         line-height: 1.75;
       }
+      /*
+        Foto yang sama dengan yang dipakai halaman masuk panel, yaitu
+        /icon.png. Berkas itu dibuat ulang otomatis tiap kali situs dibangun
+        dari gambar yang dipilih di panel, menu Pengaturan Situs > Nama Situs
+        dan SEO > Ikon situs. Jadi mengganti ikon situs sekali sudah mengganti
+        gambar di kedua layar ini sekaligus.
+
+        Dipasang di sini supaya detik detik pertama sebelum panelnya menyala
+        sudah menampilkan wajah yang benar, bukan layar teks kosong.
+      */
+      #memuat img {
+        width: 88px;
+        height: 88px;
+        margin-bottom: 1.25rem;
+        border-radius: 999px;
+      }
       #memuat strong {
         color: #ffffff;
       }
@@ -38,6 +54,7 @@
     <!-- Diganti oleh panel begitu berkasnya selesai dimuat. -->
     <div id="memuat">
       <p>
+        <img src="/icon.png" alt="" width="88" height="88" /><br />
         <strong>Menyiapkan panel konten...</strong><br />
         Kalau pesan ini tidak hilang setelah beberapa detik, buka kembali halaman ini.
         Bila tetap tidak muncul, kontennya masih bisa diubah langsung lewat berkas di

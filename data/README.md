@@ -944,6 +944,33 @@ kamu urus, dan tidak ada konten yang hilang, hanya geraknya yang tidak dijalanka
 Panel ini memungkinkan kamu mengubah seluruh isi situs lewat form biasa, tanpa
 membuka GitHub sama sekali. Bisa dipakai dari laptop maupun ponsel.
 
+### Halaman masuknya memakai fotomu
+
+Halaman masuk panel dan judul tab peramban tidak lagi bertuliskan "Sveltia CMS"
+dengan gambar bawaannya. Sekarang yang tampil foto kamu dan tulisan
+**Panel Rian Firnanda**.
+
+Fotonya **tidak perlu diurus terpisah**. Dia menunjuk ke `/icon.png`, berkas
+yang sudah dibuat ulang otomatis tiap kali situs dibangun dari gambar yang kamu
+pilih di panel, menu **Pengaturan Situs** lalu **Nama Situs dan SEO** lalu
+**Ikon situs**. Jadi ganti ikon situsnya sekali, dan empat tempat ini ikut
+berganti sendiri:
+
+- ikon di tab peramban saat orang membuka situsmu
+- ikon di hasil pencarian Google
+- gambar di halaman masuk panel
+- gambar di layar tunggu sebelum panelnya menyala
+
+Untuk mengganti tulisannya, ubah satu baris `app_title` di bagian atas
+`public/admin/config.yml`. Boleh diisi apa saja, misalnya `Masuk Panel Admin`.
+
+Satu hal yang tidak bisa diubah: ada kedipan singkat di awal, sekitar setengah
+detik, saat panel menampilkan logo bawaannya sendiri sambil membaca
+konfigurasi. Layar itu digambar sebelum berkas konfigurasi sempat dibaca, jadi
+tidak ada pengaturan yang bisa menjangkaunya. Tulisan kecil
+"Powered by Sveltia CMS" di dasar halaman masuk juga tetap ada, itu keterangan
+pustaka yang dipakai.
+
 ### Peta menunya
 
 Menu di sisi kiri disusun **mengikuti urutan bagian di halaman, dari atas ke
