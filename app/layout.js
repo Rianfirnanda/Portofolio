@@ -100,6 +100,28 @@ export const metadata = {
   },
 
   /*
+    IKON SITUS
+
+    Ketiga berkasnya dibuat ulang otomatis tiap kali situs dibangun, dari
+    gambar yang kamu pilih di panel. Lihat scripts/generate-favicon.mjs.
+
+    Alamatnya ditulis di sini apa adanya, tanpa ikut sidik jari yang berubah
+    tiap build. Google mengingat ikon situs berdasarkan alamatnya, jadi alamat
+    yang berganti tiap kali situs dibangun membuatnya terus menganggap ikon itu
+    baru dan tidak kunjung dipakai di hasil pencarian.
+
+    favicon.ico ditaruh paling depan karena itu berkas pertama yang dicari
+    Google, dan ukurannya 48 piksel persis seperti yang mereka minta.
+  */
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
+
+  /*
     Kode verifikasi Google Search Console. Diisi lewat panel di menu
     Pengaturan, bagian "Kode verifikasi Google". Selama masih kosong, tidak ada
     tag apa pun yang ikut ditulis ke halaman.

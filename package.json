@@ -8,13 +8,14 @@
   },
   "scripts": {
     "dev": "next dev",
-    "predev": "node scripts/copy-cms.mjs && node scripts/generate-og.mjs",
+    "predev": "node scripts/copy-cms.mjs && node scripts/generate-favicon.mjs && node scripts/generate-og.mjs",
     "build": "next build",
-    "prebuild": "node scripts/copy-cms.mjs && node scripts/generate-og.mjs",
+    "prebuild": "node scripts/copy-cms.mjs && node scripts/generate-favicon.mjs && node scripts/generate-og.mjs",
     "start": "next start",
     "assets": "node --no-warnings scripts/generate-assets.mjs",
     "placeholders": "node --no-warnings scripts/generate-placeholders.mjs",
     "og": "node scripts/generate-og.mjs",
+    "ikon": "node scripts/generate-favicon.mjs",
     "kecilkan-media": "node scripts/shrink-media.mjs"
   },
   "dependencies": {

@@ -95,6 +95,7 @@ ganda pada setiap nama field.
 30. [Supaya situs tetap ringan di perangkat pengunjung](#30-supaya-situs-tetap-ringan-di-perangkat-pengunjung)
 31. [Setiap bagian halaman depan diubah di mana](#31-setiap-bagian-halaman-depan-diubah-di-mana)
 32. [Keamanan situs](#32-keamanan-situs)
+33. [Mengganti ikon situs](#33-mengganti-ikon-situs)
 
 ---
 
@@ -1744,3 +1745,58 @@ dipasang.
 di memori server, jadi catatannya hilang tiap kali server berganti. Itu bukan
 penjaga mutlak, melainkan lapis yang menaikkan biaya penyalahgunaan sampai tidak
 sepadan. Untuk situs portofolio itu sudah cukup.
+
+
+---
+
+## 33. Mengganti ikon situs
+
+Ikon situs adalah gambar kecil yang muncul di tab peramban, di daftar bookmark,
+dan di sebelah alamat situsmu pada hasil pencarian Google.
+
+### Cara menggantinya
+
+Panel > **Pengaturan Situs** > **Nama Situs dan SEO** > kolom **Ikon situs**.
+
+Unggah satu gambar, simpan, selesai. Ikonnya dibuat ulang otomatis tiap kali
+situs dibangun, jadi tidak ada perintah yang perlu kamu jalankan.
+
+Kosongkan kolom itu kalau kamu ingin memakai foto profilmu, dan itu yang dipakai
+sekarang.
+
+### Yang perlu diperhatikan pada gambarnya
+
+| | |
+|---|---|
+| Bentuk | persegi, minimal 192x192 piksel |
+| Bagian penting | taruh di tengah, karena gambarnya dipotong bulat |
+| Gaya | dipotong bulat lalu diberi bingkai gradien, sama seperti logo di navbar |
+
+Ikon dilihat orang dalam ukuran sangat kecil, sekitar 16 piksel di tab peramban.
+Gambar dengan banyak detail atau tulisan kecil akan jadi bubur. Yang paling
+terbaca biasanya satu bentuk sederhana, satu huruf, atau wajah.
+
+### Kalau ikonnya belum berubah di Google
+
+Google menyimpan ikon situs secara terpisah dari halamannya, dan pembaruannya
+bisa memakan waktu berhari hari sampai berminggu minggu. Yang bisa kamu lakukan:
+
+1. Pastikan dulu ikonnya sudah benar di tab peramban. Kalau di situ sudah
+   berganti, berarti situsnya sudah beres dan tinggal menunggu Google.
+2. Minta Google memeriksa ulang halaman depan lewat Search Console, menu
+   **Inspeksi URL**, lalu **Minta Pengindeksan**.
+3. Tunggu. Tidak ada cara mempercepatnya lebih dari itu.
+
+### Tiga berkas yang dibuat
+
+Kamu tidak perlu menyentuh ini, cuma supaya tahu kalau suatu saat penasaran:
+
+| Berkas | Ukuran | Untuk apa |
+|---|---|---|
+| `public/favicon.ico` | 48x48 | yang pertama dicari Google dan kebanyakan layanan lain |
+| `app/icon.png` | 192x192 | dipakai peramban modern |
+| `app/apple-icon.png` | 180x180 | pintasan di layar utama iPhone |
+
+Ukuran 48 dan 192 bukan angka sembarangan. Google meminta ikon situs berbentuk
+persegi dengan sisi kelipatan 48 piksel. Ikon lama berukuran 512x512, dan 512
+bukan kelipatan 48.

@@ -1421,6 +1421,18 @@ collections:
             widget: object
             fields:
               - { label: "Judul situs", name: "siteTitle", widget: "string", required: true, hint: "Tampil di tab browser dan hasil pencarian Google." }
+
+              # IKON SITUS
+              #
+              # Gambar kecil di tab peramban dan di sebelah alamat situs pada
+              # hasil pencarian Google. Berkasnya dibuat ulang otomatis tiap
+              # kali situs dibangun, lihat scripts/generate-favicon.mjs, jadi
+              # cukup diganti di sini lalu simpan.
+              #
+              # Gambarnya dipotong bulat dan diberi bingkai gradien, sama
+              # seperti logo di navbar, supaya keduanya seragam.
+              - { label: "Ikon situs", name: "favicon", widget: "image", required: false, hint: "Gambar kecil di tab peramban dan di hasil pencarian Google. Sebaiknya persegi, minimal 192x192 piksel, dan bagian pentingnya di tengah karena akan dipotong bulat. Kosongkan untuk memakai foto profilmu." }
+
               - { label: "Kode verifikasi Google", name: "googleVerification", widget: "string", required: false, hint: "Dipakai sekali untuk membuktikan ke Google bahwa situs ini milikmu, lalu boleh dibiarkan terisi selamanya. Tempel hanya kode di dalam tanda kutip content=\"...\" yang diberikan Google Search Console. Kosongkan kalau belum mendaftar. Langkah lengkapnya ada di data/README.md bagian 21." }
               - label: "Deskripsi singkat"
                 name: "description"

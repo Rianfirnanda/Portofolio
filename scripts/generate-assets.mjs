@@ -3,11 +3,12 @@
  *  scripts/generate-assets.mjs
  * =============================================================================
  *
- *  Membuat ulang tiga aset gambar dari satu foto profil:
+ *  Membuat ulang kartu preview dari foto profil:
  *
- *    app/icon.png                favicon lingkaran berbingkai gradien
- *    app/apple-icon.png          ikon untuk layar utama iOS
  *    public/images/og-image.png  kartu preview saat link dibagikan (1200x630)
+ *
+ *  Ikon situs (favicon) dibuat terpisah oleh scripts/generate-favicon.mjs, dan
+ *  itu berjalan sendiri tiap kali situs dibangun.
  *
  *  JALANKAN SETIAP KALI KAMU MENGGANTI FOTO PROFIL:
  *
@@ -62,35 +63,6 @@ async function circlePhoto(size) {
     .composite([{ input: mask, blend: 'dest-in' }])
     .png()
     .toBuffer();
-}
-
-/** Favicon dan ikon iOS: foto lingkaran di dalam bingkai gradien. */
-async function buildIcon(size, outPath) {
-  const ring = size * 0.055;
-  const inner = Math.round(size - ring * 4);
-
-  const backdrop = Buffer.from(`
-    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
-      <defs>
-        <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${A1}"/>
-          <stop offset="55%" stop-color="${A2}"/>
-          <stop offset="100%" stop-color="${A3}"/>
-        </linearGradient>
-      </defs>
-      <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="url(#ring)"/>
-      <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2 - ring}" fill="${meta.themeColorDark}"/>
-    </svg>`);
-
-  const photo = await circlePhoto(inner);
-  const offset = Math.round((size - inner) / 2);
-
-  await sharp(backdrop)
-    .composite([{ input: photo, top: offset, left: offset }])
-    .png()
-    .toFile(outPath);
-
-  console.log(`  ${outPath}  ${size}x${size}`);
 }
 
 /** Kartu preview yang muncul saat tautan situs dibagikan. */
@@ -209,7 +181,15 @@ async function buildOgImage(outPath) {
 }
 
 console.log(`Membuat aset dari ${PHOTO} untuk ${contact.email}`);
-await buildIcon(512, 'app/icon.png');
-await buildIcon(180, 'app/apple-icon.png');
+
+/*
+  Ikon situs TIDAK dibuat di sini lagi.
+
+  Sekarang pembuatannya ada di scripts/generate-favicon.mjs, yang berjalan
+  sendiri tiap kali situs dibangun dan membaca pilihan gambar dari panel.
+  Kalau ikutan dibuat di sini juga, keduanya akan saling menimpa dengan
+  ukuran yang berbeda, dan yang menang tergantung mana yang dijalankan
+  terakhir.
+*/
 await buildOgImage(`public${meta.ogImage}`);
-console.log('Selesai. Jalankan npm run build untuk melihat hasilnya.');
+console.log('Selesai. Ikon situs dibuat terpisah dan otomatis, lihat npm run ikon.');
