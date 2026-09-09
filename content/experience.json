@@ -473,6 +473,46 @@
       "logo": "",
       "files": [],
       "highlight": false
+    },
+    {
+      "role": {
+        "id": "Best Paper Award – 3rd Place",
+        "en": ""
+      },
+      "org": {
+        "id": "Yayasan Bali Sruti",
+        "en": ""
+      },
+      "type": {
+        "id": "Konferensi: The 2nd International Conference Bali Gender Studies Forum (BGSF) 2026",
+        "en": ""
+      },
+      "period": {
+        "id": "Agustus 2026",
+        "en": ""
+      },
+      "location": null,
+      "description": {
+        "id": "Meraih penghargaan Best Paper Award – 3rd Place dalam ajang The 2nd International Conference Bali Gender Studies Forum (BGSF) 2026 yang diselenggarakan oleh Yayasan Bali Sruti pada 28–29 Agustus 2026. Penghargaan ini diperoleh melalui karya ilmiah berjudul “Bridging Design-Reality Gaps in a National Family Information System” pada kategori Population Administration & Digital Inclusion.",
+        "en": ""
+      },
+      "skills": [
+        "Research/Penelitian",
+        "Pengabdian kepada masyarakat"
+      ],
+      "image": "/media/129670.webp",
+      "imageAlt": null,
+      "logo": "/media/Bali-Sruti-ICON-150x150.jpg",
+      "files": [
+        {
+          "label": {
+            "id": "Sertifikat Best Presenter",
+            "en": ""
+          },
+          "file": "/media/030_Rian Firnanda Irsyadani, Abdul Aziz Zulhakim (1).pdf"
+        }
+      ],
+      "highlight": true
     }
   ]
 }
