@@ -151,6 +151,28 @@
         "id": "NOAH & Difki Khalif",
         "en": ""
       }
+    },
+    {
+      "file": "/media/Sherina - Cinta Pertama Dan Terakhir (1).mp3",
+      "title": {
+        "id": "Cinta pertama Dan terakhir",
+        "en": ""
+      },
+      "artist": {
+        "id": "",
+        "en": ""
+      }
+    },
+    {
+      "file": "/media/Taylor Swift - Enchanted.m4a",
+      "title": {
+        "id": "Enchanted",
+        "en": ""
+      },
+      "artist": {
+        "id": "Taylor Swift",
+        "en": ""
+      }
     }
   ]
 }
