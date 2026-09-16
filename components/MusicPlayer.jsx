@@ -177,7 +177,7 @@ export default function MusicPlayer() {
               <button
                 type="button"
                 onClick={() => pindah(-1)}
-                aria-label="Lagu sebelumnya"
+                aria-label={t(portfolio.ui.playerPrev)}
                 className="grid h-9 w-9 place-items-center rounded-full text-muted hover:bg-surface hover:text-fg"
               >
                 <Icon name="skip-back" className="h-4 w-4" />
@@ -193,7 +193,7 @@ export default function MusicPlayer() {
               <button
                 type="button"
                 onClick={() => pindah(1)}
-                aria-label="Lagu berikutnya"
+                aria-label={t(portfolio.ui.playerNext)}
                 className="grid h-9 w-9 place-items-center rounded-full text-muted hover:bg-surface hover:text-fg"
               >
                 <Icon name="skip-forward" className="h-4 w-4" />

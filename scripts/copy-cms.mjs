@@ -14,12 +14,61 @@
  * =============================================================================
  */
 
-import { copyFileSync, existsSync, mkdirSync, statSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const TARGET_DIR = path.join(process.cwd(), 'public', 'admin');
 const TARGET_FILE = path.join(TARGET_DIR, 'sveltia-cms.js');
+const BRANDING_FILE = path.join(TARGET_DIR, 'panel-branding.js');
+
+/**
+ * Menulis judul panel dari isi yang kamu atur sendiri lewat panel.
+ *
+ * -----------------------------------------------------------------------------
+ * KENAPA LEWAT BERKAS TERPISAH, BUKAN LANGSUNG DI config.yml
+ * -----------------------------------------------------------------------------
+ * config.yml itu berkas yang ditulis tangan, delapan puluh kilobita, penuh
+ * komentar penjelasan. Kalau sebuah skrip menimpanya tiap kali situs dibangun,
+ * dua hal buruk terjadi: komentarnya berisiko rusak, dan berkas yang dilacak
+ * Git jadi berubah tiap kali build, sehingga riwayat perubahannya penuh derau.
+ *
+ * Jadi judulnya ditulis ke berkas kecil terpisah yang TIDAK dilacak Git, sama
+ * seperti sveltia-cms.js, lalu dibaca index.html dan diserahkan ke CMS.init().
+ * Penimpaan lewat CMS.init() memang didukung, dan itu sudah diuji langsung di
+ * peramban, bukan diasumsikan.
+ *
+ * Urutan sumbernya:
+ *
+ *   1. meta.panelTitle  kalau kamu mengisinya di panel
+ *   2. nama lengkapmu   "Panel " diikuti profile.name
+ *   3. "Panel Konten"   kalau dua duanya kosong
+ */
+function tulisBranding() {
+  const bacaJson = (berkas) => {
+    try {
+      return JSON.parse(readFileSync(path.join(process.cwd(), 'content', berkas), 'utf8'));
+    } catch {
+      return {};
+    }
+  };
+
+  const meta = bacaJson('settings.json').meta ?? {};
+  const profile = bacaJson('profile.json');
+
+  const isi = (nilai) => (typeof nilai === 'string' && nilai.trim() !== '' ? nilai.trim() : '');
+  const nama = isi(profile.shortName) || isi(profile.name);
+
+  const judul = isi(meta.panelTitle) || (nama ? `Panel ${nama}` : 'Panel Konten');
+
+  writeFileSync(
+    BRANDING_FILE,
+    '/* Dibuat otomatis oleh scripts/copy-cms.mjs. Jangan diedit tangan. */\n' +
+      `window.__PANEL_BRANDING__ = ${JSON.stringify({ app_title: judul })};\n`
+  );
+
+  return judul;
+}
 
 let sourceFile = null;
 
@@ -41,11 +90,18 @@ if (!sourceFile || !existsSync(sourceFile)) {
     '[panel konten] Berkas @sveltia/cms tidak ditemukan. Jalankan npm install lebih dulu.\n' +
       '               Situsnya tetap bisa dibangun, hanya halaman /admin yang belum bisa dibuka.'
   );
+  // Judul panelnya tetap ditulis. Kalau tidak, index.html memuat berkas yang
+  // tidak ada dan panelnya ikut gagal karena alasan yang sama sekali berbeda.
+  mkdirSync(TARGET_DIR, { recursive: true });
+  tulisBranding();
   process.exit(0);
 }
 
 mkdirSync(TARGET_DIR, { recursive: true });
 copyFileSync(sourceFile, TARGET_FILE);
 
+const judul = tulisBranding();
+
 const sizeKb = (statSync(TARGET_FILE).size / 1024).toFixed(0);
 console.log(`[panel konten] public/admin/sveltia-cms.js siap (${sizeKb} KB)`);
+console.log(`[panel konten] judul panel: ${judul}`);

@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
 import { withBasePath } from '@/lib/asset';
 import { adaSuaraLain, jedakanYangLain } from '@/lib/audio-tunggal';
@@ -320,8 +321,8 @@ export default function PostAudio({ audio }) {
           <button
             type="button"
             onClick={mundur}
-            aria-label="Mundur 15 detik"
-            title="Mundur 15 detik"
+            aria-label={t(portfolio.ui.playerBack15)}
+            title={t(portfolio.ui.playerBack15)}
             className="grid h-9 w-9 place-items-center rounded-full text-muted transition-colors hover:bg-surface hover:text-fg"
           >
             <Icon name="rewind-15" className="h-4 w-4" />
@@ -331,7 +332,7 @@ export default function PostAudio({ audio }) {
             type="button"
             onClick={() => setKecepatan((k) => KECEPATAN[(KECEPATAN.indexOf(k) + 1) % KECEPATAN.length])}
             aria-label={`Kecepatan putar ${kecepatan} kali. Klik untuk mengubah.`}
-            title="Kecepatan putar"
+            title={t(portfolio.ui.playerSpeed)}
             className="grid h-9 min-w-11 place-items-center rounded-full px-2 text-xs font-semibold tabular-nums text-muted transition-colors hover:bg-surface hover:text-fg"
           >
             {kecepatan}x

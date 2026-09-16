@@ -39,8 +39,13 @@
 #  Dua baris ini mengganti tulisan "Sveltia CMS" dan gambar bawaannya yang
 #  muncul di halaman masuk, di pojok kiri atas panel, dan di judul tab peramban.
 #
-#  Tulisannya boleh kamu ganti apa saja, misalnya "Masuk Panel Admin".
-app_title: "Panel Rian Firnanda"
+#  Judulnya TIDAK ditulis di sini. Yang dipakai adalah isian di panel, menu
+#  Pengaturan Situs > Nama Situs dan SEO > Judul panel. Kalau kosong, dipakai
+#  namamu. Nilai di bawah cuma cadangan kalau berkas judulnya belum terbuat,
+#  misalnya saat repositori baru di-clone dan npm install belum dijalankan.
+#
+#  Lihat scripts/copy-cms.mjs untuk alasan lengkapnya.
+app_title: "Panel Konten"
 
 logo:
   # Sengaja menunjuk ke /icon.png, dan itu bukan berkas sembarangan.
@@ -188,7 +193,7 @@ collections:
         required: false
         hint: "Pemutar yang menempel di bawah judul artikel, seperti tombol dengarkan di Substack. Kosongkan kalau tulisan ini tidak punya audio."
         fields:
-          - { label: "Berkas audio", name: "file", widget: "file", required: false, accept: ".mp3,.m4a,.ogg,.wav", hint: "Format mp3 paling aman. Kosongkan untuk menyembunyikan pemutarnya." }
+          - { label: "Berkas audio", name: "file", widget: "file", required: false, accept: ".mp3,.m4a,.aac,.wav,.flac,.ogg,.oga,.opus,.weba", hint: "Bisa mp3, m4a, aac, wav, flac, ogg, oga, opus, atau weba. Empat yang pertama paling aman, jalan di semua perangkat termasuk iPhone. Kosongkan untuk menyembunyikan pemutarnya." }
           - label: "Jenis audio"
             name: "kind"
             widget: "select"
@@ -1428,7 +1433,7 @@ collections:
             summary: "{{fields.title.id}}"
             hint: "Musik tidak pernah berbunyi sendiri saat halaman dibuka. Pengunjung yang memilih untuk memutarnya."
             fields:
-              - { label: "Berkas lagu", name: "file", widget: "file", required: true, accept: ".mp3,.m4a,.ogg,.wav", hint: "Format mp3 paling aman, bisa diputar di semua perangkat. Pakai berkas yang memang boleh kamu sebarkan." }
+              - { label: "Berkas lagu", name: "file", widget: "file", required: true, accept: ".mp3,.m4a,.aac,.wav,.flac,.ogg,.oga,.opus,.weba", hint: "Bisa mp3, m4a, aac, wav, flac, ogg, oga, opus, atau weba. Empat yang pertama paling aman, jalan di semua perangkat termasuk iPhone. Pakai berkas yang memang boleh kamu sebarkan." }
               - label: "Judul lagu"
                 name: "title"
                 widget: object
@@ -1537,6 +1542,7 @@ collections:
               - { label: "Kata kunci", name: "keywords", widget: "list", required: false, label_singular: "Kata kunci" }
               - { label: "Gambar preview tautan", name: "ogImage", widget: "image", hint: "Ukuran 1200x630. Dibuat ulang otomatis oleh perintah npm run assets." }
               - { label: "Alamat situs", name: "baseUrl", widget: "string", hint: "Tanpa garis miring di akhir. Contoh: https://rianfirnanda.vercel.app" }
+              - { label: "Judul panel", name: "panelTitle", widget: "string", required: false, hint: "Tulisan yang muncul di halaman masuk panel dan di judul tab peramban. Kosongkan untuk memakai namamu sendiri, misalnya Panel Rian Firnanda. Boleh diisi apa saja, contohnya Masuk Panel Admin." }
               - { label: "Bahasa awal", name: "locale", widget: "select", options: ["id", "en"], hint: "Bahasa yang aktif saat halaman pertama dibuka." }
               - { label: "Tema awal", name: "defaultTheme", widget: "select", options: ["system", "light", "dark"], hint: "system berarti mengikuti pengaturan perangkat pengunjung." }
               - { label: "Warna bilah alamat, mode terang", name: "themeColorLight", widget: "color", required: false }
@@ -1557,6 +1563,668 @@ collections:
               - { label: "Tautan simpan sebagai PDF", name: "printLink", widget: "boolean", default: true, required: false }
               - { label: "Gambar bisa diperbesar", name: "lightbox", widget: "boolean", default: true, required: false }
               - { label: "Pencarian cepat Ctrl+K", name: "commandPalette", widget: "boolean", default: true, required: false }
+
+
+      # ------------------------------------------------------------------------
+      # TULISAN ANTARMUKA
+      #
+      # Semua tulisan kecil yang dipakai situs di luar isi yang kamu tulis
+      # sendiri: nama tombol, ajakan, keterangan untuk pembaca layar. Tujuh
+      # puluh satu tulisan, dua bahasa masing masing.
+      #
+      # Tidak ada yang wajib diisi. Semuanya sudah punya isi bawaan yang masuk
+      # akal, dan menu ini ada supaya kamu bisa mengubahnya kalau mau, bukan
+      # supaya kamu harus. Kolom Inggris boleh dikosongkan, nanti versi
+      # Indonesianya yang dipakai.
+      #
+      # Kolomnya sengaja dilipat semua secara bawaan. Kalau dibuka sekaligus,
+      # tujuh puluh satu kolom sederet lebih sulit ditelusuri daripada
+      # ditelusuri satu per satu lewat judulnya.
+      # ------------------------------------------------------------------------
+      - name: "labels"
+        label: "Tulisan Antarmuka"
+        icon: "translate"
+        file: "content/labels.json"
+        fields:
+          - label: "Buka menu navigasi"
+            name: "openMenu"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tutup menu navigasi"
+            name: "closeMenu"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Lompat ke konten utama"
+            name: "skipToContent"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Kembali ke atas"
+            name: "backToTop"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Gulir ke bawah"
+            name: "scrollCue"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Ganti bahasa"
+            name: "switchLanguage"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Ganti ke mode gelap"
+            name: "themeToDark"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Ganti ke mode terang"
+            name: "themeToLight"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Hubungi Saya"
+            name: "ctaContact"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Unduh CV"
+            name: "ctaResume"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Simpan sebagai PDF"
+            name: "printPage"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tersalin!"
+            name: "copied"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Salin alamat email"
+            name: "copyEmail"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "rights"
+            name: "rights"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "builtWith"
+            name: "builtWith"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Navigasi dan tombol umum"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Lihat semua tulisan"
+            name: "blogAll"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Kembali ke blog"
+            name: "blogBack"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Belum ada tulisan yang terbit. Sebentar lagi ya."
+            name: "blogEmpty"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Saring tulisan berdasarkan topik"
+            name: "blogFilterLabel"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Kembali ke beranda"
+            name: "blogHome"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "menit baca"
+            name: "blogMinutes"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Terbit"
+            name: "blogPublished"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Baca tulisan"
+            name: "blogReadPost"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tulisan lainnya"
+            name: "blogRelated"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Bagikan tulisan ini"
+            name: "blogShare"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Semua"
+            name: "allTag"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Saring proyek berdasarkan tag"
+            name: "filterLabel"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Selengkapnya"
+            name: "readMore"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Ringkas"
+            name: "readLess"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Blog"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Sekilas Kegiatan"
+            name: "galleryTitle"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "foto"
+            name: "galleryCount"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Klik gambar untuk melihat lebih besar"
+            name: "galleryHint"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Muat lebih banyak"
+            name: "galleryMore"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Perbesar gambar"
+            name: "imageZoom"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tutup gambar"
+            name: "lightboxClose"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Unduh berkas ini"
+            name: "lightboxDownload"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Gambar berikutnya"
+            name: "lightboxNext"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Gambar sebelumnya"
+            name: "lightboxPrev"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Putar video"
+            name: "videoPlay"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Peramban kamu belum bisa memutar video ini."
+            name: "videoUnsupported"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Lagu sebelumnya"
+            name: "playerPrev"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Lagu berikutnya"
+            name: "playerNext"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Mundur 15 detik"
+            name: "playerBack15"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Kecepatan putar"
+            name: "playerSpeed"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Galeri, gambar, dan pemutar"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Buka pencarian cepat"
+            name: "searchOpen"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Cari bagian, proyek, atau tulisan..."
+            name: "searchPlaceholder"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tidak ada hasil yang cocok."
+            name: "searchEmpty"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "tutup"
+            name: "searchHintClose"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "pilih"
+            name: "searchHintNavigate"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "buka"
+            name: "searchHintOpen"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tindakan"
+            name: "searchGroupActions"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tulisan"
+            name: "searchGroupPosts"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Proyek"
+            name: "searchGroupProjects"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Bagian halaman"
+            name: "searchGroupSections"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tautan"
+            name: "searchGroupSocial"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Ganti bahasa ID atau EN"
+            name: "searchActionLanguage"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Simpan halaman sebagai PDF"
+            name: "searchActionPrint"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Buka CV"
+            name: "searchActionResume"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Ganti mode terang atau gelap"
+            name: "searchActionTheme"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Salin tautan tulisan"
+            name: "shareCopyLink"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Bagikan lewat perangkat"
+            name: "shareNative"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Unduh"
+            name: "downloadFile"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Berkas terkait"
+            name: "attachments"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "CV untuk lamaran"
+            name: "unduhCV"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Portofolio PDF"
+            name: "unduhPortofolio"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Lihat kredensial"
+            name: "viewCredential"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Baca publikasi"
+            name: "viewPublication"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Baca abstrak"
+            name: "readAbstract"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tutup abstrak"
+            name: "hideAbstract"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Layanan yang Ditawarkan"
+            name: "servicesTitle"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Lainnya"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Bahasa"
+            name: "languagesTitle"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Lainnya"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
 
 
   - { name: "pemisah-masukan", divider: true }

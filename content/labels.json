@@ -266,5 +266,21 @@
   "unduhCV": {
     "id": "CV untuk lamaran",
     "en": "CV for applications"
+  },
+  "playerPrev": {
+    "id": "Lagu sebelumnya",
+    "en": "Previous track"
+  },
+  "playerNext": {
+    "id": "Lagu berikutnya",
+    "en": "Next track"
+  },
+  "playerBack15": {
+    "id": "Mundur 15 detik",
+    "en": "Back 15 seconds"
+  },
+  "playerSpeed": {
+    "id": "Kecepatan putar",
+    "en": "Playback speed"
   }
 }

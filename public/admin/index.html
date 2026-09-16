@@ -4,7 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Panel Rian Firnanda</title>
+    <!--
+      Judul sementara. Diganti sendiri oleh public/admin/panel-branding.js,
+      berkas kecil yang dibuat ulang tiap kali situs dibangun dari nama yang
+      kamu isi di panel. Lihat scripts/copy-cms.mjs.
+    -->
+    <title>Panel Konten</title>
+    <script src="/admin/panel-branding.js"></script>
+    <script>
+      (function () {
+        var judul = (window.__PANEL_BRANDING__ || {}).app_title;
+        if (judul) document.title = judul;
+      })();
+    </script>
     <link rel="icon" href="/icon.png" />
     <style>
       /* Tampilan sementara sebelum panelnya selesai dimuat. */
@@ -92,7 +104,9 @@
         berdasarkan akhiran nama berkas. Lihat lib/markdown.js.
       */
       (function () {
-        var AUDIO = 'mp3|wav|ogg|m4a|aac|flac';
+        // Daftar ini harus sama dengan JENIS_BERKAS.musik di lib/berkas.js dan
+        // dengan dua baris accept di config.yml. Lihat catatan di berkas itu.
+        var AUDIO = 'mp3|m4a|aac|wav|flac|ogg|oga|opus|weba';
         var VIDEO = 'mp4|webm|mov|ogv|m4v';
 
         function amanHtml(teks) {
@@ -192,7 +206,14 @@
           }
         });
 
-        window.CMS.init();
+        /*
+          Judul panel diserahkan lewat penimpaan konfigurasi, bukan ditulis di
+          config.yml, supaya isinya bisa kamu ganti sendiri lewat panel tanpa
+          ada yang perlu diedit tangan. Kalau berkas brandingnya belum ada,
+          CMS.init() dipanggil polos dan app_title di config.yml yang dipakai.
+        */
+        var branding = window.__PANEL_BRANDING__;
+        window.CMS.init(branding ? { config: branding } : undefined);
       })();
     </script>
 

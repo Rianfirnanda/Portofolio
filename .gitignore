@@ -31,6 +31,7 @@ Thumbs.db
 
 # Panel konten disalin dari node_modules setiap build, lihat scripts/copy-cms.mjs
 /public/admin/sveltia-cms.js
+/public/admin/panel-branding.js
 
 # Gambar yang diunggah lewat panel konten TIDAK diabaikan.
 # Berkas di public/images/uploads/ sengaja ikut masuk ke Git supaya jadi

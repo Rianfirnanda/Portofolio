@@ -375,7 +375,7 @@ Panel, buka tulisannya, lalu bagian **Audio pendamping**:
 
 | Kolom | Keterangan |
 |---|---|
-| Berkas audio | Unggah `mp3` atau `wav`. Kosongkan untuk menyembunyikan pemutarnya. |
+| Berkas audio | Sembilan format, lihat tabel di bawah. Kosongkan untuk menyembunyikan pemutarnya. |
 | Jenis audio | Menentukan ikon dan tulisan bawaannya |
 | Judul pemutar | Kosongkan untuk memakai tulisan bawaan sesuai jenis |
 | Putar sendiri saat tulisan dibuka | Menyala secara bawaan. Baca bagian di bawah ini dulu. |
@@ -394,6 +394,23 @@ Tiga pilihan jenis, masing masing punya tulisan bawaan sendiri:
 Pemutarnya punya tombol mundur 15 detik dan pengatur kecepatan 1x sampai 2x,
 seperti aplikasi podcast pada umumnya. Tulisan yang punya audio juga diberi
 penanda kecil di kartu daftar blog, jadi pembaca tahu sebelum membukanya.
+
+### Format lagu yang bisa diunggah
+
+Bukan cuma mp3. Sembilan format diterima, dan berlaku sama untuk audio
+pendamping blog maupun pemutar musik di pojok:
+
+| Format | Catatan |
+|---|---|
+| `mp3` `m4a` `aac` `wav` | Paling aman. Jalan di semua peramban, termasuk Safari dan iPhone |
+| `flac` | Jalan di semua peramban modern. Berkasnya besar, boros kuota pembaca |
+| `ogg` `oga` `opus` `weba` | Chrome, Firefox, Edge. Safari lama belum tentu bisa |
+
+Kalau ragu, pakai salah satu dari empat yang pertama. `m4a` sangat umum karena
+itu format bawaan iTunes dan banyak aplikasi perekam di iPhone.
+
+Format yang sama juga berlaku untuk tombol **Audio** saat menyisipkan lagu ke
+tengah tulisan.
 
 ### Memilih potongan lagunya
 
@@ -961,8 +978,19 @@ berganti sendiri:
 - gambar di halaman masuk panel
 - gambar di layar tunggu sebelum panelnya menyala
 
-Untuk mengganti tulisannya, ubah satu baris `app_title` di bagian atas
-`public/admin/config.yml`. Boleh diisi apa saja, misalnya `Masuk Panel Admin`.
+Tulisannya juga tidak ditanam di kode. Bawaannya mengikuti **namamu**, jadi
+ganti nama di panel dan judulnya ikut. Kalau ingin tulisan yang berbeda sama
+sekali, isi kolom **Judul panel** di menu **Pengaturan Situs** lalu
+**Nama Situs dan SEO**, misalnya `Masuk Panel Admin`.
+
+Urutan yang dipakai:
+
+| Urutan | Sumbernya |
+|---|---|
+| 1 | Kolom **Judul panel**, kalau kamu isi |
+| 2 | "Panel " diikuti nama panggilanmu |
+| 3 | "Panel " diikuti nama lengkapmu |
+| 4 | "Panel Konten", kalau semuanya kosong |
 
 Satu hal yang tidak bisa diubah: ada kedipan singkat di awal, sekitar setengah
 detik, saat panel menampilkan logo bawaannya sendiri sambil membaca
@@ -970,6 +998,20 @@ konfigurasi. Layar itu digambar sebelum berkas konfigurasi sempat dibaca, jadi
 tidak ada pengaturan yang bisa menjangkaunya. Tulisan kecil
 "Powered by Sveltia CMS" di dasar halaman masuk juga tetap ada, itu keterangan
 pustaka yang dipakai.
+
+### Semua tulisan kecil juga bisa diganti
+
+Menu **Pengaturan Situs** lalu **Tulisan Antarmuka** memuat **71 tulisan** yang
+dipakai situs di luar isi yang kamu tulis sendiri: nama tombol, ajakan,
+keterangan untuk pembaca layar. Dua bahasa masing masing.
+
+Tidak ada yang wajib diisi. Semuanya sudah punya isi bawaan yang masuk akal,
+dan menu itu ada supaya kamu **bisa** mengubahnya, bukan supaya kamu harus.
+Kolom Inggris boleh dikosongkan, nanti versi Indonesianya yang dipakai.
+
+Dikelompokkan jadi enam supaya bisa ditelusuri: Navigasi dan tombol umum, Blog,
+Galeri dan gambar dan pemutar, Pencarian cepat, Berbagi dan unduhan, dan
+Lainnya.
 
 ### Peta menunya
 
