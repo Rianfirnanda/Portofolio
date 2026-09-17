@@ -45,7 +45,7 @@
       "accentLinkDark": "",
       "background": "tenang",
       "radius": "bulat",
-      "blur": 0,
+      "blur": 5,
       "blobSpeed": 34,
       "headingStyle": "solid"
     }
