@@ -106,12 +106,23 @@ export default function MeshBackground() {
         style={{ opacity: 'var(--noise-opacity)' }}
       />
 
-      {/* 7. Vignette */}
+      {/*
+        7. Vignette
+
+        Dimulai dari 52 persen, bukan 58, dan warnanya dibuat lebih pekat.
+
+        Lapisan blob di atas bersifat fixed, jadi warnanya ikut ke mana pun
+        halaman digulir dan tetap terlihat di belakang setiap bagian. Tanpa
+        bingkai gelap di pinggir, seluruh halaman terasa diwarnai satu sapuan
+        gradien yang sama dari atas sampai bawah. Vignette yang sedikit lebih
+        rapat mengembalikan warna itu ke tengah layar, tempat isi halaman
+        berada, dan membuat tepi layar kembali tenang.
+      */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(100% 100% at 50% 50%, transparent 58%, color-mix(in oklab, var(--bg) 92%, transparent) 100%)',
+            'radial-gradient(115% 105% at 50% 45%, transparent 52%, color-mix(in oklab, var(--bg) 96%, transparent) 100%)',
         }}
       />
     </div>

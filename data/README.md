@@ -76,7 +76,7 @@ ganda pada setiap nama field.
 11. [Menyetel intensitas latar belakang](#11-menyetel-intensitas-latar-belakang)
 12. [Menambah atau menghapus item menu](#12-menambah-atau-menghapus-item-menu)
 13. [Memasang tombol Unduh CV](#13-memasang-tombol-unduh-cv)
-14. [Menyembunyikan satu section](#14-menyembunyikan-satu-section)
+14. [Menyembunyikan dan mengurutkan bagian halaman](#14-menyembunyikan-dan-mengurutkan-bagian-halaman)
 15. [Daftar nama ikon yang tersedia](#15-daftar-nama-ikon-yang-tersedia)
 16. [Menyalakan dan mematikan sentuhan interaktif](#16-menyalakan-dan-mematikan-sentuhan-interaktif)
 17. [Panel konten di /admin](#17-panel-konten-di-admin)
@@ -96,6 +96,8 @@ ganda pada setiap nama field.
 31. [Setiap bagian halaman depan diubah di mana](#31-setiap-bagian-halaman-depan-diubah-di-mana)
 32. [Keamanan situs](#32-keamanan-situs)
 33. [Mengganti ikon situs](#33-mengganti-ikon-situs)
+34. [Mengatur bentuk, jarak, dan huruf dari panel](#34-mengatur-bentuk-jarak-dan-huruf-dari-panel)
+35. [Empat perkakas kecil untuk pengunjung](#35-empat-perkakas-kecil-untuk-pengunjung)
 
 ---
 
@@ -610,47 +612,39 @@ bagian Hero tidak terlalu ramai.
 
 ## 9. Mengganti warna aksen
 
-Buka `app/globals.css`, cari blok `:root` di bagian paling atas, lalu ubah
-tiga baris ini:
+**Sekarang lewat panel, tanpa menyentuh kode sama sekali.**
+Buka **Pengaturan Situs > Nama Situs dan SEO > Tampilan Visual**, lalu pilih
+salah satu palet di kolom **Palet warna**:
 
-```css
-:root {
-  --accent-1: #6366f1; /* indigo */
-  --accent-2: #a855f7; /* violet */
-  --accent-3: #06b6d4; /* cyan   */
-}
-```
+| Palet | Kesannya |
+| --- | --- |
+| Indigo | Ungu kebiruan, bawaan situs ini |
+| Samudra | Biru toska, tenang dan profesional |
+| Zamrud | Hijau segar |
+| Senja | Merah jambu ke oranye, hangat |
+| Emas | Kuning jingga, berani |
+| Anggur | Ungu ke merah muda |
+| Hutan | Hijau tua ke toska |
+| Baja | Abu abu kebiruan, paling kalem |
 
-Ketiganya otomatis dipakai oleh gradien nama, blob latar, border kartu unggulan,
-chip, tombol, dan seluruh efek glow, di kedua mode.
+Mau warna sendiri? Pilih **Racik sendiri**, lalu isi tiga kolom warna di
+bawahnya. Warna 1 dipakai tombol dan awal gradien, Warna 2 untuk tengah gradien
+dan sorotan kartu, Warna 3 untuk akhir gradien.
 
-Contoh palet lain yang tinggal ditempel:
+### Warna tulisan beraksen dihitung sendiri, tidak perlu kamu urus
 
-```css
-/* Hijau tosca */
---accent-1: #10b981;
---accent-2: #14b8a6;
---accent-3: #a3e635;
+Warna aksen juga dipakai sebagai warna tulisan kecil, misalnya label
+`03 / KARYA` di atas judul bagian. Warna pilihan bebas tidak dijamin terbaca:
+kuning cerah di atas latar putih rasio kontrasnya cuma sekitar 1,5 banding 1,
+padahal standar keterbacaan WCAG AA meminta minimal 4,5.
 
-/* Merah muda hangat */
---accent-1: #f43f5e;
---accent-2: #d946ef;
---accent-3: #fb923c;
+Karena itu warnanya tidak dipakai mentah. `lib/tema.js` menggelapkan atau
+menerangkannya sedikit demi sedikit sampai kontrasnya mencapai 6,5 banding 1,
+dihitung saat situs dibangun. Jadi kamu boleh memilih warna apa pun, termasuk
+warna yang secara teori tidak terbaca, dan tulisannya tetap terbaca.
 
-/* Biru laut */
---accent-1: #3b82f6;
---accent-2: #0ea5e9;
---accent-3: #2dd4bf;
-```
-
-Satu hal lagi. Warna teks beraksen diatur terpisah agar tetap terbaca di kedua
-mode, yaitu `--accent-fg`. Di mode terang nilainya gelap, di mode gelap nilainya
-cerah. Kalau kamu mengganti palet, sesuaikan juga dua baris ini:
-
-```css
-:root                { --accent-fg: #6d28d9; }  /* mode terang, harus gelap */
-[data-theme='dark']  { --accent-fg: #22d3ee; }  /* mode gelap, harus cerah  */
-```
+Yang berubah hanya warna TULISAN kecilnya. Warna tombol, gradien, dan blob
+latar tetap persis seperti yang kamu pilih.
 
 ---
 
@@ -686,31 +680,23 @@ themeColorDark: '#05070f',
 ## 11. Menyetel intensitas latar belakang
 
 Latar belakang terdiri dari beberapa lapisan: blob warna, garis grid, titik
-tekstur, dan butiran noise. Kepekatannya diatur di `app/globals.css` dan
-nilainya berbeda antara mode terang dan gelap.
+tekstur, dan butiran noise. Semuanya diatur dari panel, di
+**Pengaturan Situs > Nama Situs dan SEO > Tampilan Visual**:
 
-```css
-:root {                     /* mode terang */
-  --blob-opacity: 0.17;     /* warna blob, naikkan agar lebih berwarna */
-  --grid-opacity: 0.045;    /* garis grid */
-  --dot-opacity: 0.05;      /* titik tekstur */
-  --noise-opacity: 0.03;    /* butiran halus */
-}
+| Kolom | Gunanya |
+| --- | --- |
+| **Warna latar** | Nada dasar halaman: Netral, Hangat, Dingin, Pekat, atau Lembut. Satu pilihan mengatur mode terang dan gelap sekaligus |
+| **Ramainya latar** | Minimal (hampir polos), Normal, atau Kaya. Mengatur keempat lapisan sekaligus |
+| **Kecepatan gerak latar** | Dalam detik. Semakin besar semakin tenang |
 
-[data-theme='dark'] {       /* mode gelap */
-  --blob-opacity: 0.22;
-  --grid-opacity: 0.05;
-  --dot-opacity: 0.06;
-  --noise-opacity: 0.05;
-}
-```
+Semua animasi latar otomatis berhenti untuk pengunjung yang mengaktifkan
+pengaturan "kurangi gerakan" di perangkatnya. Itu perilaku bawaan, tidak ada
+yang perlu kamu atur.
 
-Isi `0` untuk mematikan satu lapisan sepenuhnya. Ingin latar benar-benar polos?
-Set keempatnya ke `0`.
-
-Kecepatan gerak blob diatur oleh `--blob-speed: 30s`. Perbesar angkanya agar
-geraknya lebih tenang. Semua animasi ini otomatis berhenti untuk pengunjung yang
-mengaktifkan pengaturan "kurangi gerakan" di perangkatnya.
+Kalau kamu memang ingin menyetel tiap lapisan satu per satu, nilainya masih ada
+di `app/globals.css` sebagai `--blob-opacity`, `--grid-opacity`,
+`--dot-opacity`, dan `--noise-opacity`. Tetapi ingat: nilai dari panel ditulis
+belakangan dan akan menimpanya.
 
 ---
 
@@ -810,21 +796,37 @@ Isi `resumeUrl: ''` untuk menyembunyikan tombolnya sama sekali.
 
 ---
 
-## 14. Menyembunyikan satu section
+## 14. Menyembunyikan dan mengurutkan bagian halaman
 
-Kosongkan array-nya. Section beserta judulnya hilang sepenuhnya.
+**Sekarang lewat panel.** Buka
+**Pengaturan Situs > Nama Situs dan SEO > Urutan Bagian Halaman**.
+
+- **Seret barisnya** untuk mengubah urutan tampil di halaman depan.
+- **Hilangkan centang "Tampilkan"** untuk menyembunyikan satu bagian tanpa
+  menghapus isinya. Isinya tetap tersimpan utuh dan tinggal dicentang lagi
+  kapan pun.
+
+Menu navigasi ikut menyesuaikan sendiri. Bagian yang kamu sembunyikan otomatis
+dilepas dari navbar dan footer, jadi tidak pernah ada tombol yang menunjuk ke
+bagian yang sudah tidak ada di halaman. Menu yang menunjuk ke halaman lain,
+misalnya Blog, tidak ikut terlepas karena halamannya memang tetap bisa dibuka.
+
+Bagian yang belum tercantum di daftar itu TIDAK hilang. Dia disusulkan di
+belakang dengan urutan bawaannya, jadi daftar yang belum sempat kamu perbarui
+tidak akan pernah membuat isi situs lenyap diam diam.
+
+### Cara lama masih berlaku
+
+Mengosongkan datanya juga tetap menyembunyikan bagiannya, karena tiap bagian
+memeriksa datanya sendiri:
 
 ```js
-publications: [],   // section Publikasi hilang
-volunteering: [],   // section Kesukarelawanan hilang
-projects: [],       // section Proyek hilang
+publications: [],   // bagian Publikasi hilang
+volunteering: [],   // bagian Kesukarelawanan hilang
 ```
 
-Untuk menyembunyikan blog, isi `draft: true` pada semua tulisan di
-`data/posts.js`, lalu hapus baris blog dari array `nav`.
-
-Jangan lupa menghapus barisnya juga dari `nav` agar menu tidak menunjuk ke
-section yang sudah tidak ada.
+Untuk menyembunyikan blog, isi `draft: true` pada semua tulisan, atau cukup
+hilangkan centangnya di Urutan Bagian Halaman.
 
 ---
 
@@ -900,6 +902,10 @@ appearance: {
   printLink: true,       // tautan simpan sebagai PDF di footer
   lightbox: true,        // gambar bisa diklik untuk dibuka besar
   commandPalette: true,  // pencarian cepat Ctrl+K atau Cmd+K
+  sectionRail: true,     // rel penunjuk bagian di tepi kiri layar lebar
+  headingAnchor: true,   // tombol salin tautan di samping judul bagian
+  saveContact: true,     // tombol simpan kontak .vcf di bagian Kontak
+  projectSearch: true,   // kolom pencarian di bagian Proyek
 }
 ```
 
@@ -915,6 +921,10 @@ appearance: {
 | `printLink` | Tautan "Simpan sebagai PDF" di footer disembunyikan |
 | `lightbox` | Gambar tetap tampil, hanya tidak bisa diklik untuk diperbesar |
 | `commandPalette` | Tombol Ctrl+K di navbar dan pintasan keyboardnya dimatikan |
+| `sectionRail` | Rel penunjuk bagian di tepi kiri layar lebar tidak dirender |
+| `headingAnchor` | Tombol salin tautan di samping judul bagian disembunyikan |
+| `saveContact` | Tombol "Simpan kontak" di bagian Kontak dilepas |
+| `projectSearch` | Kolom pencarian di bagian Proyek dilepas, tombol filter tag tetap ada |
 
 ### Pencarian cepat Ctrl+K
 
@@ -1001,7 +1011,7 @@ pustaka yang dipakai.
 
 ### Semua tulisan kecil juga bisa diganti
 
-Menu **Pengaturan Situs** lalu **Tulisan Antarmuka** memuat **71 tulisan** yang
+Menu **Pengaturan Situs** lalu **Tulisan Antarmuka** memuat **79 tulisan** yang
 dipakai situs di luar isi yang kamu tulis sendiri: nama tombol, ajakan,
 keterangan untuk pembaca layar. Dua bahasa masing masing.
 
@@ -2100,3 +2110,80 @@ Kamu tidak perlu menyentuh ini, cuma supaya tahu kalau suatu saat penasaran:
 Ukuran 48 dan 192 bukan angka sembarangan. Google meminta ikon situs berbentuk
 persegi dengan sisi kelipatan 48 piksel. Ikon lama berukuran 512x512, dan 512
 bukan kelipatan 48.
+
+---
+
+## 34. Mengatur bentuk, jarak, dan huruf dari panel
+
+Semua ada di **Pengaturan Situs > Nama Situs dan SEO > Tampilan Visual**.
+Tidak ada satu pun yang bisa merusak situs: kolom yang dikosongkan memakai
+nilai bawaan.
+
+| Kolom | Gunanya | Bawaan |
+| --- | --- | --- |
+| **Sudut kartu** | Tajam, Sedang, Lembut, atau Bulat | Sedang |
+| **Ketebalan buram kaca** | 0 sampai 48 piksel. 0 berarti kaca bening tanpa buram | 20 |
+| **Kepadatan halaman** | Rapat, Nyaman, atau Lapang. Mengatur jarak atas bawah tiap bagian | Nyaman |
+| **Lebar isi halaman** | Sedang, Lebar, atau Penuh | Lebar |
+| **Huruf judul** | Sans, Serif, atau Mono | Sans |
+| **Gaya nama di halaman depan** | Gradien berjalan, atau Polos satu warna | Gradien |
+| **Ukuran huruf** | 88 sampai 118 persen | 100 |
+
+Tiga catatan yang layak diketahui sebelum menggeser angkanya.
+
+**Ukuran huruf menskalakan jarak juga, bukan cuma tulisannya.** Angka itu
+mengubah ukuran dasar seluruh halaman, dan karena semua jarak di situs ini
+ditulis relatif terhadap ukuran itu, tata letaknya tetap seimbang di angka
+berapa pun. Jadi 110 persen bukan berarti tulisan besar berdesakan di kotak
+yang ukurannya tetap.
+
+**Huruf judul tidak menambah waktu muat.** Ketiga pilihannya memakai huruf
+bawaan perangkat pengunjung, tidak ada berkas yang perlu diunduh. Serif memberi
+kesan terbitan cetak, Mono memberi kesan teknis, dan keduanya seketika
+membedakan situs ini dari templat yang semua judulnya memakai satu huruf sans
+yang sama.
+
+**Buram di atas 32 piksel sebaiknya dihindari.** Di angka itu isi halaman yang
+lewat di belakang kaca sudah melebur jadi bidang warna rata. Kesan kacanya
+justru hilang, karena kaca yang tidak memperlihatkan apa apa di belakangnya
+sama saja dengan panel berwarna biasa.
+
+---
+
+## 35. Empat perkakas kecil untuk pengunjung
+
+Keempatnya baru, dan semuanya bisa dimatikan dari
+**Pengaturan Situs > Sentuhan Interaktif**.
+
+### Rel penunjuk bagian
+
+Deretan garis kecil di tepi kiri layar lebar. Menunjukkan sudah sampai bagian
+mana pembaca, dan bisa diklik untuk melompat. Namanya muncul saat kursor
+mendekat. Hanya tampil di layar 1280 piksel ke atas, tempat ruang kosong di
+tepi memang ada, dan tidak dirender sama sekali di ponsel.
+
+### Salin tautan ke satu bagian
+
+Tombol kecil di samping judul bagian, muncul saat kursor mendekat. Berguna saat
+seseorang ingin mengirimkan satu bagian saja, misalnya daftar sertifikasi,
+tanpa menyuruh penerimanya menggulir sendiri. Di layar sentuh tombol ini tidak
+ditampilkan, karena tidak ada kursor yang bisa mendekat.
+
+### Simpan kontak
+
+Tombol di bagian Kontak yang mengunduh satu berkas `.vcf`. Dibuka sekali, dan
+nama, jabatan, nomor, email, alamat situs, serta seluruh tautan sosialmu
+langsung masuk ke buku alamat pengunjung. Berkasnya dirakit di peramban mereka
+dari isi panel, jadi tidak ada data yang dikirim ke mana pun, dan isinya selalu
+ikut ter-update begitu kamu mengubah kontak di panel.
+
+Formatnya vCard 3.0, bukan 4.0, karena 3.0 yang dibaca semua buku alamat yang
+umum dipakai, termasuk bawaan Android, iOS, dan Outlook.
+
+### Pencarian di bagian Proyek
+
+Muncul sendiri begitu proyekmu berjumlah lima atau lebih. Mencari sekaligus di
+nama proyek, instansi, deskripsi, dan tag, dalam bahasa yang sedang aktif.
+Kalau tidak ada yang cocok, pengunjung diberi tahu dan diberi satu tombol untuk
+membersihkan pencariannya, bukan dibiarkan menatap ruang kosong.
+

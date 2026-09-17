@@ -1563,6 +1563,158 @@ collections:
               - { label: "Tautan simpan sebagai PDF", name: "printLink", widget: "boolean", default: true, required: false }
               - { label: "Gambar bisa diperbesar", name: "lightbox", widget: "boolean", default: true, required: false }
               - { label: "Pencarian cepat Ctrl+K", name: "commandPalette", widget: "boolean", default: true, required: false }
+              - { label: "Rel penunjuk bagian di tepi kiri", name: "sectionRail", widget: "boolean", default: true, required: false, hint: "Deretan garis kecil di tepi kiri layar lebar yang menunjukkan sudah sampai bagian mana pembaca, dan bisa diklik untuk melompat. Tidak tampil di ponsel." }
+              - { label: "Tombol salin tautan di judul bagian", name: "headingAnchor", widget: "boolean", default: true, required: false, hint: "Muncul saat kursor mendekati judul bagian. Berguna untuk mengirim satu bagian saja ke orang lain." }
+              - { label: "Tombol simpan kontak (.vcf)", name: "saveContact", widget: "boolean", default: true, required: false, hint: "Di bagian Kontak. Pengunjung mengunduh satu berkas kartu kontak, lalu nama, nomor, email, dan tautan profilmu langsung masuk ke buku alamat mereka." }
+              - { label: "Kolom pencarian di bagian Proyek", name: "projectSearch", widget: "boolean", default: true, required: false, hint: "Baru muncul sendiri kalau proyekmu sudah lima atau lebih." }
+
+          # ----------------------------------------------------------------
+          # TAMPILAN VISUAL
+          #
+          # Warna, bentuk, dan jarak seluruh situs. Dulu semuanya ditulis mati
+          # di app/globals.css dan cuma bisa diubah lewat kode. Sekarang isinya
+          # diterjemahkan lib/tema.js jadi variabel CSS saat situs dibangun.
+          #
+          # Tidak ada yang bisa rusak dari sini. Kolom yang dikosongkan memakai
+          # nilai bawaan, dan warna tulisan aksen dihitung ulang otomatis supaya
+          # kontrasnya tetap lolos standar keterbacaan WCAG AA, berapa pun warna
+          # yang kamu pilih.
+          # ----------------------------------------------------------------
+          - label: "Tampilan Visual"
+            name: "theme"
+            widget: object
+            collapsed: true
+            hint: "Warna, sudut, jarak, dan ukuran huruf seluruh situs. Ubah satu, seluruh halaman ikut."
+            fields:
+              - label: "Palet warna"
+                name: "preset"
+                widget: "select"
+                default: "indigo"
+                options:
+                  - { label: "Indigo  ungu kebiruan (bawaan)", value: "indigo" }
+                  - { label: "Samudra  biru toska", value: "samudra" }
+                  - { label: "Zamrud  hijau segar", value: "zamrud" }
+                  - { label: "Senja  merah jambu oranye", value: "senja" }
+                  - { label: "Emas  kuning jingga", value: "emas" }
+                  - { label: "Anggur  ungu merah muda", value: "anggur" }
+                  - { label: "Hutan  hijau tua toska", value: "hutan" }
+                  - { label: "Baja  abu abu biru, paling kalem", value: "baja" }
+                  - { label: "Racik sendiri  pakai tiga warna di bawah", value: "kustom" }
+                hint: "Pilih satu palet siap pakai. Tiga kolom warna di bawah hanya dipakai kalau kamu memilih Racik sendiri."
+              - { label: "Warna 1 (racikan sendiri)", name: "accent1", widget: "color", required: false, hint: "Warna utama. Dipakai tombol, ikon, dan awal semua gradien." }
+              - { label: "Warna 2 (racikan sendiri)", name: "accent2", widget: "color", required: false, hint: "Warna tengah gradien, dan warna sorotan kartu." }
+              - { label: "Warna 3 (racikan sendiri)", name: "accent3", widget: "color", required: false, hint: "Warna akhir gradien." }
+              - label: "Warna latar"
+                name: "latar"
+                widget: "select"
+                default: "netral"
+                options:
+                  - { label: "Netral  biru keabuan (bawaan)", value: "netral" }
+                  - { label: "Hangat  krem kecokelatan", value: "hangat" }
+                  - { label: "Dingin  biru muda", value: "dingin" }
+                  - { label: "Pekat  mode gelapnya hampir hitam", value: "pekat" }
+                  - { label: "Lembut  mode gelapnya lebih terang", value: "lembut" }
+              - label: "Ramainya latar"
+                name: "intensitasLatar"
+                widget: "select"
+                default: "normal"
+                options:
+                  - { label: "Minimal  hampir polos", value: "minimal" }
+                  - { label: "Normal (bawaan)", value: "normal" }
+                  - { label: "Kaya  warna latarnya lebih terasa", value: "kaya" }
+                hint: "Mengatur pekatnya blob warna, garis grid, titik, dan butiran di latar sekaligus."
+              - label: "Sudut kartu"
+                name: "sudut"
+                widget: "select"
+                default: "sedang"
+                options:
+                  - { label: "Tajam  nyaris kotak", value: "tajam" }
+                  - { label: "Sedang (bawaan)", value: "sedang" }
+                  - { label: "Lembut", value: "lembut" }
+                  - { label: "Bulat  paling membulat", value: "bulat" }
+              - { label: "Ketebalan buram kaca", name: "blur", widget: "number", value_type: "int", min: 0, max: 48, step: 2, default: 20, required: false, hint: "0 berarti kaca bening tanpa buram sama sekali. 20 nilai bawaan. Di atas 32 isi di belakangnya jadi nyaris tidak terbaca." }
+              - label: "Kepadatan halaman"
+                name: "kepadatan"
+                widget: "select"
+                default: "nyaman"
+                options:
+                  - { label: "Rapat  halaman jadi lebih pendek", value: "rapat" }
+                  - { label: "Nyaman (bawaan)", value: "nyaman" }
+                  - { label: "Lapang  jarak antar bagian lebih lega", value: "lapang" }
+              - label: "Lebar isi halaman"
+                name: "lebarKonten"
+                widget: "select"
+                default: "lebar"
+                options:
+                  - { label: "Sedang  teksnya lebih mudah dibaca", value: "sedang" }
+                  - { label: "Lebar (bawaan)", value: "lebar" }
+                  - { label: "Penuh  memakai layar lebar sebanyak mungkin", value: "penuh" }
+              - label: "Huruf judul"
+                name: "hurufJudul"
+                widget: "select"
+                default: "sans"
+                options:
+                  - { label: "Sans  sama dengan huruf isi (bawaan)", value: "sans" }
+                  - { label: "Serif  berkesan terbitan cetak", value: "serif" }
+                  - { label: "Mono  berkesan teknis", value: "mono" }
+                hint: "Memakai huruf bawaan perangkat pengunjung, jadi tidak menambah waktu muat sedikit pun. Hanya judul yang berubah, teks isi tetap seperti semula."
+              - label: "Gaya nama di halaman depan"
+                name: "gayaJudul"
+                widget: "select"
+                default: "gradien"
+                options:
+                  - { label: "Gradien berjalan (bawaan)", value: "gradien" }
+                  - { label: "Polos  satu warna, lebih tenang", value: "polos" }
+              - { label: "Ukuran huruf (persen)", name: "skalaHuruf", widget: "number", value_type: "int", min: 88, max: 118, step: 2, default: 100, required: false, hint: "100 berarti ukuran bawaan. Angka ini menskalakan tulisan DAN jaraknya sekaligus, jadi tata letaknya tetap seimbang." }
+              - { label: "Kecepatan gerak latar (detik)", name: "kecepatanBlob", widget: "number", value_type: "int", min: 8, max: 120, step: 2, default: 30, required: false, hint: "Semakin besar semakin tenang. Otomatis berhenti untuk pengunjung yang mengaktifkan kurangi gerakan di perangkatnya." }
+
+          # ----------------------------------------------------------------
+          # URUTAN BAGIAN
+          #
+          # Menentukan urutan tampil tiap bagian di halaman depan, dan mana
+          # yang disembunyikan tanpa perlu menghapus isinya.
+          #
+          # Bagian yang tidak tercantum di daftar ini TIDAK hilang. Dia
+          # disusulkan di belakang dengan urutan bawaannya, jadi daftar yang
+          # belum diperbarui tidak pernah membuat isi situs lenyap diam diam.
+          #
+          # Menyembunyikan satu bagian di sini SEKALIGUS melepas menunya dari
+          # navbar dan dari footer, supaya tidak ada tombol yang menunjuk ke
+          # bagian yang sudah tidak ada di halaman. Menu yang menunjuk ke
+          # halaman lain, misalnya Blog, tidak ikut terlepas karena halamannya
+          # memang tetap bisa dibuka.
+          # ----------------------------------------------------------------
+          - label: "Urutan Bagian Halaman"
+            name: "layout"
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - label: "Urutan"
+                name: "order"
+                widget: "list"
+                required: false
+                label_singular: "Bagian"
+                summary: "{{fields.id}}"
+                hint: "Seret baris untuk mengubah urutannya di halaman. Hilangkan centang Tampilkan untuk menyembunyikan satu bagian tanpa menghapus isinya."
+                fields:
+                  - label: "Bagian"
+                    name: "id"
+                    widget: "select"
+                    options:
+                      - { label: "Tentang Saya", value: "about" }
+                      - { label: "Pengalaman", value: "experience" }
+                      - { label: "Proyek", value: "projects" }
+                      - { label: "Publikasi", value: "publications" }
+                      - { label: "Keahlian", value: "skills" }
+                      - { label: "Sertifikasi", value: "certifications" }
+                      - { label: "Pendidikan", value: "education" }
+                      - { label: "Kesukarelawanan", value: "volunteering" }
+                      - { label: "Galeri", value: "gallery" }
+                      - { label: "Blog", value: "blog" }
+                      - { label: "Masukan", value: "feedback" }
+                      - { label: "Kontak", value: "contact" }
+                  - { label: "Tampilkan", name: "visible", widget: "boolean", default: true, required: false }
 
 
       # ------------------------------------------------------------------------
@@ -1570,7 +1722,7 @@ collections:
       #
       # Semua tulisan kecil yang dipakai situs di luar isi yang kamu tulis
       # sendiri: nama tombol, ajakan, keterangan untuk pembaca layar. Tujuh
-      # puluh satu tulisan, dua bahasa masing masing.
+      # puluh sembilan tulisan, dua bahasa masing masing.
       #
       # Tidak ada yang wajib diisi. Semuanya sudah punya isi bawaan yang masuk
       # akal, dan menu ini ada supaya kamu bisa mengubahnya kalau mau, bukan
@@ -1578,7 +1730,7 @@ collections:
       # Indonesianya yang dipakai.
       #
       # Kolomnya sengaja dilipat semua secara bawaan. Kalau dibuka sekaligus,
-      # tujuh puluh satu kolom sederet lebih sulit ditelusuri daripada
+      # tujuh puluh sembilan kolom sederet lebih sulit ditelusuri daripada
       # ditelusuri satu per satu lewat judulnya.
       # ------------------------------------------------------------------------
       - name: "labels"
@@ -2222,6 +2374,78 @@ collections:
             collapsed: true
             required: false
             hint: "Lainnya"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Salin tautan ke bagian ini"
+            name: "copySectionLink"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Perkakas kecil untuk pengunjung"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Simpan kontak"
+            name: "saveContact"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Perkakas kecil untuk pengunjung"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Keterangan tombol simpan kontak"
+            name: "saveContactHint"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Perkakas kecil untuk pengunjung"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
+              - { label: "English (opsional)", name: "en", widget: "text", required: false }
+          - label: "Lompat antar bagian"
+            name: "sectionRailLabel"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Perkakas kecil untuk pengunjung"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Cari proyek"
+            name: "projectSearchPlaceholder"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Bagian Proyek"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Tidak ada proyek yang cocok"
+            name: "projectEmpty"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Bagian Proyek"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "text", required: false }
+              - { label: "English (opsional)", name: "en", widget: "text", required: false }
+          - label: "Bersihkan pencarian"
+            name: "projectReset"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Bagian Proyek"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "proyek ditampilkan (dibacakan pembaca layar)"
+            name: "resultCount"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Bagian Proyek"
             fields:
               - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
               - { label: "English (opsional)", name: "en", widget: "string", required: false }

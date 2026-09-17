@@ -25,10 +25,11 @@ export default function BlogPreview({ posts = [], limit = 3 }) {
   if (latest.length === 0) return null;
 
   return (
-    <section id="blog" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
-      <div className="mx-auto max-w-6xl">
+    <section id="blog" className="bagian">
+      <div className="wadah">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
+            id="blog"
             eyebrow={t(sections.blog.eyebrow)}
             title={t(sections.blog.title)}
             subtitle={t(sections.blog.subtitle)}

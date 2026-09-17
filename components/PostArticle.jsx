@@ -28,8 +28,8 @@ export default function PostArticle({ post, others = [], bodyHtml }) {
   const minutes = post.readingTime?.[lang] ?? post.readingTime?.id ?? 1;
 
   return (
-    <article className="px-4 pt-32 pb-20 sm:px-6 sm:pb-24">
-      <div className="mx-auto max-w-3xl">
+    <article className="bagian pt-32">
+      <div className="wadah wadah-artikel">
         <Reveal>
           <Link
             href="/blog/"

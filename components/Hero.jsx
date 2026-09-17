@@ -28,9 +28,10 @@ export default function Hero() {
       // overflow-x-clip menahan cahaya lembut di belakang foto. Cahaya itu
       // sengaja melebar keluar kotaknya, dan di layar 320px kelebihannya
       // membuat halaman bisa digeser ke samping.
-      className="relative flex min-h-svh flex-col justify-center overflow-x-clip px-4 pt-28 pb-28 print:pt-4 sm:px-6"
+      className="relative flex min-h-svh flex-col justify-center overflow-x-clip pt-28 pb-24 print:pt-4"
+      style={{ paddingInline: 'var(--tepi-kaca)' }}
     >
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
+      <div className="wadah grid items-center gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
         {/* ---------------- Kolom teks ---------------- */}
         <div className="flex flex-col items-start gap-5">
           {profile.availability?.label ? (
@@ -60,11 +61,11 @@ export default function Hero() {
           ) : null}
 
           <Reveal delay={80}>
-            <h1 className="text-[2.6rem] font-extrabold leading-[1.06] tracking-[-0.03em] sm:text-[3.4rem] lg:text-[4rem]">
-              <span className="block text-base font-medium tracking-normal text-subtle sm:text-lg">
+            <h1 className="judul-halaman font-extrabold">
+              <span className="block text-base font-medium leading-normal tracking-normal text-subtle sm:text-lg">
                 {lang === 'id' ? 'Halo, saya' : "Hi, I'm"}
               </span>
-              <span className="gradient-text mt-1 block">{profile.name}</span>
+              <span className="gradient-text mt-1.5 block">{profile.name}</span>
             </h1>
           </Reveal>
 
@@ -76,7 +77,13 @@ export default function Hero() {
 
           {profile.tagline ? (
             <Reveal delay={170}>
-              <p className="max-w-xl border-l-2 border-accent/50 pl-4 text-[0.9375rem] italic leading-relaxed text-muted">
+              <p
+                className="max-w-xl pl-4 text-[0.9375rem] italic leading-relaxed text-muted"
+                style={{
+                  borderLeft: '2px solid transparent',
+                  borderImage: 'linear-gradient(180deg, var(--accent-1), var(--accent-3)) 1',
+                }}
+              >
                 {t(profile.tagline)}
               </p>
             </Reveal>
@@ -123,7 +130,7 @@ export default function Hero() {
                       rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       aria-label={item.label}
                       title={item.label}
-                      className="glass glass-hover grid h-11 w-11 place-items-center rounded-full text-muted hover:text-fg"
+                      className="tombol-ikon h-11 w-11 backdrop-blur-xl hover:text-fg"
                     >
                       <Icon name={item.icon} className="h-[18px] w-[18px]" />
                     </a>
@@ -147,7 +154,10 @@ export default function Hero() {
               }}
             />
 
-            <div className="glass glass-featured relative overflow-hidden rounded-[1.75rem] p-2.5">
+            <div
+              className="glass glass-featured relative overflow-hidden p-2.5"
+              style={{ borderRadius: 'calc(var(--r-lg) + 0.75rem)' }}
+            >
               <SmartImage
                 src={profile.avatar}
                 fallbackSrc={profile.avatarFallback}
@@ -158,7 +168,8 @@ export default function Hero() {
                 // dulu. Petunjuk ukurannya mengikuti lebar kolom fotonya.
                 priority
                 sizes="(max-width: 1024px) 304px, 384px"
-                className="aspect-square w-full rounded-[1.4rem] object-cover"
+                className="aspect-square w-full object-cover"
+                style={{ borderRadius: 'calc(var(--r-lg) + 0.25rem)' }}
               />
 
               {/*
@@ -167,7 +178,10 @@ export default function Hero() {
                 bagian "Kartu pada foto". Kosongkan mottonya kalau kamu ingin
                 namanya saja yang tampil.
               */}
-              <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-line bg-surface-solid/85 px-4 py-3 backdrop-blur-xl">
+              <div
+                className="absolute inset-x-4 bottom-4 border border-line bg-surface-solid/85 px-4 py-3 backdrop-blur-xl sm:inset-x-5 sm:bottom-5"
+                style={{ borderRadius: 'var(--r-md)' }}
+              >
                 <p className="truncate text-sm font-semibold text-fg">
                   {profile.photoCard?.name || profile.name}
                 </p>
@@ -187,7 +201,7 @@ export default function Hero() {
         bawah isi Hero berapa pun tinggi jendelanya. Sebelumnya dibuat melayang
         dan sempat menimpa deretan ikon sosial di layar yang pendek.
       */}
-      <div className="mx-auto mt-14 hidden w-full max-w-6xl lg:block">
+      <div className="wadah mt-14 hidden lg:block">
         <SkillMarquee />
       </div>
 

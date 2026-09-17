@@ -5,6 +5,7 @@ import { t } from '@/lib/i18n';
 import LanguageProvider from '@/components/LanguageProvider';
 import ThemeProvider from '@/components/ThemeProvider';
 import { THEME_STORAGE_KEY } from '@/lib/theme';
+import { bangunGayaTema } from '@/lib/tema';
 import MeshBackground from '@/components/MeshBackground';
 import LightboxProvider from '@/components/LightboxProvider';
 import SkipLink from '@/components/SkipLink';
@@ -12,6 +13,7 @@ import ScrollProgress from '@/components/ScrollProgress';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
+import RelBagian from '@/components/RelBagian';
 import PerabotTunda from '@/components/PerabotTunda';
 import ChromeGate from '@/components/ChromeGate';
 import './globals.css';
@@ -29,6 +31,13 @@ const plusJakarta = localFont({
 });
 
 const { meta, profile, social, contact, education, skills } = portfolio;
+
+/**
+ * Warna, sudut, jarak, dan ukuran huruf pilihanmu di panel, dirakit jadi satu
+ * blok CSS saat situs dibangun. Ditulis langsung di <head> supaya sudah berlaku
+ * pada bingkai gambar pertama, tanpa kedipan warna bawaan lebih dulu.
+ */
+const gayaTema = bangunGayaTema(portfolio.theme);
 const locale = meta.locale;
 const description = t(meta.description, locale);
 
@@ -177,6 +186,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang={locale} className={plusJakarta.variable} suppressHydrationWarning>
       <head>
+        <style id="tema-panel" dangerouslySetInnerHTML={{ __html: gayaTema }} />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
           type="application/ld+json"
@@ -198,6 +208,7 @@ export default function RootLayout({ children }) {
                 <SkipLink />
                 <ScrollProgress />
                 <Navbar />
+                <RelBagian />
               </ChromeGate>
 
               <main id="main">{children}</main>

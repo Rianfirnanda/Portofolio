@@ -6,6 +6,7 @@ import { useLanguage } from '@/components/LanguageProvider';
 import SectionHeading from '@/components/SectionHeading';
 import GlassCard from '@/components/GlassCard';
 import Reveal from '@/components/Reveal';
+import SimpanKontak from '@/components/SimpanKontak';
 import Icon from '@/components/Icon';
 
 /**
@@ -42,9 +43,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
-      <div className="mx-auto max-w-4xl">
+    <section id="contact" className="bagian">
+      <div className="wadah wadah-sempit">
         <SectionHeading
+          id="contact"
           eyebrow={t(sections.contact.eyebrow)}
           title={t(sections.contact.title)}
           subtitle={t(sections.contact.subtitle)}
@@ -96,6 +98,9 @@ export default function Contact() {
                   {contact.phone}
                 </a>
               ) : null}
+
+              {/* Kartu kontak .vcf, dirakit di peramban. Lihat lib/vcard.js. */}
+              <SimpanKontak />
             </div>
 
             {/* Semua tautan sosial, lengkap dengan nama akunnya */}
@@ -107,9 +112,13 @@ export default function Contact() {
                       href={item.href}
                       target={item.href.startsWith('http') ? '_blank' : undefined}
                       rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="flex items-center gap-3 rounded-2xl border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-line-strong"
+                      style={{ borderRadius: 'var(--r-md)' }}
+                      className="flex items-center gap-3 border border-line bg-surface px-3.5 py-2.5 text-left transition-colors hover:border-line-strong hover:bg-surface-solid/40"
                     >
-                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-linear-to-br from-accent-1 to-accent-2 text-white">
+                      <span
+                        style={{ borderRadius: 'var(--r-sm)' }}
+                        className="grid h-9 w-9 shrink-0 place-items-center bg-linear-to-br from-accent-1 to-accent-2 text-white"
+                      >
                         <Icon name={item.icon} className="h-4 w-4" />
                       </span>
                       <span className="min-w-0">

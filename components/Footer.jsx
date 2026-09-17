@@ -15,7 +15,7 @@ export default function Footer() {
 
   return (
     <footer data-print="hide" className="border-t border-line px-4 py-10 sm:px-6">
-      <div className="mx-auto max-w-6xl">
+      <div className="wadah">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-sm">
             <p className="text-base font-semibold text-fg">{profile.name}</p>

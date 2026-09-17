@@ -15,6 +15,10 @@ import { portfolio } from '@/data/portfolio';
  *
  * Sorotan kursor bisa dimatikan seluruh situs lewat appearance.spotlight
  * di data/portfolio.js.
+ *
+ * Sudutnya TIDAK ditulis di sini lagi. Kelengkungannya datang dari .glass,
+ * yang membacanya dari variabel --r-lg, dan variabel itu kamu atur di panel.
+ * Kartu yang butuh sudut khusus tetap bisa menimpanya lewat className.
  */
 export default function GlassCard({
   as: Tag = 'div',
@@ -43,7 +47,6 @@ export default function GlassCard({
     hover ? 'glass-hover' : '',
     featured ? 'glass-featured' : '',
     spotlightOn ? 'glass-spotlight' : '',
-    'rounded-2xl',
     className,
   ]
     .filter(Boolean)

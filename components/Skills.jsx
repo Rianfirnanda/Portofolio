@@ -16,9 +16,10 @@ export default function Skills() {
   if (groups.length === 0) return null;
 
   return (
-    <section id="skills" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
-      <div className="mx-auto max-w-6xl">
+    <section id="skills" className="bagian">
+      <div className="wadah">
         <SectionHeading
+          id="skills"
           eyebrow={t(sections.skills.eyebrow)}
           title={t(sections.skills.title)}
           subtitle={t(sections.skills.subtitle)}

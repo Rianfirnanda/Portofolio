@@ -87,9 +87,10 @@ export default function Galeri() {
   }));
 
   return (
-    <section id="gallery" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
-      <div className="mx-auto max-w-6xl">
+    <section id="gallery" className="bagian">
+      <div className="wadah">
         <SectionHeading
+          id="gallery"
           eyebrow={t(sections.gallery?.eyebrow)}
           title={judul}
           subtitle={t(sections.gallery?.subtitle)}

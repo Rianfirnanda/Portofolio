@@ -16,9 +16,10 @@ export default function Volunteering() {
   if (volunteering.length === 0) return null;
 
   return (
-    <section id="volunteering" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
-      <div className="mx-auto max-w-5xl">
+    <section id="volunteering" className="bagian">
+      <div className="wadah wadah-sedang">
         <SectionHeading
+          id="volunteering"
           eyebrow={t(sections.volunteering.eyebrow)}
           title={t(sections.volunteering.title)}
           subtitle={t(sections.volunteering.subtitle)}

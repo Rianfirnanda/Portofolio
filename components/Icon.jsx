@@ -157,6 +157,31 @@ const strokeIcons = {
     </>
   ),
   check: <path d="M20 6 9 17l-5-5" />,
+  link: (
+    <>
+      <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7" />
+      <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7" />
+    </>
+  ),
+  search: (
+    <>
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-3.5-3.5" />
+    </>
+  ),
+  'user-round-plus': (
+    <>
+      <circle cx="9" cy="8" r="4" />
+      <path d="M2 21v-1a6 6 0 0 1 6-6h2" />
+      <path d="M19 14v6M16 17h6" />
+    </>
+  ),
+  sliders: (
+    <>
+      <path d="M4 20v-6M4 10V4M12 20v-9M12 7V4M20 20v-4M20 12V4" />
+      <path d="M1 14h6M9 7h6M17 16h6" />
+    </>
+  ),
   briefcase: (
     <>
       <rect x="2" y="7" width="20" height="14" rx="2" />

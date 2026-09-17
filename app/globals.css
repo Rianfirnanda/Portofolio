@@ -48,6 +48,23 @@
   --dot-opacity: 0.05;
   --noise-opacity: 0.03;
 
+  /* ---- TOKEN BENTUK ----
+   * Nilai di bawah ini nilai bawaan. Yang sebenarnya dipakai ditulis ulang
+   * oleh lib/tema.js dari isi panel, di menu Pengaturan > Tampilan Visual. */
+  --r-lg: 1rem;                 /* sudut kartu                                */
+  --blur-kaca: 20px;            /* ketebalan buram permukaan kaca             */
+  --saturasi-kaca: 140%;
+  --skala-teks: 1;              /* pengali ukuran huruf seluruh situs         */
+  --w-konten: 72rem;            /* lebar maksimum isi halaman                 */
+  --ruang-bagian: 4.5rem;       /* jarak atas bawah tiap bagian, layar kecil  */
+  --ruang-bagian-lebar: 6rem;   /* jarak yang sama, layar lebar               */
+  --rapat-judul: -0.022em;      /* rapatnya jarak huruf pada judul            */
+
+  /* Turunan, jangan diatur langsung. */
+  --r-md: calc(var(--r-lg) * 0.72);
+  --r-sm: calc(var(--r-lg) * 0.45);
+  --tepi-kaca: clamp(1rem, 4vw, 1.5rem);
+
   color-scheme: light;
 }
 
@@ -103,6 +120,9 @@
  * 2. DASAR
  * ========================================================================== */
 html {
+  /* Ukuran huruf seluruh situs diatur dari panel. Karena Tailwind memakai rem,
+   * satu angka ini ikut menskalakan teks, jarak, dan sudut secara serempak. */
+  font-size: calc(100% * var(--skala-teks));
   scroll-behavior: smooth;
   /* Supaya judul section tidak tertutup navbar melayang saat lompat anchor. */
   scroll-padding-top: 7rem;
@@ -113,10 +133,8 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
-  /* Sedikit lebih besar dari bawaan browser supaya teks panjang nyaman dibaca
-   * tanpa memaksa pengunjung memperbesar halaman. */
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -129,8 +147,14 @@ h1,
 h2,
 h3,
 h4 {
+  /* Huruf judul diatur dari panel. Bawaannya sama dengan huruf isi, jadi
+   * tanpa diapa apakan tampilannya persis seperti semula. */
+  font-family: var(--font-judul, var(--font-sans));
   text-wrap: balance;
-  letter-spacing: -0.022em;
+  /* Huruf serif dan mono bentuknya lebih lebar, jadi tidak boleh dirapatkan
+   * sekencang huruf sans. Angkanya ikut berganti saat kamu mengganti huruf
+   * judul di panel; lihat lib/tema.js. */
+  letter-spacing: var(--rapat-judul, -0.022em);
 }
 
 /* Paragraf: hindari satu kata tersisa sendirian di baris terakhir. */
@@ -183,31 +207,51 @@ time,
 @layer components {
   /* Primitif permukaan kaca, dipakai ulang oleh GlassCard.jsx. */
   .glass {
+    position: relative;
     background-color: var(--glass);
+    /* Kilau tipis di seperempat atas permukaan. Kaca sungguhan memantulkan
+       cahaya paling kuat di tepi yang menghadap sumbernya, dan satu lapis
+       gradien setipis ini yang membedakan "kaca" dari "kotak transparan". */
+    background-image: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--inner-glow) 55%, transparent) 0%,
+      transparent 28%
+    );
     /* Jangan tambahkan versi -webkit- di sini. Tailwind sudah membuatkannya
        otomatis, dan menulisnya dua kali justru membuat properti standarnya
        terbuang saat situs dibangun, sehingga efek buramnya hilang sama sekali. */
-    backdrop-filter: blur(20px) saturate(140%);
+    backdrop-filter: blur(var(--blur-kaca)) saturate(var(--saturasi-kaca));
     border: 1px solid var(--line);
-    border-radius: 1rem;
+    border-radius: var(--r-lg);
+    /* Tiga lapis, bukan satu: garis dalam sebagai tepi kaca, bayangan dekat
+       untuk mengangkatnya dari latar, bayangan jauh untuk kedalaman. */
     box-shadow:
       inset 0 1px 0 0 var(--inner-glow),
-      0 4px 20px -12px var(--shadow-soft);
+      0 1px 2px -1px var(--shadow-soft),
+      0 12px 32px -20px var(--shadow-soft);
     transition:
       background-color 0.35s ease,
       border-color 0.35s ease,
       box-shadow 0.35s ease,
-      transform 0.35s ease;
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .glass-hover:hover {
     background-color: var(--glass-hover);
-    border-color: var(--line-strong);
-    transform: translateY(-4px);
+    border-color: color-mix(in oklab, var(--accent-2) 30%, var(--line-strong));
+    transform: translateY(-3px);
     box-shadow:
       inset 0 1px 0 0 var(--inner-glow),
-      0 20px 45px -22px var(--shadow-lift),
-      0 0 40px -24px color-mix(in oklab, var(--accent-2) 80%, transparent);
+      0 2px 4px -2px var(--shadow-soft),
+      0 24px 50px -26px var(--shadow-lift),
+      0 0 38px -26px color-mix(in oklab, var(--accent-2) 85%, transparent);
+  }
+
+  /* Ditekan: kartu turun kembali. Umpan balik kecil yang membuat kartu yang
+     bisa diklik terasa benar benar tertekan di layar sentuh. */
+  .glass-hover:active {
+    transform: translateY(-1px);
+    transition-duration: 0.1s;
   }
 
   /* Sorotan lembut yang mengikuti kursor di dalam kartu.
@@ -280,7 +324,7 @@ time,
      kaca. */
   .glass-nav-solid {
     background-color: color-mix(in oklab, var(--bg) 92%, transparent);
-    backdrop-filter: blur(26px) saturate(160%);
+    backdrop-filter: blur(calc(var(--blur-kaca) * 1.3)) saturate(160%);
     border-color: var(--line-strong);
     box-shadow:
       inset 0 1px 0 0 var(--inner-glow),
@@ -289,7 +333,51 @@ time,
 
   [data-theme='dark'] .glass-nav-solid {
     background-color: color-mix(in oklab, var(--bg) 64%, transparent);
-    backdrop-filter: blur(34px) saturate(180%);
+    backdrop-filter: blur(calc(var(--blur-kaca) * 1.7)) saturate(180%);
+  }
+
+  /*
+    KERANGKA HALAMAN
+
+    Dua kelas ini menggantikan deretan utility yang dulu diulang di tiap
+    bagian halaman (px-4 py-20 sm:px-6 sm:py-24 + mx-auto max-w-6xl). Ditulis
+    sekali di sini, jaraknya jadi bisa diatur dari panel lewat --ruang-bagian
+    dan lebarnya lewat --w-konten, tanpa menyentuh satu pun komponen.
+  */
+  .bagian {
+    padding-inline: var(--tepi-kaca);
+    padding-block: var(--ruang-bagian);
+    scroll-margin-top: 6.5rem;
+  }
+  @media (min-width: 640px) {
+    .bagian {
+      padding-block: var(--ruang-bagian-lebar);
+    }
+  }
+
+  .wadah {
+    width: 100%;
+    max-width: var(--w-konten);
+    margin-inline: auto;
+  }
+  /* Tiga lebar yang lebih sempit, untuk bagian yang isinya satu kolom teks.
+     min() menjaganya tidak pernah melebihi lebar isi pilihanmu di panel. */
+  .wadah-sedang {
+    max-width: min(var(--w-konten), 64rem);
+  }
+  .wadah-sempit {
+    max-width: min(var(--w-konten), 56rem);
+  }
+  .wadah-artikel {
+    max-width: min(var(--w-konten), 48rem);
+  }
+
+  /* Garis pemisah tipis yang memudar di kedua ujungnya. Lebih tenang
+     dipandang daripada garis lurus yang berhenti mendadak. */
+  .garis-pudar {
+    height: 1px;
+    border: 0;
+    background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
   }
 
   /* Border gradien beranimasi untuk kartu unggulan. */
@@ -345,6 +433,19 @@ time,
    *   .text-body      paragraf utama, nyaman untuk teks panjang
    *   .text-body-sm   keterangan pendukung di dalam kartu
    *   .text-meta      label kecil seperti tanggal dan lokasi */
+  /* Ukuran judul mengikuti lebar layar tanpa titik patah. clamp() menjaga
+   * judul tetap terbaca di 320 piksel dan tetap berwibawa di layar lebar. */
+  .judul-halaman {
+    font-size: clamp(2.35rem, 1.6rem + 3.6vw, 4rem);
+    line-height: 1.04;
+    letter-spacing: calc(var(--rapat-judul, -0.022em) - 0.013em);
+  }
+  .judul-bagian {
+    font-size: clamp(1.85rem, 1.35rem + 1.9vw, 2.6rem);
+    line-height: 1.12;
+    letter-spacing: calc(var(--rapat-judul, -0.022em) - 0.006em);
+  }
+
   .text-body {
     font-size: 1rem;
     line-height: 1.75;
@@ -429,26 +530,45 @@ time,
   .btn-primary {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+    /* Tinggi minimum 44 piksel, ukuran sasaran sentuh yang disarankan Apple
+       dan Google. Tombol yang lebih pendek sering meleset ditekan jempol. */
+    min-height: 2.75rem;
     border-radius: 999px;
     padding: 0.75rem 1.5rem;
     font-size: 0.875rem;
     font-weight: 600;
     color: #ffffff;
     background-image: linear-gradient(100deg, var(--accent-1), var(--accent-2));
-    box-shadow: 0 16px 36px -18px var(--accent-1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-size: 160% 100%;
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.28),
+      0 14px 32px -16px var(--accent-1);
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s ease,
+      background-position 0.5s ease;
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 20px 44px -18px var(--accent-2);
+    background-position: 100% 0;
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.35),
+      0 20px 44px -18px var(--accent-2);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+    transition-duration: 0.1s;
   }
 
   /* Tombol sekunder berbahan kaca. */
   .btn-ghost {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+    min-height: 2.75rem;
     border-radius: 999px;
     padding: 0.75rem 1.5rem;
     font-size: 0.875rem;
@@ -456,12 +576,20 @@ time,
     color: var(--fg);
     background-color: var(--glass);
     border: 1px solid var(--line-strong);
-    backdrop-filter: blur(16px);
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    backdrop-filter: blur(calc(var(--blur-kaca) * 0.8));
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .btn-ghost:hover {
     background-color: var(--glass-hover);
+    border-color: color-mix(in oklab, var(--accent-2) 35%, var(--line-strong));
     transform: translateY(-2px);
+  }
+  .btn-ghost:active {
+    transform: translateY(0);
+    transition-duration: 0.1s;
   }
 
   /* Status awal dan akhir animasi scroll-reveal. */
@@ -767,6 +895,130 @@ time,
     width: 60%;
   }
 
+  /* ----------------------------------------------------------------------
+     REL BAGIAN
+     Deretan titik kecil di tepi kiri layar lebar yang menunjukkan posisi
+     pembaca di dalam halaman, dan bisa diklik untuk melompat. Namanya muncul
+     saat kursor mendekat. Dimatikan lewat panel, Sentuhan Interaktif.
+     ---------------------------------------------------------------------- */
+  .rel-bagian {
+    position: fixed;
+    left: 1.25rem;
+    top: 50%;
+    z-index: 40;
+    transform: translateY(-50%);
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  @media (min-width: 1280px) {
+    .rel-bagian {
+      display: flex;
+    }
+  }
+  .rel-titik {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    /* Area sentuh penuh, penanda kecil digambar terpisah di dalamnya. */
+    padding: 0.32rem 0;
+    color: var(--fg-subtle);
+  }
+  .rel-tanda {
+    width: 1.1rem;
+    height: 2px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background-color: var(--line-strong);
+    /* Saat tidak disentuh, rel ini cuma isyarat samar di tepi mata. Baru
+       benar benar terbaca ketika kursor mendekat. */
+    opacity: 0.45;
+    transition:
+      width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease,
+      background-color 0.3s ease;
+  }
+  .rel-bagian:hover .rel-tanda {
+    opacity: 0.8;
+  }
+  .rel-titik:hover .rel-tanda {
+    width: 2.1rem;
+    opacity: 1;
+    background-color: color-mix(in oklab, var(--accent-2) 70%, var(--line-strong));
+  }
+  .rel-titik[aria-current='true'] .rel-tanda {
+    width: 2.6rem;
+    opacity: 1;
+    background-image: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  }
+  .rel-nama {
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+    pointer-events: none;
+  }
+  .rel-bagian:hover .rel-nama,
+  .rel-titik:focus-visible .rel-nama {
+    opacity: 1;
+    transform: none;
+  }
+  .rel-titik[aria-current='true'] .rel-nama {
+    color: var(--fg);
+  }
+
+  /* Tombol berbentuk ikon: satu ukuran sentuh yang sama di seluruh situs. */
+  .tombol-ikon {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background-color: var(--glass);
+    color: var(--fg-muted);
+    transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  }
+  .tombol-ikon:hover {
+    color: var(--fg);
+    border-color: var(--line-strong);
+    transform: translateY(-1px);
+  }
+
+  /* Tautan jangkar di sebelah judul bagian. Muncul saat kursor mendekat, dan
+     selalu terlihat begitu difokuskan lewat papan ketik. */
+  .jangkar-judul {
+    display: inline-grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-left: 0.4rem;
+    border-radius: 999px;
+    color: var(--fg-subtle);
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+  }
+  .kepala-bagian:hover .jangkar-judul,
+  .jangkar-judul:focus-visible {
+    opacity: 1;
+    transform: none;
+  }
+  .jangkar-judul:hover {
+    color: var(--accent-fg);
+  }
+  /* Di layar sentuh tidak ada kursor yang bisa mendekat, jadi disembunyikan
+     sepenuhnya daripada jadi tombol misterius yang tidak pernah terlihat. */
+  @media (hover: none) {
+    .jangkar-judul {
+      display: none;
+    }
+  }
+
   /*
     ------------------------------------------------------------------------
     CATATAN: DUA PERCOBAAN YANG SENGAJA TIDAK DIPAKAI
@@ -800,8 +1052,11 @@ time,
  * dipaksa terang, dan kartu berubah jadi kotak bergaris tipis.
  * ========================================================================== */
 @media print {
-  :root,
-  [data-theme='dark'] {
+  /* Selektornya ditulis dua kali (:root:root) supaya tetap mengalahkan gaya
+     yang ditulis lib/tema.js dari panel, yang juga memakai :root:root. Tanpa
+     ini, warna latar gelap pilihan pengunjung ikut tercetak di atas kertas. */
+  :root:root,
+  :root:root[data-theme='dark'] {
     --bg: #ffffff;
     --bg-deep: #ffffff;
     --fg: #000000;
@@ -831,6 +1086,8 @@ time,
     dokumen portofolio yang kebetulan memakai elemen yang sama.
   */
   .scroll-progress,
+  .rel-bagian,
+  .jangkar-judul,
   [data-print='hide'] {
     display: none !important;
   }

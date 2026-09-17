@@ -34,6 +34,78 @@
     "heroMarquee": true,
     "printLink": true,
     "lightbox": true,
-    "commandPalette": true
+    "commandPalette": true,
+    "sectionRail": true,
+    "headingAnchor": true,
+    "saveContact": true,
+    "projectSearch": true
+  },
+  "theme": {
+    "preset": "indigo",
+    "accent1": "#6366f1",
+    "accent2": "#a855f7",
+    "accent3": "#06b6d4",
+    "latar": "netral",
+    "intensitasLatar": "normal",
+    "sudut": "sedang",
+    "blur": 20,
+    "kepadatan": "nyaman",
+    "lebarKonten": "lebar",
+    "hurufJudul": "sans",
+    "gayaJudul": "gradien",
+    "skalaHuruf": 100,
+    "kecepatanBlob": 30
+  },
+  "layout": {
+    "order": [
+      {
+        "id": "about",
+        "visible": true
+      },
+      {
+        "id": "experience",
+        "visible": true
+      },
+      {
+        "id": "projects",
+        "visible": true
+      },
+      {
+        "id": "publications",
+        "visible": true
+      },
+      {
+        "id": "skills",
+        "visible": true
+      },
+      {
+        "id": "certifications",
+        "visible": true
+      },
+      {
+        "id": "education",
+        "visible": true
+      },
+      {
+        "id": "volunteering",
+        "visible": true
+      },
+      {
+        "id": "gallery",
+        "visible": true
+      },
+      {
+        "id": "blog",
+        "visible": true
+      },
+      {
+        "id": "feedback",
+        "visible": true
+      },
+      {
+        "id": "contact",
+        "visible": true
+      }
+    ]
   }
 }

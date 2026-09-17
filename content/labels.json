@@ -282,5 +282,37 @@
   "playerSpeed": {
     "id": "Kecepatan putar",
     "en": "Playback speed"
+  },
+  "copySectionLink": {
+    "id": "Salin tautan ke bagian ini",
+    "en": "Copy link to this section"
+  },
+  "saveContact": {
+    "id": "Simpan kontak",
+    "en": "Save contact"
+  },
+  "saveContactHint": {
+    "id": "Unduh kartu kontak (.vcf) supaya nomor dan emailnya langsung masuk ke buku alamatmu.",
+    "en": "Download a contact card (.vcf) so the number and email land straight in your address book."
+  },
+  "projectSearchPlaceholder": {
+    "id": "Cari proyek",
+    "en": "Search projects"
+  },
+  "projectEmpty": {
+    "id": "Tidak ada proyek yang cocok dengan pencarian itu.",
+    "en": "No project matches that search."
+  },
+  "projectReset": {
+    "id": "Bersihkan pencarian",
+    "en": "Clear search"
+  },
+  "sectionRailLabel": {
+    "id": "Lompat antar bagian",
+    "en": "Jump between sections"
+  },
+  "resultCount": {
+    "id": "proyek ditampilkan",
+    "en": "projects shown"
   }
 }

@@ -38,8 +38,8 @@ export default function BlogIndex({ posts = [], tags = [] }) {
     ].join(' ');
 
   return (
-    <div className="px-4 pt-32 pb-20 sm:px-6 sm:pb-24">
-      <div className="mx-auto max-w-6xl">
+    <div className="bagian pt-32">
+      <div className="wadah">
         {/* Judul halaman */}
         <Reveal className="max-w-2xl">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-accent">

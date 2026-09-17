@@ -82,9 +82,10 @@ export default function Feedback() {
     'w-full rounded-xl border border-line bg-surface px-3.5 py-2.5 text-sm text-fg placeholder:text-subtle focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/35';
 
   return (
-    <section id="feedback" className="px-4 py-20 sm:px-6 sm:py-24">
-      <div className="mx-auto max-w-3xl">
+    <section id="feedback" className="bagian">
+      <div className="wadah wadah-artikel">
         <SectionHeading
+          id="feedback"
           eyebrow={t(sections.feedback?.eyebrow)}
           title={t(sections.feedback?.title)}
           subtitle={t(sections.feedback?.subtitle)}

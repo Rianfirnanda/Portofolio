@@ -99,12 +99,40 @@ function susunGaleri(sumber) {
 const galeri = susunGaleri(gallery);
 const galeriTampil = gallery?.enabled !== false && galeri.length > 0;
 
+/*
+  Bagian yang kamu sembunyikan lewat panel, di Pengaturan Situs > Urutan Bagian
+  Halaman. Menu navigasinya ikut dilepas di bawah.
+
+  Tanpa ini, menyembunyikan satu bagian akan menyisakan tombol di navbar yang
+  menunjuk ke bagian yang sudah tidak ada di halaman: diklik, tidak terjadi apa
+  apa. Menu yang menunjuk ke halaman lain (type: 'page'), misalnya Blog, tidak
+  ikut terpengaruh karena halamannya memang tetap ada.
+*/
+const bagianDisembunyikan = new Set(
+  (Array.isArray(settings.layout?.order) ? settings.layout.order : [])
+    .filter((baris) => baris?.visible === false && typeof baris?.id === 'string')
+    .map((baris) => baris.id)
+);
+
 export const portfolio = {
   // content/settings.json  judul situs, SEO, bahasa awal, tema awal
   meta: settings.meta,
 
   // content/settings.json  sakelar hidup dan mati untuk sentuhan interaktif
   appearance: settings.appearance ?? {},
+
+  // content/settings.json  warna, sudut, jarak, dan ukuran huruf dari panel.
+  // Diterjemahkan jadi variabel CSS oleh lib/tema.js.
+  theme: settings.theme ?? {},
+
+  /*
+    content/settings.json  urutan dan tampil sembunyi tiap bagian halaman
+
+    Bagian yang tidak tercantum di daftar TIDAK hilang, melainkan disusulkan di
+    belakang dengan urutan bawaannya. Jadi menambah bagian baru di kode tidak
+    pernah membuatnya lenyap hanya karena daftarnya di panel belum diperbarui.
+  */
+  layout: { order: Array.isArray(settings.layout?.order) ? settings.layout.order : [] },
 
   /*
     content/profile.json  isi halaman depan: foto, nama, status, lokasi
@@ -177,7 +205,9 @@ export const portfolio = {
     terjadi apa apa. Begitu foto pertama masuk lewat panel, menunya muncul
     kembali sendiri tanpa perlu diatur.
   */
-  nav: list(navigation).filter((item) => item.id !== 'gallery' || galeriTampil),
+  nav: list(navigation)
+    .filter((item) => item.id !== 'gallery' || galeriTampil)
+    .filter((item) => item.type === 'page' || !bagianDisembunyikan.has(item.id)),
 
   // content/sections.json  judul dan subjudul tiap bagian halaman
   sections,

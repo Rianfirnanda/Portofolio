@@ -92,9 +92,10 @@ export default function Publications() {
   if (publications.length === 0) return null;
 
   return (
-    <section id="publications" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
-      <div className="mx-auto max-w-4xl">
+    <section id="publications" className="bagian">
+      <div className="wadah wadah-sempit">
         <SectionHeading
+          id="publications"
           eyebrow={t(sections.publications.eyebrow)}
           title={t(sections.publications.title)}
           subtitle={t(sections.publications.subtitle)}

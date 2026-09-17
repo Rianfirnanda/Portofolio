@@ -14,9 +14,10 @@ export default function Experience() {
   if (experience.length === 0) return null;
 
   return (
-    <section id="experience" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
-      <div className="mx-auto max-w-5xl">
+    <section id="experience" className="bagian">
+      <div className="wadah wadah-sedang">
         <SectionHeading
+          id="experience"
           eyebrow={t(sections.experience.eyebrow)}
           title={t(sections.experience.title)}
           subtitle={t(sections.experience.subtitle)}

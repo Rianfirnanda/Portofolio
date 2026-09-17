@@ -69,10 +69,12 @@ situs statis murni.
 | `lib/markdown.js` | Mengubah tulisan blog menjadi HTML, sekaligus menyisipkan pemutar video, musik, dan PDF. |
 | `scripts/copy-cms.mjs` | Menyalin berkas panel dari node_modules saat build. |
 | `app/layout.js` | Kerangka HTML, metadata SEO, JSON-LD, font, skrip anti kedip tema, provider tema dan bahasa. |
-| `app/page.js` | Server component yang menyusun urutan section halaman utama. |
+| `app/page.js` | Server component yang menyusun urutan bagian halaman utama, mengikuti Urutan Bagian di panel. |
 | `app/blog/page.js` | Halaman daftar tulisan. |
 | `app/blog/[slug]/page.js` | Halaman detail satu tulisan, dibuat otomatis dari isi `content/posts/`. |
-| `app/globals.css` | Token warna mode terang dan gelap, kelas `.glass`, keyframes, pengaturan kepekatan latar. |
+| `app/globals.css` | Token warna, bentuk, dan jarak untuk kedua mode, kelas `.glass`, `.bagian`, `.wadah`, keyframes. |
+| `lib/tema.js` | Menerjemahkan pilihan Tampilan Visual di panel jadi variabel CSS, lengkap dengan perhitungan kontras warna aksen. |
+| `lib/vcard.js` | Menyusun kartu kontak `.vcf` untuk tombol Simpan kontak. |
 | `app/sitemap.js` dan `app/robots.js` | Membuat `sitemap.xml` dan `robots.txt` saat build. |
 | `app/cetak/portofolio/` dan `app/cetak/cv/` | Dua halaman dokumen siap disimpan sebagai PDF. |
 | `app/cetak.css` | Gaya kedua dokumen itu, termasuk ukuran kertas dan aturan pemenggalan halaman. |
@@ -304,15 +306,11 @@ berbentuk persegi minimal 640 x 640 piksel, lalu jalankan `npm run assets`.
 Perintah itu membuat ulang favicon, ikon iOS, dan kartu preview tautan supaya
 semuanya ikut memakai foto yang sama.
 
-**Mengganti warna aksen.** Ubah tiga baris di `app/globals.css`:
-
-```css
-:root {
-  --accent-1: #6366f1;
-  --accent-2: #a855f7;
-  --accent-3: #06b6d4;
-}
-```
+**Mengganti warna aksen.** Lewat panel, di
+**Pengaturan Situs > Nama Situs dan SEO > Tampilan Visual**. Pilih satu dari
+delapan palet siap pakai, atau isi tiga warnamu sendiri. Warna tulisan
+beraksennya dihitung ulang otomatis supaya kontrasnya tetap lolos standar
+keterbacaan WCAG AA, berapa pun warna yang kamu pilih. Lihat `lib/tema.js`.
 
 **Menulis tulisan blog.** Salin satu objek di `data/posts.js`, tempel di posisi
 paling atas, ganti isinya. Halaman detail, filter topik, dan sitemap menyesuaikan
@@ -432,6 +430,12 @@ Tidak ada dependency lain. Ikon, animasi, dan sistem dua bahasa ditulis sendiri.
 | Kartu nama dan motto di foto | Panel, Profil Diri, Kartu pada foto | Dua baris di bawah foto profil. Kosongkan mottonya kalau ingin nama saja. |
 | Pemutar musik | Panel, Pengaturan, Musik | Tidak pernah berbunyi sendiri. Lihat `data/README.md` bagian 18. |
 | Masukan dari tamu | Panel, Masukan Masuk | Butuh `GITHUB_CONTENT_TOKEN` dan repositori privat. Lihat bagian 19. |
+| Tampilan Visual dari panel | Panel, Pengaturan Situs, Tampilan Visual | Warna, latar, sudut kartu, buram kaca, kepadatan, lebar isi, huruf judul, dan ukuran huruf. Tanpa menyentuh kode. |
+| Urutan dan sembunyikan bagian | Panel, Pengaturan Situs, Urutan Bagian Halaman | Seret untuk mengurutkan, hilangkan centang untuk menyembunyikan. Menu navigasinya ikut menyesuaikan sendiri. |
+| Rel penunjuk bagian | Panel, Sentuhan Interaktif | Deretan garis di tepi kiri layar lebar, menunjukkan posisi pembaca dan bisa diklik. |
+| Salin tautan ke satu bagian | Panel, Sentuhan Interaktif | Tombol kecil di samping judul bagian, muncul saat kursor mendekat. |
+| Simpan kontak (.vcf) | Panel, Sentuhan Interaktif | Satu berkas, dan seluruh datamu masuk ke buku alamat pengunjung. Dirakit di peramban mereka. |
+| Pencarian di bagian Proyek | Panel, Sentuhan Interaktif | Muncul sendiri begitu proyeknya lima atau lebih. |
 
 Kolom **English** di seluruh panel boleh dikosongkan. Kalau kosong, versi Inggris
 situs memakai teks Indonesianya.
