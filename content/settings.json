@@ -19,6 +19,7 @@
     ],
     "ogImage": "/images/og-image.jpg",
     "baseUrl": "https://rianfirnanda.vercel.app",
+    "panelTitle": "",
     "locale": "id",
     "defaultTheme": "dark",
     "themeColorLight": "#f5f7fc",
@@ -35,6 +36,7 @@
     "printLink": true,
     "lightbox": true,
     "commandPalette": true,
+    "sectionAnchor": true,
     "theme": {
       "accent1": "",
       "accent2": "",
@@ -43,10 +45,9 @@
       "accentLinkDark": "",
       "background": "tenang",
       "radius": "sedang",
-      "blur": 20,
+      "blur": 8,
       "blobSpeed": 34,
       "headingStyle": "solid"
-    },
-    "sectionAnchor": true
+    }
   }
 }
