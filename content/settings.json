@@ -44,8 +44,8 @@
       "accentLink": "",
       "accentLinkDark": "",
       "background": "tenang",
-      "radius": "sedang",
-      "blur": 8,
+      "radius": "bulat",
+      "blur": 0,
       "blobSpeed": 34,
       "headingStyle": "solid"
     }
