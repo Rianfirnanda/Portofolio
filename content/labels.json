@@ -282,5 +282,9 @@
   "playerSpeed": {
     "id": "Kecepatan putar",
     "en": "Playback speed"
+  },
+  "sectionCopyLink": {
+    "id": "Salin tautan ke bagian ini",
+    "en": "Copy link to this section"
   }
 }

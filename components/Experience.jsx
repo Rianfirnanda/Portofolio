@@ -17,6 +17,7 @@ export default function Experience() {
     <section id="experience" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
+          id="experience"
           eyebrow={t(sections.experience.eyebrow)}
           title={t(sections.experience.title)}
           subtitle={t(sections.experience.subtitle)}

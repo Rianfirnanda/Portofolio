@@ -19,6 +19,7 @@ export default function Volunteering() {
     <section id="volunteering" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
+          id="volunteering"
           eyebrow={t(sections.volunteering.eyebrow)}
           title={t(sections.volunteering.title)}
           subtitle={t(sections.volunteering.subtitle)}

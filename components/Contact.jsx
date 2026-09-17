@@ -45,6 +45,7 @@ export default function Contact() {
     <section id="contact" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-4xl">
         <SectionHeading
+          id="contact"
           eyebrow={t(sections.contact.eyebrow)}
           title={t(sections.contact.title)}
           subtitle={t(sections.contact.subtitle)}

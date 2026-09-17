@@ -95,6 +95,7 @@ export default function Publications() {
     <section id="publications" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-4xl">
         <SectionHeading
+          id="publications"
           eyebrow={t(sections.publications.eyebrow)}
           title={t(sections.publications.title)}
           subtitle={t(sections.publications.subtitle)}

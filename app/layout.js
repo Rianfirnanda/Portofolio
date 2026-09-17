@@ -6,6 +6,7 @@ import LanguageProvider from '@/components/LanguageProvider';
 import ThemeProvider from '@/components/ThemeProvider';
 import { THEME_STORAGE_KEY } from '@/lib/theme';
 import MeshBackground from '@/components/MeshBackground';
+import { gayaDariPanel } from '@/lib/tema';
 import LightboxProvider from '@/components/LightboxProvider';
 import SkipLink from '@/components/SkipLink';
 import ScrollProgress from '@/components/ScrollProgress';
@@ -174,10 +175,16 @@ export default function RootLayout({ children }) {
     tags: post.tags ?? [],
   }));
 
+  const gayaPanel = gayaDariPanel(portfolio.appearance?.theme);
+
   return (
     <html lang={locale} className={plusJakarta.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Warna, sudut, dan keramaian latar yang kamu atur di panel.
+            Disisipkan setelah globals.css supaya pilihanmu yang menang.
+            Nilainya sudah disaring di lib/tema.js. */}
+        {gayaPanel ? <style dangerouslySetInnerHTML={{ __html: gayaPanel }} /> : null}
         <script
           type="application/ld+json"
           // Isinya berasal dari data lokal, bukan masukan pengguna, jadi aman.

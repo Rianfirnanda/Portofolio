@@ -24,6 +24,7 @@ export default function About() {
     <section id="about" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
+          id="about"
           eyebrow={t(sections.about.eyebrow)}
           title={t(sections.about.title)}
           subtitle={t(sections.about.subtitle)}

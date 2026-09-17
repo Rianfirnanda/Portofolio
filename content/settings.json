@@ -34,6 +34,19 @@
     "heroMarquee": true,
     "printLink": true,
     "lightbox": true,
-    "commandPalette": true
+    "commandPalette": true,
+    "theme": {
+      "accent1": "",
+      "accent2": "",
+      "accent3": "",
+      "accentLink": "",
+      "accentLinkDark": "",
+      "background": "tenang",
+      "radius": "sedang",
+      "blur": 20,
+      "blobSpeed": 34,
+      "headingStyle": "solid"
+    },
+    "sectionAnchor": true
   }
 }

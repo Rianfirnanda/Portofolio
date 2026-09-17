@@ -29,6 +29,7 @@ export default function BlogPreview({ posts = [], limit = 3 }) {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
+          id="blog"
             eyebrow={t(sections.blog.eyebrow)}
             title={t(sections.blog.title)}
             subtitle={t(sections.blog.subtitle)}

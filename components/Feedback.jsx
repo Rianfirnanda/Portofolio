@@ -85,6 +85,7 @@ export default function Feedback() {
     <section id="feedback" className="px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-3xl">
         <SectionHeading
+          id="feedback"
           eyebrow={t(sections.feedback?.eyebrow)}
           title={t(sections.feedback?.title)}
           subtitle={t(sections.feedback?.subtitle)}

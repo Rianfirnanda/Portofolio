@@ -39,6 +39,7 @@ export default function Education() {
     <section id="education" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
+          id="education"
           eyebrow={t(sections.education.eyebrow)}
           title={t(sections.education.title)}
           subtitle={t(sections.education.subtitle)}

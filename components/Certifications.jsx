@@ -18,6 +18,7 @@ export default function Certifications() {
     <section id="certifications" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
+          id="certifications"
           eyebrow={t(sections.certifications.eyebrow)}
           title={t(sections.certifications.title)}
           subtitle={t(sections.certifications.subtitle)}

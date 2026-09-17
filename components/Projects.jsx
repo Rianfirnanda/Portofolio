@@ -49,6 +49,7 @@ export default function Projects() {
     <section id="projects" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
+          id="projects"
           eyebrow={t(sections.projects.eyebrow)}
           title={t(sections.projects.title)}
           subtitle={t(sections.projects.subtitle)}

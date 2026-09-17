@@ -999,6 +999,31 @@ tidak ada pengaturan yang bisa menjangkaunya. Tulisan kecil
 "Powered by Sveltia CMS" di dasar halaman masuk juga tetap ada, itu keterangan
 pustaka yang dipakai.
 
+### Mengubah tampilan situs dari panel
+
+Menu **Pengaturan Situs** lalu **Nama Situs dan SEO**, bagian **Tampilan**.
+Semua yang mengatur rasa situsnya ada di sana, dan tidak satu pun perlu
+menyentuh kode:
+
+| Kolom | Isinya |
+|---|---|
+| Warna utama, kedua, ketiga | Warna merek. Kosongkan satu untuk memakai bawaannya |
+| Warna tautan terang dan gelap | Dipisah karena yang terbaca di atas putih belum tentu terbaca di atas hitam |
+| Keramaian latar | Polos, Tenang, Sedang, Ramai. Mengatur empat lapisan sekaligus |
+| Kelengkungan sudut kartu | Tegas, Sedang, Bulat |
+| Tebal buram kaca | 0 sampai 40 piksel. Nol berarti kaca bening |
+| Kecepatan gerak latar | Detik untuk satu putaran. Makin besar makin tenang |
+| Gaya judul besar | Gradien warna, atau Satu warna |
+
+Dua bawaan sengaja dipilih supaya situs tidak terlihat seperti hasil desain
+otomatis: **Keramaian latar = Tenang** dan **Gaya judul = Satu warna**. Latar
+penuh gradien beranimasi dan judul bergradien warna adalah dua ciri yang paling
+sering muncul di situs yang dirakit mesin. Kalau kamu lebih suka yang lama,
+tinggal pilih Sedang dan Gradien warna.
+
+Kolom warna yang kamu isi disaring lebih dulu, jadi isian yang bukan kode warna
+diabaikan dan tidak bisa menyelipkan aturan lain ke dalam halaman.
+
 ### Semua tulisan kecil juga bisa diganti
 
 Menu **Pengaturan Situs** lalu **Tulisan Antarmuka** memuat **71 tulisan** yang

@@ -19,6 +19,7 @@ export default function Skills() {
     <section id="skills" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
+          id="skills"
           eyebrow={t(sections.skills.eyebrow)}
           title={t(sections.skills.title)}
           subtitle={t(sections.skills.subtitle)}

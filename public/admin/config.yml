@@ -1563,6 +1563,60 @@ collections:
               - { label: "Tautan simpan sebagai PDF", name: "printLink", widget: "boolean", default: true, required: false }
               - { label: "Gambar bisa diperbesar", name: "lightbox", widget: "boolean", default: true, required: false }
               - { label: "Pencarian cepat Ctrl+K", name: "commandPalette", widget: "boolean", default: true, required: false }
+              - { label: "Tautan salin di judul bagian", name: "sectionAnchor", widget: "boolean", default: true, required: false, hint: "Ikon rantai kecil muncul saat kursor lewat di atas judul bagian. Diklik, alamat ke bagian itu tersalin, jadi kamu bisa mengirim tautan langsung ke bagian Proyek misalnya." }
+
+              # ------------------------------------------------------------
+              # TAMPILAN
+              #
+              # Semua yang mengatur RASA situsnya: warna, kelengkungan sudut,
+              # tebal buram kaca, dan seberapa ramai latarnya.
+              #
+              # Setiap kolom warna boleh dikosongkan, dan yang dikosongkan
+              # memakai warna bawaan. Jadi kamu bisa mengganti satu warna saja
+              # tanpa harus menentukan sisanya.
+              # ------------------------------------------------------------
+              - label: "Tampilan"
+                name: "theme"
+                widget: object
+                collapsed: false
+                required: false
+                fields:
+                  - { label: "Warna utama", name: "accent1", widget: "color", required: false, allowInput: true, hint: "Dipakai tombol utama, gradien judul, dan bingkai foto. Kosongkan untuk memakai bawaan." }
+                  - { label: "Warna kedua", name: "accent2", widget: "color", required: false, allowInput: true, hint: "Pasangan warna utama pada gradien dan sorotan kartu." }
+                  - { label: "Warna ketiga", name: "accent3", widget: "color", required: false, allowInput: true, hint: "Aksen pelengkap, dipakai sedikit saja." }
+                  - { label: "Warna tautan, mode terang", name: "accentLink", widget: "color", required: false, allowInput: true, hint: "Warna tautan dan penanda menu aktif. Pastikan cukup gelap supaya terbaca di atas latar terang." }
+                  - { label: "Warna tautan, mode gelap", name: "accentLinkDark", widget: "color", required: false, allowInput: true, hint: "Sama seperti di atas, tapi untuk mode gelap. Pastikan cukup terang." }
+                  - label: "Keramaian latar"
+                    name: "background"
+                    widget: "select"
+                    required: false
+                    default: "tenang"
+                    hint: "Mengatur empat lapisan hiasan latar sekaligus. Latar yang penuh gradien beranimasi membuat situs terlihat seperti hasil desain otomatis, jadi Tenang dipakai sebagai bawaan."
+                    options:
+                      - { label: "Polos, tanpa hiasan sama sekali", value: "polos" }
+                      - { label: "Tenang, disarankan", value: "tenang" }
+                      - { label: "Sedang", value: "sedang" }
+                      - { label: "Ramai", value: "ramai" }
+                  - label: "Kelengkungan sudut kartu"
+                    name: "radius"
+                    widget: "select"
+                    required: false
+                    default: "sedang"
+                    options:
+                      - { label: "Tegas, terasa lebih formal", value: "tegas" }
+                      - { label: "Sedang", value: "sedang" }
+                      - { label: "Bulat, terasa lebih ramah", value: "bulat" }
+                  - { label: "Tebal buram kaca", name: "blur", widget: "number", required: false, default: 20, value_type: "int", min: 0, max: 40, hint: "Satuan piksel. Nol berarti kaca bening tanpa buram. Semakin tebal semakin terasa seperti kaca, tapi juga semakin berat di perangkat lama." }
+                  - { label: "Kecepatan gerak latar", name: "blobSpeed", widget: "number", required: false, default: 34, value_type: "int", min: 10, max: 120, hint: "Satuan detik untuk satu putaran penuh. Semakin besar semakin tenang geraknya." }
+                  - label: "Gaya judul besar"
+                    name: "headingStyle"
+                    widget: "select"
+                    required: false
+                    default: "gradien"
+                    hint: "Judul bergradien warna itu salah satu ciri yang paling sering dipakai situs hasil desain otomatis. Pilih Satu warna kalau ingin terlihat lebih dirancang tangan."
+                    options:
+                      - { label: "Gradien warna", value: "gradien" }
+                      - { label: "Satu warna, lebih tenang", value: "solid" }
 
 
       # ------------------------------------------------------------------------
@@ -2114,6 +2168,15 @@ collections:
             collapsed: true
             required: false
             hint: "Pencarian cepat"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Salin tautan ke bagian ini"
+            name: "sectionCopyLink"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Berbagi dan unduhan"
             fields:
               - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
               - { label: "English (opsional)", name: "en", widget: "string", required: false }

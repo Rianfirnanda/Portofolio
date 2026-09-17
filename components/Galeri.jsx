@@ -90,6 +90,7 @@ export default function Galeri() {
     <section id="gallery" className="scroll-mt-28 px-4 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
+          id="gallery"
           eyebrow={t(sections.gallery?.eyebrow)}
           title={judul}
           subtitle={t(sections.gallery?.subtitle)}
