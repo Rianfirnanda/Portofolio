@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
@@ -25,7 +25,19 @@ export default function RelBagian() {
 
   const aktifkan = portfolio.appearance?.sectionRail !== false;
   const isHome = pathname === '/' || pathname === '';
-  const items = (portfolio.nav ?? []).filter((item) => item.type !== 'page');
+  /*
+    useMemo di sini bukan penghematan mikro, melainkan syarat kebenaran.
+
+    Daftar ini masuk ke daftar kebergantungan useEffect di bawah. Tanpa
+    dibekukan, .filter() membuat array BARU pada tiap penggambaran, React
+    membacanya sebagai kebergantungan yang berubah, lalu IntersectionObserver
+    dibongkar dan dipasang ulang setiap kali sorotan berpindah bagian.
+
+    Diukur langsung di peramban, sekali gulir dari atas sampai bawah: tanpa
+    useMemo pengamatnya dibangun tujuh kali, dengan useMemo sekali. Isinya
+    sendiri tidak pernah berubah sepanjang umur halaman.
+  */
+  const items = useMemo(() => (portfolio.nav ?? []).filter((item) => item.type !== 'page'), []);
 
   useEffect(() => {
     if (!aktifkan || !isHome || typeof IntersectionObserver === 'undefined') return undefined;

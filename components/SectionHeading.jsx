@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { portfolio } from '@/data/portfolio';
 import { useLanguage } from '@/components/LanguageProvider';
 import Reveal from '@/components/Reveal';
@@ -18,7 +18,14 @@ import Icon from '@/components/Icon';
 export default function SectionHeading({ id, eyebrow, title, subtitle, align = 'left' }) {
   const { t } = useLanguage();
   const [tersalin, setTersalin] = useState(false);
+  const jamRef = useRef(null);
   const jangkarAktif = Boolean(id) && portfolio.appearance?.headingAnchor !== false;
+
+  // Penanda "tersalin" kembali sendiri setelah 1,8 detik. Jamnya dibatalkan
+  // saat komponen dilepas, supaya tidak ada perubahan state pada komponen yang
+  // sudah tidak ada, misalnya ketika pengunjung pindah halaman tepat setelah
+  // menekan tombolnya.
+  useEffect(() => () => clearTimeout(jamRef.current), []);
 
   const alignment =
     align === 'center' ? 'items-center text-center mx-auto' : 'items-start text-left';
@@ -31,7 +38,8 @@ export default function SectionHeading({ id, eyebrow, title, subtitle, align = '
       return;
     }
     setTersalin(true);
-    setTimeout(() => setTersalin(false), 1800);
+    clearTimeout(jamRef.current);
+    jamRef.current = setTimeout(() => setTersalin(false), 1800);
   };
 
   return (
