@@ -1,0 +1,352 @@
+/* ==========================================================================
+ *  app/panduan.css  |  MODUL PANDUAN PENGGUNAAN
+ * --------------------------------------------------------------------------
+ *  Halaman ini dokumen, bukan halaman jelajah. Aturannya sama dengan dua
+ *  halaman di bawah /cetak/: hitam di atas putih, apa pun tema yang sedang
+ *  dipakai pengunjung, dan tata letaknya menyesuaikan kertas A4.
+ *
+ *  Alasannya sederhana. Panduan dibaca orang yang sedang bingung, sering
+ *  sambil membuka panel di jendela sebelah, dan kadang dicetak lalu ditaruh
+ *  di meja. Ketiga keadaan itu butuh halaman yang tenang, bukan halaman yang
+ *  berkaca dan bergerak.
+ * ========================================================================== */
+
+@page {
+  size: A4;
+  margin: 18mm 16mm;
+}
+
+.pan-lembar {
+  min-height: 100svh;
+  background: #eef1f6;
+}
+
+.pan-kertas {
+  background: #ffffff;
+}
+
+.pan {
+  max-width: 178mm;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+  color: #111827;
+  background: #ffffff;
+  font-size: 10.5pt;
+  line-height: 1.62;
+}
+
+/* --------------------------------------------------------------------------
+ *  BILAH TOMBOL
+ *  Tidak pernah ikut tercetak.
+ * -------------------------------------------------------------------------- */
+.pan-bilah {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 0.8125rem;
+}
+
+.pan-bilah a,
+.pan-bilah button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(226, 232, 240, 0.28);
+  border-radius: 0.5rem;
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pan-bilah .pan-utama {
+  background: #2f4bb8;
+  border-color: #2f4bb8;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.pan-bilah-kanan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+ *  KEPALA
+ * -------------------------------------------------------------------------- */
+.pan-kepala {
+  padding-bottom: 1.1rem;
+  border-bottom: 2px solid #2f4bb8;
+}
+
+.pan-judul {
+  margin: 0;
+  font-size: 26pt;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #0f172a;
+}
+
+.pan-anak {
+  margin: 0.4rem 0 0;
+  font-size: 11pt;
+  color: #4b5563;
+}
+
+.pan-pembuka {
+  margin: 0.45rem 0 0;
+  max-width: 62ch;
+}
+
+/* --------------------------------------------------------------------------
+ *  DAFTAR ISI
+ * -------------------------------------------------------------------------- */
+.pan-daftar-isi {
+  margin-top: 1.6rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background: #f9fafb;
+  /* Daftar isi tidak boleh terbelah dua halaman. Setengah daftar isi di
+     lembar pertama dan setengah lagi di lembar kedua justru lebih sulit
+     dipakai daripada tidak ada daftar isi sama sekali. */
+  break-inside: avoid;
+}
+
+.pan-daftar-isi h2 {
+  margin: 0 0 0.6rem;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4b5563;
+}
+
+.pan-daftar-isi ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: isi;
+}
+
+.pan-daftar-isi li {
+  counter-increment: isi;
+  padding: 0.16rem 0;
+}
+
+.pan-daftar-isi li::before {
+  content: counter(isi, decimal-leading-zero) '  ';
+  color: #2f4bb8;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.pan-daftar-isi a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+ *  BAGIAN
+ * -------------------------------------------------------------------------- */
+.pan-bagian {
+  margin-top: 1.9rem;
+  /* Judul bagian tidak boleh tertinggal sendirian di dasar halaman. */
+  break-inside: auto;
+}
+
+.pan-bagian-judul {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 13pt;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0f172a;
+  break-after: avoid;
+}
+
+.pan-nomor {
+  flex-shrink: 0;
+  font-size: 10pt;
+  font-weight: 700;
+  color: #2f4bb8;
+  font-variant-numeric: tabular-nums;
+}
+
+.pan p {
+  margin: 0 0 0.6rem;
+  max-width: 68ch;
+}
+
+.pan p:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+ *  DAFTAR
+ * -------------------------------------------------------------------------- */
+/* Jenis penandanya ditulis eksplisit. Tailwind mengosongkan list-style pada
+   semua ol dan ul lewat aturan penyeragamannya, jadi tanpa dua baris di bawah
+   ini langkah bernomor tampil tanpa nomor sama sekali, dan daftar bertitik
+   tampil tanpa titik. */
+.pan ol.pan-langkah {
+  margin: 0 0 0.7rem;
+  padding-left: 1.45rem;
+  max-width: 68ch;
+  list-style: decimal outside;
+}
+
+.pan ul.pan-butir {
+  margin: 0 0 0.7rem;
+  padding-left: 1.2rem;
+  max-width: 68ch;
+  list-style: disc outside;
+}
+
+.pan li {
+  margin-bottom: 0.22rem;
+  break-inside: avoid;
+}
+
+/* --------------------------------------------------------------------------
+ *  TABEL
+ *
+ *  Satu satunya tempat di seluruh proyek ini yang memakai tabel, dan di sini
+ *  memang tabel yang paling tepat: isinya benar benar berpasangan, kolom kiri
+ *  pertanyaan dan kolom kanan jawabannya.
+ * -------------------------------------------------------------------------- */
+.pan-tabel-bungkus {
+  margin: 0 0 0.8rem;
+  overflow-x: auto;
+}
+
+.pan table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9.5pt;
+}
+
+.pan th {
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1.5px solid #cbd5e1;
+  text-align: left;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b5563;
+}
+
+.pan td {
+  padding: 0.42rem 0.6rem;
+  border-bottom: 1px solid #eef1f6;
+  vertical-align: top;
+}
+
+.pan tr {
+  break-inside: avoid;
+}
+
+/* Kolom pertama biasanya nama atau istilah, jadi ditebalkan dan dijaga
+   supaya tidak melar mengambil seluruh lebar tabel. */
+.pan td:first-child {
+  width: 30%;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* --------------------------------------------------------------------------
+ *  KOTAK CATATAN
+ * -------------------------------------------------------------------------- */
+.pan-catatan {
+  margin: 0 0 0.8rem;
+  padding: 0.7rem 0.9rem;
+  border-left: 3px solid #2f4bb8;
+  background: #f5f7fc;
+  border-radius: 0 0.35rem 0.35rem 0;
+  break-inside: avoid;
+}
+
+.pan-catatan-judul {
+  margin: 0 0 0.2rem;
+  font-size: 9.5pt;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.pan-catatan p {
+  margin: 0;
+  font-size: 9.5pt;
+}
+
+/* --------------------------------------------------------------------------
+ *  KAKI
+ * -------------------------------------------------------------------------- */
+.pan-kaki {
+  margin-top: 2.5rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 8.5pt;
+  color: #6b7280;
+}
+
+/* --------------------------------------------------------------------------
+ *  SAAT DICETAK
+ * -------------------------------------------------------------------------- */
+@media print {
+  .pan-lembar,
+  .pan-kertas,
+  .pan {
+    background: #ffffff;
+  }
+
+  /* Di layar, lembarnya dipaksa setinggi jendela supaya latar abu abunya
+     terlihat sebagai meja. Di atas kertas aturan itu justru menambah satu
+     lembar kosong di belakang, karena tinggi jendela saat mencetak sama
+     dengan tinggi satu halaman penuh. */
+  .pan-lembar {
+    min-height: 0;
+  }
+
+  /*
+    Sisa ruang kecil di kiri dan kanan, walau tepi halaman sudah diatur
+    pencetaknya.
+
+    Tanpa ini, tulisan digambar tepat di garis tepi kertas, dan huruf pertama
+    tiap baris beserta nomor bagian terpotong separuh. Empat milimeter tidak
+    terlihat sebagai jarak tambahan, tapi cukup untuk memastikan tidak ada
+    yang tersenggol tepi.
+  */
+  .pan {
+    max-width: none;
+    padding: 0 4mm;
+  }
+
+  [data-cetak='sembunyi'] {
+    display: none !important;
+  }
+
+  /* Alamat tautan tidak dicetak di belakang teksnya. Di dokumen ini seluruh
+     tautan mengarah ke dalam dokumen yang sama, jadi alamatnya tidak berguna
+     di atas kertas dan cuma menambah keramaian. */
+  .pan a {
+    color: inherit;
+    text-decoration: none;
+  }
+}

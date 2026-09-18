@@ -15,6 +15,7 @@
     "assets": "node --no-warnings scripts/generate-assets.mjs",
     "placeholders": "node --no-warnings scripts/generate-placeholders.mjs",
     "og": "node scripts/generate-og.mjs",
+    "panduan": "node scripts/generate-panduan.mjs",
     "ikon": "node scripts/generate-favicon.mjs",
     "kecilkan-media": "node scripts/shrink-media.mjs"
   },

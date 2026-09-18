@@ -432,26 +432,62 @@ Tidak ada dependency lain. Ikon, animasi, dan sistem dua bahasa ditulis sendiri.
 | Kartu nama dan motto di foto | Panel, Profil Diri, Kartu pada foto | Dua baris di bawah foto profil. Kosongkan mottonya kalau ingin nama saja. |
 | Pemutar musik | Panel, Pengaturan, Musik | Tidak pernah berbunyi sendiri. Lihat `data/README.md` bagian 18. |
 | Masukan dari tamu | Panel, Masukan Masuk | Butuh `GITHUB_CONTENT_TOKEN` dan repositori privat. Lihat bagian 19. |
+| Unduh CV dan portofolio sebagai Word | Tombol di bilah atas `/cetak/cv/` dan `/cetak/portofolio/` | Berkas `.docx` sungguhan, disusun di peramban tanpa pustaka luar. Lihat `lib/docx.js`. |
+| Tema siap pakai | Panel, Pengaturan Situs, Tampilan | Enam tema yang nilainya sudah dicocokkan. Kolom di bawahnya boleh dikosongkan untuk ikut tema. Lihat `lib/tema.js`. |
+| Modul panduan penggunaan | `/panduan/` dan `/panduan-penggunaan.pdf` | Panduan seluruh fitur, 10 halaman. Isinya di `data/panduan.js`. |
 
 Kolom **English** di seluruh panel boleh dikosongkan. Kalau kosong, versi Inggris
 situs memakai teks Indonesianya.
 
 ---
 
-## 9. Dua berkas unduhan
+## 9. Dua dokumen, empat berkas unduhan
 
-| Berkas | Alamat | Untuk siapa |
+| Dokumen | Alamat | Untuk siapa |
 | --- | --- | --- |
 | Portofolio | `/cetak/portofolio/` | Manusia. Berfoto, berwarna, sertifikasi dua kolom. |
 | CV | `/cetak/cv/` | Mesin pelacak lamaran dulu, baru perekrut. Satu kolom, Arial, tanpa gambar. |
 
 Keduanya halaman tersendiri yang dirancang khusus untuk kertas, bukan hasil
-mencetak halaman utama. Isinya diambil dari data yang sama, jadi ikut berubah
-setiap kamu memperbarui sesuatu lewat panel.
+mencetak halaman utama. Masing masing punya dua tombol simpan di bilah atas:
+**Simpan sebagai PDF** dan **Unduh Word**.
+
+Berkas Word disusun di peramban pengunjung, bukan di server, dan tanpa pustaka
+pihak ketiga. Sebuah `.docx` sebenarnya cuma berkas ZIP berisi XML, dan yang
+dibutuhkan di sini hanya paragraf, huruf tebal, tautan, dan butir. Penulisnya
+ada di `lib/docx.js`, penata rupanya di `lib/docx-dokumen.js`.
+
+Susunan isi kedua dokumen ada di `lib/isi-dokumen.js`, satu sumber untuk empat
+keluaran sekaligus. Menambah satu bagian di berkas itu membuat halaman, PDF,
+dan Word ikut memuatnya tanpa disentuh satu per satu.
 
 Tautannya ada di footer dan di pencarian cepat Ctrl+K. Penjelasan lengkap
 beserta alasan di balik tiap keputusan desainnya ada di `data/README.md`
 bagian 21.
+
+---
+
+## 9b. Modul panduan penggunaan
+
+Panduan lengkap mengurus situs ini, ditulis untuk orang yang belum pernah
+memakai panel konten mana pun.
+
+| Bentuk | Alamat | Catatan |
+| --- | --- | --- |
+| Halaman | `/panduan/` | Selalu mengikuti isi terbaru. Bisa dicari dengan Ctrl+F. |
+| PDF | `/panduan-penggunaan.pdf` | 10 halaman A4, bisa disimpan dan dicetak. |
+
+Isinya ditulis sebagai data di `data/panduan.js`, jadi halaman dan PDF-nya tidak
+pernah berbeda. Tombol **Panduan** melayang di pojok kanan bawah panel `/admin`.
+
+Berkas PDF-nya ikut disimpan di repositori dan dibuat ulang dengan perintah
+terpisah, bukan saat build, karena mencetak PDF butuh peramban sungguhan dan
+mesin build di Vercel tidak punya peramban:
+
+```bash
+npm run build && npm start   # di terminal lain
+npm run panduan
+```
 
 ## 10. Mesin pencari
 
