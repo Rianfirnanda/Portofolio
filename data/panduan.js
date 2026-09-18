@@ -347,7 +347,7 @@ export const panduan = {
             ['Tebal buram kaca', 'Seberapa buram permukaan kaca. Nol berarti bening.'],
             ['Kecepatan gerak latar', 'Berapa detik untuk satu putaran penuh. Makin besar makin tenang.'],
             ['Gaya judul besar', 'Satu warna, atau bergradien'],
-            ['Huruf judul', 'Berkait seperti huruf di buku, atau polos seperti isi situs'],
+            ['Huruf judul', 'Tiga pilihan: modern, berkait seperti huruf di buku, atau polos seperti isi situs'],
           ],
         },
         {

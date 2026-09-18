@@ -30,19 +30,41 @@ const plusJakarta = localFont({
 });
 
 /**
- * Instrument Serif, dipakai khusus untuk nama besar di sampul dan judul tiap
- * bagian. Di luar itu seluruh situs tetap memakai Plus Jakarta Sans.
+ * =============================================================================
+ *  HURUF JUDUL
+ * =============================================================================
  *
- * KENAPA HURUF KEDUA
- * Halaman yang seluruhnya memakai satu huruf sans membuat tiap bagian
- * terbaca sama pentingnya. Satu huruf berkait yang dipakai hemat, cuma di
- * judul, langsung memberi hierarki: mata tahu mana kepala tulisan dan mana
- * isinya, tanpa perlu ukuran yang makin besar atau warna yang makin mencolok.
+ *  Nama besar di sampul dan judul tiap bagian memakai huruf yang berbeda dari
+ *  isi situs. Alasannya bukan hiasan: halaman yang seluruhnya memakai satu
+ *  huruf membuat tiap bagian terbaca sama pentingnya. Huruf kedua yang dipakai
+ *  hemat, cuma di judul, langsung memberi hierarki tanpa perlu ukuran yang
+ *  makin besar atau warna yang makin mencolok.
  *
- * Dipilih yang cuma punya satu ketebalan, jadi tambahannya 43 kB untuk dua
- * gaya, tegak dan miring. Lisensinya SIL Open Font License 1.1, boleh
- * dipakai dan disertakan ulang, keterangannya di app/fonts/LISENSI.md.
+ *  Ada dua pilihan, dan kamu tentukan sendiri di panel, Pengaturan Situs >
+ *  Tampilan > Huruf judul. Pilihan ketiga, "polos", tidak butuh berkas baru
+ *  karena memakai Plus Jakarta Sans yang sudah ada.
+ *
+ *  KENAPA DUA DUANYA DISERTAKAN PADAHAL CUMA SATU YANG DIPAKAI
+ *  Peramban mengunduh berkas huruf hanya kalau ada tulisan di halaman yang
+ *  benar benar memakainya. Yang tidak terpilih tidak pernah diunduh siapa pun,
+ *  jadi menyertakan keduanya tidak membebani pengunjung. Yang ikut disiapkan
+ *  lebih awal cuma yang jadi bawaan.
+ *
+ *  Keduanya berlisensi SIL Open Font License 1.1, keterangannya di
+ *  app/fonts/LISENSI.md.
+ * =============================================================================
  */
+
+/** Bawaan. Geometris, modern, dan cuma 22 kB untuk seluruh rentang tebalnya. */
+const spaceGrotesk = localFont({
+  src: [{ path: './fonts/SpaceGrotesk-Variable-latin.woff2', weight: '300 700', style: 'normal' }],
+  variable: '--font-space',
+  display: 'swap',
+  fallback: ['ui-sans-serif', 'system-ui', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
+});
+
+/** Pilihan huruf berkait, untuk yang ingin kesan buku. Tidak disiapkan lebih
+ *  awal karena bukan bawaan; kalau dipilih, unduhannya menyusul sebentar. */
 const instrumentSerif = localFont({
   src: [
     { path: './fonts/InstrumentSerif-Regular-latin.woff2', weight: '400', style: 'normal' },
@@ -50,6 +72,7 @@ const instrumentSerif = localFont({
   ],
   variable: '--font-instrument',
   display: 'swap',
+  preload: false,
   fallback: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
 });
 
@@ -204,7 +227,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang={locale}
-      className={`${plusJakarta.variable} ${instrumentSerif.variable}`}
+      className={`${plusJakarta.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
       <head>

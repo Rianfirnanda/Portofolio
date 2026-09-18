@@ -25,10 +25,11 @@ import Icon from '@/components/Icon';
  * teks yang makin ke bawah makin sulit dibedakan; dengan dia, mata langsung
  * tahu satu babak selesai dan babak berikutnya dimulai.
  *
- * Judul besarnya memakai huruf berkait. Itu satu satunya tempat di halaman
- * ini, selain nama di sampul, yang memakainya. Dipakai hemat begitu, huruf
- * berkait terbaca sebagai hierarki. Dipakai di mana mana, dia cuma jadi
- * dekorasi.
+ * Judul besarnya memakai huruf judul, yang berbeda dari huruf isi situs. Itu
+ * satu satunya tempat di halaman ini, selain nama di sampul, yang memakainya.
+ * Dipakai hemat begitu, huruf kedua terbaca sebagai hierarki. Dipakai di mana
+ * mana, dia cuma jadi dekorasi. Hurufnya bisa diganti lewat panel, Tampilan >
+ * Huruf judul.
  *
  * Nomornya dihitung otomatis dari bagian mana saja yang punya isi, lihat
  * lib/urutan-bagian.js.
@@ -40,11 +41,13 @@ import Icon from '@/components/Icon';
  * Diklik, alamat lengkap ke bagian itu tersalin ke papan klip, jadi kamu bisa
  * mengirim tautan yang langsung mendarat di bagian Proyek, misalnya.
  *
- * Di layar sentuh yang tidak punya kursor, ikonnya selalu terlihat samar,
- * karena kalau tidak dia tidak akan pernah bisa ditemukan.
+ * Hanya ada di perangkat yang punya kursor. Di ponsel dia tidak pernah muncul,
+ * karena ikon kecil tak dikenal di sebelah judul cuma jadi pertanyaan, dan
+ * peramban ponsel sudah punya tombol bagikan sendiri. Lihat .tombol-salin di
+ * app/globals.css.
  *
- * Bisa dimatikan lewat panel, Pengaturan Situs > Nama Situs dan SEO >
- * Tautan salin di judul bagian.
+ * Bisa dimatikan sepenuhnya lewat panel, Pengaturan Situs > Nama Situs dan
+ * SEO > Tautan salin di judul bagian.
  */
 export default function SectionHeading({ eyebrow, title, subtitle, align = 'left', id }) {
   const { t } = useLanguage();
@@ -103,9 +106,9 @@ export default function SectionHeading({ eyebrow, title, subtitle, align = 'left
             onClick={salin}
             aria-label={`${t(portfolio.ui.sectionCopyLink)}: ${title}`}
             title={tersalin ? t(portfolio.ui.copied) : t(portfolio.ui.sectionCopyLink)}
-            className={`grid h-7 w-7 shrink-0 translate-y-[-0.15em] place-items-center rounded-full border border-line text-subtle transition-all duration-300 hover:border-line-strong hover:text-accent focus-visible:opacity-100 ${
+            className={`tombol-salin h-7 w-7 shrink-0 translate-y-[-0.15em] place-items-center rounded-full border border-line text-subtle transition-all duration-300 hover:border-line-strong hover:text-accent focus-visible:opacity-100 ${
               tersalin ? 'text-accent opacity-100' : 'opacity-0 group-hover:opacity-100'
-            } max-[1024px]:opacity-40`}
+            }`}
           >
             <Icon name={tersalin ? 'check' : 'copy'} className="h-3.5 w-3.5" />
           </button>

@@ -30,9 +30,20 @@
   --sudut-tombol: 0.65rem;
   --kaca-buram: 20px;
 
-  /* Huruf judul. Bisa ditukar ke huruf polos lewat panel, Tampilan >
-   * Huruf judul. Lihat lib/tema.js. */
-  --tampil-huruf: var(--font-instrument), Georgia, Cambria, 'Times New Roman', serif;
+  /*
+    Huruf judul, lengkap dengan tebal dan kerapatannya.
+
+    Ketiganya satu paket, dan itu perlu. Tiap huruf punya ukuran optis yang
+    berbeda: yang satu sudah terasa tegas di tebal 500, yang lain baru terbaca
+    sebagai judul di tebal 700. Kerapatan hurufnya pun begitu. Kalau cuma nama
+    hurufnya yang ditukar, salah satu pilihan pasti terlihat kurus atau
+    terlalu renggang.
+
+    Bisa ditukar lewat panel, Tampilan > Huruf judul. Lihat lib/tema.js.
+  */
+  --tampil-huruf: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --tampil-tebal: 500;
+  --tampil-jarak: -0.03em;
 
   /* ---- MODE TERANG (default) ---- */
   --bg: #f5f7fc;
@@ -456,9 +467,36 @@ time,
   */
   .judul-tampil {
     font-family: var(--tampil-huruf);
-    font-weight: 400;
-    letter-spacing: -0.015em;
-    line-height: 1.04;
+    font-weight: var(--tampil-tebal);
+    letter-spacing: var(--tampil-jarak);
+    line-height: 1.06;
+  }
+
+  /*
+    TOMBOL SALIN DI SAMPING JUDUL BAGIAN
+
+    Hanya ada di perangkat yang punya kursor.
+
+    Dulu di layar sentuh dia dibuat selalu terlihat samar, dengan alasan kalau
+    tidak begitu dia tidak akan pernah bisa ditemukan. Alasan itu keliru
+    arahnya: yang terjadi justru sebuah ikon kecil tak dikenal nongkrong di
+    sebelah judul, dan orang bertanya tanya itu tombol apa.
+
+    Di ponsel, menyalin alamat satu bagian bukan hal yang orang cari, dan
+    kalaupun mau, peramban ponsel sudah punya tombol bagikan sendiri. Jadi di
+    sana tombol ini tidak perlu ada sama sekali.
+
+    (hover: hover) menanyakan apakah perangkatnya punya penunjuk yang bisa
+    melayang di atas sesuatu tanpa menekannya, dan cuma tetikus serta trackpad
+    yang bisa. Layar sentuh tidak.
+  */
+  .tombol-salin {
+    display: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .tombol-salin {
+      display: grid;
+    }
   }
 
   /*

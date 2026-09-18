@@ -21,25 +21,25 @@ import Reveal from '@/components/Reveal';
  *
  * Yang berubah dari versi sebelumnya, dan alasannya:
  *
- *   Baris keterangan diri   dulu lencana kapsul berkaca. Kapsul itu menarik
- *                           perhatian ke dirinya sendiri, padahal isinya cuma
- *                           keterangan. Sekarang jadi satu baris tipis
- *                           bergaris rambut, seperti kepala surat.
+ *   Baris keterangan diri   status dan tempat tinggal dalam satu bilah kaca,
+ *                           dipisah garis tegak tipis. Keduanya menjawab
+ *                           pertanyaan yang sama, jadi dibaca sekali.
  *
  *   Nama                    dulu bergradien warna. Gradien pada teks sebesar
  *                           ini membuat sebagian hurufnya lebih pucat dari
  *                           yang lain, dan nama orang tidak pantas separuh
- *                           pudar. Sekarang huruf berkait, satu warna.
+ *                           pudar. Sekarang satu warna, dengan huruf judul
+ *                           yang bisa kamu ganti lewat panel.
  *
  *   Tautan sosial           dulu lingkaran berisi ikon saja. Ikon tanpa
  *                           tulisan memaksa pengunjung menebak, dan tebakan
  *                           itu sering salah untuk lambang yang mirip.
  *                           Sekarang ikonnya ditemani namanya.
  *
- *   Cahaya di balik foto    dulu lingkaran berpendar besar. Diganti bingkai
- *                           tipis yang bergeser sedikit ke belakang foto,
- *                           cara lama di desain cetak untuk memberi kedalaman
- *                           tanpa menambah cahaya.
+ *   Cahaya di balik foto    dulu lingkaran berpendar besar. Dibuang, dan
+ *                           tidak diganti apa apa: kartu kacanya sendiri
+ *                           sudah cukup sebagai bingkai. Lihat catatan di
+ *                           kolom foto di bawah.
  */
 export default function Hero() {
   const { lang, t } = useLanguage();
@@ -62,23 +62,36 @@ export default function Hero() {
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
         {/* ---------------- Kolom teks ---------------- */}
         <div className="flex flex-col items-start">
-          {/* Baris keterangan diri: status dan tempat tinggal, dipisah garis
-              rambut yang mengisi sisa lebar. */}
-          <Reveal className="w-full">
-            <div className="flex w-full flex-wrap items-center gap-x-3 gap-y-2 text-[0.8125rem] text-subtle">
-              {profile.availability?.label ? (
-                /*
-                  Status ketersediaan memakai permukaan kaca, sedangkan tempat
-                  tinggal di sebelahnya tidak.
+          {/*
+            BARIS KETERANGAN DIRI
 
-                  Bedanya disengaja. Keduanya keterangan, tapi cuma satu yang
-                  berubah ubah dan cuma satu yang jadi alasan orang menghubungi:
-                  status. Permukaan kaca di sekelilingnya membuat dia terbaca
-                  sebagai penanda yang hidup, bukan sebagai baris keterangan
-                  biasa. Kalau keduanya diberi kaca, tidak ada yang menonjol
-                  dan kacanya cuma jadi hiasan.
-                */
-                <span className="glass inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-muted">
+            Status ketersediaan dan tempat tinggal ditaruh di dalam SATU bilah
+            kaca, dipisah garis tegak tipis, bukan dua benda yang berdiri
+            sendiri.
+
+            Sebabnya keduanya menjawab pertanyaan yang sama, "orang ini
+            bagaimana dan di mana", jadi wajar kalau dibaca sekali sebagai satu
+            hal. Sebagai dua benda terpisah, yang terjadi di layar ponsel
+            adalah sebuah kapsul melayang di satu baris lalu sebaris teks polos
+            di baris berikutnya, dan keduanya terbaca tidak berhubungan.
+
+            Bilahnya dibuat menempel pada isinya, bukan selebar kolom. Bilah
+            selebar kolom akan terbaca sebagai palang pemberitahuan, padahal
+            ini cuma keterangan.
+
+            Di layar sempit keduanya ditumpuk, bukan dibiarkan melipat sendiri.
+            Bedanya penting: kotak yang isinya melipat selalu melebar sampai
+            batas ruang yang tersedia, jadi bilahnya jadi selebar layar. Kotak
+            yang isinya ditumpuk cuma selebar baris terpanjangnya.
+
+            Sudutnya rounded-2xl, bukan kapsul. Di layar sempit isinya dua
+            baris, dan kapsul setinggi dua baris bentuknya jadi lonjong seperti
+            telur.
+          */}
+          <Reveal>
+            <div className="glass inline-flex flex-col items-start gap-1.5 rounded-2xl px-3.5 py-2 text-[0.8125rem] text-muted sm:flex-row sm:items-center sm:gap-3">
+              {profile.availability?.label ? (
+                <span className="inline-flex items-center gap-2">
                   {/* Titik status. Warnanya kamu atur sendiri lewat panel, di
                       menu Profil Diri bagian Status Ketersediaan. Kalau
                       dikosongkan, dipakai hijau seperti semula. */}
@@ -99,14 +112,19 @@ export default function Hero() {
                 </span>
               ) : null}
 
+              {profile.availability?.label && profile.location ? (
+                /* Garis pemisah, cuma muncul kalau keduanya sebaris. Begitu
+                   isinya turun ke baris kedua, garis tegak di pangkal baris
+                   itu jadi tanda baca yang menggantung. */
+                <span aria-hidden="true" className="hidden h-3.5 w-px bg-line-strong sm:block" />
+              ) : null}
+
               {profile.location ? (
-                <span className="inline-flex items-center gap-1.5">
-                  <Icon name="map-pin" className="h-3.5 w-3.5" aria-hidden="true" />
+                <span className="inline-flex items-center gap-1.5 text-subtle">
+                  <Icon name="map-pin" className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                   {profile.location}
                 </span>
               ) : null}
-
-              <hr className="aturan hidden min-w-8 flex-1 sm:block" />
             </div>
           </Reveal>
 
@@ -115,9 +133,9 @@ export default function Hero() {
               <span className="block text-[0.8125rem] font-semibold uppercase tracking-[0.2em] text-subtle">
                 {lang === 'id' ? 'Halo, saya' : "Hi, I'm"}
               </span>
-              {/* Huruf berkait, satu warna, baris dirapatkan. Ukurannya
-                  dibiarkan tumbuh sampai layar lebar karena ini satu satunya
-                  hal di halaman yang boleh sebesar itu. */}
+              {/* Satu warna, baris dirapatkan. Ukurannya dibiarkan tumbuh
+                  sampai layar lebar karena ini satu satunya hal di halaman
+                  yang boleh sebesar itu. */}
               <span className="judul-tampil mt-3 block text-[2.9rem] text-fg sm:text-[4.1rem] lg:text-[4.9rem]">
                 {profile.name}
               </span>
@@ -132,10 +150,11 @@ export default function Hero() {
 
           {t(profile.tagline) ? (
             <Reveal delay={170} className="w-full">
-              {/* Kalimat pegangan, ditulis miring dengan huruf berkait yang
-                  sama dengan judul. Satu satunya kalimat di halaman ini yang
-                  bersuara pribadi, jadi wajar kalau rupanya juga berbeda. */}
-              <p className="mt-6 max-w-xl border-l border-line-strong pl-5 font-tampil text-[1.2rem] italic leading-snug text-muted">
+              {/* Kalimat pegangan. Memakai huruf isi situs, bukan huruf judul:
+                  huruf judul tidak punya gaya miring sungguhan, jadi peramban
+                  membuatnya sendiri dengan cara memiringkan huruf tegak, dan
+                  hasilnya terlihat seperti huruf yang dipaksa condong. */}
+              <p className="mt-6 max-w-xl border-l border-line-strong pl-5 text-[1.0625rem] italic leading-relaxed text-muted">
                 {t(profile.tagline)}
               </p>
             </Reveal>

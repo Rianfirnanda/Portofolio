@@ -1650,8 +1650,9 @@ collections:
                     name: "headingFont"
                     widget: "select"
                     required: false
-                    hint: "Kosongkan untuk ikut tema. Huruf berkait dipakai di nama besar pada sampul dan judul tiap bagian saja, tidak di isi tulisan."
+                    hint: "Kosongkan untuk ikut tema. Huruf ini dipakai di nama besar pada sampul dan judul tiap bagian saja, tidak di isi tulisan."
                     options:
+                      - { label: "Modern, geometris dan bersih", value: "modern" }
                       - { label: "Berkait, seperti huruf di buku", value: "berkait" }
                       - { label: "Polos, sama dengan isi situs", value: "polos" }
 

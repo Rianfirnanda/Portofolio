@@ -1,12 +1,13 @@
 # Lisensi huruf
 
-Dua keluarga huruf disertakan langsung di dalam repositori ini, bukan dipanggil
+Tiga keluarga huruf disertakan langsung di dalam repositori ini, bukan dipanggil
 dari server luar. Alasannya dua: halaman tampil benar walau server font sedang
 bermasalah, dan alamat pengunjung tidak ikut terkirim ke pihak ketiga.
 
 | Berkas | Huruf | Lisensi |
 | --- | --- | --- |
 | `PlusJakartaSans-Variable-latin.woff2` | Plus Jakarta Sans | SIL Open Font License 1.1 |
+| `SpaceGrotesk-Variable-latin.woff2` | Space Grotesk | SIL Open Font License 1.1 |
 | `InstrumentSerif-Regular-latin.woff2` | Instrument Serif | SIL Open Font License 1.1 |
 | `InstrumentSerif-Italic-latin.woff2` | Instrument Serif Italic | SIL Open Font License 1.1 |
 
