@@ -67,7 +67,18 @@ export default function Hero() {
           <Reveal className="w-full">
             <div className="flex w-full flex-wrap items-center gap-x-3 gap-y-2 text-[0.8125rem] text-subtle">
               {profile.availability?.label ? (
-                <span className="inline-flex items-center gap-2">
+                /*
+                  Status ketersediaan memakai permukaan kaca, sedangkan tempat
+                  tinggal di sebelahnya tidak.
+
+                  Bedanya disengaja. Keduanya keterangan, tapi cuma satu yang
+                  berubah ubah dan cuma satu yang jadi alasan orang menghubungi:
+                  status. Permukaan kaca di sekelilingnya membuat dia terbaca
+                  sebagai penanda yang hidup, bukan sebagai baris keterangan
+                  biasa. Kalau keduanya diberi kaca, tidak ada yang menonjol
+                  dan kacanya cuma jadi hiasan.
+                */
+                <span className="glass inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-muted">
                   {/* Titik status. Warnanya kamu atur sendiri lewat panel, di
                       menu Profil Diri bagian Status Ketersediaan. Kalau
                       dikosongkan, dipakai hijau seperti semula. */}
@@ -176,14 +187,24 @@ export default function Hero() {
 
         {/* ---------------- Kolom foto ---------------- */}
         <Reveal delay={180} className="order-first mx-auto w-full max-w-[19rem] lg:order-last lg:max-w-sm">
-          <div className="relative">
-            {/* Bingkai tipis yang bergeser ke kanan bawah, di belakang foto.
-                Memberi kedalaman tanpa cahaya berpendar. */}
-            <span
-              aria-hidden="true"
-              className="absolute inset-0 -z-10 translate-x-3 translate-y-3 rounded-[1.5rem] border border-line-strong"
-            />
+          {/*
+            TIDAK ADA BINGKAI TAMBAHAN DI BELAKANG FOTO
 
+            Sempat dipasang bingkai tipis yang bergeser ke kanan bawah, cara
+            lama di desain cetak untuk memberi kedalaman. Di sini tidak bisa,
+            dan sebabnya bukan selera.
+
+            Kartu fotonya berbahan kaca, artinya tembus pandang. Bingkai yang
+            ditaruh di belakangnya ikut TERLIHAT MENEMBUS kartu, jadi dua garis
+            nyasar melintang di dalam foto. Digeser sedikit, garisnya jatuh
+            tepat di sebelah garis tepi kartu dan terbaca sebagai tepi yang
+            gagal sejajar. Digeser jauh, dia jadi kotak kedua yang berdiri
+            sendiri.
+
+            Kaca dan bingkai geser memang tidak bisa dipakai bersamaan. Kartu
+            kacanya sendiri sudah cukup sebagai bingkai.
+          */}
+          <div className="relative">
             <div className="glass relative overflow-hidden rounded-[1.5rem] p-2.5">
               <SmartImage
                 src={profile.avatar}
