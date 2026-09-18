@@ -27,7 +27,12 @@
   /* Bisa diubah lewat panel, menu Pengaturan Situs > Tampilan.
    * Lihat lib/tema.js. Nilai di sini cuma bawaan kalau panel dikosongkan. */
   --sudut-kartu: 1rem;
+  --sudut-tombol: 0.65rem;
   --kaca-buram: 20px;
+
+  /* Huruf judul. Bisa ditukar ke huruf polos lewat panel, Tampilan >
+   * Huruf judul. Lihat lib/tema.js. */
+  --tampil-huruf: var(--font-instrument), Georgia, Cambria, 'Times New Roman', serif;
 
   /* ---- MODE TERANG (default) ---- */
   --bg: #f5f7fc;
@@ -93,6 +98,10 @@
  * atas lewat @theme inline, sehingga ikut berubah saat tema diganti. */
 @theme inline {
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Huruf judul. Dipakai lewat class font-tampil, dan sengaja cuma di nama
+   * besar dan judul bagian. Lihat app/layout.js dan lib/tema.js. */
+  --font-tampil: var(--tampil-huruf);
 
   --color-bg: var(--bg);
   --color-fg: var(--fg);
@@ -319,8 +328,10 @@ time,
       var(--accent-3),
       var(--accent-1)
     );
-    background-size: 300% 300%;
-    animation: border-flow 9s linear infinite;
+    /* Dulu gradiennya berjalan terus. Bingkai yang bergerak menarik mata ke
+       tepi kartu, bukan ke isinya, dan di halaman yang punya beberapa kartu
+       unggulan sekaligus hasilnya gelisah. Sekarang diam. */
+    background-size: 100% 100%;
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
@@ -330,7 +341,7 @@ time,
       linear-gradient(#fff 0 0);
     mask-composite: exclude;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.55;
   }
 
   /* Teks bergradien. Warna awal mengikuti tema agar tetap terbaca. */
@@ -368,28 +379,109 @@ time,
     line-height: 1.45;
   }
 
-  /* Chip kecil untuk skill, tag, dan label. */
+  /*
+    Chip kecil untuk skill, tag, dan label.
+
+    KENAPA TANPA GARIS TEPI
+    Halaman ini penuh label: keahlian, tag proyek, tanggal, lokasi, jenis
+    berkas. Waktu tiap label punya garis tepi sendiri, mata membaca puluhan
+    kotak kecil sebelum sampai ke isinya, dan halamannya terasa seperti
+    formulir. Yang dibutuhkan label cuma cukup beda dari teks biasa supaya
+    terbaca sebagai kelompok, dan itu sudah dikerjakan warna dasarnya.
+
+    Sudutnya juga tidak lagi bulat penuh. Bentuk kapsul membuat label sependek
+    "PHP" jadi bulat telur, dan deretan bulat telur adalah ciri paling kentara
+    dari tata letak yang disusun asal tempel.
+  */
   .chip {
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
-    padding: 0.32rem 0.72rem;
+    padding: 0.3rem 0.6rem;
     font-size: 0.78125rem;
     line-height: 1.15rem;
-    border-radius: 999px;
+    border-radius: 0.4rem;
     background-color: var(--chip-bg);
-    border: 1px solid var(--line);
+    border: 1px solid transparent;
     color: var(--chip-fg);
     transition:
       color 0.25s ease,
       border-color 0.25s ease,
-      background-color 0.25s ease,
-      box-shadow 0.25s ease;
+      background-color 0.25s ease;
   }
   .chip:hover {
     color: var(--fg);
-    border-color: color-mix(in oklab, var(--accent-2) 45%, transparent);
-    box-shadow: 0 0 18px -6px color-mix(in oklab, var(--accent-2) 80%, transparent);
+    background-color: color-mix(in oklab, var(--accent-2) 12%, var(--chip-bg));
+  }
+
+  /*
+    Garis rambut pemisah. Dipakai di kepala tiap bagian dan di beberapa daftar.
+    Dibuat memudar di ujung kanan, bukan berhenti mendadak, supaya terbaca
+    sebagai penanda ruang dan bukan sebagai sisi sebuah kotak.
+  */
+  .aturan {
+    height: 1px;
+    border: 0;
+    /* Dimulai dari warna teks yang diredam, bukan dari warna garis kartu.
+       Garis kartu dibuat agar nyaris tak terlihat, dan di sini justru
+       sebaliknya: garis ini harus terbaca sebagai penanda yang disengaja. */
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--fg) 24%, transparent),
+      transparent
+    );
+  }
+
+  /*
+    Nomor urut bagian: 01, 02, 03. Angka kecil di kiri judul.
+
+    Gunanya bukan hiasan. Halaman ini panjang, dan nomor memberi pengunjung
+    rasa "sudah sampai mana", persis seperti nomor bab di buku. Angkanya
+    memakai lebar tetap supaya 01 dan 11 sama lebarnya dan judul di sebelahnya
+    tidak bergeser.
+  */
+  .nomor-bagian {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--accent-fg);
+  }
+
+  /*
+    Judul dengan huruf berkait. Ukuran optisnya berbeda dari huruf sans, jadi
+    jarak antarbaris dan antarhurufnya perlu disetel sendiri: huruf berkait
+    dengan kontras tinggi terlihat renggang kalau dibiarkan pada setelan
+    bawaan, dan renggang pada judul besar terbaca sebagai kurang rapi.
+  */
+  .judul-tampil {
+    font-family: var(--tampil-huruf);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.04;
+  }
+
+  /*
+    Tautan tenang: tidak berwarna sampai disentuh kursor, lalu muncul garis
+    bawah tipis. Dipakai untuk deretan tautan sosial dan tautan dalam teks.
+
+    Garis bawahnya dibuat dengan background, bukan text-decoration, supaya
+    bisa tumbuh dari kiri ke kanan. Perbedaannya kecil tapi terasa: garis yang
+    muncul sekaligus terbaca sebagai kedipan, garis yang tumbuh terbaca
+    sebagai jawaban atas gerakan kursor.
+  */
+  .tautan-samar {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition:
+      background-size 0.3s ease,
+      color 0.25s ease;
+  }
+  .tautan-samar:hover {
+    color: var(--fg);
+    background-size: 100% 1px;
   }
 
   /*
@@ -407,7 +499,7 @@ time,
     font-size: 0.8125rem;
     font-weight: 500;
     line-height: 1.2;
-    border-radius: 999px;
+    border-radius: 0.5rem;
     background-color: var(--chip-bg);
     border: 1px solid var(--line);
     color: var(--fg-muted);
@@ -419,8 +511,8 @@ time,
   }
   .tombol-berkas:hover {
     color: var(--fg);
-    border-color: color-mix(in oklab, var(--accent-2) 45%, transparent);
-    box-shadow: 0 0 18px -6px color-mix(in oklab, var(--accent-2) 80%, transparent);
+    border-color: var(--line-strong);
+    background-color: color-mix(in oklab, var(--accent-2) 10%, var(--chip-bg));
   }
   /* Label jenis berkas: pdf, jpg, mp4, dan seterusnya. */
   .tombol-berkas-jenis {
@@ -440,18 +532,25 @@ time,
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    border-radius: 999px;
+    border-radius: var(--sudut-tombol);
     padding: 0.75rem 1.5rem;
     font-size: 0.875rem;
     font-weight: 600;
     color: #ffffff;
-    background-image: linear-gradient(100deg, var(--accent-1), var(--accent-2));
-    box-shadow: 0 16px 36px -18px var(--accent-1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Warna rata, bukan gradien. Gradien pada tombol sekecil ini tidak
+       pernah benar benar terlihat sebagai gradien, yang terlihat cuma
+       warnanya jadi kurang tegas di salah satu ujung. */
+    background-color: var(--accent-1);
+    box-shadow: 0 10px 24px -16px var(--accent-1);
+    transition:
+      background-color 0.25s ease,
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
   }
   .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 44px -18px var(--accent-2);
+    background-color: color-mix(in oklab, var(--accent-1) 88%, #000);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px -16px var(--accent-1);
   }
 
   /* Tombol sekunder berbahan kaca. */
@@ -459,7 +558,7 @@ time,
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    border-radius: 999px;
+    border-radius: var(--sudut-tombol);
     padding: 0.75rem 1.5rem;
     font-size: 0.875rem;
     font-weight: 600;

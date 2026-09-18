@@ -36,16 +36,18 @@
     "lightbox": true,
     "commandPalette": true,
     "theme": {
+      "preset": "biru-tenang",
       "accent1": "",
       "accent2": "",
       "accent3": "",
       "accentLink": "",
       "accentLinkDark": "",
-      "background": "tenang",
-      "radius": "sedang",
+      "background": "",
+      "radius": "",
       "blur": 20,
       "blobSpeed": 34,
-      "headingStyle": "solid"
+      "headingStyle": "",
+      "headingFont": ""
     },
     "sectionAnchor": true
   }

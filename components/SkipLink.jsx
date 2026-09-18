@@ -13,7 +13,7 @@ export default function SkipLink() {
   return (
     <a
       href="#main"
-      className="sr-only rounded-full bg-linear-to-r from-accent-1 to-accent-2 px-4 py-2 text-sm font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60]"
+      className="sr-only bg-accent-1 px-4 py-2 text-sm font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg"
     >
       {t(portfolio.ui.skipToContent)}
     </a>

@@ -37,7 +37,7 @@ export default function ExperienceCard({ item }) {
         {item.image ? <ExperienceMedia item={item} /> : null}
 
         <div className="p-5 sm:p-6">
-        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <div className="flex items-start gap-x-4">
           <div className="flex min-w-0 gap-3">
             {item.logo ? (
               <SmartImage
@@ -50,34 +50,54 @@ export default function ExperienceCard({ item }) {
             ) : null}
 
             <div className="min-w-0">
-              <h3 className="text-[1.0625rem] font-semibold leading-snug text-fg sm:text-lg">{t(item.role)}</h3>
-              <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-accent">
-                <Icon name="building" className="h-3.5 w-3.5 shrink-0" />
-                <span>{t(item.org)}</span>
-                {item.type ? (
-                  <>
-                    <span aria-hidden="true" className="opacity-40">
-                      &bull;
+              {/*
+                Tanggal ditaruh di atas judul, bukan rata kanan di seberangnya.
+
+                Rata kanan itu yang biasa dipakai di CV, dan di CV memang
+                cocok karena nama instansinya pendek. Di sini tidak: satu
+                entri punya keterangan "Konferensi: The 2nd International
+                Conference Bali Gender Studies Forum (BGSF) 2026", dan baris
+                sepanjang itu mendorong tanggalnya turun ke baris sendiri
+                dalam keadaan rata kiri, terlihat seperti tersesat.
+
+                Di atas judul, tanggalnya selalu muat, selalu di tempat yang
+                sama, dan terbaca sebagai tanggal terbitan seperti di majalah.
+              */}
+              {t(item.period) ? (
+                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-subtle tabular-nums">
+                  {t(item.period)}
+                </p>
+              ) : null}
+
+              <h3 className="mt-1 text-[1.0625rem] font-semibold leading-snug text-fg sm:text-lg">
+                {t(item.role)}
+              </h3>
+
+              {/*
+                Instansi, jenis kerja, dan kota jadi satu baris, dipisah titik
+                tengah. Dulu ketiganya punya ikon dan kotak sendiri sendiri:
+                ikon gedung untuk instansi, kapsul berikon kalender untuk
+                tanggal, ikon peta untuk kota. Tiga hiasan untuk tiga
+                keterangan yang bahkan tidak perlu dibaca satu satu.
+
+                Sekarang cuma nama instansinya yang diberi warna, karena itu
+                satu satunya yang biasanya dicari orang, dan sisanya mengikut
+                di belakangnya sebagai keterangan biasa.
+              */}
+              <p className="mt-1.5 text-sm leading-relaxed text-subtle">
+                <span className="text-accent">{t(item.org)}</span>
+                {[t(item.type), t(item.location)].filter(Boolean).map((isi) => (
+                  <span key={isi}>
+                    <span aria-hidden="true" className="px-1.5 opacity-40">
+                      &middot;
                     </span>
-                    <span className="text-subtle">{t(item.type)}</span>
-                  </>
-                ) : null}
+                    {isi}
+                  </span>
+                ))}
               </p>
             </div>
           </div>
-
-          <p className="chip shrink-0">
-            <Icon name="calendar" className="h-3.5 w-3.5" />
-            {t(item.period)}
-          </p>
         </div>
-
-        {item.location ? (
-          <p className="mt-2 flex items-center gap-1.5 text-meta text-subtle">
-            <Icon name="map-pin" className="h-3.5 w-3.5" />
-            {t(item.location)}
-          </p>
-        ) : null}
 
         {description ? (
           <div className="mt-3">

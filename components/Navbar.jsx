@@ -288,8 +288,12 @@ export default function Navbar() {
             aria-label={`${portfolio.profile.name}, ${lang === 'id' ? 'kembali ke beranda' : 'back to home'}`}
             className={`group ml-1 shrink-0 items-center gap-2.5 rounded-full py-1 pl-1 pr-2 text-sm font-bold text-fg ${sembunyiSaatCiut}`}
           >
+            {/* Cincin foto memakai garis tipis, bukan gradien tiga warna.
+                Foto wajah sudah punya cukup warna sendiri, dan cincin
+                berwarna di sekelilingnya membuat kepala orang terlihat
+                seperti ikon aplikasi. */}
             {usePhotoLogo ? (
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-linear-to-br from-accent-1 via-accent-2 to-accent-3 p-[1.5px] transition-transform duration-300 group-hover:scale-105">
+              <span className="grid h-8 w-8 place-items-center rounded-full border border-line-strong p-[1.5px] transition-transform duration-300 group-hover:scale-105">
                 <SmartImage
                   src={profile.avatar}
                   fallbackSrc={profile.avatarFallback}
@@ -373,14 +377,14 @@ export default function Navbar() {
             >
               <span
                 className={`rounded-full px-2.5 py-1 transition-colors ${
-                  langLangsung === 'id' ? 'bg-linear-to-r from-accent-1 to-accent-2 text-white' : 'text-subtle'
+                  langLangsung === 'id' ? 'bg-accent-1 text-white' : 'text-subtle'
                 }`}
               >
                 ID
               </span>
               <span
                 className={`rounded-full px-2.5 py-1 transition-colors ${
-                  langLangsung === 'en' ? 'bg-linear-to-r from-accent-1 to-accent-2 text-white' : 'text-subtle'
+                  langLangsung === 'en' ? 'bg-accent-1 text-white' : 'text-subtle'
                 }`}
               >
                 EN

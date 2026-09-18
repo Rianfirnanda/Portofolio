@@ -69,16 +69,34 @@ export default function MeshBackground() {
         }}
       />
 
-      {/* 3. Sapuan aurora di bagian atas */}
+      {/*
+        3. Sapuan aurora di bagian atas.
+
+        Dua lapis, dan itu bukan kebetulan. Lapis luar memegang kepekatan dari
+        panel, lapis dalam yang bergerak.
+
+        Dulu keduanya satu elemen, dan hasilnya sebuah bug yang bertahan lama:
+        animasi aurora-sweep ikut mengatur opacity, dan nilai dari keyframe
+        selalu menang atas nilai yang ditulis di style. Jadi pilihan latar
+        "polos" di panel, yang memasang --blob-opacity ke nol, tidak pernah
+        benar benar mematikan lapisan ini. Sapuannya tetap terlihat samar.
+
+        Dipisah begini, lapis luar tidak dianimasikan sama sekali, jadi nol
+        tetap nol.
+      */}
       <div
-        className="absolute -top-[10%] left-[-20%] h-[45vmax] w-[140%] blur-[90px]"
-        style={{
-          opacity: 'calc(var(--blob-opacity) * 0.35)',
-          background:
-            'linear-gradient(100deg, transparent 5%, var(--accent-2) 35%, var(--accent-3) 60%, transparent 95%)',
-          animation: 'aurora-sweep calc(var(--blob-speed) * 1.9) ease-in-out infinite',
-        }}
-      />
+        className="absolute -top-[10%] left-[-20%] h-[45vmax] w-[140%]"
+        style={{ opacity: 'calc(var(--blob-opacity) * 0.35)' }}
+      >
+        <div
+          className="h-full w-full blur-[90px]"
+          style={{
+            background:
+              'linear-gradient(100deg, transparent 5%, var(--accent-2) 35%, var(--accent-3) 60%, transparent 95%)',
+            animation: 'aurora-sweep calc(var(--blob-speed) * 1.9) ease-in-out infinite',
+          }}
+        />
+      </div>
 
       {/* 4. Garis grid, memudar ke arah tepi layar */}
       <div

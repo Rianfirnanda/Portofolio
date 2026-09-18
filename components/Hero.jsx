@@ -10,7 +10,36 @@ import Reveal from '@/components/Reveal';
 
 /**
  * Hero: layar pembuka berisi foto, nama, kalimat pembuka, dua tombol utama,
- * dan deretan ikon sosial yang ditandai featured di data.
+ * dan deretan tautan sosial yang ditandai featured di data.
+ *
+ * -----------------------------------------------------------------------------
+ * KENAPA SUSUNANNYA SEPERTI INI
+ * -----------------------------------------------------------------------------
+ * Sampul situs pribadi punya satu tugas: dalam tiga detik, pengunjung harus
+ * tahu siapa ini dan apa kerjanya. Semua yang tidak membantu dua hal itu cuma
+ * memperlambat.
+ *
+ * Yang berubah dari versi sebelumnya, dan alasannya:
+ *
+ *   Baris keterangan diri   dulu lencana kapsul berkaca. Kapsul itu menarik
+ *                           perhatian ke dirinya sendiri, padahal isinya cuma
+ *                           keterangan. Sekarang jadi satu baris tipis
+ *                           bergaris rambut, seperti kepala surat.
+ *
+ *   Nama                    dulu bergradien warna. Gradien pada teks sebesar
+ *                           ini membuat sebagian hurufnya lebih pucat dari
+ *                           yang lain, dan nama orang tidak pantas separuh
+ *                           pudar. Sekarang huruf berkait, satu warna.
+ *
+ *   Tautan sosial           dulu lingkaran berisi ikon saja. Ikon tanpa
+ *                           tulisan memaksa pengunjung menebak, dan tebakan
+ *                           itu sering salah untuk lambang yang mirip.
+ *                           Sekarang ikonnya ditemani namanya.
+ *
+ *   Cahaya di balik foto    dulu lingkaran berpendar besar. Diganti bingkai
+ *                           tipis yang bergeser sedikit ke belakang foto,
+ *                           cara lama di desain cetak untuk memberi kedalaman
+ *                           tanpa menambah cahaya.
  */
 export default function Hero() {
   const { lang, t } = useLanguage();
@@ -25,73 +54,85 @@ export default function Hero() {
     // halaman jadi bisa digulir. Tidak ada yang saling menimpa.
     <section
       id="top"
-      // overflow-x-clip menahan cahaya lembut di belakang foto. Cahaya itu
-      // sengaja melebar keluar kotaknya, dan di layar 320px kelebihannya
-      // membuat halaman bisa digeser ke samping.
+      // overflow-x-clip menahan bingkai foto yang sengaja menonjol keluar
+      // kotaknya. Di layar 320px kelebihannya membuat halaman bisa digeser
+      // ke samping kalau tidak ditahan.
       className="relative flex min-h-svh flex-col justify-center overflow-x-clip px-4 pt-28 pb-28 print:pt-4 sm:px-6"
     >
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
         {/* ---------------- Kolom teks ---------------- */}
-        <div className="flex flex-col items-start gap-5">
-          {profile.availability?.label ? (
-            <Reveal>
-              <p className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted">
-                {/*
-                  Titik status. Warnanya kamu atur sendiri lewat panel, di menu
-                  Profil Diri bagian Status Ketersediaan. Kalau dikosongkan,
-                  dipakai hijau seperti semula.
-                */}
-                {profile.availability.available ? (
-                  <span
-                    className="relative flex h-2 w-2"
-                    aria-hidden="true"
-                    style={{ color: profile.availability.dotColor || '#10b981' }}
-                  >
+        <div className="flex flex-col items-start">
+          {/* Baris keterangan diri: status dan tempat tinggal, dipisah garis
+              rambut yang mengisi sisa lebar. */}
+          <Reveal className="w-full">
+            <div className="flex w-full flex-wrap items-center gap-x-3 gap-y-2 text-[0.8125rem] text-subtle">
+              {profile.availability?.label ? (
+                <span className="inline-flex items-center gap-2">
+                  {/* Titik status. Warnanya kamu atur sendiri lewat panel, di
+                      menu Profil Diri bagian Status Ketersediaan. Kalau
+                      dikosongkan, dipakai hijau seperti semula. */}
+                  {profile.availability.available ? (
                     <span
-                      className="absolute inline-flex h-full w-full rounded-full bg-current"
-                      style={{ animation: 'pulse-dot 2.4s ease-in-out infinite' }}
-                    />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-current" />
-                  </span>
-                ) : null}
-                {t(profile.availability.label)}
-              </p>
-            </Reveal>
-          ) : null}
+                      className="relative flex h-[7px] w-[7px]"
+                      aria-hidden="true"
+                      style={{ color: profile.availability.dotColor || '#10b981' }}
+                    >
+                      <span
+                        className="absolute inline-flex h-full w-full rounded-full bg-current"
+                        style={{ animation: 'pulse-dot 2.4s ease-in-out infinite' }}
+                      />
+                      <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-current" />
+                    </span>
+                  ) : null}
+                  {t(profile.availability.label)}
+                </span>
+              ) : null}
 
-          <Reveal delay={80}>
-            <h1 className="text-[2.6rem] font-extrabold leading-[1.06] tracking-[-0.03em] sm:text-[3.4rem] lg:text-[4rem]">
-              <span className="block text-base font-medium tracking-normal text-subtle sm:text-lg">
+              {profile.location ? (
+                <span className="inline-flex items-center gap-1.5">
+                  <Icon name="map-pin" className="h-3.5 w-3.5" aria-hidden="true" />
+                  {profile.location}
+                </span>
+              ) : null}
+
+              <hr className="aturan hidden min-w-8 flex-1 sm:block" />
+            </div>
+          </Reveal>
+
+          <Reveal delay={80} className="w-full">
+            <h1 className="mt-7">
+              <span className="block text-[0.8125rem] font-semibold uppercase tracking-[0.2em] text-subtle">
                 {lang === 'id' ? 'Halo, saya' : "Hi, I'm"}
               </span>
-              <span className="gradient-text mt-1 block">{profile.name}</span>
+              {/* Huruf berkait, satu warna, baris dirapatkan. Ukurannya
+                  dibiarkan tumbuh sampai layar lebar karena ini satu satunya
+                  hal di halaman yang boleh sebesar itu. */}
+              <span className="judul-tampil mt-3 block text-[2.9rem] text-fg sm:text-[4.1rem] lg:text-[4.9rem]">
+                {profile.name}
+              </span>
             </h1>
           </Reveal>
 
-          <Reveal delay={130}>
-            <p className="max-w-xl text-[1.0625rem] leading-relaxed text-muted sm:text-lg">
+          <Reveal delay={130} className="w-full">
+            <p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-muted sm:text-lg">
               {t(profile.headline)}
             </p>
           </Reveal>
 
-          {profile.tagline ? (
-            <Reveal delay={170}>
-              <p className="max-w-xl border-l-2 border-accent/50 pl-4 text-[0.9375rem] italic leading-relaxed text-muted">
+          {t(profile.tagline) ? (
+            <Reveal delay={170} className="w-full">
+              {/* Kalimat pegangan, ditulis miring dengan huruf berkait yang
+                  sama dengan judul. Satu satunya kalimat di halaman ini yang
+                  bersuara pribadi, jadi wajar kalau rupanya juga berbeda. */}
+              <p className="mt-6 max-w-xl border-l border-line-strong pl-5 font-tampil text-[1.2rem] italic leading-snug text-muted">
                 {t(profile.tagline)}
               </p>
             </Reveal>
           ) : null}
 
-          <Reveal delay={210}>
-            <p className="inline-flex items-center gap-2 text-sm text-subtle">
-              <Icon name="map-pin" className="h-4 w-4 text-accent" />
-              {profile.location}
-            </p>
-          </Reveal>
-
           {/* Tombol utama */}
-          <Reveal delay={260} className="w-full">
-            <div className="flex flex-wrap items-center gap-3">
+          <Reveal delay={230} className="w-full">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <a href="#contact" className="btn-primary">
                 <Icon name="send" className="h-4 w-4" />
                 {t(ui.ctaContact)}
@@ -111,21 +152,20 @@ export default function Hero() {
             </div>
           </Reveal>
 
-          {/* Ikon sosial */}
+          {/* Tautan sosial, lengkap dengan namanya. */}
           {featuredSocial.length > 0 ? (
-            <Reveal delay={310}>
-              <ul className="flex flex-wrap items-center gap-2.5">
+            <Reveal delay={280} className="w-full">
+              <ul className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2.5">
                 {featuredSocial.map((item) => (
                   <li key={item.label}>
                     <a
                       href={item.href}
                       target={item.href.startsWith('http') ? '_blank' : undefined}
                       rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      aria-label={item.label}
-                      title={item.label}
-                      className="glass glass-hover grid h-11 w-11 place-items-center rounded-full text-muted hover:text-fg"
+                      className="tautan-samar inline-flex items-center gap-2 text-[0.8125rem] text-subtle"
                     >
-                      <Icon name={item.icon} className="h-[18px] w-[18px]" />
+                      <Icon name={item.icon} className="h-4 w-4" aria-hidden="true" />
+                      {item.label}
                     </a>
                   </li>
                 ))}
@@ -137,17 +177,14 @@ export default function Hero() {
         {/* ---------------- Kolom foto ---------------- */}
         <Reveal delay={180} className="order-first mx-auto w-full max-w-[19rem] lg:order-last lg:max-w-sm">
           <div className="relative">
-            {/* Cahaya lembut di belakang foto. */}
-            <div
+            {/* Bingkai tipis yang bergeser ke kanan bawah, di belakang foto.
+                Memberi kedalaman tanpa cahaya berpendar. */}
+            <span
               aria-hidden="true"
-              className="absolute -inset-6 -z-10 rounded-full opacity-60 blur-3xl"
-              style={{
-                background:
-                  'radial-gradient(circle at 50% 45%, color-mix(in oklab, var(--accent-2) 55%, transparent), transparent 70%)',
-              }}
+              className="absolute inset-0 -z-10 translate-x-3 translate-y-3 rounded-[1.5rem] border border-line-strong"
             />
 
-            <div className="glass glass-featured relative overflow-hidden rounded-[1.75rem] p-2.5">
+            <div className="glass relative overflow-hidden rounded-[1.5rem] p-2.5">
               <SmartImage
                 src={profile.avatar}
                 fallbackSrc={profile.avatarFallback}
@@ -158,7 +195,7 @@ export default function Hero() {
                 // dulu. Petunjuk ukurannya mengikuti lebar kolom fotonya.
                 priority
                 sizes="(max-width: 1024px) 304px, 384px"
-                className="aspect-square w-full rounded-[1.4rem] object-cover"
+                className="aspect-square w-full rounded-[1.1rem] object-cover"
               />
 
               {/*
@@ -167,7 +204,7 @@ export default function Hero() {
                 bagian "Kartu pada foto". Kosongkan mottonya kalau kamu ingin
                 namanya saja yang tampil.
               */}
-              <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-line bg-surface-solid/85 px-4 py-3 backdrop-blur-xl">
+              <div className="absolute inset-x-5 bottom-5 rounded-xl border border-line bg-surface-solid/85 px-4 py-3 backdrop-blur-xl">
                 <p className="truncate text-sm font-semibold text-fg">
                   {profile.photoCard?.name || profile.name}
                 </p>
@@ -187,7 +224,7 @@ export default function Hero() {
         bawah isi Hero berapa pun tinggi jendelanya. Sebelumnya dibuat melayang
         dan sempat menimpa deretan ikon sosial di layar yang pendek.
       */}
-      <div className="mx-auto mt-14 hidden w-full max-w-6xl lg:block">
+      <div className="mx-auto mt-16 hidden w-full max-w-6xl lg:block">
         <SkillMarquee />
       </div>
 

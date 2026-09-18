@@ -1581,17 +1581,47 @@ collections:
                 collapsed: false
                 required: false
                 fields:
-                  - { label: "Warna utama", name: "accent1", widget: "color", required: false, allowInput: true, hint: "Dipakai tombol utama, gradien judul, dan bingkai foto. Kosongkan untuk memakai bawaan." }
-                  - { label: "Warna kedua", name: "accent2", widget: "color", required: false, allowInput: true, hint: "Pasangan warna utama pada gradien dan sorotan kartu." }
-                  - { label: "Warna ketiga", name: "accent3", widget: "color", required: false, allowInput: true, hint: "Aksen pelengkap, dipakai sedikit saja." }
+                  # --------------------------------------------------------
+                  # LANGKAH 1: PILIH TEMA
+                  #
+                  # Satu pilihan, seluruh situs berganti rupa. Buat sebagian
+                  # besar orang, kolom ini saja sudah cukup dan sisanya tidak
+                  # perlu disentuh sama sekali.
+                  # --------------------------------------------------------
+                  - label: "Tema siap pakai"
+                    name: "preset"
+                    widget: "select"
+                    required: false
+                    default: "biru-tenang"
+                    hint: "Pilih satu, lalu simpan. Warna, sudut, dan latar langsung menyesuaikan. Kalau ada satu dua hal yang ingin kamu ubah sendiri, isi kolom di bawah ini; yang kamu kosongkan tetap mengikuti tema yang dipilih di sini."
+                    options:
+                      - { label: "Biru Tenang, bawaan situs ini", value: "biru-tenang" }
+                      - { label: "Tinta Hitam, nyaris tanpa warna, paling aman untuk lamaran kerja", value: "tinta-hitam" }
+                      - { label: "Hijau Hutan, tenang dan hangat", value: "hijau-hutan" }
+                      - { label: "Tanah Terakota, hangat dan ramah", value: "tanah-terakota" }
+                      - { label: "Ungu Senja, lebih berani", value: "ungu-senja" }
+                      - { label: "Malam Emas, tegas dan mewah", value: "malam-emas" }
+
+                  # --------------------------------------------------------
+                  # LANGKAH 2: ATUR SENDIRI, KALAU MAU
+                  #
+                  # Semua kolom di bawah ini boleh dikosongkan. Kosong berarti
+                  # "ikut tema yang dipilih di atas". Diisi berarti "yang ini
+                  # saya mau begini".
+                  #
+                  # Tidak ada kolom yang wajib. Mengosongkan semuanya sama
+                  # sekali tidak merusak apa pun.
+                  # --------------------------------------------------------
+                  - { label: "Warna utama", name: "accent1", widget: "color", required: false, allowInput: true, hint: "Dipakai tombol utama dan bingkai foto. Kosongkan untuk ikut tema di atas." }
+                  - { label: "Warna kedua", name: "accent2", widget: "color", required: false, allowInput: true, hint: "Pasangan warna utama pada sorotan kartu dan lapisan latar. Kosongkan untuk ikut tema." }
+                  - { label: "Warna ketiga", name: "accent3", widget: "color", required: false, allowInput: true, hint: "Aksen pelengkap, dipakai sedikit saja. Kosongkan untuk ikut tema." }
                   - { label: "Warna tautan, mode terang", name: "accentLink", widget: "color", required: false, allowInput: true, hint: "Warna tautan dan penanda menu aktif. Pastikan cukup gelap supaya terbaca di atas latar terang." }
                   - { label: "Warna tautan, mode gelap", name: "accentLinkDark", widget: "color", required: false, allowInput: true, hint: "Sama seperti di atas, tapi untuk mode gelap. Pastikan cukup terang." }
                   - label: "Keramaian latar"
                     name: "background"
                     widget: "select"
                     required: false
-                    default: "tenang"
-                    hint: "Mengatur empat lapisan hiasan latar sekaligus. Latar yang penuh gradien beranimasi membuat situs terlihat seperti hasil desain otomatis, jadi Tenang dipakai sebagai bawaan."
+                    hint: "Kosongkan untuk ikut tema. Mengatur empat lapisan hiasan latar sekaligus. Latar yang penuh gradien beranimasi membuat situs terlihat seperti hasil desain otomatis, jadi Tenang dipakai sebagai bawaan."
                     options:
                       - { label: "Polos, tanpa hiasan sama sekali", value: "polos" }
                       - { label: "Tenang, disarankan", value: "tenang" }
@@ -1601,22 +1631,29 @@ collections:
                     name: "radius"
                     widget: "select"
                     required: false
-                    default: "sedang"
+                    hint: "Kosongkan untuk ikut tema. Mengatur sudut kartu sekaligus sudut tombol."
                     options:
                       - { label: "Tegas, terasa lebih formal", value: "tegas" }
                       - { label: "Sedang", value: "sedang" }
                       - { label: "Bulat, terasa lebih ramah", value: "bulat" }
-                  - { label: "Tebal buram kaca", name: "blur", widget: "number", required: false, default: 20, value_type: "int", min: 0, max: 40, hint: "Satuan piksel. Nol berarti kaca bening tanpa buram. Semakin tebal semakin terasa seperti kaca, tapi juga semakin berat di perangkat lama." }
+                  - { label: "Tebal buram kaca", name: "blur", widget: "number", required: false, default: 20, value_type: "int", min: 0, max: 40, hint: "Kosongkan untuk memakai 20. Satuan piksel, nol berarti kaca bening tanpa buram. Semakin tebal semakin terasa seperti kaca, tapi juga semakin berat di perangkat lama." }
                   - { label: "Kecepatan gerak latar", name: "blobSpeed", widget: "number", required: false, default: 34, value_type: "int", min: 10, max: 120, hint: "Satuan detik untuk satu putaran penuh. Semakin besar semakin tenang geraknya." }
                   - label: "Gaya judul besar"
                     name: "headingStyle"
                     widget: "select"
                     required: false
-                    default: "gradien"
-                    hint: "Judul bergradien warna itu salah satu ciri yang paling sering dipakai situs hasil desain otomatis. Pilih Satu warna kalau ingin terlihat lebih dirancang tangan."
+                    hint: "Kosongkan untuk ikut tema. Judul bergradien warna itu salah satu ciri yang paling sering dipakai situs hasil desain otomatis, jadi seluruh tema siap pakai memilih satu warna."
                     options:
                       - { label: "Gradien warna", value: "gradien" }
                       - { label: "Satu warna, lebih tenang", value: "solid" }
+                  - label: "Huruf judul"
+                    name: "headingFont"
+                    widget: "select"
+                    required: false
+                    hint: "Kosongkan untuk ikut tema. Huruf berkait dipakai di nama besar pada sampul dan judul tiap bagian saja, tidak di isi tulisan."
+                    options:
+                      - { label: "Berkait, seperti huruf di buku", value: "berkait" }
+                      - { label: "Polos, sama dengan isi situs", value: "polos" }
 
 
       # ------------------------------------------------------------------------

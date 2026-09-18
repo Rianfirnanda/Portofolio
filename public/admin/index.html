@@ -60,6 +60,55 @@
       #memuat a {
         color: #22d3ee;
       }
+
+      /*
+        TOMBOL PANDUAN
+
+        Melayang di pojok kanan bawah, di atas panel. Sengaja selalu terlihat,
+        bukan disembunyikan di dalam menu: orang yang paling butuh panduan
+        adalah orang yang baru pertama membuka panel ini, dan orang itu belum
+        tahu menu mana yang harus dibuka.
+
+        Ukurannya kecil dan warnanya tenang supaya tidak mengganggu yang sudah
+        hafal. z-index-nya tinggi karena panel menggambar dialognya sendiri di
+        lapisan atas.
+      */
+      #panduan {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 2147483000;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: #111827;
+        color: #e5e7eb;
+        font: 600 0.8125rem/1 ui-sans-serif, system-ui, sans-serif;
+        text-decoration: none;
+        box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.8);
+      }
+      #panduan:hover {
+        background: #1f2937;
+        color: #ffffff;
+      }
+      /* Di layar sempit tombolnya bisa menutupi tombol simpan milik panel,
+         jadi tinggal lingkaran bertanda tanya saja. */
+      @media (max-width: 640px) {
+        #panduan span {
+          display: none;
+        }
+        #panduan {
+          padding: 0.6rem;
+        }
+      }
+      @media print {
+        #panduan {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -73,6 +122,21 @@
         folder <code>content/</code> pada repositori.
       </p>
     </div>
+
+    <!--
+      Panduan lengkap dalam bentuk PDF, dibuat ulang tiap kali situs dibangun
+      dari scripts/generate-panduan.mjs. Dibuka di tab baru supaya pekerjaan
+      yang sedang diketik di panel tidak hilang.
+    -->
+    <a id="panduan" href="/panduan-penggunaan.pdf" target="_blank" rel="noopener" title="Buka panduan penggunaan">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3" />
+        <path d="M12 17h.01" />
+      </svg>
+      <span>Panduan</span>
+    </a>
 
     <!--
       Panel ditahan dulu supaya tombol sisip media di bawah sempat didaftarkan

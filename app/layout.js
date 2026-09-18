@@ -29,6 +29,30 @@ const plusJakarta = localFont({
   fallback: ['ui-sans-serif', 'system-ui', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
 });
 
+/**
+ * Instrument Serif, dipakai khusus untuk nama besar di sampul dan judul tiap
+ * bagian. Di luar itu seluruh situs tetap memakai Plus Jakarta Sans.
+ *
+ * KENAPA HURUF KEDUA
+ * Halaman yang seluruhnya memakai satu huruf sans membuat tiap bagian
+ * terbaca sama pentingnya. Satu huruf berkait yang dipakai hemat, cuma di
+ * judul, langsung memberi hierarki: mata tahu mana kepala tulisan dan mana
+ * isinya, tanpa perlu ukuran yang makin besar atau warna yang makin mencolok.
+ *
+ * Dipilih yang cuma punya satu ketebalan, jadi tambahannya 43 kB untuk dua
+ * gaya, tegak dan miring. Lisensinya SIL Open Font License 1.1, boleh
+ * dipakai dan disertakan ulang, keterangannya di app/fonts/LISENSI.md.
+ */
+const instrumentSerif = localFont({
+  src: [
+    { path: './fonts/InstrumentSerif-Regular-latin.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/InstrumentSerif-Italic-latin.woff2', weight: '400', style: 'italic' },
+  ],
+  variable: '--font-instrument',
+  display: 'swap',
+  fallback: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
+});
+
 const { meta, profile, social, contact, education, skills } = portfolio;
 const locale = meta.locale;
 const description = t(meta.description, locale);
@@ -178,7 +202,11 @@ export default function RootLayout({ children }) {
   const gayaPanel = gayaDariPanel(portfolio.appearance?.theme);
 
   return (
-    <html lang={locale} className={plusJakarta.variable} suppressHydrationWarning>
+    <html
+      lang={locale}
+      className={`${plusJakarta.variable} ${instrumentSerif.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         {/* Warna, sudut, dan keramaian latar yang kamu atur di panel.

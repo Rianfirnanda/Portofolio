@@ -1,8 +1,8 @@
 {
   "about": {
     "eyebrow": {
-      "id": "01 / Profil",
-      "en": "01 / Profile"
+      "id": "Profil",
+      "en": "Profile"
     },
     "title": {
       "id": "Tentang Saya",
@@ -15,8 +15,8 @@
   },
   "experience": {
     "eyebrow": {
-      "id": "02 / Perjalanan",
-      "en": "02 / Journey"
+      "id": "Perjalanan",
+      "en": "Journey"
     },
     "title": {
       "id": "Pengalaman",
@@ -29,8 +29,8 @@
   },
   "projects": {
     "eyebrow": {
-      "id": "03 / Karya",
-      "en": "03 / Work"
+      "id": "Karya",
+      "en": "Work"
     },
     "title": {
       "id": "Proyek",
@@ -43,8 +43,8 @@
   },
   "publications": {
     "eyebrow": {
-      "id": "04 / Riset",
-      "en": "04 / Research"
+      "id": "Riset",
+      "en": "Research"
     },
     "title": {
       "id": "Publikasi",
@@ -57,8 +57,8 @@
   },
   "skills": {
     "eyebrow": {
-      "id": "05 / Kompetensi",
-      "en": "05 / Competencies"
+      "id": "Kompetensi",
+      "en": "Competencies"
     },
     "title": {
       "id": "Keahlian",
@@ -71,8 +71,8 @@
   },
   "certifications": {
     "eyebrow": {
-      "id": "06 / Kredensial",
-      "en": "06 / Credentials"
+      "id": "Kredensial",
+      "en": "Credentials"
     },
     "title": {
       "id": "Sertifikasi",
@@ -85,8 +85,8 @@
   },
   "education": {
     "eyebrow": {
-      "id": "07 / Pendidikan",
-      "en": "07 / Education"
+      "id": "Pendidikan",
+      "en": "Education"
     },
     "title": {
       "id": "Pendidikan",
@@ -99,8 +99,8 @@
   },
   "volunteering": {
     "eyebrow": {
-      "id": "08 / Kontribusi",
-      "en": "08 / Contribution"
+      "id": "Kontribusi",
+      "en": "Contribution"
     },
     "title": {
       "id": "Kesukarelawanan",
@@ -113,8 +113,8 @@
   },
   "gallery": {
     "eyebrow": {
-      "id": "09 / Dokumentasi",
-      "en": "09 / Documentation"
+      "id": "Dokumentasi",
+      "en": "Documentation"
     },
     "title": {
       "id": "Galeri",
@@ -127,8 +127,8 @@
   },
   "blog": {
     "eyebrow": {
-      "id": "10 / Tulisan",
-      "en": "10 / Writing"
+      "id": "Tulisan",
+      "en": "Writing"
     },
     "title": {
       "id": "Blog",
@@ -141,8 +141,8 @@
   },
   "contact": {
     "eyebrow": {
-      "id": "12 / Kontak",
-      "en": "12 / Contact"
+      "id": "Kontak",
+      "en": "Contact"
     },
     "title": {
       "id": "Mari Terhubung",
@@ -155,8 +155,8 @@
   },
   "feedback": {
     "eyebrow": {
-      "en": "11 / Feedback",
-      "id": "11 / Masukan"
+      "en": "Feedback",
+      "id": "Masukan"
     },
     "subtitle": {
       "en": "Your thoughts help me grow. You are welcome to send it without a name.",
