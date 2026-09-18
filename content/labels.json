@@ -91,6 +91,18 @@
     "id": "Simpan sebagai PDF",
     "en": "Save as PDF"
   },
+  "unduhWord": {
+    "id": "Unduh Word",
+    "en": "Download Word"
+  },
+  "menyiapkan": {
+    "id": "Menyiapkan...",
+    "en": "Preparing..."
+  },
+  "unduhGagal": {
+    "id": "Gagal, coba lagi",
+    "en": "Failed, try again"
+  },
   "galleryTitle": {
     "id": "Sekilas Kegiatan",
     "en": "A Look at the Work"

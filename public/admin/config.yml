@@ -1739,6 +1739,33 @@ collections:
             fields:
               - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
               - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Unduh Word"
+            name: "unduhWord"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Tombol unduh .docx di halaman CV dan portofolio"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Menyiapkan..."
+            name: "menyiapkan"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Muncul sesaat saat berkas Word sedang disusun"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
+          - label: "Gagal, coba lagi"
+            name: "unduhGagal"
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Muncul kalau berkas Word gagal disusun"
+            fields:
+              - { label: "Bahasa Indonesia", name: "id", widget: "string", required: false }
+              - { label: "English (opsional)", name: "en", widget: "string", required: false }
           - label: "Tersalin!"
             name: "copied"
             widget: object
