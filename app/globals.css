@@ -473,6 +473,48 @@ time,
   }
 
   /*
+    TITIK STATUS
+
+    Titik kecil di sebelah tulisan "Terbuka untuk peluang kerja". Warnanya
+    diambil dari currentColor, jadi pemanggilnya cukup menyetel color dan
+    seluruh bagiannya ikut, termasuk cincinnya. Warna itu kamu atur lewat
+    panel, Profil Diri > Status Ketersediaan.
+
+    Cincinnya ada dua, berangkat bergantian dengan jarak setengah putaran.
+    Dengan satu cincin, ada jeda panjang saat tidak terjadi apa apa dan
+    denyutnya terbaca tersendat. Dengan dua, riaknya bersambung.
+
+    Keduanya digambar sebagai ::before dan ::after, bukan sebagai elemen
+    tambahan, supaya tidak ada kotak kosong yang ikut terbaca pembaca layar.
+  */
+  .titik-status {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background-color: currentColor;
+    animation: denyut-inti 2.4s ease-in-out infinite;
+  }
+
+  .titik-status::before,
+  .titik-status::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: currentColor;
+    /* cubic-bezier yang melambat di ujung: riaknya berangkat cepat lalu
+       mengendur, bukan melebar rata seperti mesin. */
+    animation: denyut-halo 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .titik-status::after {
+    animation-delay: 1.2s;
+  }
+
+  /*
     TOMBOL SALIN DI SAMPING JUDUL BAGIAN
 
     Hanya ada di perangkat yang punya kursor.
@@ -1075,9 +1117,25 @@ time,
   50%      { background-position: 100% center; }
 }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.45; transform: scale(0.8); }
+/*
+  Denyut titik status.
+
+  Dua keyframe, dan yang mengerjakan pekerjaannya cuma yang pertama. Cincinnya
+  membesar KELUAR dari titik lalu memudar, seperti riak air. Arah itu penting:
+  versi sebelumnya membuat lapisan beranimasinya menciut ke dalam, dan karena
+  titik padat menutupinya persis, animasinya berjalan tanpa pernah terlihat
+  satu piksel pun.
+*/
+@keyframes denyut-halo {
+  0%        { transform: scale(1); opacity: 0.6; }
+  80%, 100% { transform: scale(3.1); opacity: 0; }
+}
+
+/* Titik intinya ikut bernapas tipis, supaya tetap ada yang bergerak pada saat
+   cincinnya sudah memudar dan cincin berikutnya belum berangkat. */
+@keyframes denyut-inti {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.65; }
 }
 
 @keyframes scroll-cue {

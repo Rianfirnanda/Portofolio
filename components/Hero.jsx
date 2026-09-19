@@ -92,21 +92,22 @@ export default function Hero() {
             <div className="glass inline-flex flex-col items-start gap-1.5 rounded-2xl px-3.5 py-2 text-[0.8125rem] text-muted sm:flex-row sm:items-center sm:gap-3">
               {profile.availability?.label ? (
                 <span className="inline-flex items-center gap-2">
-                  {/* Titik status. Warnanya kamu atur sendiri lewat panel, di
-                      menu Profil Diri bagian Status Ketersediaan. Kalau
-                      dikosongkan, dipakai hijau seperti semula. */}
+                  {/*
+                    Titik status yang berdenyut. Seluruh bentuk dan geraknya
+                    ada di .titik-status pada app/globals.css, jadi di sini
+                    cukup satu span dan satu warna.
+
+                    Warnanya kamu atur sendiri lewat panel, di menu Profil Diri
+                    bagian Status Ketersediaan. Kalau dikosongkan, dipakai hijau
+                    seperti semula. Cincin denyutnya ikut warna itu dengan
+                    sendirinya, karena dia mewarisi lewat currentColor.
+                  */}
                   {profile.availability.available ? (
                     <span
-                      className="relative flex h-[7px] w-[7px]"
+                      className="titik-status"
                       aria-hidden="true"
                       style={{ color: profile.availability.dotColor || '#10b981' }}
-                    >
-                      <span
-                        className="absolute inline-flex h-full w-full rounded-full bg-current"
-                        style={{ animation: 'pulse-dot 2.4s ease-in-out infinite' }}
-                      />
-                      <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-current" />
-                    </span>
+                    />
                   ) : null}
                   {t(profile.availability.label)}
                 </span>
